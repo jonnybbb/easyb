@@ -1,51 +1,19 @@
 /**
  * DbUnit easyb plug-in build file
  */
-includeTool << gant.tools.Ivy
+includeTargets << new File("../../easyb/default_tasks.gant")
 
 version = "0.7a"
-defaultdir = "target"
-libdir = "${defaultdir}/lib"
-jarincludes = "**/*.jar"
-classdir = "${defaultdir}/classes"
 gsourcedir = "src/groovy"
 gbehavedir = "behavior/groovy"
-
-target(clean:"cleans target dir"){
-	Ant.delete(dir:defaultdir)
-}
-
-Ant.path(id:"build.classpath"){
-	fileset(dir:libdir, includes:jarincludes)
-}
-
-target(init:"init dirs"){
-	Ant.mkdir(dir:classdir)
-	Ant.mkdir(dir:libdir)
-	getdeps()
-}
-
-target(configuregroovy:""){
- depends(init)
- Ant.taskdef(name:"groovyc",
-    classname:"org.codehaus.groovy.ant.Groovyc", classpathref:"build.classpath"){
- }
-}
-
-target(getdeps:"retrieves dependencies"){
-  Ivy.configure(file:"./ivyconfig.xml")
-  Ivy.retrieve(pattern:"./target/lib/[artifact]-[revision].[ext]")
-}
-
 
 target("default":"Default task is make a release."){
    	release()
 }
 
-
 target("groovyc":"compile Groovy classes"){
 	depends(configuregroovy)
-	genericgroovyc(gsourcedir, classdir)
+	genericgroovyc([gsourcedir], classdir)
 }
 
 target(jar:"archive project"){
@@ -79,38 +47,17 @@ target(release:"compile and archive"){
 
 target(dist:"create a distribution from the release"){
 	depends(release)
-	
-
 	def tarfilename = "${defaultdir}/dist/easyb-dbunit-plugin-${version}.tar"
-
 	Ant.mkdir(dir:"${defaultdir}/dist")
 	Ant.tar(tarfile:tarfilename, basedir:"${defaultdir}/release")
     Ant.gzip(zipfile:"${tarfilename}.gz", src:tarfilename)
     Ant.delete(file:tarfilename)
 }
 
-genericgroovyc = { source, destination ->
-    Ant.groovyc(srcdir:source, destdir:destination){
-	      classpath(){
-	      	fileset(dir:libdir){
-	      		include(name:jarincludes)
-	      	}
-	      	dirset(dir:classdir)
-	     }
-	}
-}
-
-target(compilebehaviors:"compile all behavior classes"){
-	depends(groovyc)
-	genericgroovyc(gbehavedir, classdir)
-}
-
-
 target("validate-plugin":"runs the easyb ant task"){
   	depends(jar)
 
 	Ant.taskdef(name:"easyb", classname:"org.disco.easyb.ant.SpecificationRunnerTask"){
-	    
 		classpath(){
         	pathelement(location:"${defaultdir}/lib/easyb-${version}.jar")
     	}
@@ -123,9 +70,7 @@ target("validate-plugin":"runs the easyb ant task"){
         	pathelement(location:"${defaultdir}/easyb-dbunit-plugin-${version}.jar")
         	pathelement(location:gbehavedir)
       	}
-      	
-
-		report(location:"${defaultdir}/behavior-report.xml", format:"xmlbehavior")
+      	report(location:"${defaultdir}/behavior-report.xml", format:"xmlbehavior")
 	    report(location:"${defaultdir}/story-report.txt", format:"txtstory")
 
     	behaviors(dir:gbehavedir){
