@@ -1,5 +1,7 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml-stylesheet type="text/xsl" href="../../easyb/docs/ivy/ivy-doc.xsl"?>
 <ivy-module version="1.0">
-	<info organisation="disco" module="dbunit-plug-in" />
+	<info organisation="org" module="dbunit-plug-in" />
 	<dependencies>
 		<dependency name="easyb" rev="0.7a" />
 		<dependency name="groovy" rev="all-1.5.0" />
