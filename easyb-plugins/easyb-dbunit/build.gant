@@ -45,8 +45,6 @@ target(release:"compile and archive"){
   }
 }
 
-
-
 target("validate-plugin":"runs the easyb ant task"){
   	depends(jar)
 
