@@ -3,11 +3,12 @@
  */
 includeTargets << new File("../../easyb/default_tasks.gant")
 
-version = "0.7a"
+version = 0.7
 gsourcedir = "src/groovy"
 gbehavedir = "behavior/groovy"
+tarfilename = "${defaultdir}/dist/easyb-dbunit-plugin-${version}.tar"
 
-target("default":"Default task is make a release."){
+target("default":"release"){
    	release()
 }
 
@@ -22,7 +23,6 @@ target(jar:"archive project"){
      metainf(dir:"./cfg/web/META-INF", includes:"**")
    }
 }
-
 /**
  * note for releases, this plug-in relies on the main
  * easyb binary, so there is no need to include
@@ -45,14 +45,7 @@ target(release:"compile and archive"){
   }
 }
 
-target(dist:"create a distribution from the release"){
-	depends(release)
-	def tarfilename = "${defaultdir}/dist/easyb-dbunit-plugin-${version}.tar"
-	Ant.mkdir(dir:"${defaultdir}/dist")
-	Ant.tar(tarfile:tarfilename, basedir:"${defaultdir}/release")
-    Ant.gzip(zipfile:"${tarfilename}.gz", src:tarfilename)
-    Ant.delete(file:tarfilename)
-}
+
 
 target("validate-plugin":"runs the easyb ant task"){
   	depends(jar)
