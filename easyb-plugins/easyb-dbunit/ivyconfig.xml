@@ -5,6 +5,9 @@
 			<url name="easybrepo">
 				<artifact
 					pattern="http://www.easyb.org/repo/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]" />
+					
+				<artifact
+					pattern="http://www.easyb.org/repo/[organisation]/[module]/[module]/[revision]/[artifact]-[revision].[ext]" />
 			</url>
 			<ibiblio name="ibiblio" />
 		</chain>
