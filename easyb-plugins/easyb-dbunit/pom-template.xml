@@ -83,12 +83,12 @@
     <dependency>
 	  <groupId>dbunit</groupId>
 	  <artifactId>dbunit</artifactId>
-	  <version>2.1</dbunit>
+	  <version>2.1</version>
 	</dependency>
 	<dependency>
 	  <groupId>hsqldb</groupId>
 	  <artifactId>hsqldb</artifactId>
-	  <version>1.8.0.5</dbunit>
+	  <version>1.8.0.5</version>
 	</dependency>
     <dependency>
       <groupId>org.codehaus.groovy</groupId>
