@@ -3,10 +3,31 @@
  */
 includeTargets << new File("../../easyb/default_tasks.gant")
 
-version = 0.7
-gsourcedir = "src/groovy"
-gbehavedir = "behavior/groovy"
-tarfilename = "${defaultdir}/dist/easyb-dbunit-plugin-${version}.tar"
+/**
+ * Properties needed by default tasks
+ */
+artifactid = "easyb-dbunit-plugin"
+version = detectOrDefaultVersion("0.7")
+sourcedirs = [gsourcedir]
+
+/**
+ * Project specific properties
+ */
+tarfilename = "${defaultdir}/dist/${artifactid}-${version}.tar"
+
+/**  
+ * The version number used by all targets is command line overridden if needed- for example
+ * if you need to create a snapshot version, you can type gant -Dversion=snapshot jar and 
+ * the resultant jar file will be easyb-dbunit-plugin-snapshot.jar instead of reading the 
+ * default value of version from above.
+ */
+def detectOrDefaultVersion(version) {
+  if(Ant.project.properties."version" != null){
+	  return Ant.project.properties."version"
+  }else{
+  	return version
+  }
+}
 
 target("default":"release"){
    	release()
@@ -19,7 +40,7 @@ target("groovyc":"compile Groovy classes"){
 
 target(jar:"archive project"){
    depends(groovyc)
-   Ant.jar(destfile:"${defaultdir}/easyb-dbunit-plugin-${version}.jar", basedir:classdir) {
+   Ant.jar(destfile:"${defaultdir}/${artifactid}-${version}.jar", basedir:classdir) {
      metainf(dir:"./cfg/web/META-INF", includes:"**")
    }
 }
@@ -33,7 +54,7 @@ target(release:"compile and archive"){
   depends(jar)
   depends("validate-plugin")
   Ant.mkdir(dir:"${defaultdir}/release")
-  Ant.move(file:"${defaultdir}/easyb-dbunit-plugin-${version}.jar", todir:"${defaultdir}/release")
+  Ant.move(file:"${defaultdir}/${artifactid}-${version}.jar", todir:"${defaultdir}/release")
   Ant.move(todir:"${defaultdir}/release"){
   	fileset(dir:"./target/lib/"){
   		exclude(name:"**/ant-*.jar")
@@ -58,13 +79,13 @@ target("validate-plugin":"runs the easyb ant task"){
 	
     	classpath() {
         	fileset(dir:libdir, includes:jarincludes)
-        	pathelement(location:"${defaultdir}/easyb-dbunit-plugin-${version}.jar")
-        	pathelement(location:gbehavedir)
+        	pathelement(location:"${defaultdir}/${artifactid}-${version}.jar")
+        	pathelement(location:gbehaviordir)
       	}
       	report(location:"${defaultdir}/behavior-report.xml", format:"xmlbehavior")
 	    report(location:"${defaultdir}/story-report.txt", format:"txtstory")
 
-    	behaviors(dir:gbehavedir){
+    	behaviors(dir:gbehaviordir){
 	        include(name:"**/*story.groovy")
 	  
 		}
