@@ -14,7 +14,7 @@ import org.dbunit.dataset.IDataSet
 import org.dbunit.dataset.xml.FlatXmlDataSet
 import org.dbunit.operation.DatabaseOperation
 
-import org.disco.easyb.core.delegates.Plugable
+import org.disco.easyb.delegates.Plugable
 
 /**
  *
