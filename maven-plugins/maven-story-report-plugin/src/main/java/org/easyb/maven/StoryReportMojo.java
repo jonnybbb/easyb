@@ -20,6 +20,7 @@ public class StoryReportMojo extends AbstractMavenReport {
      * @required
      * @readonly
      */
+    @SuppressWarnings("UnusedDeclaration")
     private MavenProject project;
 
     /**
@@ -27,13 +28,21 @@ public class StoryReportMojo extends AbstractMavenReport {
      *
      * @component
      */
+    @SuppressWarnings("UnusedDeclaration")
     private Renderer siteRenderer;
 
     /**
      * @parameter expression="${project.build.directory}/easyb-stories"
      * @required
      */
+    @SuppressWarnings("UnusedDeclaration")
     private File outputDirectory;
+
+    protected void executeReport(Locale locale) throws MavenReportException {
+        if (!outputDirectory.exists()) {
+            outputDirectory.mkdirs();
+        }
+    }
 
     protected Renderer getSiteRenderer() {
         return siteRenderer;
@@ -45,12 +54,6 @@ public class StoryReportMojo extends AbstractMavenReport {
 
     protected MavenProject getProject() {
         return project;
-    }
-
-    protected void executeReport(Locale locale) throws MavenReportException {
-        if (!outputDirectory.exists()) {
-            outputDirectory.mkdirs();
-        }
     }
 
     public String getOutputName() {
