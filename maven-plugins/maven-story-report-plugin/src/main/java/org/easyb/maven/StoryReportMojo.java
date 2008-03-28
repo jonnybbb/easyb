@@ -1,12 +1,17 @@
 package org.easyb.maven;
 
 import java.util.Locale;
+import java.util.List;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import org.apache.maven.doxia.siterenderer.Renderer;
 import org.apache.maven.project.MavenProject;
 import org.apache.maven.reporting.AbstractMavenReport;
 import org.apache.maven.reporting.MavenReportException;
+import org.disco.easyb.util.CamelCaseConverter;
 
 /**
  * Execute story specifications defined with easyb
@@ -24,8 +29,6 @@ public class StoryReportMojo extends AbstractMavenReport {
     private MavenProject project;
 
     /**
-     * <i>Maven Internal</i>: The Doxia Site Renderer.
-     *
      * @component
      */
     @SuppressWarnings("UnusedDeclaration")
@@ -38,9 +41,43 @@ public class StoryReportMojo extends AbstractMavenReport {
     @SuppressWarnings("UnusedDeclaration")
     private File outputDirectory;
 
+    /**
+     * @parameter expression="${project.build.directory}/easyb/report.xml"
+     * @required
+     */
+    @SuppressWarnings("UnusedDeclaration")
+    private File easybReport;
+
+    @SuppressWarnings("ThrowFromFinallyBlock")
     protected void executeReport(Locale locale) throws MavenReportException {
         if (!outputDirectory.exists()) {
             outputDirectory.mkdirs();
+        }
+
+        FileInputStream reportStream = null;
+        try {
+            reportStream = new FileInputStream(easybReport);
+            EasybReportReader reader = new EasybReportReader(reportStream);
+            for (Story story : (List<Story>)reader.getStories()) {
+                try {
+                    CamelCaseConverter converter = new CamelCaseConverter(story.getName());
+                    new File(outputDirectory, converter.toCamelCase() + "Story.html").createNewFile();
+                } catch (IOException e) {
+                    throw new MavenReportException("Unable to create story file", e);
+                }
+            }
+        }
+        catch (FileNotFoundException e) {
+            throw new MavenReportException("Unable to read easyb report", e);
+        }
+        finally {
+            if (reportStream != null) {
+                try {
+                    reportStream.close();
+                } catch (IOException e) {
+                    throw new MavenReportException("Unable to close easyb report", e);
+                }
+            }
         }
     }
 
