@@ -12,14 +12,20 @@ class StoryReportWriter {
 
     private def writeReport(MarkupBuilder report, Story story) {
         report.html {
+            head {
+                style type: 'text/css', '''
+                    .success {color: green}
+                    .pending {color: gold}
+                    .failure {color: red}'''
+            }
             body {
                 h1 'Story: ' + story.name
                 story.scenarios.each {scenario ->
-                    h3 'Scenario: ' + scenario.name
-                    div 'class': 'scenario', {
-                        scenario.givens.each {div 'class': 'given', 'given ' + it}
-                        scenario.whens.each {div 'class': 'when', 'when ' + it}
-                        scenario.thens.each {div 'class': 'then', 'then ' + it}
+                    h3 'class': scenario.result, 'Scenario: ' + scenario.name
+                    div {
+                        scenario.givens.each {div 'given ' + it}
+                        scenario.whens.each {div 'when ' + it}
+                        scenario.thens.each {div 'then ' + it}
                     }
                 }
             }

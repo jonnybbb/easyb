@@ -7,9 +7,9 @@ scenario "null is pushed onto empty stack", {
 }
 
 scenario "pop is called on empty stack", {
-    given "an empty stack", {}
-    when "pop is called", {}
-    then "an exception should be thrown", {}
+    given "an empty stack"
+    when "pop is called"
+    then "an exception should be thrown"
     and
-    then "the stack should still be empty", {}
+    then "the stack should still be empty"
 }
