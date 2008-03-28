@@ -7,7 +7,7 @@ class EasybReportReader {
         Node parser = new XmlParser().parse(reportStream)
         stories = parser.stories.story.collect {story ->
             def scenarios = story.scenario.collect {scenario ->
-                new Scenario(givens: parse(scenario.given), whens: parse(scenario.when), thens: parse(scenario.then))
+                new Scenario(name: scenario.@name, givens: parse(scenario.given), whens: parse(scenario.when), thens: parse(scenario.then))
             }
             return new Story(name: story.@name, scenarios: scenarios)
         }

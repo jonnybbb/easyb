@@ -13,11 +13,13 @@ class StoryReportWriter {
     private def writeReport(MarkupBuilder report, Story story) {
         report.html {
             body {
+                h1 'Story: ' + story.name
                 story.scenarios.each {scenario ->
-                    div {
-                        scenario.givens.each {div it}
-                        scenario.whens.each {div it}
-                        scenario.thens.each {div it}
+                    h3 'Scenario: ' + scenario.name
+                    div 'class': 'scenario', {
+                        scenario.givens.each {div 'class': 'given', 'given ' + it}
+                        scenario.whens.each {div 'class': 'when', 'when ' + it}
+                        scenario.thens.each {div 'class': 'then', 'then ' + it}
                     }
                 }
             }

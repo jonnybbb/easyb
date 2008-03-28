@@ -1,12 +1,12 @@
 package org.easyb.maven;
 
-import java.util.Locale;
-import java.util.List;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Locale;
+import java.util.List;
 
 import org.apache.maven.doxia.siterenderer.Renderer;
 import org.apache.maven.project.MavenProject;
@@ -49,7 +49,7 @@ public class StoryReportMojo extends AbstractMavenReport {
     @SuppressWarnings("UnusedDeclaration")
     private File easybReport;
 
-    @SuppressWarnings("ThrowFromFinallyBlock")
+    @SuppressWarnings({"ThrowFromFinallyBlock", "RedundantCast"})
     protected void executeReport(Locale locale) throws MavenReportException {
         if (!outputDirectory.exists()) {
             outputDirectory.mkdirs();
@@ -60,7 +60,7 @@ public class StoryReportMojo extends AbstractMavenReport {
         try {
             reportStream = new FileInputStream(easybReport);
             EasybReportReader reader = new EasybReportReader(reportStream);
-            for (Story story : (List<Story>)reader.getStories()) {
+            for (Story story : (List<Story>) reader.getStories()) {
                 try {
                     CamelCaseConverter converter = new CamelCaseConverter(story.getName());
                     File report = new File(outputDirectory, converter.toCamelCase() + "Story.html");
