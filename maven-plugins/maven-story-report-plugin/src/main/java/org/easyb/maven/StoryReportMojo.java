@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.FileOutputStream;
 
 import org.apache.maven.doxia.siterenderer.Renderer;
 import org.apache.maven.project.MavenProject;
@@ -55,13 +56,16 @@ public class StoryReportMojo extends AbstractMavenReport {
         }
 
         FileInputStream reportStream = null;
+        StoryReportWriter writer = new StoryReportWriter();
         try {
             reportStream = new FileInputStream(easybReport);
             EasybReportReader reader = new EasybReportReader(reportStream);
             for (Story story : (List<Story>)reader.getStories()) {
                 try {
                     CamelCaseConverter converter = new CamelCaseConverter(story.getName());
-                    new File(outputDirectory, converter.toCamelCase() + "Story.html").createNewFile();
+                    File report = new File(outputDirectory, converter.toCamelCase() + "Story.html");
+                    report.createNewFile();
+                    writer.write(story, new FileOutputStream(report));
                 } catch (IOException e) {
                     throw new MavenReportException("Unable to create story file", e);
                 }

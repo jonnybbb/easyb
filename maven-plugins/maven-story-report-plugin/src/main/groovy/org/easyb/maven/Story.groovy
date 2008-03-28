@@ -2,7 +2,7 @@ package org.easyb.maven
 
 class Story {
     String name
-    List scenarios
+    List scenarios = []
 
     String getName() {
         return name
