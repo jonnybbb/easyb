@@ -13,7 +13,6 @@
 
   <modules>
     <module>maven-easyb-plugin</module>
-    <module>maven-story-report-plugin</module>
   </modules>
 
   <developers>
@@ -88,28 +87,27 @@
     <url>http://code.google.com/p/easyb/issues/</url>
   </issueManagement>
 
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.easyb</groupId>
+        <artifactId>easyb</artifactId>
+        <version>0.7.4</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.easyb</groupId>
+      <artifactId>easyb</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
   <build>
     <defaultGoal>install</defaultGoal>
     <plugins>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>shitty-maven-plugin</artifactId>
-        <version>1.0-alpha-1</version>
-        <executions>
-          <execution>
-            <goals>
-              <goal>clean</goal>
-              <goal>install</goal>
-              <goal>test</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <flags>-DeasybVersion=0.7.4</flags>
-          <!-- This makes the build a tad faster -->
-          <parallel>true</parallel>
-        </configuration>
-      </plugin>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <configuration>

@@ -3,19 +3,15 @@
 
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>org.easyb</groupId>
-  <artifactId>basic-behavior</artifactId>
+  <parent>
+    <groupId>org.easyb</groupId>
+    <artifactId>maven-parent</artifactId>
+    <version>0.7.4-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>html-story-behavior</artifactId>
   <version>testing</version>
   <description>Tests that HTML story reports are created</description>
-
-  <dependencies>
-    <dependency>
-      <groupId>org.easyb</groupId>
-      <artifactId>easyb</artifactId>
-      <version>${easybVersion}</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
 
   <build>
     <plugins>
@@ -27,28 +23,12 @@
           <execution>
             <goals>
               <goal>test</goal>
+              <goal>storyReport</goal>
             </goals>
           </execution>
         </executions>
       </plugin>
-      <plugin>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <source>1.5</source>
-          <target>1.5</target>
-        </configuration>
-      </plugin>
     </plugins>
   </build>
-
-  <reporting>
-    <plugins>
-      <plugin>
-        <groupId>org.easyb</groupId>
-        <artifactId>maven-story-report-plugin</artifactId>
-        <version>testing</version>
-      </plugin>
-    </plugins>
-  </reporting>
 
 </project>

@@ -5,52 +5,47 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Locale;
 import java.util.List;
 
-import org.apache.maven.doxia.siterenderer.Renderer;
+import org.apache.maven.plugin.AbstractMojo;
+import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.project.MavenProject;
-import org.apache.maven.reporting.AbstractMavenReport;
-import org.apache.maven.reporting.MavenReportException;
 import org.disco.easyb.util.CamelCaseConverter;
 
 /**
- * Execute story specifications defined with easyb
+ * Generate a html report for stories defined with easyb
  *
- * @goal report
- * @phase site
+ * @goal storyReport
+ * @phase test
  */
-public class StoryReportMojo extends AbstractMavenReport {
+@SuppressWarnings("UnusedDeclaration")
+public class StoryReportMojo extends AbstractMojo {
     /**
      * @parameter expression="${project}"
      * @required
      * @readonly
+     * @SuppressWarnings("UnusedDeclaration")
      */
-    @SuppressWarnings("UnusedDeclaration")
     private MavenProject project;
 
     /**
-     * @component
-     */
-    @SuppressWarnings("UnusedDeclaration")
-    private Renderer siteRenderer;
-
-    /**
+     * Directory to create html stories in
+     *
      * @parameter expression="${project.build.directory}/easyb-stories"
      * @required
      */
-    @SuppressWarnings("UnusedDeclaration")
     private File outputDirectory;
 
     /**
+     * Path to the easyb report created by the test goal
+     *
      * @parameter expression="${project.build.directory}/easyb/report.xml"
      * @required
      */
-    @SuppressWarnings("UnusedDeclaration")
     private File easybReport;
 
-    @SuppressWarnings({"ThrowFromFinallyBlock", "RedundantCast"})
-    protected void executeReport(Locale locale) throws MavenReportException {
+    @SuppressWarnings("RedundantCast")
+    public void execute() throws MojoExecutionException {
         if (!outputDirectory.exists()) {
             outputDirectory.mkdirs();
         }
@@ -60,6 +55,7 @@ public class StoryReportMojo extends AbstractMavenReport {
         try {
             reportStream = new FileInputStream(easybReport);
             EasybReportReader reader = new EasybReportReader(reportStream);
+            // This redundant cast is required due to some weirdness with the joint compiler
             for (Story story : (List<Story>) reader.getStories()) {
                 try {
                     CamelCaseConverter converter = new CamelCaseConverter(story.getName());
@@ -67,45 +63,21 @@ public class StoryReportMojo extends AbstractMavenReport {
                     report.createNewFile();
                     writer.write(story, new FileOutputStream(report));
                 } catch (IOException e) {
-                    throw new MavenReportException("Unable to create story file", e);
+                    throw new MojoExecutionException("Unable to create story file", e);
                 }
             }
         }
         catch (FileNotFoundException e) {
-            throw new MavenReportException("Unable to read easyb report", e);
+            throw new MojoExecutionException("Unable to read easyb report", e);
         }
         finally {
             if (reportStream != null) {
                 try {
                     reportStream.close();
                 } catch (IOException e) {
-                    throw new MavenReportException("Unable to close easyb report", e);
+                    getLog().error("Unable to close easyb report", e);
                 }
             }
         }
-    }
-
-    protected Renderer getSiteRenderer() {
-        return siteRenderer;
-    }
-
-    protected String getOutputDirectory() {
-        return outputDirectory.getAbsolutePath();
-    }
-
-    protected MavenProject getProject() {
-        return project;
-    }
-
-    public String getOutputName() {
-        return "easyb-stories";
-    }
-
-    public String getName(Locale locale) {
-        return "Easyb Story Reports";
-    }
-
-    public String getDescription(Locale locale) {
-        return "Easyb Story Reports";
     }
 }
