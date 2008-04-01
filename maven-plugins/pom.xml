@@ -6,7 +6,7 @@
   <groupId>org.easyb</groupId>
   <artifactId>maven-parent</artifactId>
   <packaging>pom</packaging>
-  <version>0.7.4-SNAPSHOT</version>
+  <version>0.8-SNAPSHOT</version>
   <name>Easyb Maven Parent</name>
   <description>Common definitions for all maven easyb projects</description>
   <url>http://www.easyb.org</url>
@@ -92,7 +92,7 @@
       <dependency>
         <groupId>org.easyb</groupId>
         <artifactId>easyb</artifactId>
-        <version>0.7.4</version>
+        <version>0.8</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
