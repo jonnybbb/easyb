@@ -97,14 +97,6 @@
     </dependencies>
   </dependencyManagement>
 
-  <dependencies>
-    <dependency>
-      <groupId>org.easyb</groupId>
-      <artifactId>easyb</artifactId>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
-
   <build>
     <defaultGoal>install</defaultGoal>
     <plugins>
