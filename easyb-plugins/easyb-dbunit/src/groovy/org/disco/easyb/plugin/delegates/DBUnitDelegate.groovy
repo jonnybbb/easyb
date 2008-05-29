@@ -18,10 +18,7 @@ import org.disco.easyb.delegates.Plugable
 import java.sql.Connection
 
 /**
- *
  * @author aglover
- * TODO: create a database_model method that takes a connection
- *      public void database_model(final connection){}
  * 
  */
 public class DBUnitDelegate implements Plugable{
