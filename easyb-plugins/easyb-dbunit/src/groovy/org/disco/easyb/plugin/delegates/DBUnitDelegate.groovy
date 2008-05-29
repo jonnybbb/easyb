@@ -15,11 +15,14 @@ import org.dbunit.dataset.xml.FlatXmlDataSet
 import org.dbunit.operation.DatabaseOperation
 
 import org.disco.easyb.delegates.Plugable
+import java.sql.Connection
 
 /**
  *
  * @author aglover
- *
+ * TODO: create a database_model method that takes a connection
+ *      public void database_model(final connection){}
+ * 
  */
 public class DBUnitDelegate implements Plugable{
 	/**
@@ -33,17 +36,27 @@ public class DBUnitDelegate implements Plugable{
 	 */
 	public void database_model(final String driver, final String url, final String user,
 			final String pssword, final Closure model) throws Throwable{
-
-		final IDatabaseConnection conn =
+        final IDatabaseConnection conn =
 				this.getConnection(driver, url, user, pssword)
-		final IDataSet data = this.getDataSet(model)
-		try {
-			DatabaseOperation.CLEAN_INSERT.execute(conn, data)
-		} finally {
-			conn.close()
-		}
+        this.doDatabaseOperation(conn, model)
 	}
-	/**
+    /**
+     *
+     */
+    public void database_model(final Connection connection, final Closure model){
+        this.doDatabaseOperation(new DatabaseConnection(connection), model)
+    }
+    /**
+     *
+     */ 
+    private void doDatabaseOperation(final IDatabaseConnection iconn, final Closure model){
+		try {
+            DatabaseOperation.CLEAN_INSERT.execute(iconn, this.getDataSet(model))
+		} finally {
+			iconn.close()
+		}
+    }
+    /**
 	 * @param Closure model-- which could be anything that returns a String
 	 * @return DbUnit's IDataSet type
 	 * @throws IOException
@@ -51,9 +64,7 @@ public class DBUnitDelegate implements Plugable{
 	 */
 	private IDataSet getDataSet(final Closure model) throws IOException, DataSetException {
 		final String datastr = (String)model.call()
-		final IDataSet data =
-				new FlatXmlDataSet(new ByteArrayInputStream(datastr.getBytes()))
-		return data
+		return new FlatXmlDataSet(new ByteArrayInputStream(datastr.getBytes()))
 	}
 	/**
 	 * @throws ClassNotFoundException
