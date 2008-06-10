@@ -6,7 +6,7 @@
   <artifactId>maven-parent</artifactId>
   <packaging>pom</packaging>
   <version>0.8.2-SNAPSHOT</version>
-  <name>Easyb Maven Parent</name>
+  <name>easyb Maven Parent</name>
   <description>Common definitions for all maven easyb projects</description>
   <url>http://www.easyb.org</url>
 
