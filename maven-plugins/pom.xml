@@ -86,16 +86,6 @@
     <url>http://code.google.com/p/easyb/issues/</url>
   </issueManagement>
 
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>org.easyb</groupId>
-        <artifactId>easyb</artifactId>
-        <version>0.8</version>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
-
   <build>
     <defaultGoal>install</defaultGoal>
     <plugins>
