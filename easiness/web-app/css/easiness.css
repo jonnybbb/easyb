@@ -1,0 +1,349 @@
+body {
+	margin: 0;
+	padding: 0;
+	background: #FFFFFF;
+   background-image: url('/images/easybackground.gif');
+   background-repeat: repeat-x;
+   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	color: #333333;
+}
+
+form {
+	margin: 0px;
+	padding: 0px;
+}
+
+fieldset {
+	margin: 0;
+	padding: 0;
+	border: none;
+}
+
+input, textarea {
+	font: bold 100% "Trebuchet MS", Arial, Helvetica, sans-serif;
+	color: #333333;
+}
+
+h1, h2, h3 {
+	margin: 0;
+	font-weight: normal;
+	color: #333333;
+}
+
+h1 {
+	letter-spacing: -1px;
+	font-size: 240%;
+}
+
+h2 {
+	font-size: 180%;
+}
+
+h3 {
+	font-size: 100%;
+	font-weight: bold;
+}
+
+p, ul, ol {
+	margin-bottom: 10px;
+	line-height: 180%;
+}
+
+p {
+}
+
+blockquote {
+	font-style: italic;
+}
+
+ul {
+}
+
+ol {
+}
+
+a {
+	border-bottom: 1px dotted #EFEFEF;
+	text-decoration: none;
+	color: #356AA0;
+}
+
+a:hover {
+	text-decoration: none;
+	color: #CC0000;
+}
+
+small {
+}
+
+hr {
+	display: none;
+}
+
+img {
+	border: none;
+}
+
+img.left {
+	float: left;
+	margin: 0 15px 0 0;
+}
+
+img.right {
+	float: left;
+	margin: 0 0 0 15px;
+}
+
+/* Header */
+
+#header {
+	width: 1060px;
+	height: 231px;
+	margin: 0 auto;
+}
+
+#header h1 {
+	float: left;
+	margin-top: 20px;
+	padding: 100px 190px 0 0;
+	background-image: url('/images/easybubble.jpg');
+   background-repeat: no-repeat;
+   text-transform: lowercase;
+	letter-spacing: -3px;
+	font-size: 440%;
+}
+
+#header h1 span {
+	color: #CC0000;
+}
+
+#header h2 {
+	float: left;
+	margin: 0 0 0 -190px;
+	padding: 160px 0 0 0;
+	text-transform: lowercase;
+	font-size: 125%;
+	font-weight: bold;
+	color: #333333;
+}
+
+#header h2 a {
+	color: #333333;
+}
+
+/* Search */
+
+#search {
+	float: right;
+	width: 300px;
+	padding: 150px 0 0 0;
+}
+
+#search legend {
+	display: none;
+}
+
+#searchfield {
+	width: 200px;
+}
+
+#searchsubmit {
+	width: 80px;
+}
+
+/* Page */
+
+#page {
+	width: 1060px;
+	margin: 0 auto;
+	padding: 20px 0;
+}
+
+/* Content */
+
+#content {
+	float: left;
+	width: 530px;
+   /*border: 2px solid #CCC;
+   */
+   padding: 0px;
+   margin: 0px;
+}
+
+
+#content h1 h2 h3 h4 {
+	letter-spacing: -1px;
+   color: #356AA0;
+}
+
+#content h1 {
+   font-size: 240%;
+   color: #356AA0;
+}
+
+#content h2 {
+   font-size: 180%;
+   color: #356AA0;
+}
+
+#content h3 {
+   font-size: 150%;
+   color: #356AA0;
+}
+
+#content h4 {
+   font-size: 125%;
+   color: #356AA0;
+
+}
+
+#content .meta {
+   /*
+   margin: 0 0 20px 0;
+	padding: 0 0 20px 0;
+	*/
+	border-bottom: 1px solid #EFEFEF;
+	line-height: normal;
+	color: #666666;
+}
+
+/* Sidebar */
+
+#sidebar {
+	float: left;
+	width: 250px;
+   /*border: 2px solid gray;
+   */
+}
+
+#sidebar ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+#sidebar li {
+	margin-bottom: 20px;
+	padding: 20px 40px;
+	background-image: url('/images/easyborder.jpg');
+   background-repeat: no-repeat;
+}
+
+#sidebar li ul {
+	line-height: 2em;
+}
+
+#sidebar li li {
+	margin: 0;
+	padding: 0;
+	background: none;
+	border-bottom: 1px solid #EFEFEF;
+}
+
+#sidebar h2 {
+	margin-bottom: 10px;
+	text-transform: lowercase;
+	letter-spacing: -1px;
+	color: #CC0000;
+}
+
+#sidebar a {
+	border: none;
+}
+
+/* Footer */
+
+#footer {
+	clear: both;
+	padding: 30px 0;
+	border-top: 10px solid #DDDDDD;
+	background: #EFEFEF;
+}
+
+#footer p {
+	margin: 0;
+	padding: 10px 0 0 0;
+	text-align: center;
+	line-height: normal;
+}
+
+
+.login-button {
+   text-align: center;
+   margin: 0 auto;
+}
+
+
+.action-button {
+   text-align: center;
+   font-size: 110%;
+}
+
+.prompt {
+   padding: 0 20px 0 0;
+   font-weight: bold;
+   font-size: 110%;
+}
+
+
+.errorbox {
+   padding: 10px;
+   margin: 10px;
+   color: #C33;
+   border: 2px solid #FF9999;
+}
+
+.messagebox {
+   padding: 10px;
+   border: 2px solid #FFFF99;
+}
+
+
+.formdiv {
+   /*border: 2px solid #CCC;
+   */
+   padding: 5px;
+   margin: 5px;
+}
+
+.formdiv td {
+   color: #356AA0;            
+}
+
+
+
+
+#context-help {
+   padding: 10px;
+   width: 250px;
+   float: right;
+   background: #FFE;
+
+}
+
+
+#context-help h1 {
+   text-align: center;
+   margin-bottom: 10px;
+	text-transform: lowercase;
+	letter-spacing: -1px;
+	color: #333;
+   font-size: 200%;
+}
+
+
+.info {
+   font-style: italic;
+   padding-left: 15px;
+}
+
+#scenario-list {
+   padding-top: 10px;
+   padding-left: 20px;
+}
+#scenario-list p {
+   font-size: 150%;
+   padding: 3px;
+   margin: 3px;
+}
