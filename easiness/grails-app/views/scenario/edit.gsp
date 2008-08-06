@@ -40,7 +40,7 @@
   </g:hasErrors>
 
 
-  <h2>Edit: ${scenario.title}</h2>
+  <h2>Edit Scenario: ${scenario.title} of Story: ${scenario.story.title}</h2>
 
   <div id="formdiv">
      <g:form action="do_edit">
@@ -52,6 +52,46 @@
         <strong>Given</strong>
 
         <g:if test="${ordered_givens?.size() > 0}">
+           
+           <% def i = 0 %>
+
+           <g:each var="given" in="${ordered_givens}">
+
+              <% def tname = "g_text${i}" %>
+              <% def cname = "g_code${i}" %>
+
+
+              <g:if test="${i > 0}">
+                 <strong>AND</strong>
+                 <div style="padding-left: 10px; margin-left: 10px;">
+              </g:if>
+
+              <input type="text" size="64" maxlength="128" name="${tname}" value="${given.text}" />   {
+              </p>
+              <div id="${cname}_show" style="display: none;">
+                 <p>&nbsp;&nbsp;&nbsp;<textarea rows="5" cols="62" name="${cname}">${given.code}</textarea> <br/>
+                      <a href="javascript:description()" onclick='changeLayout(0, "${cname}_show", "${cname}_noshow")'>Click here to hide the source</a>
+                   </p>
+              </div>
+              <div id="${cname}_noshow" style="display: inline;">
+                 <p><em>
+                    <a href="javascript:description()" onclick='changeLayout(1, "${cname}_show", "${cname}_noshow")'>Click here to view the source</a>
+                 </em></p>
+              </div>
+              <div style="float:right; padding-right: 20px;">
+                 <g:link action="do_delete_clause" controller="scenario" id="${given.id}" params="[type:'given',scenario_id: scenario.id]">Delete</g:link>
+              </div>
+              <p>}</p>
+
+              <g:if test="${i > 0}">
+                 </div>
+              </g:if>
+              
+
+
+              <% i++ %>
+           </g:each>
+
         </g:if>
         <g:if test="${ordered_givens== null || ordered_givens?.size() == 0}">
            <input type="text" size="64" maxlength="128" name="g_text0" />   {
@@ -73,6 +113,46 @@
         <p>
         <strong>When</strong>
         <g:if test="${ordered_conditions?.size() > 0}">
+
+           <% i = 0 %>
+
+           <g:each var="cond" in="${ordered_conditions}">
+
+              <% tname = "w_text${i}" %>
+              <% cname = "w_code${i}" %>
+
+
+              <g:if test="${i > 0}">
+                 <strong>AND</strong>
+                 <div style="padding-left: 10px; margin-left: 10px;">
+              </g:if>
+
+              <input type="text" size="64" maxlength="128" name="${tname}" value="${cond.text}" />   {
+              </p>
+              <div id="${cname}_show" style="display: none;">
+                 <p>&nbsp;&nbsp;&nbsp;<textarea rows="5" cols="62" name="${cname}">${cond.code}</textarea> <br/>
+                      <a href="javascript:description()" onclick='changeLayout(0, "${cname}_show", "${cname}_noshow")'>Click here to hide the source</a>
+                   </p>
+              </div>
+              <div id="${cname}_noshow" style="display: inline;">
+                 <p><em>
+                    <a href="javascript:description()" onclick='changeLayout(1, "${cname}_show", "${cname}_noshow")'>Click here to view the source</a>
+                 </em></p>
+              </div>
+              <div style="float:right; padding-right: 20px;">
+                 <g:link action="do_delete_clause" controller="scenario" id="${cond.id}" params="[type:'condition',scenario_id: scenario.id]">Delete</g:link>
+              </div>
+              <p>}</p>
+
+
+              <g:if test="${i > 0}">
+                 </div>
+              </g:if>
+
+              <% i++ %>
+           </g:each>
+
+
         </g:if>
         <g:if test="${ordered_conditions == null || ordered_conditions?.size() == 0}">
            <input type="text" size="64" maxlength="128" name="w_text0" />   {
@@ -96,11 +176,49 @@
         <strong>Then</strong>
         <g:if test="${ordered_conclusions?.size() > 0}">
 
+           <% i = 0 %>
+
+           <g:each var="concl" in="${ordered_conclusions}">
+
+              <% tname = "t_text${i}" %>
+              <% cname = "t_code${i}" %>
+
+
+              <g:if test="${i > 0}">
+                 <strong>AND</strong>
+                 <div style="padding-left: 10px; margin-left: 10px;">
+              </g:if>
+
+              <input type="text" size="64" maxlength="128" name="${tname}" value="${concl.text}" />   {
+              <p />
+              <div id="${cname}_show" style="display: none;">
+                 <p>&nbsp;&nbsp;&nbsp;<textarea rows="5" cols="62" name="${cname}">${concl.code}</textarea> <br/>
+                      <a href="javascript:description()" onclick='changeLayout(0, "${cname}_show", "${cname}_noshow")'>Click here to hide the source</a>
+                   </p>
+              </div>
+              <div id="${cname}_noshow" style="display: inline;">
+                 <p><em>
+                    <a href="javascript:description()" onclick='changeLayout(1, "${cname}_show", "${cname}_noshow")'>Click here to view the source</a>
+                 </em></p>
+              </div>
+              <div style="float:right; padding-right: 20px;">
+                 <g:link action="do_delete_clause" controller="scenario" id="${concl.id}" params="[type:'conclusion',scenario_id: scenario.id]">Delete</g:link>
+              </div>
+
+              <p>}</p>
+
+              <g:if test="${i > 0}">
+                  </div>
+               </g:if>
+              
+
+              <% i++ %>
+           </g:each>
 
         </g:if>
         <g:if test="${ordered_conclusions == null || ordered_conclusions?.size() == 0}">
            <input type="text" size="64" maxlength="128" name="t_text0" />   {
-           </p>
+           <p />
 
            <div id="t_code0_show" style="display: none;">
               <p>&nbsp;&nbsp;&nbsp;<textarea rows="5" cols="62" name="t_code0"></textarea><br />

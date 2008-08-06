@@ -2,12 +2,16 @@ class Conclusion  {
 
    String text
    String code
-   int    order
+   int    sortOrder
 
    Scenario scenario
    
 
    static belongsTo = Scenario
-   
+
+
+   static constraints = {
+      code(nullable:true)
+   }
 }
 

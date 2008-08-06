@@ -1,79 +1,361 @@
-class StoryController extends ControllerBase {
+class ScenarioController extends ControllerBase {
 
    def beforeInterceptor = [ action: this.&intercept ]
 
 
-    def index = { }
-
-
-   def edit = {
-
-      def story = Story.get(params.id)
-
-      if (story == null) {
-         flash.error = "No such story ${params.id}"
-         redirect(controller:story, action:mystorys)
-         return
-      }
-
-      [ story: story]
-      
-   }
-
-
-   def mystories = {
-
-      def stories = Story.findAllByUser(flash.user)
-
-      if (stories.size > 0) {
-         flash.context_help = [ title:  'Selecting stories',
-               content: '''
-                <p>Click on a story to the left, and you'll be able to start creating stories for it.</p>
-                <p>Or, click on the 'X' next to the story name to delete it.</p>
-          ''' ]
-
-      }
-
-      return [ stories: stories]
-
-   }
-
+   def index = { }
 
    def create = {
 
-      flash.context_help = [ title:  'Creating a Story',
-            content: '''
-     <p>A story represents a set of stories, all organized around a common theme.  For examle, you can create a
-     login story, and create a number of stories about different ways to log in (and also, how you might fail to
-        log in).
-     </p>
-     <p>Once you create the story, you'll be able to create a series of stories for it.</p>''' ]
+      def parent = Story.get(params.story_id)
 
+      if (parent == null) {
+         log.error "Parent is null, unable to establish new scenario."
+         flash.error = "No scenario with id: ${params.story_id}"
+         redirect(action: mystories, controller: story)
+         return
+      }
+
+
+      flash.context_help = [ title:  'Creating a Scenario',
+            content: '''
+             <p>Your scenario needs a title, and an optional description</p>
+             <p>When you're done, hit 'Create', and you can build out the scenario's internal structure.</p>
+       ''' ]
+
+
+      [ parent: parent ]
 
    }
 
 
    def do_create = {
 
-      def story = new Story(params)
+      def parent = Story.get(params.story_id)
 
-
-      story.user = flash.user
-
-      if (story.hasErrors()) {
-         render(view: create)
+      if (parent == null) {
+         log.error "Parent is null"
+         flash.error = "No story with id: ${params.story_id}"
+         redirect( action: 'mystories', controller: story)
          return
       }
 
-      if (!story.save()) {
-         flash.error = "Unable to save story."
-         render(view:create)
+      def scenario = new Scenario(params)
+
+      scenario.story = parent
+
+      if (scenario.hasErrors()) {
+         log.error "Scenario has errors"
+         flash.error = "Errors in this scenario."
+         render( view: 'create', model:[ parent: parent, scenario: scenario])
          return
       }
 
-      redirect(controller: 'story', action: 'mystories')
-      return
-      
+      if (!scenario.save()) {
+         log.error "Unable to save scenario - parent: ${parent}"
+         flash.error = "Unable to save scenario."
+         render( view: 'create', model:[ scenario: scenario, parent : parent] )
+         return
+      }
+
+      log.info "Scenario do_create success"
+      redirect(action:'edit', controller:'scenario', id: scenario.id)
+
+
+
+   }
+
+
+   def edit =  {
+
+      def scenario = Scenario.get(params.id)
+
+      if (scenario == null) {
+         flash.error = "No scenario with id: ${params.id}"
+         redirect(action: 'mystories', controller: 'story')
+         return
+      }
+
+
+      flash.context_help = [ title:  'Filling out a Scenario',
+            content: '''
+<p>EasyB Scenarios consist of three parts:
+<ul>
+  <li>The Starting Conditions (<em>Given</em>)</li>
+  <li>The Action that occurs (<em>When</em>)</li>
+  <li>The Results (<em>Then</em>)</li>
+</ul>
+<p>For a longer explanation of Scenario structure... <em>tbd</em></p>
+<p><strong>Note</strong> - you don't have to fill out the whole thing - just fill out the parts you want and click
+<em>Save</em></p>
+       ''' ]
+
+
+
+      [scenario: scenario, ordered_givens: scenario.ordered('givens'), ordered_conditions: scenario.ordered('conditions'), ordered_conclusions: scenario.ordered('conclusions')]
+   }
+
+
+
+   def do_edit = {
+
+//      log.info "ScenarioController: do_edit{} "
+
+      def scenario = Scenario.get(params.scenario_id)
+
+      if (scenario == null) {
+         flash.error = "No scenario with id: ${params.scenario_id}"
+         redirect(action: 'mystories', controller: 'story')
+         return
+      }
+
+
+
+      // here are all the existing elements.
+      def givens = scenario.givens
+      def conditions = scenario.conditions
+      def conclusions = scenario.conclusions
+
+      // iterate through the possible given, condition and conclusion fields and add as necessary to this
+      // story.
+
+      def given_texts = findParameters(params, "g_text")
+      def given_codes = findParameters(params, "g_code")
+
+      def condition_texts = findParameters(params, "w_text")
+      def condition_codes = findParameters(params, "w_code")
+
+      def conclusion_texts = findParameters(params, "t_text")
+      def conclusion_codes = findParameters(params, "t_code")
+
+
+//      log.info "analyzing parameters."
+//      log.info "given texts: ${given_texts}, conditions: ${condition_texts}, conclusions: ${conclusion_texts}"
+
+
+      // validation
+      def error_str = check_codes(given_texts, given_codes, 'Given')
+      if (error_str != null) {
+         flash.error = error_str
+         render(view: edit, model:       [scenario: scenario, ordered_givens: scenario.ordered('givens'), ordered_conditions: scenario.ordered('conditions'), ordered_conclusions: scenario.ordered('conclusions')])
+         return
+      }
+
+      error_str = check_codes(condition_texts, condition_codes, 'When')
+      if (error_str != null) {
+         flash.error = error_str
+         render(view: edit, model:       [scenario: scenario, ordered_givens: scenario.ordered('givens'), ordered_conditions: scenario.ordered('conditions'), ordered_conclusions: scenario.ordered('conclusions')])
+         return
+      }
+
+      error_str = check_codes(conclusion_texts, conclusion_codes, 'Then')
+      if (error_str != null) {
+         flash.error = error_str
+         render(view: edit, model: [scenario: scenario, ordered_givens: scenario.ordered('givens'), ordered_conditions: scenario.ordered('conditions'), ordered_conclusions: scenario.ordered('conclusions')])
+         return
+      }
+
+
+      def given_list = create_clauses(given_texts, given_codes)
+      def cond_list = create_clauses(condition_texts, condition_codes)
+      def concl_list = create_clauses(conclusion_texts, conclusion_codes)
+
+//      log.info "Analyzing clauses."
+//      log.debug "Given list: ${given_list}, cond_list: ${cond_list}, concl_list: ${concl_list}"
+
+
+      def i = 0;
+
+      given_list.each {
+
+         // first we see if there's an existing clause with the same title.  if so, we update that one,
+         // instead of creating a new one.
+
+         def g = find_and_update_clause(givens, it)
+
+         if (g == null) {
+
+            log.debug("Creating a new Given record for: ${it}")
+
+           g = new Given()
+
+           update_clause(g, it, i)
+
+           g.scenario = scenario
+
+           scenario.givens << g
+         }
+         i++;
+      }
+
+      i = 0;
+      cond_list.each {
+
+         def c = find_and_update_clause(conditions, it)
+
+         if (c == null) {
+
+            log.debug("Creating a new Condition record for: ${it}")
+            c = new Condition()
+
+            update_clause(c, it, i)
+
+            c.scenario = scenario
+
+            scenario.conditions << c
+
+         }
+         i++
+      }
+
+
+
+      i = 0
+      concl_list.each {
+
+         def c = find_and_update_clause(conclusions, it)
+
+         log.debug("::: - c: ${c}")
+
+         if (c == null) {
+
+            log.debug("@@@ No clause with info: ${it}, creating new ")
+            c = new Conclusion()
+
+            update_clause(c, it, i)
+
+            c.scenario = scenario
+
+            scenario.conclusions << c
+         }
+         i++
+      }
+
+//      log.debug "params: ${params}"
+     log.debug "scenario clauses: ${scenario.givens}, ${scenario.conditions}, ${scenario.conclusions}"
+//      log.info "given texts: ${given_texts}, conditions: ${condition_texts}, conclusions: ${conclusion_texts}"
+//      log.debug "Given list: ${given_list}, cond_list: ${cond_list}, concl_list: ${concl_list}"
+
+
+      if (scenario.hasErrors()) {
+         flash.error = "There are errors in this scenario."
+         render( view: edit, model:       [scenario: scenario, ordered_givens: scenario.ordered('givens'), ordered_conditions: scenario.ordered('conditions'), ordered_conclusions: scenario.ordered('conclusions')])
+      } else if (!scenario.save()) {
+         flash.error = "Unable to save scenario."
+         render( view: edit, model:       [scenario: scenario, ordered_givens: scenario.ordered('givens'), ordered_conditions: scenario.ordered('conditions'), ordered_conclusions: scenario.ordered('conclusions')])
+      } else {
+         flash.message = "Scenario updated."
+      }
+
+
+      redirect( action: edit, controller: 'scenario', id: scenario.id)
+
+   }
+
+
+
+
+
+    def do_delete_clause = {
+
+       def obj = null
+
+       def type = params.type
+
+       if (type == 'given') {
+          obj = Given.get(params.id)
+       } else if (type == 'condition') {
+          obj = Condition.get(params.id)
+       } else if (type == 'conclusion') {
+          obj = Conclusion.get(params.id)
+       }
+
+
+       if (obj == null) {
+          flash.error = "Unable to find a ${type} clause with id: ${params.id}"
+       }
+
+       obj.delete()
+
+       flash.message = "${type} clause removed from scenario."
+
+
+       redirect( action: 'edit', controller: 'scenario', id: params.scenario_id)
+       return
+
+
+    }
+
+
+
+
+
+
+
+
+
+   //----------------------------------------------------------------------------------------------
+   // private methods
+
+
+   def find_and_update_clause( current, pNew) {
+
+      def found = null
+
+      current.each { cl ->
+
+         log.debug("##### pNew: ${pNew}, clause: ${cl}  eval: ${pNew.text == cl.text}")
+
+         if (pNew.text == cl.text) {
+            log.debug(">>> updating code for clause: '${cl.text}' - cl: ${cl}")
+            cl.code = pNew.code
+            found = cl
+         }
+      }
+
+      return found
+
+   }
+
+   def update_clause( dest, source, order) {
+      dest.text = source.text
+      dest.code = source.code
+      dest.sortOrder = order
+
+   }
+
+
+   def check_codes( texts, codes, title) {
+
+      if (codes?.size() > texts?.size()) {
+         return "We require a text description for each code block in the ${title} section."
+      }
+
+      return null
+
+   }
+
+
+   def findParameters(params, preamble) {
+
+      def list = []
+
+
+      for (int i = 0; i > -1; i++) {
+
+         String key = "${preamble}${i}"
+
+         if (params[key] != null && params[key] != "") {
+            list << params[key]
+         } else {
+            i = -1
+            break
+         }
+
+
+      }
+
+      return list
    }
 
 
@@ -86,7 +368,33 @@ class StoryController extends ControllerBase {
 
       return true
    }
-   
 
-   
+
+   def create_clauses( tlist, clist) {
+
+      def list = []
+
+      if (tlist == null || tlist.size() == 0) {
+        return list
+      }
+
+
+      for (int i = 0; i < tlist.size(); i++) {
+
+         def cl = [:]
+         cl.text = tlist[i]
+         cl.code = clist[i]
+
+         list << cl
+
+
+      }
+
+
+      return list
+
+
+
+   }
+
 }

@@ -59,9 +59,9 @@ log4j {
             codehaus.groovy.grails."web.mapping"="info" // URL mapping
             codehaus.groovy.grails.commons="debug" // core / classloading
             codehaus.groovy.grails.plugins="info" // plugins
-            codehaus.groovy.grails.orm.hibernate="info" // hibernate integration
+            codehaus.groovy.grails.orm.hibernate="debug" // hibernate integration
             springframework="off"
-            hibernate="off"
+            hibernate="debug"
         }
     }
     additivity.StackTrace=false

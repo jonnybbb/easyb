@@ -16,11 +16,13 @@
      <g:if test="${stories?.size > 0}">
         <span class="info">Total Stories: ${stories.size}</span>
         <div id="story-list">
+           <ul>
         <g:each var="story" in="${stories}">
-           <p ><g:link action="edit" controller="story" id="${story.id}">
+           <li><p><g:link action="edit" controller="story" id="${story.id}">
                ${story.title}
-           </g:link></p>
+           </g:link></p></li>
         </g:each>
+           </ul>
         </div>
      </g:if>
      <g:if test="${stories == null || stories.size == 0}">

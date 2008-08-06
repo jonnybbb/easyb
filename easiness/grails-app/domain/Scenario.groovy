@@ -18,10 +18,13 @@ class Scenario {
 
    static constraints = {
       title(unique:true, blank:false, maxsize:128)
-      description(maxsize:2048, blank:true)
+      description(maxsize:2048, blank:true, nullable:true)
+      setUp(nullable:true)
+      tearDown(nullable:true)
+      imports(nullable:true)
    }
 
-   static optionals = [ 'setUp', 'tearDown', 'imports', 'description']
+   static optionals = [ "setUp", "tearDown", "description", "imports"]
 
 
    def ordered(String c_type) {
