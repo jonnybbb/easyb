@@ -59,13 +59,14 @@
 
               <% def tname = "g_text${i}" %>
               <% def cname = "g_code${i}" %>
-
+              <% def iname = "g_id_${i}" %>
 
               <g:if test="${i > 0}">
                  <strong>AND</strong>
                  <div style="padding-left: 10px; margin-left: 10px;">
               </g:if>
 
+              <input type="hidden" name="${iname}" value="${given.id}" />
               <input type="text" size="64" maxlength="128" name="${tname}" value="${given.text}" />   {
               </p>
               <div id="${cname}_show" style="display: none;">
@@ -79,7 +80,7 @@
                  </em></p>
               </div>
               <div style="float:right; padding-right: 20px;">
-                 <g:link action="do_delete_clause" controller="scenario" id="${given.id}" params="[type:'given',scenario_id: scenario.id]">Delete</g:link>
+                 <g:link action="do_delete_clause" controller="scenario" id="${given.id}" params="[type:'given',scenario_id: scenario.id]"><span class="delete_link">Delete</span></g:link>
               </div>
               <p>}</p>
 
@@ -106,8 +107,10 @@
                  <a href="javascript:description()" onclick="changeLayout(1, 'g_code0_show', 'g_code0_noshow')">Click here to view the source</a>
               </em></p>
            </div>
+
            <p>}</p>
         </g:if>
+        <g:link action="do_add_clause" controller="scenario" params="[scenario_id: scenario.id, type: 'given']"><span class="add_link">add</span></g:link>
 
 
         <p>
@@ -120,6 +123,7 @@
 
               <% tname = "w_text${i}" %>
               <% cname = "w_code${i}" %>
+              <% iname = "w_id_${i}" %>
 
 
               <g:if test="${i > 0}">
@@ -127,6 +131,7 @@
                  <div style="padding-left: 10px; margin-left: 10px;">
               </g:if>
 
+              <input type="hidden" name="${iname}" value="${cond.id}" />
               <input type="text" size="64" maxlength="128" name="${tname}" value="${cond.text}" />   {
               </p>
               <div id="${cname}_show" style="display: none;">
@@ -140,7 +145,7 @@
                  </em></p>
               </div>
               <div style="float:right; padding-right: 20px;">
-                 <g:link action="do_delete_clause" controller="scenario" id="${cond.id}" params="[type:'condition',scenario_id: scenario.id]">Delete</g:link>
+                 <g:link action="do_delete_clause" controller="scenario" id="${cond.id}" params="[type:'condition',scenario_id: scenario.id]"><span class="delete_link">Delete</span></g:link>
               </div>
               <p>}</p>
 
@@ -169,6 +174,7 @@
            </div>
            <p>}</p>
         </g:if>
+        <g:link action="do_add_clause" controller="scenario" params="[scenario_id: scenario.id, type: 'condition']"><span class="add_link">add</span></g:link>
 
 
 
@@ -182,6 +188,7 @@
 
               <% tname = "t_text${i}" %>
               <% cname = "t_code${i}" %>
+              <% iname = "t_id_${i}" %>
 
 
               <g:if test="${i > 0}">
@@ -189,6 +196,7 @@
                  <div style="padding-left: 10px; margin-left: 10px;">
               </g:if>
 
+              <input type="hidden" name="${iname}" value="${concl.id}" />
               <input type="text" size="64" maxlength="128" name="${tname}" value="${concl.text}" />   {
               <p />
               <div id="${cname}_show" style="display: none;">
@@ -202,7 +210,7 @@
                  </em></p>
               </div>
               <div style="float:right; padding-right: 20px;">
-                 <g:link action="do_delete_clause" controller="scenario" id="${concl.id}" params="[type:'conclusion',scenario_id: scenario.id]">Delete</g:link>
+                 <g:link action="do_delete_clause" controller="scenario" id="${concl.id}" params="[type:'conclusion',scenario_id: scenario.id]"><span class="delete_link">Delete</span></g:link>
               </div>
 
               <p>}</p>
@@ -232,6 +240,7 @@
            </div>
            <p>}</p>
         </g:if>
+        <g:link action="do_add_clause" controller="scenario" params="[scenario_id: scenario.id, type: 'conclusion']"><span class="add_link">add</span></g:link></p>
 
 
         <p class="action-button"><input type="submit" value="Save"/></p>

@@ -121,13 +121,15 @@ class ScenarioController extends ControllerBase {
 
       def given_texts = findParameters(params, "g_text")
       def given_codes = findParameters(params, "g_code")
+      def given_ids = findParameters(params, "g_id_")
 
       def condition_texts = findParameters(params, "w_text")
       def condition_codes = findParameters(params, "w_code")
+      def condition_ids = findParameters(params, "w_id_")
 
       def conclusion_texts = findParameters(params, "t_text")
       def conclusion_codes = findParameters(params, "t_code")
-
+      def conclusion_ids = findParameters(params, "t_id_")
 
 //      log.info "analyzing parameters."
 //      log.info "given texts: ${given_texts}, conditions: ${condition_texts}, conclusions: ${conclusion_texts}"
@@ -156,12 +158,12 @@ class ScenarioController extends ControllerBase {
       }
 
 
-      def given_list = create_clauses(given_texts, given_codes)
-      def cond_list = create_clauses(condition_texts, condition_codes)
-      def concl_list = create_clauses(conclusion_texts, conclusion_codes)
+      def given_list = create_clauses(given_texts, given_codes, given_ids)
+      def cond_list = create_clauses(condition_texts, condition_codes, condition_ids)
+      def concl_list = create_clauses(conclusion_texts, conclusion_codes, conclusion_ids)
 
 //      log.info "Analyzing clauses."
-//      log.debug "Given list: ${given_list}, cond_list: ${cond_list}, concl_list: ${concl_list}"
+      log.debug "::::: - Given list: ${given_list}, cond_list: ${cond_list}, concl_list: ${concl_list}"
 
 
       def i = 0;
@@ -175,7 +177,7 @@ class ScenarioController extends ControllerBase {
 
          if (g == null) {
 
-            log.debug("Creating a new Given record for: ${it}")
+           log.debug("### Creating a new Given record for: ${it}")
 
            g = new Given()
 
@@ -195,7 +197,7 @@ class ScenarioController extends ControllerBase {
 
          if (c == null) {
 
-            log.debug("Creating a new Condition record for: ${it}")
+            log.debug("#### Creating a new Condition record for: ${it}")
             c = new Condition()
 
             update_clause(c, it, i)
@@ -254,6 +256,43 @@ class ScenarioController extends ControllerBase {
 
 
 
+   def do_add_clause = {
+
+      def obj = null
+
+      def type = params.type
+
+      def scenario = Scenario.get(params.scenario_id)
+
+      if (scenario == null) {
+         flash.error = "Unable to find the scenario with id: ${params.scenario_id}"
+      } else {
+
+         if (type == 'given') {
+            obj = new Given()
+            obj.scenario = scenario
+            scenario.givens << obj
+         } else if (type == 'condition') {
+            obj = new Condition()
+            obj.scenario = scenario
+            scenario.conditions << obj
+         } else if (type == 'conclusion') {
+            obj = new Conclusion()
+            obj.scenario = scenario
+            scenario.conclusions << obj
+         }
+      }
+
+      obj.text = " "
+
+      scenario.save()
+
+      redirect( action: 'edit', controller: 'scenario', id: params.scenario_id)
+      return
+      
+
+   }
+
 
 
     def do_delete_clause = {
@@ -302,16 +341,42 @@ class ScenarioController extends ControllerBase {
 
       def found = null
 
+
+      log.debug("%%% - pNew: ${pNew}")
+
+      if (pNew.id != null) {
+
+         current.each { cl ->
+
+            log.debug("%%% cl: ${cl}, ${0+cl.id}, ${0+pNew.id}")
+
+
+            // for some reason, these don't match with == - perhaps one is a number and the other is a string.
+            if (cl.id == pNew.id) {
+
+               log.debug("&&&& found match between ${cl.id} and ${pNew.id}")
+
+               cl.text = pNew.text
+               cl.code = pNew.code
+               log.debug(">>> updating code for clause: '${cl.text}' - cl: ${cl}")
+               found = cl
+            } else {
+               log.debug("&&&& no match between ${cl.id} and ${pNew.id}")
+
+            }
+         }
+
+      }
+
+         /*
       current.each { cl ->
 
-         log.debug("##### pNew: ${pNew}, clause: ${cl}  eval: ${pNew.text == cl.text}")
-
          if (pNew.text == cl.text) {
-            log.debug(">>> updating code for clause: '${cl.text}' - cl: ${cl}")
             cl.code = pNew.code
             found = cl
          }
       }
+      */
 
       return found
 
@@ -370,7 +435,7 @@ class ScenarioController extends ControllerBase {
    }
 
 
-   def create_clauses( tlist, clist) {
+   def create_clauses( tlist, clist, ilist) {
 
       def list = []
 
@@ -384,6 +449,18 @@ class ScenarioController extends ControllerBase {
          def cl = [:]
          cl.text = tlist[i]
          cl.code = clist[i]
+
+         int id = -1
+
+         try {
+             id = Integer.parseInt(ilist[i])
+         } catch( NumberFormatException nfe) {
+             id = -1
+         }
+
+         if (id > -1) {
+           cl.id = id
+         }
 
          list << cl
 
