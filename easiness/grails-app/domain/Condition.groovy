@@ -1,4 +1,4 @@
-class Condition  {
+class Condition implements Comparable {
 
    String text
    String code
@@ -11,6 +11,12 @@ class Condition  {
 
    static constraints = {
       code(nullable:true)
+   }
+
+
+   public int compareTo(other) {
+      return sortOrder - other.sortOrder
+
    }
    
 }

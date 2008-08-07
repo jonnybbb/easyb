@@ -347,3 +347,31 @@ img.right {
    padding: 3px;
    margin: 3px;
 }
+
+.tab-label {
+   font-weight: bold;
+   font-size: 125%;
+}
+
+.note {
+   padding-left: 10px;
+   font-style: italic;
+   font-size: 90%;
+   color: #356AA0;
+}
+
+.delete_clause {
+   font-size: 90%;
+   font-style: italic;
+   padding: 2px;
+   background-color: #EEE;
+   border: 1px solid #555;
+}
+
+.add_clause {
+   font-size: 90%;
+   font-style: italic;
+   padding: 2px;
+   background-color: #EEE;
+   border: 1px solid #555;
+}

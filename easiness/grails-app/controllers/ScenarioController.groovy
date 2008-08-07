@@ -111,6 +111,128 @@ class ScenarioController extends ControllerBase {
 
 
 
+      if (!process_clauses(scenario)) {
+         render(view: edit, model:       [scenario: scenario, ordered_givens: scenario.ordered('givens'),
+               ordered_conditions: scenario.ordered('conditions'),
+               ordered_conclusions: scenario.ordered('conclusions')])
+         return
+      }
+
+
+      scenario.imports = params.imports
+      scenario.setUp = params.setup
+      scenario.tearDown = params.teardown
+
+
+      if (scenario.hasErrors()) {
+         flash.error = "There are errors in this scenario."
+      } else if (!scenario.save()) {
+         flash.error = "Unable to save scenario."
+      } else {
+         flash.message = "Scenario updated."
+      }
+
+
+      render( view: 'edit', model:       [scenario: scenario, ordered_givens: scenario.ordered('givens'), ordered_conditions: scenario.ordered('conditions'), ordered_conclusions: scenario.ordered('conclusions')])
+
+   }
+
+
+
+   def do_add_clause = {
+
+
+      def obj = null
+
+      def type = params.type
+
+      def scenario = Scenario.get(params.scenario_id)
+
+
+
+      if (scenario == null) {
+         flash.error = "Unable to find the scenario with id: ${params.scenario_id}"
+      } else {
+
+
+         if (type == 'given') {
+            obj = new Given()
+            obj.scenario = scenario
+            obj.sortOrder = next_sort_order(scenario.givens)
+            scenario.givens << obj
+         } else if (type == 'condition') {
+            obj = new Condition()
+            obj.scenario = scenario
+            obj.sortOrder = next_sort_order(scenario.conditions)
+            scenario.conditions << obj
+         } else if (type == 'conclusion') {
+            obj = new Conclusion()
+            obj.scenario = scenario
+            obj.sortOrder = next_sort_order(scenario.conclusions)
+            scenario.conclusions << obj
+         }
+      }
+
+      obj.text = " "
+
+      if (!scenario.save()) {
+         flash.error = "Unable to save scenario."
+      }
+
+      redirect( action: 'edit', controller: 'scenario', id: params.scenario_id)
+      return
+      
+
+   }
+
+
+
+    def do_delete_clause = {
+
+       def obj = null
+
+       def type = params.type
+
+       if (type == 'given') {
+          obj = Given.get(params.id)
+       } else if (type == 'condition') {
+          obj = Condition.get(params.id)
+       } else if (type == 'conclusion') {
+          obj = Conclusion.get(params.id)
+       }
+
+
+       if (obj == null) {
+          flash.error = "Unable to find a ${type} clause with id: ${params.id}"
+       }
+
+       obj.delete()
+
+       flash.message = "${type} clause removed from scenario."
+
+
+       redirect( action: 'edit', controller: 'scenario', id: params.scenario_id)
+       return
+
+
+    }
+
+
+
+
+
+
+
+
+
+   //----------------------------------------------------------------------------------------------
+   // private methods
+
+
+
+   def process_clauses( scenario ) {
+
+
       // here are all the existing elements.
       def givens = scenario.givens
       def conditions = scenario.conditions
@@ -131,30 +253,24 @@ class ScenarioController extends ControllerBase {
       def conclusion_codes = findParameters(params, "t_code")
       def conclusion_ids = findParameters(params, "t_id_")
 
-//      log.info "analyzing parameters."
-//      log.info "given texts: ${given_texts}, conditions: ${condition_texts}, conclusions: ${conclusion_texts}"
-
 
       // validation
       def error_str = check_codes(given_texts, given_codes, 'Given')
       if (error_str != null) {
          flash.error = error_str
-         render(view: edit, model:       [scenario: scenario, ordered_givens: scenario.ordered('givens'), ordered_conditions: scenario.ordered('conditions'), ordered_conclusions: scenario.ordered('conclusions')])
-         return
+         return false
       }
 
       error_str = check_codes(condition_texts, condition_codes, 'When')
       if (error_str != null) {
          flash.error = error_str
-         render(view: edit, model:       [scenario: scenario, ordered_givens: scenario.ordered('givens'), ordered_conditions: scenario.ordered('conditions'), ordered_conclusions: scenario.ordered('conclusions')])
-         return
+         return false
       }
 
       error_str = check_codes(conclusion_texts, conclusion_codes, 'Then')
       if (error_str != null) {
          flash.error = error_str
-         render(view: edit, model: [scenario: scenario, ordered_givens: scenario.ordered('givens'), ordered_conditions: scenario.ordered('conditions'), ordered_conclusions: scenario.ordered('conclusions')])
-         return
+         return false
       }
 
 
@@ -221,7 +337,7 @@ class ScenarioController extends ControllerBase {
 
          if (c == null) {
 
-            log.debug("@@@ No clause with info: ${it}, creating new ")
+            log.debug("#### Creating a new Conclusion record for ${it}")
             c = new Conclusion()
 
             update_clause(c, it, i)
@@ -233,108 +349,15 @@ class ScenarioController extends ControllerBase {
          i++
       }
 
-//      log.debug "params: ${params}"
      log.debug "scenario clauses: ${scenario.givens}, ${scenario.conditions}, ${scenario.conclusions}"
-//      log.info "given texts: ${given_texts}, conditions: ${condition_texts}, conclusions: ${conclusion_texts}"
-//      log.debug "Given list: ${given_list}, cond_list: ${cond_list}, concl_list: ${concl_list}"
 
-
-      if (scenario.hasErrors()) {
-         flash.error = "There are errors in this scenario."
-         render( view: edit, model:       [scenario: scenario, ordered_givens: scenario.ordered('givens'), ordered_conditions: scenario.ordered('conditions'), ordered_conclusions: scenario.ordered('conclusions')])
-      } else if (!scenario.save()) {
-         flash.error = "Unable to save scenario."
-         render( view: edit, model:       [scenario: scenario, ordered_givens: scenario.ordered('givens'), ordered_conditions: scenario.ordered('conditions'), ordered_conclusions: scenario.ordered('conclusions')])
-      } else {
-         flash.message = "Scenario updated."
-      }
-
-
-      redirect( action: edit, controller: 'scenario', id: scenario.id)
+      return true
 
    }
 
 
 
-   def do_add_clause = {
 
-      def obj = null
-
-      def type = params.type
-
-      def scenario = Scenario.get(params.scenario_id)
-
-      if (scenario == null) {
-         flash.error = "Unable to find the scenario with id: ${params.scenario_id}"
-      } else {
-
-         if (type == 'given') {
-            obj = new Given()
-            obj.scenario = scenario
-            scenario.givens << obj
-         } else if (type == 'condition') {
-            obj = new Condition()
-            obj.scenario = scenario
-            scenario.conditions << obj
-         } else if (type == 'conclusion') {
-            obj = new Conclusion()
-            obj.scenario = scenario
-            scenario.conclusions << obj
-         }
-      }
-
-      obj.text = " "
-
-      scenario.save()
-
-      redirect( action: 'edit', controller: 'scenario', id: params.scenario_id)
-      return
-      
-
-   }
-
-
-
-    def do_delete_clause = {
-
-       def obj = null
-
-       def type = params.type
-
-       if (type == 'given') {
-          obj = Given.get(params.id)
-       } else if (type == 'condition') {
-          obj = Condition.get(params.id)
-       } else if (type == 'conclusion') {
-          obj = Conclusion.get(params.id)
-       }
-
-
-       if (obj == null) {
-          flash.error = "Unable to find a ${type} clause with id: ${params.id}"
-       }
-
-       obj.delete()
-
-       flash.message = "${type} clause removed from scenario."
-
-
-       redirect( action: 'edit', controller: 'scenario', id: params.scenario_id)
-       return
-
-
-    }
-
-
-
-
-
-
-
-
-
-   //----------------------------------------------------------------------------------------------
-   // private methods
 
 
    def find_and_update_clause( current, pNew) {
@@ -472,6 +495,19 @@ class ScenarioController extends ControllerBase {
 
 
 
+   }
+
+   def next_sort_order( arr ) {
+
+      if (arr == null || arr.size() == 0) {
+         return 0
+      }
+
+      def tmp = []
+
+      arr.each{ tmp << it }
+
+      return tmp[-1].sortOrder + 1
    }
 
 }

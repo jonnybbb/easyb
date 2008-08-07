@@ -1,3 +1,4 @@
+
 class Scenario {
 
    String title
@@ -30,18 +31,32 @@ class Scenario {
    def ordered(String c_type) {
 
       if (c_type == 'givens') {
-         return givens
+         return sort_clauses(givens)
       }
 
       if (c_type == 'conditions') {
-         return conditions
+         return sort_clauses(conditions)
       }
 
       if (c_type == 'conclusions') {
-         return conclusions
+         return sort_clauses(conclusions)
       }
 
       null
+
+   }
+
+
+   def sort_clauses( arr ) {
+
+      def tmp = []
+
+      arr.each{ tmp << it}
+
+      Collections.sort(tmp)
+
+      return tmp
+      
 
    }
 

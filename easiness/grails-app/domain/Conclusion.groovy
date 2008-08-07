@@ -1,4 +1,4 @@
-class Conclusion  {
+class Conclusion implements Comparable {
 
    String text
    String code
@@ -12,6 +12,11 @@ class Conclusion  {
 
    static constraints = {
       code(nullable:true)
+   }
+
+   public int compareTo(other) {
+      return sortOrder - other.sortOrder
+      
    }
 }
 
