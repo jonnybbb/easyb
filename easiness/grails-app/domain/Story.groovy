@@ -6,7 +6,7 @@ class Story {
 
    User user
 
-   static belongsTo = User
+   static belongsTo = [User,Family]
 
    static hasMany = [ scenarios: Scenario, scripts: Script]
 

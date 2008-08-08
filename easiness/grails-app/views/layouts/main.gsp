@@ -41,8 +41,8 @@
                  <li>
                     <h2>Admin</h2>
                      <ul>
-                       <li>manage users</li>
-                       <li>view stats</li>
+                       <li><g:link action="users" controller="admin">Manage Users</g:link></li>
+                       <li><g:link action="families" controller="admin">Manage Families</g:link></li>
                      </ul>
                  </li>
                  </ezi:hasRole>

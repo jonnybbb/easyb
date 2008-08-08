@@ -13,16 +13,25 @@
 
      <h1>Your Stories</h1>
 
+
+     <g:render template="storymenubar" />
+
+
+     <p />
      <g:if test="${stories?.size > 0}">
-        <span class="info">Total Stories: ${stories.size}</span>
+        <span class="note">Total Stories: ${stories.size}</span>
         <div id="story-list">
-           <ul>
-        <g:each var="story" in="${stories}">
-           <li><p><g:link action="edit" controller="story" id="${story.id}">
-               ${story.title}
-           </g:link></p></li>
-        </g:each>
-           </ul>
+        <table class="story-table" border="0">
+           <g:each var="story" in="${stories}">
+              <tr>
+                 <td width=""><g:link action="edit" controller="story" id="${story.id}">
+                     ${story.title}
+                 </g:link></td>
+                 <td width="15%"> run </td>
+                 <td width="15%"> edit </td>
+              </tr>
+           </g:each>
+        </table>
         </div>
      </g:if>
      <g:if test="${stories == null || stories.size == 0}">

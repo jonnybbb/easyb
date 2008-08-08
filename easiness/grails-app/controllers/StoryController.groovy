@@ -53,6 +53,55 @@ class StoryController extends ControllerBase {
    }
 
 
+
+   def statistics = {
+
+      def stories = Story.findAllByUser(flash.user)
+
+      flash.context_help = [ title: 'Story Statistics',
+            content: '''
+      <p>This page shows you the latest statistics on your stories - the most recent pass/fail/incomplete numbers and
+      the time and date of the last run.</p>
+      ''']
+
+      return [ stories: stories]
+
+   }
+
+
+   def export = {
+
+      def stories = Story.findAllByUser(flash.user)
+
+      flash.context_help = [ title: 'Story Export',
+            content: '''
+       <p>
+           You can export one or all of your stories here - just provide the appropriate directory name, and click the
+           'export' button.
+       </p>
+      ''']
+
+      return [ stories: stories]
+
+
+   }
+
+
+   def run = {
+
+      def stories = Story.findAllByUser(flash.user)
+
+      flash.context_help = [ title: 'Story Execution',
+            content: '''
+      <p>You can run one or all of your stories from this page. </p>
+      ''']
+
+      return [ stories: stories]
+      
+   }
+
+
+
    def do_create = {
 
       def story = new Story(params)

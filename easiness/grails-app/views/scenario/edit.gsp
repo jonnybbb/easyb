@@ -56,7 +56,7 @@
         <input type="hidden" name="scenario_id" value="${scenario.id}" />
 
 
-        <p>
+        <div id="menu-bar">
            <a href="#" onclick='changeLayout(0, "main_area_show", "import_area_show", "setup_area_show", "teardown_area_show"); return false;'><em>Main</em></a>
            |
            <a href="#" onclick='changeLayout(1, "main_area_show", "import_area_show", "setup_area_show", "teardown_area_show"); return false;'><em>Imports</em></a>
@@ -64,8 +64,7 @@
            <a href="#" onclick='changeLayout(2, "main_area_show", "import_area_show", "setup_area_show", "teardown_area_show"); return false;'><em>Setup</em></a>
            |
            <a href="#" onclick='changeLayout(3, "main_area_show", "import_area_show", "setup_area_show", "teardown_area_show"); return false;'><em>Teardown</em></a>
-        </p>
-
+        </div>
 
         <div id="import_area_show" style="display: none;">
            <p class="tab-label">Imports</p>

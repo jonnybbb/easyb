@@ -16,22 +16,36 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/domain/Condition.groovy" afterPath="$PROJECT_DIR$/grails-app/domain/Condition.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/controllers/ScenarioController.groovy" afterPath="$PROJECT_DIR$/grails-app/controllers/ScenarioController.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$" afterPath="$PROJECT_DIR$" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web-app/css/easiness.css" afterPath="$PROJECT_DIR$/web-app/css/easiness.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/integration/FamilyTests.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/grails-app/views/story/run.gsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/controllers/ControllerBase.groovy" afterPath="$PROJECT_DIR$/grails-app/controllers/ControllerBase.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/grails-app/views/admin" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/grails-app/domain/Family.groovy" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/devDB.properties" afterPath="$PROJECT_DIR$/db/devDB.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/scenario/edit.gsp" afterPath="$PROJECT_DIR$/grails-app/views/scenario/edit.gsp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Easiness.iws" afterPath="$PROJECT_DIR$/Easiness.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/domain/Given.groovy" afterPath="$PROJECT_DIR$/grails-app/domain/Given.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/grails-app/views/story/export.gsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/grails-app/views/admin/index.gsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/grails-app/views/story/statistics.gsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/story/mystories.gsp" afterPath="$PROJECT_DIR$/grails-app/views/story/mystories.gsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/grails-app/views/story/_storymenubar.gsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/controllers/StoryController.groovy" afterPath="$PROJECT_DIR$/grails-app/controllers/StoryController.groovy" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/groovy/ClauseObj.groovy" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/grails-app/views/admin/users.gsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/domain/User.groovy" afterPath="$PROJECT_DIR$/grails-app/domain/User.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db" afterPath="$PROJECT_DIR$/db" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web-app/css/easiness.css" afterPath="$PROJECT_DIR$/web-app/css/easiness.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/scenario/edit.gsp" afterPath="$PROJECT_DIR$/grails-app/views/scenario/edit.gsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/grails-app/controllers/AdminController.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/grails-app/views/admin/families.gsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/layouts/main.gsp" afterPath="$PROJECT_DIR$/grails-app/views/layouts/main.gsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/domain/Story.groovy" afterPath="$PROJECT_DIR$/grails-app/domain/Story.groovy" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/devDB.log" afterPath="$PROJECT_DIR$/db/devDB.log" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/integration/AdminControllerTests.groovy" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/devDB.script" afterPath="$PROJECT_DIR$/db/devDB.script" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/domain/Scenario.groovy" afterPath="$PROJECT_DIR$/grails-app/domain/Scenario.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/domain/Conclusion.groovy" afterPath="$PROJECT_DIR$/grails-app/domain/Conclusion.groovy" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/stacktrace.log" afterPath="" />
     </list>
     <ignored path="Easiness.iws" />
     <ignored path=".idea/workspace.xml" />
+    <ignored path="grails.out.log" />
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="Commander">
@@ -96,10 +110,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="edit.gsp" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/grails-app/views/scenario/edit.gsp">
+      <file leaf-file-name="AdminController.groovy" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/controllers/AdminController.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="282" column="124" selection-start="11892" selection-end="11892" vertical-scroll-proportion="0.74772036">
+            <state line="8" column="21" selection-start="165" selection-end="165" vertical-scroll-proportion="0.24935065">
+              <folding>
+                <marker date="1218215658000" expanded="true" signature="250:392" placeholder="{...}" />
+                <marker date="1218215658000" expanded="true" signature="282:368" placeholder="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="users.gsp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/views/admin/users.gsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="8" column="118" selection-start="206" selection-end="206" vertical-scroll-proportion="0.2601626">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mystories.gsp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/views/story/mystories.gsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="20" column="0" selection-start="337" selection-end="348" vertical-scroll-proportion="0.6504065">
               <folding />
             </state>
           </provider>
@@ -108,88 +143,61 @@
       <file leaf-file-name="easiness.css" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web-app/css/easiness.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="281" column="87" selection-start="3304" selection-end="3304" vertical-scroll-proportion="0.8506329">
+            <state line="355" column="118" selection-start="4190" selection-end="4190" vertical-scroll-proportion="0.6595238">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ScenarioController.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/controllers/ScenarioController.groovy">
+      <file leaf-file-name="StoryController.groovy" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/controllers/StoryController.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="125" column="119" selection-start="3379" selection-end="3379" vertical-scroll-proportion="2.8675675">
+            <state line="99" column="0" selection-start="2288" selection-end="2288" vertical-scroll-proportion="0.64415586">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Story.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/domain/Story.groovy">
-          <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
-            <state />
-          </provider>
+      <file leaf-file-name="run.gsp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/views/story/run.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="43" selection-start="140" selection-end="156" vertical-scroll-proportion="0.3539823">
+            <state line="20" column="0" selection-start="356" selection-end="356" vertical-scroll-proportion="0.6504065">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Script.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/domain/Script.groovy">
-          <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
-            <state />
-          </provider>
+      <file leaf-file-name="statistics.gsp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/views/story/statistics.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="6" selection-start="6" selection-end="6" vertical-scroll-proportion="0.0">
+            <state line="17" column="0" selection-start="354" selection-end="354" vertical-scroll-proportion="0.55284554">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Conclusion.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/domain/Conclusion.groovy">
-          <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
-            <state />
-          </provider>
+      <file leaf-file-name="export.gsp" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/grails-app/views/story/export.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="40" selection-start="283" selection-end="283" vertical-scroll-proportion="0.6017699">
+            <state line="15" column="117" selection-start="303" selection-end="303" vertical-scroll-proportion="0.4878049">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Condition.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/domain/Condition.groovy">
-          <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
-            <state />
-          </provider>
+      <file leaf-file-name="families.gsp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/views/admin/families.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="6" selection-start="6" selection-end="6" vertical-scroll-proportion="0.0">
+            <state line="11" column="65" selection-start="341" selection-end="341" vertical-scroll-proportion="0.35772356">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Given.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/domain/Given.groovy">
-          <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
-            <state />
-          </provider>
+      <file leaf-file-name="index.gsp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/views/admin/index.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="47" selection-start="280" selection-end="280" vertical-scroll-proportion="0.6017699">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Scenario.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/domain/Scenario.groovy">
-          <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="57" column="16" selection-start="978" selection-end="978" vertical-scroll-proportion="1.2861357">
+            <state line="15" column="5" selection-start="409" selection-end="409" vertical-scroll-proportion="0.4878049">
               <folding />
             </state>
           </provider>
@@ -215,7 +223,7 @@
     <OptionsSetting value="true" id="Add" />
     <OptionsSetting value="true" id="Remove" />
     <OptionsSetting value="true" id="Checkout" />
-    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="false" id="Update" />
     <OptionsSetting value="true" id="Status" />
     <OptionsSetting value="true" id="Edit" />
     <ConfirmationsSetting value="0" id="Add" />
@@ -261,253 +269,7 @@
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
         </PATH_ELEMENT>
         <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:/Volumes/WINDOWS/dev/easiness/web-app" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="Easiness" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="Easiness" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:/Volumes/WINDOWS/dev/easiness" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:/Volumes/WINDOWS/dev/easiness/web-app" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:/Volumes/WINDOWS/dev/easiness/web-app/css" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="Easiness" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="Easiness" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:/Volumes/WINDOWS/dev/easiness" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:/Volumes/WINDOWS/dev/easiness/src" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="Easiness" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="Easiness" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:/Volumes/WINDOWS/dev/easiness" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:/Volumes/WINDOWS/dev/easiness/src" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:/Volumes/WINDOWS/dev/easiness/src/groovy" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="Easiness" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="Easiness" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:/Volumes/WINDOWS/dev/easiness" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:/Volumes/WINDOWS/dev/easiness/grails-app" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:/Volumes/WINDOWS/dev/easiness/grails-app/views" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="Easiness" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="Easiness" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:/Volumes/WINDOWS/dev/easiness" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:/Volumes/WINDOWS/dev/easiness/grails-app" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:/Volumes/WINDOWS/dev/easiness/grails-app/views" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:/Volumes/WINDOWS/dev/easiness/grails-app/views/story" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="Easiness" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="Easiness" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:/Volumes/WINDOWS/dev/easiness" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:/Volumes/WINDOWS/dev/easiness/grails-app" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:/Volumes/WINDOWS/dev/easiness/grails-app/views" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:/Volumes/WINDOWS/dev/easiness/grails-app/views/scenario" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="Easiness" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="Easiness" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:/Volumes/WINDOWS/dev/easiness" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:/Volumes/WINDOWS/dev/easiness/grails-app" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:/Volumes/WINDOWS/dev/easiness/grails-app/views" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:/Volumes/WINDOWS/dev/easiness/grails-app/views/main" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="Easiness" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="Easiness" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:/Volumes/WINDOWS/dev/easiness" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:/Volumes/WINDOWS/dev/easiness/grails-app" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="Easiness" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="Easiness" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:/Volumes/WINDOWS/dev/easiness" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:/Volumes/WINDOWS/dev/easiness/grails-app" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:/Volumes/WINDOWS/dev/easiness/grails-app/domain" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="Easiness" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="Easiness" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:/Volumes/WINDOWS/dev/easiness" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:/Volumes/WINDOWS/dev/easiness/grails-app" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:/Volumes/WINDOWS/dev/easiness/grails-app/controllers" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="Easiness" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="Easiness" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:/Volumes/WINDOWS/dev/easiness" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:/Volumes/WINDOWS/dev/easiness/grails-app" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:/Volumes/WINDOWS/dev/easiness/grails-app/conf" />
+          <option name="myItemId" value="PsiDirectory:/Volumes/WINDOWS/dev/easiness/db" />
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
         </PATH_ELEMENT>
       </PATH>
@@ -540,7 +302,7 @@
     <property name="RunManagerConfig.showSettingsBeforeRunnig" value="true" />
   </component>
   <component name="RestoreUpdateTree">
-    <UpdateInfo date="8/7/08 3:37 PM" ActionInfo="_Update">
+    <UpdateInfo date="8/8/08 6:20 PM" ActionInfo="_Update">
       <UpdatedFiles>
         <FILE-GROUP>
           <option name="myUpdateName" value="Updated from server" />
@@ -568,8 +330,6 @@
             <option name="mySupportsDeletion" value="false" />
             <option name="myCanBeAbsent" value="true" />
             <option name="myId" value="REMOVED_FROM_REPOSITORY" />
-            <PATH vcs="svn" revision="433">$PROJECT_DIR$/out/test</PATH>
-            <PATH vcs="svn" revision="433">$PROJECT_DIR$/out/production</PATH>
           </FILE-GROUP>
           <FILE-GROUP>
             <option name="myUpdateName" value="Restored" />
@@ -577,11 +337,6 @@
             <option name="mySupportsDeletion" value="false" />
             <option name="myCanBeAbsent" value="false" />
             <option name="myId" value="RESTORED" />
-            <PATH vcs="svn" revision="433">$PROJECT_DIR$/out/production/Easiness/Clause.class</PATH>
-            <PATH vcs="svn" revision="433">$PROJECT_DIR$/out/production/Easiness/ScenarioController$_closure5_closure6.class</PATH>
-            <PATH vcs="svn" revision="433">$PROJECT_DIR$/out/production/Easiness/ScenarioController$_closure5_closure7.class</PATH>
-            <PATH vcs="svn" revision="433">$PROJECT_DIR$/out/production/Easiness/ScenarioController$_closure5_closure8.class</PATH>
-            <PATH vcs="svn" revision="433">$PROJECT_DIR$/src/groovy/ClauseObj.groovy</PATH>
           </FILE-GROUP>
         </FILE-GROUP>
         <FILE-GROUP>
@@ -590,6 +345,18 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="false" />
           <option name="myId" value="MODIFIED" />
+          <PATH>$PROJECT_DIR$/db/devDB.log</PATH>
+          <PATH>$PROJECT_DIR$/db/devDB.properties</PATH>
+          <PATH>$PROJECT_DIR$/db/devDB.script</PATH>
+          <PATH>$PROJECT_DIR$/Easiness.iws</PATH>
+          <PATH>$PROJECT_DIR$/grails-app/controllers/ControllerBase.groovy</PATH>
+          <PATH>$PROJECT_DIR$/grails-app/controllers/StoryController.groovy</PATH>
+          <PATH>$PROJECT_DIR$/grails-app/domain/Story.groovy</PATH>
+          <PATH>$PROJECT_DIR$/grails-app/domain/User.groovy</PATH>
+          <PATH>$PROJECT_DIR$/grails-app/views/layouts/main.gsp</PATH>
+          <PATH>$PROJECT_DIR$/grails-app/views/scenario/edit.gsp</PATH>
+          <PATH>$PROJECT_DIR$/grails-app/views/story/mystories.gsp</PATH>
+          <PATH>$PROJECT_DIR$/web-app/css/easiness.css</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Skipped" />
@@ -618,6 +385,9 @@
           <option name="mySupportsDeletion" value="true" />
           <option name="myCanBeAbsent" value="false" />
           <option name="myId" value="UNKNOWN" />
+          <PATH>$PROJECT_DIR$/grails.out.log</PATH>
+          <PATH>$PROJECT_DIR$/db/devDB.lck</PATH>
+          <PATH>$PROJECT_DIR$/out/production</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Locally added" />
@@ -625,6 +395,18 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="false" />
           <option name="myId" value="LOCALLY_ADDED" />
+          <PATH>$PROJECT_DIR$/grails-app/controllers/AdminController.groovy</PATH>
+          <PATH>$PROJECT_DIR$/grails-app/domain/Family.groovy</PATH>
+          <PATH>$PROJECT_DIR$/grails-app/views/admin</PATH>
+          <PATH>$PROJECT_DIR$/grails-app/views/admin/families.gsp</PATH>
+          <PATH>$PROJECT_DIR$/grails-app/views/admin/index.gsp</PATH>
+          <PATH>$PROJECT_DIR$/grails-app/views/admin/users.gsp</PATH>
+          <PATH>$PROJECT_DIR$/grails-app/views/story/_storymenubar.gsp</PATH>
+          <PATH>$PROJECT_DIR$/grails-app/views/story/export.gsp</PATH>
+          <PATH>$PROJECT_DIR$/grails-app/views/story/run.gsp</PATH>
+          <PATH>$PROJECT_DIR$/grails-app/views/story/statistics.gsp</PATH>
+          <PATH>$PROJECT_DIR$/test/integration/AdminControllerTests.groovy</PATH>
+          <PATH>$PROJECT_DIR$/test/integration/FamilyTests.groovy</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Locally removed" />
@@ -632,6 +414,7 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="false" />
           <option name="myId" value="LOCALLY_REMOVED" />
+          <PATH>$PROJECT_DIR$/src/groovy/ClauseObj.groovy</PATH>
         </FILE-GROUP>
       </UpdatedFiles>
     </UpdateInfo>
@@ -648,48 +431,6 @@
       <option name="HOST" value="localhost" />
       <option name="PORT" value="5005" />
     </configuration>
-    <configuration default="true" type="RubyRunConfigurationType" factoryName="Ruby test">
-      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="TESTS_FOLDER_PATH" VALUE="" />
-      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="TEST_SCRIPT_PATH" VALUE="" />
-      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="TEST_CLASS_NAME" VALUE="" />
-      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="TEST_FILE_MASK" VALUE="" />
-      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="TEST_METHOD_NAME" VALUE="" />
-      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="TEST_TEST_TYPE" VALUE="TEST_SCRIPT" />
-      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="-e STDOUT.sync=true;STDERR.sync=true;load($0=ARGV.shift)" />
-      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="WORK DIR" VALUE="" />
-      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="MODULE_NAME" VALUE="" />
-      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="SHOULD_USE_SDK" VALUE="false" />
-      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="ALTERN_SDK_NAME" VALUE="" />
-      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="INHERITANCE_CHECK_DISABLED" VALUE="false" />
-    </configuration>
-    <configuration default="true" type="GrailsRunConfigurationType" factoryName="Grails Application">
-      <module name="" />
-      <setting name="vmparams" value="" />
-      <setting name="grailsparams" value="" />
-      <setting name="operation" value="run-app" />
-    </configuration>
-    <configuration default="true" type="JUnit" factoryName="JUnit" enabled="false" merge="false">
-      <module name="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="ADDITIONAL_CLASS_PATH" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="wholeProject" />
-      </option>
-      <envs />
-      <method>
-        <option name="Make" value="true" />
-      </method>
-    </configuration>
     <configuration default="true" type="Application" factoryName="Application" enabled="false" merge="false">
       <option name="MAIN_CLASS_NAME" />
       <option name="VM_PARAMETERS" />
@@ -702,14 +443,6 @@
       <option name="PASS_PARENT_ENVS" value="true" />
       <module name="" />
       <envs />
-    </configuration>
-    <configuration default="true" type="GroovyScriptRunConfigurationType" factoryName="Groovy Script">
-      <module name="" />
-      <setting name="path" value="" />
-      <setting name="vmparams" value="" />
-      <setting name="params" value="" />
-      <setting name="workDir" value="." />
-      <setting name="debug" value="false" />
     </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG" enabled="false" merge="false">
       <module name="" />
@@ -752,6 +485,56 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
     </configuration>
+    <configuration default="true" type="GrailsRunConfigurationType" factoryName="Grails Application">
+      <module name="" />
+      <setting name="vmparams" value="" />
+      <setting name="grailsparams" value="" />
+      <setting name="operation" value="run-app" />
+    </configuration>
+    <configuration default="true" type="GroovyScriptRunConfigurationType" factoryName="Groovy Script">
+      <module name="" />
+      <setting name="path" value="" />
+      <setting name="vmparams" value="" />
+      <setting name="params" value="" />
+      <setting name="workDir" value="." />
+      <setting name="debug" value="false" />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit" enabled="false" merge="false">
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="ADDITIONAL_CLASS_PATH" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="wholeProject" />
+      </option>
+      <envs />
+      <method>
+        <option name="Make" value="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="RubyRunConfigurationType" factoryName="Ruby test">
+      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="TESTS_FOLDER_PATH" VALUE="" />
+      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="TEST_SCRIPT_PATH" VALUE="" />
+      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="TEST_CLASS_NAME" VALUE="" />
+      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="TEST_FILE_MASK" VALUE="" />
+      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="TEST_METHOD_NAME" VALUE="" />
+      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="TEST_TEST_TYPE" VALUE="TEST_SCRIPT" />
+      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="-e STDOUT.sync=true;STDERR.sync=true;load($0=ARGV.shift)" />
+      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="WORK DIR" VALUE="" />
+      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="MODULE_NAME" VALUE="" />
+      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="SHOULD_USE_SDK" VALUE="false" />
+      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="ALTERN_SDK_NAME" VALUE="" />
+      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="INHERITANCE_CHECK_DISABLED" VALUE="false" />
+    </configuration>
     <configuration default="false" name="Easiness" type="GrailsRunConfigurationType" factoryName="Grails Application">
       <module name="Easiness" />
       <setting name="vmparams" value="" />
@@ -783,7 +566,7 @@
     <option name="USER" value="" />
     <option name="PASSWORD" value="" />
     <option name="LAST_MERGED_REVISION" />
-    <option name="UPDATE_RUN_STATUS" value="false" />
+    <option name="UPDATE_RUN_STATUS" value="true" />
     <option name="UPDATE_RECURSIVELY" value="true" />
     <option name="MERGE_DRY_RUN" value="false" />
     <configuration useDefault="true">/Users/johnbr/.subversion</configuration>
@@ -809,7 +592,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="42" y="42" width="1398" height="834" extended-state="0" />
+    <frame x="41" y="42" width="1398" height="834" extended-state="0" />
     <editor active="false" />
     <layout>
       <window_info id="SQL" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="8" />
@@ -824,17 +607,18 @@
       <window_info id="Module Dependencies" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="5" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="12" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="4" />
+      <window_info id="Grails" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32911393" order="13" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" order="1" />
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32911393" order="14" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32911393" order="14" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28551337" order="2" x="32" y="68" width="1409" height="744" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" order="2" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" order="0" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" order="4" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32911393" order="10" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32911393" order="10" />
       <window_info id="Duplicates" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="11" />
       <window_info id="SVN Repositories" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32957748" order="9" />
+      <window_info id="SVN Properties" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32911393" order="-1" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="0" />
-      <window_info id="Grails" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32911393" order="13" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" order="2" />
       <window_info id="EJB" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" order="3" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" order="5" />
@@ -848,7 +632,7 @@
     <option name="PERFORM_EDIT_IN_BACKGROUND" value="true" />
     <option name="PERFORM_ADD_REMOVE_IN_BACKGROUND" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated the display for the Scenario editor, including import, setup, teardown.  Fixed ordering of the givens, cleaned up the presentation a bit.  At this point, we have all the data we need to export a scenario to the filesystem as an easyb file." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added the rest of the skeleton for the overall application, updated the layout of the MyStories page, added in some concepts to support grouping stories together for editing, etc." />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="REFORMAT_BEFORE_FILE_COMMIT" value="false" />
@@ -862,60 +646,16 @@
     <MESSAGE value="updated to allow scenario clauses to be updated easily.&#10;" />
     <MESSAGE value="Got the 'add' for new clauses working properly.&#10;&#10;" />
     <MESSAGE value="Updated the display for the Scenario editor, including import, setup, teardown.  Fixed ordering of the givens, cleaned up the presentation a bit.  At this point, we have all the data we need to export a scenario to the filesystem as an easyb file." />
+    <MESSAGE value="Added the rest of the skeleton for the overall application, updated the layout of the MyStories page, added in some concepts to support grouping stories together for editing, etc." />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/application.properties">
+    <entry file="file://$PROJECT_DIR$/grails-app/controllers/ScenarioController.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/controllers/MainController.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="32" selection-start="677" selection-end="677" vertical-scroll-proportion="0.41243863">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/story/mystories.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="29" selection-start="624" selection-end="624" vertical-scroll-proportion="0.43278688">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/scenario/create.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/story/edit.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="119" selection-start="781" selection-end="781" vertical-scroll-proportion="0.452459">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/controllers/StoryController.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="45" selection-start="45" selection-end="45" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/domain/Script.groovy">
-      <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="6" selection-start="6" selection-end="6" vertical-scroll-proportion="0.0">
+        <state line="458" column="0" selection-start="10618" selection-end="10783" vertical-scroll-proportion="0.7182045">
           <folding />
         </state>
       </provider>
@@ -925,68 +665,112 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="43" selection-start="140" selection-end="156" vertical-scroll-proportion="0.3539823">
+        <state line="8" column="35" selection-start="104" selection-end="104" vertical-scroll-proportion="0.25945947">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/layouts/main.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="44" column="0" selection-start="1812" selection-end="1812" vertical-scroll-proportion="0.42">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/taglib/EasinessTagLib.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="6" selection-start="166" selection-end="166" vertical-scroll-proportion="0.18625277">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/controllers/ControllerBase.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="20" selection-start="514" selection-end="514" vertical-scroll-proportion="0.3991131">
+          <folding>
+            <marker date="1218215658000" expanded="true" signature="222:549" placeholder="{...}" />
+            <marker date="1218215658000" expanded="true" signature="338:522" placeholder="{...}" />
+            <marker date="1218215658000" expanded="true" signature="377:492" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/controllers/AdminController.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="21" selection-start="165" selection-end="165" vertical-scroll-proportion="0.24935065">
+          <folding>
+            <marker date="1218215658000" expanded="true" signature="250:392" placeholder="{...}" />
+            <marker date="1218215658000" expanded="true" signature="282:368" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/admin/index.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="5" selection-start="409" selection-end="409" vertical-scroll-proportion="0.4878049">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/admin/families.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="65" selection-start="341" selection-end="341" vertical-scroll-proportion="0.35772356">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails.out.log">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/admin/users.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="118" selection-start="206" selection-end="206" vertical-scroll-proportion="0.2601626">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web-app/css/easiness.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="281" column="87" selection-start="3304" selection-end="3304" vertical-scroll-proportion="0.8506329">
+        <state line="355" column="118" selection-start="4190" selection-end="4190" vertical-scroll-proportion="0.6595238">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/domain/Scenario.groovy">
-      <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
-        <state />
-      </provider>
+    <entry file="file://$PROJECT_DIR$/grails-app/controllers/StoryController.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="57" column="16" selection-start="978" selection-end="978" vertical-scroll-proportion="1.2861357">
+        <state line="99" column="0" selection-start="2288" selection-end="2288" vertical-scroll-proportion="0.64415586">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/domain/Conclusion.groovy">
-      <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
-        <state />
-      </provider>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/story/mystories.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="40" selection-start="283" selection-end="283" vertical-scroll-proportion="0.6017699">
+        <state line="20" column="0" selection-start="337" selection-end="348" vertical-scroll-proportion="0.6504065">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/domain/Condition.groovy">
-      <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
-        <state />
-      </provider>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/story/run.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="6" selection-start="6" selection-end="6" vertical-scroll-proportion="0.0">
+        <state line="20" column="0" selection-start="356" selection-end="356" vertical-scroll-proportion="0.6504065">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/domain/Given.groovy">
-      <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
-        <state />
-      </provider>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/story/statistics.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="47" selection-start="280" selection-end="280" vertical-scroll-proportion="0.6017699">
+        <state line="17" column="0" selection-start="354" selection-end="354" vertical-scroll-proportion="0.55284554">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/controllers/ScenarioController.groovy">
+    <entry file="file://$PROJECT_DIR$/grails-app/views/story/export.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="125" column="119" selection-start="3379" selection-end="3379" vertical-scroll-proportion="2.8675675">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/scenario/edit.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="282" column="124" selection-start="11892" selection-end="11892" vertical-scroll-proportion="0.74772036">
+        <state line="15" column="117" selection-start="303" selection-end="303" vertical-scroll-proportion="0.4878049">
           <folding />
         </state>
       </provider>

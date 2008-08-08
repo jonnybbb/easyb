@@ -6,6 +6,27 @@
  * To change this template use File | Settings | File Templates.
  */
 class ControllerBase {
+
+
+   public boolean admin_intercept() {
+      if (!base_intercept()) { return false }
+
+      def user = User.get(session.userId)
+
+      if (user != null) {
+         if (!user.hasRole("admin")) {
+            flash.error = "Only Admins are authorized to access these pages."
+            return false
+         }
+
+         return true
+      }
+
+
+      return false
+
+   }
+
    public boolean base_intercept() {
 
       def error = warnIfInvalidUser()

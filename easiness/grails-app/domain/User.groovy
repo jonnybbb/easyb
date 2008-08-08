@@ -5,6 +5,7 @@ class User {
    String passwordConfirmation
 
    String role
+   String families
 
 
    static hasMany = [ stories: Story]
