@@ -5,10 +5,8 @@ class User {
    String passwordConfirmation
 
    String role
-   String families
 
-
-   static hasMany = [ stories: Story]
+   static hasMany = [ stories: Story, families: Family]
 
    //static belongsTo = Role
 
@@ -16,7 +14,7 @@ class User {
 
    static constraints = {
       name(size:2..64, blank:false, unique:true)
-      role(inList:["author","developer","admin"])
+      role(inList:Role.roleList)
    }
 
 

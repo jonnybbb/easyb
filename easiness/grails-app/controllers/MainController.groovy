@@ -75,7 +75,7 @@ applications.</p>
 
       String role = "author"
 
-      def users = User .list()
+      def users = User.list()
 
       if (users.size == 0) {
 
@@ -89,6 +89,9 @@ applications.</p>
          render(view: 'register')
          return  null
       }
+
+      user.families  = [Family.getDefault()]
+
 
 
       if (user.save()) {
