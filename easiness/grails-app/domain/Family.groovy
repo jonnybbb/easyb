@@ -5,4 +5,9 @@ class Family {
 
    static hasMany = [ stories: Story ]
 
+   static constraints = {
+      name(size:2..64, blank:false, unique:true)
+      code(size:2..32, blank:false, unique:true)
+   }
+
 }

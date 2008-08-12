@@ -24,11 +24,11 @@
         <table class="story-table" border="0">
            <g:each var="story" in="${stories}">
               <tr>
-                 <td width=""><g:link action="edit" controller="story" id="${story.id}">
+                 <td width="70%"><g:link action="expand" controller="story" id="${story.id}">
                      ${story.title}
                  </g:link></td>
                  <td width="15%"> run </td>
-                 <td width="15%"> edit </td>
+                 <td width="15%"> <g:link action="edit" controller="story" id="${story.id}">edit</g:link> </td>
               </tr>
            </g:each>
         </table>

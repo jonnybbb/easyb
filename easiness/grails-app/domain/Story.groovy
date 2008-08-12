@@ -5,6 +5,7 @@ class Story {
    String description
 
    User user
+   Family family
 
    static belongsTo = [User,Family]
 

@@ -16,6 +16,27 @@ class StoryController extends ControllerBase {
          return
       }
 
+
+      flash.context_help = [ title:  'Editing a Story',
+            content: '''
+     <p>On this page, you can update the title, description and family for your existing story.''' ]
+
+
+      [ story: story, families: Family.findAll()]
+
+   }
+
+
+   def expand = {
+
+      def story = Story.get(params.id)
+
+      if (story == null) {
+         flash.error = "No such story ${params.id}"
+         redirect(controller:story, action:mystorys)
+         return
+      }
+
       [ story: story]
 
    }
@@ -28,8 +49,9 @@ class StoryController extends ControllerBase {
       if (stories.size > 0) {
          flash.context_help = [ title:  'Selecting stories',
                content: '''
-                <p>Click on a story to the left, and you'll be able to start creating stories for it.</p>
-                <p>Or, click on the 'X' next to the story name to delete it.</p>
+                <p>Click on a story name to the left, and you'll be able to start creating scenarios for it.</p>
+                <p>Click on the <em>'run'</em> link to execute the scenarios.</p>
+                <p>Click on the <em>'edit'</em> link to update the story name, description and/or family</p>
           ''' ]
 
       }
@@ -43,12 +65,18 @@ class StoryController extends ControllerBase {
 
       flash.context_help = [ title:  'Creating a Story',
             content: '''
-     <p>A story represents a set of stories, all organized around a common theme.  For examle, you can create a
-     login story, and create a number of stories about different ways to log in (and also, how you might fail to
+     <p>A story represents a set of scenarios, all organized around a common theme.  For examle, you can create a
+     login story, and create a number of scenarios about different ways to log in (and also, how you might fail to
         log in).
      </p>
-     <p>Once you create the story, you'll be able to create a series of stories for it.</p>''' ]
+     <p>In this step, you provide the name, description and <em>family</em> for the story.  The family you choose
+        will define which users have the rights to edit this story.</p>
+     <p>Once you create the story, you'll be able to create a series of scenarios for it.</p>''' ]
 
+
+      //log.debug("%%% - families: ${Family.findAll()}")
+
+      [families: Family.findAll()]
 
    }
 
@@ -108,15 +136,16 @@ class StoryController extends ControllerBase {
 
 
       story.user = flash.user
+      story.family = Family.get(params.family_id)
 
       if (story.hasErrors()) {
-         render(view: create)
+         render(view: 'create')
          return
       }
 
       if (!story.save()) {
          flash.error = "Unable to save story."
-         render(view:create)
+         render(view:'create')
          return
       }
 
@@ -126,6 +155,34 @@ class StoryController extends ControllerBase {
    }
 
 
+   def do_edit = {
+
+
+      def story = Story.get(params.id)
+
+      if (story == null) {
+         flash.error = "No story found with id: ${params.id}"
+         render(view: 'edit')
+         return
+      }
+
+      story.family = Family.get(params.family_id)
+
+      if (story.hasErrors()) {
+         render(view: 'edit')
+         return
+      }
+
+      if (!story.save()) {
+         flash.error = "Unable to update story."
+         render(view: 'edit')
+         return
+      }
+
+      redirect(controller: 'story', action: 'mystories')
+      return
+
+   }
 
    boolean intercept() {
       if (!base_intercept()) {

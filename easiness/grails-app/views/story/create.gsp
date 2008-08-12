@@ -24,6 +24,8 @@
          <p><span class="prompt">Title:</span> <input type="text" size="45" maxlength="64" name="title"/></p>
          <p><span class="prompt">Description:</span></p>
          <p><textarea rows="5" cols="62" name="description">${scenario?.description}</textarea></p>
+         <p><span class="prompt">Story Family:</span><g:select name="family_id" from="${families}" optionKey="id" optionValue="name" /></p>
+
          <p />
          <p class="action-button"><input type="submit" value="Create"/></p>
       </div>

@@ -1,30 +1,35 @@
 <%--
   Created by IntelliJ IDEA.
   User: johnbr
-  Date: Jul 24, 2008
-  Time: 1:01:54 PM
+  Date: Aug 11, 2008
+  Time: 2:44:14 PM
   To change this template use File | Settings | File Templates.
 --%>
 
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
-  <head><title>Story Edit</title></head>
+  <head><title>Story: Edit</title></head>
   <body>
+     <g:hasErrors bean="${story}">
+         <div class="errorbox">
+             <g:renderErrors bean="${story}" as="list" />
+         </div>
+     </g:hasErrors>
 
-  <h1>Story: ${story.title}</h1>
-     <span class="info">Total Scenarios: ${story.scenarios.size()}</span>
+    <h1>Story Editor</h1>
+     <g:form action="do_edit">
+        <div class="formdiv">
+           <g:hiddenField name="id" value="${story.id}" />
 
-  <h4>Scenarios</h4>
-  <g:if test="${story?.scenarios?.size() > 0}">
-        <ul>
-        <g:each var='scenario' in="${story.scenarios}">
-           <li><p><g:link action="edit" controller="scenario" id='${scenario.id}'>${scenario.title}</g:link></p></li>
-        </g:each>
-        </ul>
-        <p><g:link action='create' controller='scenario' params='[story_id: story.id]'>Create New Scenario</g:link></p>
-    </g:if>
-    <g:if test="${story?.scenarios?.size() == 0}">
-       <p class="info">You don't have any scenarios yet.  Why not <g:link action='create' controller='scenario' params='[story_id: story.id]'>create one</g:link>?</p>
-    </g:if>
-    </body>
+           <p><span class="prompt">Title:</span> <input type="text" size="45" maxlength="64" name="title" value="${story.title}"/></p>
+           <p><span class="prompt">Description:</span></p>
+           <p><textarea rows="5" cols="62" name="description">${story.description}</textarea></p>
+           <p><span class="prompt">Story Family:</span><g:select name="family_id" from="${families}" value="${story.family.id}" optionKey="id" optionValue="name" /></p>
+
+           <p />
+           <p class="action-button"><input type="submit" value="Update"/></p>
+        </div>
+     </g:form>
+
+  </body>
 </html>
