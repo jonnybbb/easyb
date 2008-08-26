@@ -11,20 +11,45 @@
   <head><title>Story Expansion</title></head>
   <body>
 
-  <h1>Story: ${story.title}</h1>
-     <span class="info">Total Scenarios: ${story.scenarios.size()}</span>
+     <h1><g:link action="edit" controller="story" id="${story.id}">Story: ${story.title}</g:link></h1>
 
-  <h4>Scenarios</h4>
-  <g:if test="${story?.scenarios?.size() > 0}">
-        <ul>
-        <g:each var='scenario' in="${story.scenarios}">
-           <li><p><g:link action="edit" controller="scenario" id='${scenario.id}'>${scenario.title}</g:link></p></li>
-        </g:each>
-        </ul>
-        <p><g:link action='create' controller='scenario' params='[story_id: story.id]'>Create New Scenario</g:link></p>
-    </g:if>
-    <g:if test="${story?.scenarios?.size() == 0}">
-       <p class="info">You don't have any scenarios yet.  Why not <g:link action='create' controller='scenario' params='[story_id: story.id]'>create one</g:link>?</p>
-    </g:if>
+     <div id="story-table">
+        <ezi:hasRights type="context">
+            <p class="info" style="text-align: right; padding-right: 20px;">
+               <g:link action="export_story" controller="story" id="${story.id}">Export</g:link>
+               &nbsp;
+               &nbsp;
+               <g:link action="edit" controller="story" id="${story.id}">Edit</g:link>
+            </p>
+        </ezi:hasRights>
+        <ezi:hasRights type="context" not="true">
+           <p class="info" style="text-align: right; padding-right: 20px;">
+              <g:link action="export_story" controller="story" id="${story.id}">Export</g:link>
+           </p>
+        </ezi:hasRights>
+
+        <h2>Scenarios: ${story.scenarios.size()}</h2>
+        <g:if test="${story?.scenarios?.size() > 0}">
+           <ul>
+           <g:each var='scenario' in="${story.scenarios}">
+              <li><p><g:link action="edit" controller="scenario" id='${scenario.id}'>${scenario.title}</g:link></p></li>
+           </g:each>
+           </ul>
+           <ezi:hasRights type="context">
+              <p class="info"><g:link action='create' controller='scenario' params='[story_id: story.id]'>Create New Scenario</g:link></p>
+           </ezi:hasRights>
+        </g:if>
+
+        <g:if test="${story?.scenarios?.size() == 0}">
+           <ezi:hasRights type="context">
+              <p class="info">You don't have any scenarios yet.  Why not <g:link action='create' controller='scenario' params='[story_id: story.id]'>create one</g:link>?</p>
+           </ezi:hasRights>
+           <ezi:hasRights type="context" not="true">
+              <p class="info">No scenarios have been created for this story.</p>
+           </ezi:hasRights>
+        </g:if>
+
+     </div>
+
     </body>
 </html>

@@ -10,7 +10,7 @@
 <html>
   <head><title>Admin: Edit User</title></head>
   <body>
-       <g:form action="do_edit_user">
+       <g:form action="do_edit_user" method="POST" controller="admin">
 
           <span class="prompt">Name</span><g:textField name="name" value="${user.name}" /><p />
           <span class="prompt">Role</span><g:select name="role" from="${roles}" value="${user.role}" /><p></p>
@@ -23,9 +23,10 @@
              </ul>
           </p>
           <p></p>
+          <g:hiddenField name="id" value="${user.id}" />
 
 
-          <g:actionSubmit name="submit" value="Update" />
+          <g:submitButton name="submit" value="Update" />
 
        </g:form>
   </body>

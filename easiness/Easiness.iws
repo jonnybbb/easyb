@@ -16,18 +16,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/admin/users.gsp" afterPath="$PROJECT_DIR$/grails-app/views/admin/users.gsp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/grails-app/views/admin/edit_user.gsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/domain/Role.groovy" afterPath="$PROJECT_DIR$/grails-app/domain/Role.groovy" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/grails-app/views/admin/update_user_families.gsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/domain/User.groovy" afterPath="$PROJECT_DIR$/grails-app/domain/User.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/devDB.properties" afterPath="$PROJECT_DIR$/db/devDB.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/story/edit.gsp" afterPath="$PROJECT_DIR$/grails-app/views/story/edit.gsp" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/db/devDB.log" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/grails-app/views/story/export_story.gsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/grails-app/views/story/viewfamilies.gsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/controllers/ScenarioController.groovy" afterPath="$PROJECT_DIR$/grails-app/controllers/ScenarioController.groovy" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/db/devDB.script" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/grails-app/views/story/family.gsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/taglib/EasinessTagLib.groovy" afterPath="$PROJECT_DIR$/grails-app/taglib/EasinessTagLib.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web-app/css/easiness.css" afterPath="$PROJECT_DIR$/web-app/css/easiness.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/story/create.gsp" afterPath="$PROJECT_DIR$/grails-app/views/story/create.gsp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/controllers/MainController.groovy" afterPath="$PROJECT_DIR$/grails-app/controllers/MainController.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/scenario/edit.gsp" afterPath="$PROJECT_DIR$/grails-app/views/scenario/edit.gsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/story/_storymenubar.gsp" afterPath="$PROJECT_DIR$/grails-app/views/story/_storymenubar.gsp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Easiness.iws" afterPath="$PROJECT_DIR$/Easiness.iws" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/controllers/AdminController.groovy" afterPath="$PROJECT_DIR$/grails-app/controllers/AdminController.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/devDB.log" afterPath="$PROJECT_DIR$/db/devDB.log" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/devDB.script" afterPath="$PROJECT_DIR$/db/devDB.script" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/domain/Family.groovy" afterPath="$PROJECT_DIR$/grails-app/domain/Family.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/layouts/main.gsp" afterPath="$PROJECT_DIR$/grails-app/views/layouts/main.gsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/domain/Story.groovy" afterPath="$PROJECT_DIR$/grails-app/domain/Story.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/domain/Scenario.groovy" afterPath="$PROJECT_DIR$/grails-app/domain/Scenario.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/story/expand.gsp" afterPath="$PROJECT_DIR$/grails-app/views/story/expand.gsp" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/db/devDB.properties" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/controllers/StoryController.groovy" afterPath="$PROJECT_DIR$/grails-app/controllers/StoryController.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/admin/edit_user.gsp" afterPath="$PROJECT_DIR$/grails-app/views/admin/edit_user.gsp" />
     </list>
     <ignored path="Easiness.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -96,110 +106,102 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="User.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/domain/User.groovy">
+      <file leaf-file-name="edit.gsp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/views/story/edit.gsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="71" column="122" selection-start="2648" selection-end="2648" vertical-scroll-proportion="0.4987013">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="create.gsp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/views/story/create.gsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="23" column="91" selection-start="573" selection-end="598" vertical-scroll-proportion="0.43896103">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="expand.gsp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/views/story/expand.gsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="27" column="15" selection-start="1026" selection-end="1026" vertical-scroll-proportion="0.68051946">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="StoryController.groovy" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/controllers/StoryController.groovy">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="240" column="44" selection-start="5166" selection-end="5166" vertical-scroll-proportion="0.2693267">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="export_story.gsp" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/grails-app/views/story/export_story.gsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="19" column="4" selection-start="314" selection-end="314" vertical-scroll-proportion="0.57">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="edit.gsp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/views/scenario/edit.gsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="51" column="2" selection-start="1173" selection-end="1173" vertical-scroll-proportion="0.425974">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Given.groovy" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/domain/Given.groovy">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="6" selection-start="6" selection-end="6" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
           <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
             <state />
           </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ScenarioController.groovy" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/controllers/ScenarioController.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="12" selection-start="232" selection-end="232" vertical-scroll-proportion="0.42162162">
+            <state line="658" column="5" selection-start="15203" selection-end="15203" vertical-scroll-proportion="15.842893">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AdminController.groovy" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/grails-app/controllers/AdminController.groovy">
+      <file leaf-file-name="Scenario.groovy" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/domain/Scenario.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="107" column="40" selection-start="1724" selection-end="1724" vertical-scroll-proportion="0.59615386">
-              <folding>
-                <marker date="1218575688000" expanded="true" signature="5334:5476" placeholder="{...}" />
-                <marker date="1218575688000" expanded="true" signature="5366:5452" placeholder="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="users.gsp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/views/admin/users.gsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="33" column="23" selection-start="883" selection-end="883" vertical-scroll-proportion="0.835">
-              <folding>
-                <marker date="1218574046000" expanded="true" signature="562:1130" placeholder="..." />
-                <marker date="1218574046000" expanded="true" signature="774:899" placeholder="..." />
-                <marker date="1218574046000" expanded="true" signature="807:882" placeholder="..." />
-                <marker date="1218574046000" expanded="true" signature="917:1115" placeholder="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MainController.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/controllers/MainController.groovy">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="92" column="44" selection-start="2193" selection-end="2193" vertical-scroll-proportion="0.38902742">
+            <state line="1" column="6" selection-start="7" selection-end="7" vertical-scroll-proportion="0.032432433">
               <folding />
             </state>
           </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="edit_user.gsp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/views/admin/edit_user.gsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="10" selection-start="528" selection-end="528" vertical-scroll-proportion="0.4987013">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="update_user_families.gsp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/views/admin/update_user_families.gsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="99" selection-start="671" selection-end="671" vertical-scroll-proportion="0.54">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="families.gsp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/views/admin/families.gsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.6857143">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MultiselectTagLib.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/taglib/MultiselectTagLib.groovy">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="66" column="27" selection-start="1769" selection-end="1769" vertical-scroll-proportion="0.62749445">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Family.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/domain/Family.groovy">
           <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
             <state />
           </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="16" selection-start="584" selection-end="584" vertical-scroll-proportion="0.8756757">
-              <folding />
-            </state>
-          </provider>
         </entry>
       </file>
-      <file leaf-file-name="Role.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/domain/Role.groovy">
-          <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
-            <state />
-          </provider>
+      <file leaf-file-name="Story.groovy" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/domain/Story.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="3" column="78" selection-start="93" selection-end="93" vertical-scroll-proportion="0.097297296">
+            <state line="24" column="37" selection-start="328" selection-end="328" vertical-scroll-proportion="0.61621624">
               <folding />
             </state>
+          </provider>
+          <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
+            <state />
           </provider>
         </entry>
       </file>
@@ -387,6 +389,58 @@
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
         </PATH_ELEMENT>
         <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:/Volumes/WINDOWS/dev/easiness/grails-app/views/scenario" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Easiness" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Easiness" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:/Volumes/WINDOWS/dev/easiness" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:/Volumes/WINDOWS/dev/easiness/grails-app" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:/Volumes/WINDOWS/dev/easiness/grails-app/views" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:/Volumes/WINDOWS/dev/easiness/grails-app/views/layouts" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Easiness" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Easiness" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:/Volumes/WINDOWS/dev/easiness" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:/Volumes/WINDOWS/dev/easiness/grails-app" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:/Volumes/WINDOWS/dev/easiness/grails-app/views" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
           <option name="myItemId" value="PsiDirectory:/Volumes/WINDOWS/dev/easiness/grails-app/views/admin" />
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
         </PATH_ELEMENT>
@@ -475,6 +529,24 @@
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
         </PATH_ELEMENT>
       </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Easiness" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Easiness" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:/Volumes/WINDOWS/dev/easiness" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:/Volumes/WINDOWS/dev/easiness/db" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+      </PATH>
     </subPane>
   </component>
   <component name="ProjectReloadState">
@@ -508,6 +580,47 @@
     <RUBY_DOC NAME="NUMBER" VALUE="0" />
   </component>
   <component name="RunManager" selected="Grails Application.Easiness">
+    <configuration default="true" type="Application" factoryName="Application" enabled="false" merge="false">
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+    </configuration>
+    <configuration default="true" type="GrailsRunConfigurationType" factoryName="Grails Application">
+      <module name="" />
+      <setting name="vmparams" value="" />
+      <setting name="grailsparams" value="" />
+      <setting name="operation" value="run-app" />
+    </configuration>
+    <configuration default="true" type="RubyRunConfigurationType" factoryName="Ruby test">
+      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="TESTS_FOLDER_PATH" VALUE="" />
+      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="TEST_SCRIPT_PATH" VALUE="" />
+      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="TEST_CLASS_NAME" VALUE="" />
+      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="TEST_FILE_MASK" VALUE="" />
+      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="TEST_METHOD_NAME" VALUE="" />
+      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="TEST_TEST_TYPE" VALUE="TEST_SCRIPT" />
+      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="-e STDOUT.sync=true;STDERR.sync=true;load($0=ARGV.shift)" />
+      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="WORK DIR" VALUE="" />
+      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="MODULE_NAME" VALUE="" />
+      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="SHOULD_USE_SDK" VALUE="false" />
+      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="ALTERN_SDK_NAME" VALUE="" />
+      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="INHERITANCE_CHECK_DISABLED" VALUE="false" />
+    </configuration>
+    <configuration default="true" type="GroovyScriptRunConfigurationType" factoryName="Groovy Script">
+      <module name="" />
+      <setting name="path" value="" />
+      <setting name="vmparams" value="" />
+      <setting name="params" value="" />
+      <setting name="workDir" value="." />
+      <setting name="debug" value="false" />
+    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG" enabled="false" merge="false">
       <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -537,19 +650,24 @@
         <option name="Make" value="true" />
       </method>
     </configuration>
-    <configuration default="true" type="RubyRunConfigurationType" factoryName="Ruby test">
-      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="TESTS_FOLDER_PATH" VALUE="" />
-      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="TEST_SCRIPT_PATH" VALUE="" />
-      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="TEST_CLASS_NAME" VALUE="" />
-      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="TEST_FILE_MASK" VALUE="" />
-      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="TEST_METHOD_NAME" VALUE="" />
-      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="TEST_TEST_TYPE" VALUE="TEST_SCRIPT" />
-      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="-e STDOUT.sync=true;STDERR.sync=true;load($0=ARGV.shift)" />
-      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="WORK DIR" VALUE="" />
-      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="MODULE_NAME" VALUE="" />
-      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="SHOULD_USE_SDK" VALUE="false" />
-      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="ALTERN_SDK_NAME" VALUE="" />
-      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="INHERITANCE_CHECK_DISABLED" VALUE="false" />
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$M2_REPO$/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit" enabled="false" merge="false">
       <module name="" />
@@ -572,52 +690,6 @@
       <method>
         <option name="Make" value="true" />
       </method>
-    </configuration>
-    <configuration default="true" type="GrailsRunConfigurationType" factoryName="Grails Application">
-      <module name="" />
-      <setting name="vmparams" value="" />
-      <setting name="grailsparams" value="" />
-      <setting name="operation" value="run-app" />
-    </configuration>
-    <configuration default="true" type="Remote" factoryName="Remote">
-      <option name="USE_SOCKET_TRANSPORT" value="true" />
-      <option name="SERVER_MODE" value="false" />
-      <option name="SHMEM_ADDRESS" value="javadebug" />
-      <option name="HOST" value="localhost" />
-      <option name="PORT" value="5005" />
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$M2_REPO$/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-    </configuration>
-    <configuration default="true" type="Application" factoryName="Application" enabled="false" merge="false">
-      <option name="MAIN_CLASS_NAME" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="" />
-      <envs />
-    </configuration>
-    <configuration default="true" type="GroovyScriptRunConfigurationType" factoryName="Groovy Script">
-      <module name="" />
-      <setting name="path" value="" />
-      <setting name="vmparams" value="" />
-      <setting name="params" value="" />
-      <setting name="workDir" value="." />
-      <setting name="debug" value="false" />
     </configuration>
     <configuration default="false" name="Easiness" type="GrailsRunConfigurationType" factoryName="Grails Application">
       <module name="Easiness" />
@@ -691,7 +763,6 @@
       <window_info id="Module Dependencies" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="5" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="13" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="4" />
-      <window_info id="Grails" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32911393" order="14" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" order="1" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32911393" order="15" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28551337" order="2" x="32" y="68" width="1409" height="744" />
@@ -703,6 +774,7 @@
       <window_info id="SVN Repositories" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32957748" order="10" />
       <window_info id="SVN Properties" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32911393" order="9" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="0" />
+      <window_info id="Grails" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32911393" order="14" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" order="2" />
       <window_info id="EJB" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" order="3" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" order="5" />
@@ -716,7 +788,7 @@
     <option name="PERFORM_EDIT_IN_BACKGROUND" value="true" />
     <option name="PERFORM_ADD_REMOVE_IN_BACKGROUND" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated to support user administration, role and family management and added (and debugged) the multiselect taglib" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added the ability to manage and work with other stories in your family.  &#10;&#10;Made it so the developer/author roles are supported by the tag lib, allowing us to customize the look and feel of each page based on role.&#10;&#10;Moved the imports, setup and teardown to the story, instead of the scenario.    &#10;&#10;Made it so we can export stories, at least in a rudimentary way.   &#10;&#10;Made it so developers can update given/then/when code blocks, but not the titles.  &#10;&#10;Made it so authors can update the given/then/when titles, but not the code blocks.&#10;&#10;Revamped the code to create/edit given/then/when clauses - it's much cleaner and easier to follow now.&#10;&#10;" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="REFORMAT_BEFORE_FILE_COMMIT" value="false" />
@@ -734,134 +806,134 @@
     <MESSAGE value="Added a basic readme" />
     <MESSAGE value="Updated to support story families, and added an Easiness/ directory to the web-app.&#10;" />
     <MESSAGE value="Updated to support user administration, role and family management and added (and debugged) the multiselect taglib" />
+    <MESSAGE value="Added the ability to manage and work with other stories in your family.  &#10;&#10;Made it so the developer/author roles are supported by the tag lib, allowing us to customize the look and feel of each page based on role.&#10;&#10;Moved the imports, setup and teardown to the story, instead of the scenario.    &#10;&#10;Made it so we can export stories, at least in a rudimentary way.   &#10;&#10;Made it so developers can update given/then/when code blocks, but not the titles.  &#10;&#10;Made it so authors can update the given/then/when titles, but not the code blocks.&#10;&#10;Revamped the code to create/edit given/then/when clauses - it's much cleaner and easier to follow now.&#10;&#10;" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/grails-app/views/story/create.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="0" selection-start="270" selection-end="1032" vertical-scroll-proportion="0.6453782">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/story/edit.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="25" selection-start="453" selection-end="453" vertical-scroll-proportion="0.36302522">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/controllers/ScenarioController.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="6" selection-start="6" selection-end="6" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web-app/Easiness/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="HtmlPreview">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file:///Users/johnbr/Library/Caches/IntelliJIDEA70/compiler/Easiness.Easiness497196a1/.generated/Groovy_to_java_source_code_generator/Easiness.4971963e/production/AdminController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="121" column="27" selection-start="2402" selection-end="2402" vertical-scroll-proportion="3.0165877">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/domain/Role.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="58" selection-start="73" selection-end="91" vertical-scroll-proportion="0.097297296">
+          <folding />
+        </state>
+      </provider>
       <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
         <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="78" selection-start="93" selection-end="93" vertical-scroll-proportion="0.097297296">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/domain/Family.groovy">
-      <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="16" selection-start="584" selection-end="584" vertical-scroll-proportion="0.8756757">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/domain/User.groovy">
-      <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="12" selection-start="232" selection-end="232" vertical-scroll-proportion="0.42162162">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/controllers/MainController.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="92" column="44" selection-start="2193" selection-end="2193" vertical-scroll-proportion="0.38902742">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/admin/users.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="23" selection-start="883" selection-end="883" vertical-scroll-proportion="0.835">
-          <folding>
-            <marker date="1218574046000" expanded="true" signature="562:1130" placeholder="..." />
-            <marker date="1218574046000" expanded="true" signature="774:899" placeholder="..." />
-            <marker date="1218574046000" expanded="true" signature="807:882" placeholder="..." />
-            <marker date="1218574046000" expanded="true" signature="917:1115" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/admin/edit_user.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="10" selection-start="528" selection-end="528" vertical-scroll-proportion="0.4987013">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/admin/families.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.6857143">
-          <folding />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/admin/update_user_families.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="99" selection-start="671" selection-end="671" vertical-scroll-proportion="0.54">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/taglib/MultiselectTagLib.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="66" column="27" selection-start="1769" selection-end="1769" vertical-scroll-proportion="0.62749445">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/controllers/AdminController.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="107" column="40" selection-start="1724" selection-end="1724" vertical-scroll-proportion="0.59615386">
-          <folding>
-            <marker date="1218575688000" expanded="true" signature="5334:5476" placeholder="{...}" />
-            <marker date="1218575688000" expanded="true" signature="5366:5452" placeholder="{...}" />
-          </folding>
+        <state line="149" column="15" selection-start="2560" selection-end="2560" vertical-scroll-proportion="0.63461536">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/admin/edit_user.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="58" selection-start="964" selection-end="964" vertical-scroll-proportion="0.84155846">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/story/family.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="31" column="27" selection-start="1078" selection-end="1078" vertical-scroll-proportion="0.9298701">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/domain/Given.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="6" selection-start="6" selection-end="6" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/story/expand.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="15" selection-start="1026" selection-end="1026" vertical-scroll-proportion="0.68051946">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/domain/Scenario.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="6" selection-start="7" selection-end="7" vertical-scroll-proportion="0.032432433">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/taglib/EasinessTagLib.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="74" column="0" selection-start="1426" selection-end="1426" vertical-scroll-proportion="1.0110865">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/controllers/ScenarioController.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="658" column="5" selection-start="15203" selection-end="15203" vertical-scroll-proportion="15.842893">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/controllers/StoryController.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="240" column="44" selection-start="5166" selection-end="5166" vertical-scroll-proportion="0.2693267">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/domain/Story.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="37" selection-start="328" selection-end="328" vertical-scroll-proportion="0.61621624">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/scenario/edit.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="51" column="2" selection-start="1173" selection-end="1173" vertical-scroll-proportion="0.425974">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/story/create.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="91" selection-start="573" selection-end="598" vertical-scroll-proportion="0.43896103">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/story/edit.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="71" column="122" selection-start="2648" selection-end="2648" vertical-scroll-proportion="0.4987013">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/story/export_story.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="4" selection-start="314" selection-end="314" vertical-scroll-proportion="0.57">
+          <folding />
         </state>
       </provider>
     </entry>

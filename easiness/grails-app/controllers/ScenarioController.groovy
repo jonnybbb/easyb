@@ -112,16 +112,11 @@ class ScenarioController extends ControllerBase {
 
 
       if (!process_clauses(scenario)) {
-         render(view: edit, model:       [scenario: scenario, ordered_givens: scenario.ordered('givens'),
+         render(view: 'edit', model:       [scenario: scenario, ordered_givens: scenario.ordered('givens'),
                ordered_conditions: scenario.ordered('conditions'),
                ordered_conclusions: scenario.ordered('conclusions')])
          return
       }
-
-
-      scenario.imports = params.imports
-      scenario.setUp = params.setup
-      scenario.tearDown = params.teardown
 
 
       if (scenario.hasErrors()) {
@@ -133,7 +128,21 @@ class ScenarioController extends ControllerBase {
       }
 
 
-      render( view: 'edit', model:       [scenario: scenario, ordered_givens: scenario.ordered('givens'), ordered_conditions: scenario.ordered('conditions'), ordered_conclusions: scenario.ordered('conclusions')])
+      log.debug "##### scenario givens: ${scenario.givens}"
+      log.debug "##### scenario conditions: ${scenario.conditions}"
+      log.debug "##### scenario conclusions: ${scenario.conclusions}"
+
+
+      def ordered_givens = scenario.ordered('givens')
+      def ordered_conditions = scenario.ordered('conditions')
+      def ordered_conclusions = scenario.ordered('conclusions')
+
+      log.debug "##### successfully created and saved scenario.  About to render view."
+      
+      render( view: 'edit', model: [scenario: scenario,
+            ordered_givens: ordered_givens,
+            ordered_conditions: ordered_conditions,
+            ordered_conclusions: ordered_conclusions])
 
    }
 
@@ -238,6 +247,144 @@ class ScenarioController extends ControllerBase {
       def conditions = scenario.conditions
       def conclusions = scenario.conclusions
 
+
+      def error_str = null
+
+      error_str = update_and_add_clauses( scenario, givens, "g", params, { new Given() } )
+
+      if (error_str != null) {
+         flash.error = error_str
+         return false
+      }
+
+
+      error_str = update_and_add_clauses(scenario,  conditions, "w", params, { new Condition() } )
+      if (error_str != null) {
+         flash.error = error_str
+         return false
+      }
+
+      error_str = update_and_add_clauses(scenario, conclusions, "t", params, { new Conclusion() } )
+      if (error_str != null) {
+         flash.error = error_str
+         return false
+      }
+
+
+      log.info "#####  givens: ${givens}, conditions: ${conditions}, conclusions: ${conclusions}"
+
+      return true
+   }
+
+
+
+
+   def update_and_add_clauses( scenario, clause_list, clause_keycode, params, creator_closure ) {
+
+      log.info "#####  update_and_add_clauses: ${clause_list}"
+
+      int i = 0;
+      for (; i > -1; i++) {
+
+         def text  = find_param(params, clause_keycode, "text", i)
+
+         def code  = find_param(params, clause_keycode, "code", i)
+
+         def idstr = find_param(params, clause_keycode, "id_", i)
+
+
+         log.info "##### params: ${text}, ${code}, ${idstr}"
+
+         if (text != null || code != null) {
+
+            if (idstr != null) {
+
+               int id = -1
+               try {
+                   id = Integer.parseInt(idstr)
+               } catch( NumberFormatException nfe) {
+               }               
+
+               def clause = find_clause_with_id_in_list(clause_list, id)
+
+               log.info "##### Found clause: ${clause} with id: ${id}"
+
+               if (clause != null) {
+
+                  if (text != null) { clause.text = text  }
+                  if (code != null) { clause.code = code  }
+               } else {
+                  return "unable to find clause in ${clause_list} with id ${id}"
+               }
+
+            } else {
+
+
+               def clause =  creator_closure()
+
+               log.info "##### Creating clause: ${clause} text: ${text} ${code}"
+
+               clause.text = text
+               clause.code = code
+               clause.scenario = scenario
+
+               clause.sortOrder = next_sort_order(clause_list)
+
+               log.info "##### adding clause: ${clause} to clause_list: ${clause_list}"
+
+               clause_list << clause
+
+            }
+         } else {
+            i = -1
+            break;
+         }
+      }
+
+
+      return null
+
+   }
+
+
+
+   def find_param( params, key_preamble, key_body, key_index) {
+
+      String key = "${key_preamble}_${key_body}${key_index}"
+
+      def res = params[key]
+
+      if (res == null || res == "") {
+         return null
+      }
+
+      return res
+
+   }
+
+   def find_clause_with_id_in_list( list, id) {
+
+      log.debug("##### id: ${id}, ${0+id}")
+
+      def clause = null
+
+      list.each{ cl ->
+
+         log.debug(" clause id: ${cl.id}, ${0+id}, ${id}")
+
+         if (cl.id == id) {
+            clause = cl
+            return
+         }
+      }
+
+      return clause
+
+   }
+
+
+/*
+
       // iterate through the possible given, condition and conclusion fields and add as necessary to this
       // story.
 
@@ -255,28 +402,28 @@ class ScenarioController extends ControllerBase {
 
 
       // validation
-      def error_str = check_codes(given_texts, given_codes, 'Given')
+      def error_str = check_codes(givens, given_texts, given_codes, 'Given')
       if (error_str != null) {
          flash.error = error_str
          return false
       }
 
-      error_str = check_codes(condition_texts, condition_codes, 'When')
+      error_str = check_codes(conditions, condition_texts, condition_codes, 'When')
       if (error_str != null) {
          flash.error = error_str
          return false
       }
 
-      error_str = check_codes(conclusion_texts, conclusion_codes, 'Then')
+      error_str = check_codes(conclusions, conclusion_texts, conclusion_codes, 'Then')
       if (error_str != null) {
          flash.error = error_str
          return false
       }
 
 
-      def given_list = create_clauses(given_texts, given_codes, given_ids)
-      def cond_list = create_clauses(condition_texts, condition_codes, condition_ids)
-      def concl_list = create_clauses(conclusion_texts, conclusion_codes, conclusion_ids)
+      def given_list = create_clauses(given_texts, given_codes, given_ids, givens)
+      def cond_list = create_clauses(condition_texts, condition_codes, condition_ids, conditions)
+      def concl_list = create_clauses(conclusion_texts, conclusion_codes, conclusion_ids, conclusions)
 
 //      log.info "Analyzing clauses."
       log.debug "::::: - Given list: ${given_list}, cond_list: ${cond_list}, concl_list: ${concl_list}"
@@ -355,11 +502,12 @@ class ScenarioController extends ControllerBase {
 
    }
 
+      */
 
 
 
 
-
+   /*
    def find_and_update_clause( current, pNew) {
 
       def found = null
@@ -391,39 +539,58 @@ class ScenarioController extends ControllerBase {
 
       }
 
-         /*
-      current.each { cl ->
-
-         if (pNew.text == cl.text) {
-            cl.code = pNew.code
-            found = cl
-         }
-      }
-      */
+//      current.each { cl ->
+//
+//         if (pNew.text == cl.text) {
+//            cl.code = pNew.code
+//            found = cl
+//         }
+//      }
 
       return found
 
    }
 
+   */
+
+   /*
    def update_clause( dest, source, order) {
       dest.text = source.text
       dest.code = source.code
       dest.sortOrder = order
 
    }
+   */
+
+   /*
+   def check_codes( h_list, texts, codes, title) {
 
 
-   def check_codes( texts, codes, title) {
+      if (h_list == null || h_list.size() == 0 ) {
+         if (codes?.size() > texts?.size()) {
+            return "We require a text description for each code block in the ${title} section."
+         }
+      } else {
 
-      if (codes?.size() > texts?.size()) {
-         return "We require a text description for each code block in the ${title} section."
+         def list = []
+
+         h_list.each { list << it }
+
+         for (def i = 0; i < list.size(); i++) {
+
+            if (list[i].text == null && texts[i] == null && codes[i] != null) {
+               return "We require a text description for each code block in the ${title} section."
+            }
+
+         }
+         
       }
-
       return null
 
    }
+   */
 
-
+   /*
    def findParameters(params, preamble) {
 
       def list = []
@@ -445,27 +612,20 @@ class ScenarioController extends ControllerBase {
 
       return list
    }
+   */
 
 
 
-   boolean intercept() {
-      if (!base_intercept()) {
-         redirect(controller: 'main', action: 'index')
-         return false
-      }
-
-      return true
-   }
-
-
-   def create_clauses( tlist, clist, ilist) {
+   /*
+   def create_clauses( tlist, clist, ilist, existing_list) {
 
       def list = []
 
-      if (tlist == null || tlist.size() == 0) {
-        return list
+      if (existing_list == null || existing_list.size() == 0) {
+         if (tlist == null || tlist.size() == 0) {
+           return list
+         }
       }
-
 
       for (int i = 0; i < tlist.size(); i++) {
 
@@ -496,6 +656,7 @@ class ScenarioController extends ControllerBase {
 
 
    }
+   */
 
    def next_sort_order( arr ) {
 
@@ -508,6 +669,18 @@ class ScenarioController extends ControllerBase {
       arr.each{ tmp << it }
 
       return tmp[-1].sortOrder + 1
+   }
+
+
+
+
+   boolean intercept() {
+      if (!base_intercept()) {
+         redirect(controller: 'main', action: 'index')
+         return false
+      }
+
+      return true
    }
 
 }

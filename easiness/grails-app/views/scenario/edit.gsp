@@ -49,48 +49,11 @@
 
 
   <h3>Edit Scenario: ${scenario.title}</h3>
-  <h4 style="padding-left: 20px; margin-top: 5px;">of Story: ${scenario.story.title}</h4>
+  <h4 style="padding-left: 20px; margin-top: 5px;">of Story: <g:link action="expand" controller="story" id="${scenario.story.id}">${scenario.story.title}</g:link></h4>
 
   <div id="formdiv">
      <g:form action="do_edit">
         <input type="hidden" name="scenario_id" value="${scenario.id}" />
-
-
-        <div id="menu-bar">
-           <a href="#" onclick='changeLayout(0, "main_area_show", "import_area_show", "setup_area_show", "teardown_area_show"); return false;'><em>Main</em></a>
-           |
-           <a href="#" onclick='changeLayout(1, "main_area_show", "import_area_show", "setup_area_show", "teardown_area_show"); return false;'><em>Imports</em></a>
-           |
-           <a href="#" onclick='changeLayout(2, "main_area_show", "import_area_show", "setup_area_show", "teardown_area_show"); return false;'><em>Setup</em></a>
-           |
-           <a href="#" onclick='changeLayout(3, "main_area_show", "import_area_show", "setup_area_show", "teardown_area_show"); return false;'><em>Teardown</em></a>
-        </div>
-
-        <div id="import_area_show" style="display: none;">
-           <p class="tab-label">Imports</p>
-           <textarea rows="5" cols="62" name="imports">${scenario.imports}</textarea>
-           <p />
-           <p class="note">Use this area to add the import statements you need for your scenario.</p>
-           <p class="action-button"><input type="submit" value="Save"/></p>
-        </div>
-
-
-        <div id="setup_area_show" style="display: none;">
-           <p class="tab-label">Setup</p>
-           <textarea rows="5" cols="62" name="setup">${scenario.setUp}</textarea>
-           <p />
-           <p class="note">Use this area to add any setup code (groovy) you need for your scenario</p>
-           <p class="action-button"><input type="submit" value="Save"/></p>
-        </div>
-
-
-        <div id="teardown_area_show" style="display: none;">
-           <p class="tab-label">Teardown</p>
-           <textarea rows="5" cols="62" name="teardown">${scenario.tearDown}</textarea>
-           <p />
-           <p class="note">Use this area to add any teardown code (groovy) you need for your scenario</p>
-           <p class="action-button"><input type="submit" value="Save"/></p>
-        </div>
 
         
         <div id="main_area_show" style="display: inline">
@@ -114,10 +77,23 @@
                  </g:if>
 
                  <input type="hidden" name="${iname}" value="${given.id}" />
-                 <input type="text" size="64" maxlength="128" name="${tname}" value="${given.text}" />   {
+
+                 <ezi:hasRights type="context">
+                    <input type="text" size="64" maxlength="128" name="${tname}" value="${given.text}" />
+                 </ezi:hasRights>
+                 <ezi:hasRights type="context" not="true"><span class="info">${given.text}</span>
+                 </ezi:hasRights>
+                 {
                  </p>
                  <div id="${cname}_show" style="display: none;">
-                    <p>&nbsp;&nbsp;&nbsp;<textarea rows="5" cols="62" name="${cname}">${given.code}</textarea> <br/>
+
+                    <p>&nbsp;&nbsp;&nbsp;
+                       <ezi:hasRights type="code">
+                           <textarea rows="5" cols="62" name="${cname}">${given.code}</textarea> <br/>
+                       </ezi:hasRights>
+                       <ezi:hasRights type="code" not="true">
+                          <p class="code">${given.code}</p>
+                       </ezi:hasRights>
                          <a href="#" onclick='changeLayout(1, "${cname}_show", "${cname}_noshow"); return false;'><p class="note">Click here to hide the source</p></a>
                       </p>
                  </div>
@@ -126,9 +102,11 @@
                        <a href="#" onclick='changeLayout(0, "${cname}_show", "${cname}_noshow"); return false;'><p class="note">Click here to view the source</p></a>
                     </em></p>
                  </div>
-                 <div style="float:right; padding-right: 20px;">
-                    <g:link action="do_delete_clause" controller="scenario" id="${given.id}" params="[type:'given',scenario_id: scenario.id]"><span class="delete_clause">Delete</span></g:link>
-                 </div>
+                 <ezi:hasRights type="context">
+                    <div style="float:right; padding-right: 20px;">
+                       <g:link action="do_delete_clause" controller="scenario" id="${given.id}" params="[type:'given',scenario_id: scenario.id]"><span class="delete_clause">Delete</span></g:link>
+                    </div>
+                  </ezi:hasRights>
                  <p>}</p>
 
                  <g:if test="${i > 0}">
@@ -142,10 +120,15 @@
 
            </g:if>
            <g:if test="${ordered_givens== null || ordered_givens?.size() == 0}">
-              <input type="text" size="64" maxlength="128" name="g_text0" />   {
+
+                 <input type="text" size="64" maxlength="128" name="g_text0" />
+              {
               </p>
               <div id="g_code0_show" style="display: none;">
-                   <p>&nbsp;&nbsp;&nbsp;<textarea rows="5" cols="62" name="g_code0"></textarea> <br/>
+                   <p>&nbsp;&nbsp;&nbsp;
+                      <ezi:hasRights type="code">
+                         <textarea rows="5" cols="62" name="g_code0"></textarea> <br/>
+                      </ezi:hasRights>
                       <a href="#" onclick="changeLayout(1, 'g_code0_show', 'g_code0_noshow'); return false;"><p class="note">Click here to hide the source</p></a>
                    </p>
               </div>
@@ -157,8 +140,9 @@
 
               <p>}</p>
            </g:if>
-           <g:link action="do_add_clause" controller="scenario" params="[scenario_id: scenario.id, type: 'given']"><span class="add_clause">add another Given</span></g:link>
-
+           <ezi:hasRights type="context">
+              <g:link action="do_add_clause" controller="scenario" params="[scenario_id: scenario.id, type: 'given']"><span class="add_clause">add another Given</span></g:link>
+           </ezi:hasRights>
 
            <p>
            <strong>When</strong>
@@ -179,10 +163,26 @@
                  </g:if>
 
                  <input type="hidden" name="${iname}" value="${cond.id}" />
-                 <input type="text" size="64" maxlength="128" name="${tname}" value="${cond.text}" />   {
+
+
+                 <ezi:hasRights type="context">
+                    <input type="text" size="64" maxlength="128" name="${tname}" value="${cond.text}" />
+                 </ezi:hasRights>
+                 <ezi:hasRights type="context" not="true"><span class="info">${cond.text}</span>
+                 </ezi:hasRights>
+
+                 {
+                 
                  </p>
                  <div id="${cname}_show" style="display: none;">
-                    <p>&nbsp;&nbsp;&nbsp;<textarea rows="5" cols="62" name="${cname}">${cond.code}</textarea> <br/>
+                    <p>&nbsp;&nbsp;&nbsp;
+                      <ezi:hasRights type="code">
+                         <textarea rows="5" cols="62" name="${cname}">${cond.code}</textarea> <br/>
+                      </ezi:hasRights>
+                      <ezi:hasRights type="code" not="true">
+                         <p class="code">${cond.code}</p>
+                      </ezi:hasRights>
+
                          <a href="#" onclick='changeLayout(1, "${cname}_show", "${cname}_noshow"); return false;'><p class="note">Click here to hide the source</p></a>
                       </p>
                  </div>
@@ -191,9 +191,11 @@
                        <a href="#" onclick='changeLayout(0, "${cname}_show", "${cname}_noshow"); return false;'><p class="note">Click here to view the source</p></a>
                     </em></p>
                  </div>
-                 <div style="float:right; padding-right: 20px;">
-                    <g:link action="do_delete_clause" controller="scenario" id="${cond.id}" params="[type:'condition',scenario_id: scenario.id]"><span class="delete_clause">Delete</span></g:link>
-                 </div>
+                 <ezi:hasRights type="context">
+                    <div style="float:right; padding-right: 20px;">
+                       <g:link action="do_delete_clause" controller="scenario" id="${cond.id}" params="[type:'condition',scenario_id: scenario.id]"><span class="delete_clause">Delete</span></g:link>
+                    </div>
+                 </ezi:hasRights>
                  <p>}</p>
 
 
@@ -210,7 +212,10 @@
               <input type="text" size="64" maxlength="128" name="w_text0" />   {
               </p>
               <div id="w_code0_show" style="display: none;">
-                 <p>&nbsp;&nbsp;&nbsp;<textarea rows="5" cols="62" name="w_code0"></textarea><br/>
+                 <p>&nbsp;&nbsp;&nbsp;
+                    <ezi:hasRights type="code">
+                        <textarea rows="5" cols="62" name="w_code0"></textarea><br/>
+                    </ezi:hasRights>
                       <a href="#" onclick="changeLayout(1, 'w_code0_show', 'w_code0_noshow'); return false;"><p class="note">Click here to hide the source</p></a>
                  </p>
               </div>
@@ -221,8 +226,9 @@
               </div>
               <p>}</p>
            </g:if>
-           <g:link action="do_add_clause" controller="scenario" params="[scenario_id: scenario.id, type: 'condition']"><span class="add_clause">add another When</span></g:link>
-
+           <ezi:hasRights type="context">
+              <g:link action="do_add_clause" controller="scenario" params="[scenario_id: scenario.id, type: 'condition']"><span class="add_clause">add another When</span></g:link>
+           </ezi:hasRights>
 
 
            <p>
@@ -244,10 +250,24 @@
                  </g:if>
 
                  <input type="hidden" name="${iname}" value="${concl.id}" />
-                 <input type="text" size="64" maxlength="128" name="${tname}" value="${concl.text}" />   {
+
+                 <ezi:hasRights type="context">
+                    <input type="text" size="64" maxlength="128" name="${tname}" value="${concl.text}" />
+                 </ezi:hasRights>
+                 <ezi:hasRights type="context" not="true"><span class="info">${concl.text}</span>
+                 </ezi:hasRights>
+
+                 {
                  <p />
                  <div id="${cname}_show" style="display: none;">
-                    <p>&nbsp;&nbsp;&nbsp;<textarea rows="5" cols="62" name="${cname}">${concl.code}</textarea> <br/>
+                    <p>&nbsp;&nbsp;&nbsp;
+                       <ezi:hasRights type="code">
+                          <textarea rows="5" cols="62" name="${cname}">${concl.code}</textarea> <br/>
+                       </ezi:hasRights>
+                       <ezi:hasRights type="code" not="true">
+                          <p class="code">${concl.code}</p>
+                       </ezi:hasRights>
+
                          <a href="#" onclick='changeLayout(1, "${cname}_show", "${cname}_noshow"); return false;'><p class="note"><p class="note">Click here to hide the source</p></p></a>
                       </p>
                  </div>
@@ -256,10 +276,11 @@
                        <a href="#" onclick='changeLayout(0, "${cname}_show", "${cname}_noshow"); return false;'><p class="note">Click here to view the source</p></a>
                     </em></p>
                  </div>
-                 <div style="float:right; padding-right: 20px;">
-                    <g:link action="do_delete_clause" controller="scenario" id="${concl.id}" params="[type:'conclusion',scenario_id: scenario.id]"><span class="delete_clause">Delete</span></g:link>
-                 </div>
-
+                 <ezi:hasRights type="context">
+                    <div style="float:right; padding-right: 20px;">
+                       <g:link action="do_delete_clause" controller="scenario" id="${concl.id}" params="[type:'conclusion',scenario_id: scenario.id]"><span class="delete_clause">Delete</span></g:link>
+                    </div>
+                 </ezi:hasRights>
                  <p>}</p>
 
                  <g:if test="${i > 0}">
@@ -276,7 +297,10 @@
               <p />
 
               <div id="t_code0_show" style="display: none;">
-                 <p>&nbsp;&nbsp;&nbsp;<textarea rows="5" cols="62" name="t_code0"></textarea><br />
+                 <p>&nbsp;&nbsp;&nbsp;
+                    <ezi:hasRights type="code">
+                       <textarea rows="5" cols="62" name="t_code0"></textarea><br />
+                    </ezi:hasRights>
                     <a href="#" onclick="changeLayout(1, 't_code0_show', 't_code0_noshow'); return false;"><p class="note"><p class="note">Click here to hide the source</p></p></a>
                  </p>
               </div>
@@ -287,7 +311,10 @@
               </div>
               <p>}</p>
            </g:if>
-           <g:link action="do_add_clause" controller="scenario" params="[scenario_id: scenario.id, type: 'conclusion']"><span class="add_clause">add another Then</span></g:link></p>
+
+           <ezi:hasRights type="context">
+              <g:link action="do_add_clause" controller="scenario" params="[scenario_id: scenario.id, type: 'conclusion']"><span class="add_clause">add another Then</span></g:link></p>
+           </ezi:hasRights>
 
 
            <p class="action-button"><input type="submit" value="Save"/></p>

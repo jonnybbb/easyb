@@ -34,7 +34,15 @@
                      <ul>
                        <li><g:link action="create" controller="story">Create A Story</g:link></li>
                        <li><g:link action="mystories" controller="story">My Stories</g:link></li>
+                       <li><g:link action="viewfamilies" controller="story">My Story Families</g:link></li>
+
+                        <g:if test="${session.current_story != null}">
+                           <li><g:link action="edit" controller="story" id="${session.current_story.id}">Current Story</g:link></li>
+                        </g:if>
                      </ul>
+
+
+
                  </li>
                  </ezi:ifUser>
                  <ezi:hasRole role="admin">                     

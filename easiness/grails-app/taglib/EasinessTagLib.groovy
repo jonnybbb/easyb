@@ -45,4 +45,40 @@ class EasinessTagLib {
       }
    }
 
+   def hasRights = { attrs, body ->
+
+      boolean valid = false
+
+      if (session.userId != null) {
+
+         User u = User.get(session.userId)
+
+         if (u.hasRole("admin") || u.hasRole("author & developer")) {
+            valid = true
+         } else {
+
+            if (attrs.type == "context" ) {
+               if (u.hasRole("author")) {
+                  valid = true
+               }
+            } else if (attrs.type == "code") {
+               if (u.hasRole("developer")) {
+                  valid = true
+               }
+            }
+
+         }
+
+         if (attrs.not) {
+            valid = !valid
+         }
+
+      }
+
+      if (valid) {
+         out << body()
+      }
+
+   }
+
 }

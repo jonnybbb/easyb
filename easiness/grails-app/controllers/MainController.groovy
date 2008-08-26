@@ -52,6 +52,7 @@ applications.</p>
       }
 
       session.userId = user.id
+      session.user = user
 
       redirect(controller: 'story', action: 'mystories')
                          
@@ -95,9 +96,10 @@ applications.</p>
 
 
       if (user.save()) {
-          session.userId = user.id
-          flash.message = "User ${user.name} created"
-          redirect(controller: 'story', action: 'mystories')
+         session.userId = user.id
+         session.user = user
+         flash.message = "User ${user.name} created"
+         redirect(controller: 'story', action: 'mystories')
       }
       else {
          render(view: 'register', model: [ user: user ])

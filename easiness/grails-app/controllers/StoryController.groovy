@@ -17,6 +17,8 @@ class StoryController extends ControllerBase {
       }
 
 
+      session.current_story = story
+
       flash.context_help = [ title:  'Editing a Story',
             content: '''
      <p>On this page, you can update the title, description and family for your existing story.''' ]
@@ -36,6 +38,15 @@ class StoryController extends ControllerBase {
          redirect(controller:story, action:mystorys)
          return
       }
+
+
+
+      flash.context_help = [ title:  'Expanding a Story',
+            content: '''
+     <p>You can use this page to add scenarios to your story.  Click on the story name to edit the story details.''' ]
+
+
+      session.current_story = story
 
       [ story: story]
 
@@ -130,6 +141,63 @@ class StoryController extends ControllerBase {
 
 
 
+
+
+
+   def viewfamilies = {
+
+      def families = flash.user.families
+
+      flash.context_help = [ title: 'Story Families',
+            content: '''
+      <p>You can edit and update stories that belong to your families.  Click on a family to view and edit the stories.</p>
+      ''']
+
+
+      return [families: families]
+
+   }
+
+
+
+   def family = {
+
+      def fam = Family.get(params.id)
+
+      def stories = []
+
+      fam.stories.each { s ->
+         stories << s
+      }
+
+
+      flash.context_help = [ title: 'Story Family',
+            content: '<p>Here are all the stories in family <strong>'+fam.name+'</strong>.  Click on a story to expand or edit it.</p>']
+
+
+      return ['family': fam, 'stories': stories]
+   }
+
+
+
+
+
+   def export_story = {
+      def story = Story.get(params.id)
+
+      if (story == null) {
+         flash.error = "No such story ${params.id}"
+         redirect(controller:story, action:mystorys)
+         return
+      }
+
+
+      return [story: story]
+
+   }
+
+
+
    def do_create = {
 
       def story = new Story(params)
@@ -168,6 +236,14 @@ class StoryController extends ControllerBase {
 
       story.family = Family.get(params.family_id)
 
+
+
+      story.packageText = params.packageText
+      story.imports = params.imports
+      story.setUp = params.setup
+      story.tearDown = params.teardown
+
+
       if (story.hasErrors()) {
          render(view: 'edit')
          return
@@ -179,10 +255,20 @@ class StoryController extends ControllerBase {
          return
       }
 
+      session.current_story = story
+      
+
       redirect(controller: 'story', action: 'mystories')
       return
 
    }
+
+
+
+
+
+
+   //----------------- [ private ] -------------------------------
 
    boolean intercept() {
       if (!base_intercept()) {

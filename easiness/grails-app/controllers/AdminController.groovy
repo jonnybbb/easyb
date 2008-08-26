@@ -137,6 +137,17 @@ class AdminController extends ControllerBase {
       user.role = params.role
       user.name = params.name
 
+      if (user.hasErrors()) {
+         render(view: 'edit_user', model: [user: user, roles: Role.roleList ])
+         return
+      }
+
+      if (!user.save()) {
+         flash.error = "Unable to save user"
+         render(view: 'edit_user', model: [user: user, roles: Role.roleList ])
+         return
+      }
+      
       render(view: 'users', model: [users: User.findAll()])
       return
 
