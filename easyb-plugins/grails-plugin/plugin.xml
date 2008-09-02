@@ -5,7 +5,7 @@
 </description>
   <documentation>http://grails.org/Easybtest+Plugin</documentation>
   <resources>
-    <resource>UrlMappings</resource>
     <resource>DataSource</resource>
+    <resource>UrlMappings</resource>
   </resources>
 </plugin>
