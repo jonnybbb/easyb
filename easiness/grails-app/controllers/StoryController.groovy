@@ -112,13 +112,7 @@ class StoryController extends ControllerBase {
 
       def stories = Story.findAllByUser(flash.user)
 
-      flash.context_help = [ title: 'Story Export',
-            content: '''
-       <p>
-           You can export one or all of your stories here - just provide the appropriate directory name, and click the
-           'export' button.
-       </p>
-      ''']
+      flash.context_help = story_export_help()
 
       return [ stories: stories]
 
@@ -198,6 +192,9 @@ class StoryController extends ControllerBase {
 
 
 
+   //-------------------[ Actions ]---------------------------------
+
+
    def do_create = {
 
       def story = new Story(params)
@@ -265,6 +262,64 @@ class StoryController extends ControllerBase {
 
 
 
+   def do_export_stories = {
+
+      def stories = flash.user.stories
+
+      def list = []
+
+      stories.each { st ->
+
+         def key = "story_${st.id}"
+
+         def value = params[key]
+
+         //log.info "#####: do_export_storyes: ${key}, ${value}"
+
+         if (value != null) {
+
+            list << st
+
+         }
+
+      }
+
+
+      //log.debug "#####: export list: ${list}" 
+
+
+      def exporter = new Exporter()
+
+
+      //log.debug "#####: export list: ${list}"
+
+      def namelist = []
+
+      list.each { st ->
+
+         //log.debug "###### exporting: ${st.title}"
+         namelist << exporter.export_story(st, "story")
+
+      }
+
+
+      //log.debug "#####: export complete."
+
+      def msg =  "Export successful for the following stories:  <ul>"
+
+      namelist.each { name ->
+         msg += " <li>${name}</li>"
+      }
+
+      msg += "</ul>"
+
+      flash.message = msg
+
+      flash.context_help = story_export_help()
+
+      render('view': 'export', model: [ stories: flash.user.stories ])
+   }
+
 
 
 
@@ -277,6 +332,21 @@ class StoryController extends ControllerBase {
       }
 
       return true
+   }
+
+
+   def story_export_help() {
+     return [ title: 'Story Export',
+            content: '''
+       <p>
+           You can export one or all of your stories here - check the stories you want to export, and click the
+           'export' button.
+       </p>
+       <p>
+           The stories will be generated in the <tt>story/</tt> subdirectory of the <tt>easiness/</tt> project directory.
+       </p>
+      ''']
+
    }
 
 }
