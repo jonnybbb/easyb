@@ -12,20 +12,25 @@
   <body>
 
 
-  <h1>Your Family of Stories</h1>
+  <h1>Your Story Families</h1>
+
+
+  <g:render template="familymenubar" />
 
 
   <p />
 
-  <ul>
-     <g:each var="fam" in="${families}">
+  <div id="story-list">
+     <table border="0">
+        <g:each var="fam" in="${families}">
+              <tr>
+                 <td><g:link action="family" controller="story" id="${fam.id}">${fam.name}</g:link></td>
+              </tr>
 
-        <li>
-           <g:link action="family" controller="story" id="${fam.id}">${fam.name}</g:link>
-        </li>
+        </g:each>
 
-     </g:each>
-  </ul>
+     </table>
+  </div>
 
     
   </body>

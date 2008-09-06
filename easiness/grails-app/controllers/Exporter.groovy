@@ -8,6 +8,26 @@
 class Exporter {
 
 
+   public String export_family( Family family, String topdir ) {
+
+
+      createDirIfNeeded(topdir)
+
+      family.stories.each { st ->
+
+         def famdir = family.code
+
+         export_story( st, "${topdir}/${famdir}")
+
+      }
+
+      return family.name
+
+
+   }
+
+
+
    public String export_story( Story story, String dir) {
 
 

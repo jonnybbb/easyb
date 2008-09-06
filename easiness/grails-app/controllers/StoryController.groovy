@@ -158,6 +158,13 @@ class StoryController extends ControllerBase {
 
       def fam = Family.get(params.id)
 
+      if (fam == null) {
+         flash.error = "No such family: ${params.id}"
+         redirect(controller: 'story', action: 'mystories')
+         return
+      }
+
+
       def stories = []
 
       fam.stories.each { s ->
@@ -181,7 +188,7 @@ class StoryController extends ControllerBase {
 
       if (story == null) {
          flash.error = "No such story ${params.id}"
-         redirect(controller:story, action:mystorys)
+         redirect(controller:'story', action:'mystories')
          return
       }
 
@@ -190,6 +197,15 @@ class StoryController extends ControllerBase {
 
    }
 
+
+   def family_export = {
+      def families = flash.user.families
+
+      flash.context_help = family_export_help()
+
+
+      return [families: families]
+   }
 
 
    //-------------------[ Actions ]---------------------------------
@@ -266,32 +282,12 @@ class StoryController extends ControllerBase {
 
       def stories = flash.user.stories
 
-      def list = []
+      def list = gather_object_ids("story", stories, params)
 
-      stories.each { st ->
-
-         def key = "story_${st.id}"
-
-         def value = params[key]
-
-         //log.info "#####: do_export_storyes: ${key}, ${value}"
-
-         if (value != null) {
-
-            list << st
-
-         }
-
-      }
-
-
-      //log.debug "#####: export list: ${list}" 
 
 
       def exporter = new Exporter()
 
-
-      //log.debug "#####: export list: ${list}"
 
       def namelist = []
 
@@ -302,8 +298,6 @@ class StoryController extends ControllerBase {
 
       }
 
-
-      //log.debug "#####: export complete."
 
       def msg =  "Export successful for the following stories:  <ul>"
 
@@ -320,6 +314,46 @@ class StoryController extends ControllerBase {
       render('view': 'export', model: [ stories: flash.user.stories ])
    }
 
+
+
+
+
+
+
+   def do_export_families = {
+
+      def families = flash.user.families
+
+      def list = gather_object_ids( "family", families, params )
+
+
+
+
+      def exporter = new Exporter()
+
+
+      def namelist = []
+
+      list.each { fm ->
+
+         namelist << exporter.export_family(fm, "story")
+      }
+
+
+      def msg =  "Export successful for the following families:  <ul>"
+
+      namelist.each { name ->
+         msg += " <li>${name}</li>"
+      }
+
+      msg += "</ul>"
+
+      flash.message = msg
+
+      flash.context_help = family_export_help()
+
+      render(view: 'family_export', model: [ families: flash.user.families ])
+   }
 
 
 
@@ -348,5 +382,39 @@ class StoryController extends ControllerBase {
       ''']
 
    }
+
+
+   def family_export_help() {
+
+      return [ title: 'Story Family Export',
+            content: '''
+      <p>Click the checkbox next to each family you'd like to export to the fileystem, and then click the 'Export' button. </p> <p>
+            The <tt>.story</tt> files will be generated in the <tt>story/&lt;family_name&gt; subdirectory of the <tt>easiness/</tt> project directory</p>
+      ''']
+
+   }
+
+   def gather_object_ids( prefix, obj_list, params ) {
+
+
+      def list = []
+
+      obj_list.each { obj ->
+
+         def key = "${prefix}_${obj.id}"
+
+         def value = params[key]
+
+         if (value != null) {
+
+            list << obj
+
+         }
+      }
+
+
+      return list
+   }
+
 
 }

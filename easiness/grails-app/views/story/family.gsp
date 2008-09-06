@@ -13,6 +13,8 @@
 
      <h1>Family: '${family.name}' </h1>
 
+     <g:render template="familymenubar" />
+
      <p />
      <g:if test="${stories?.size() > 0}">
         <span class="note">Total Stories: ${stories.size()}</span>
