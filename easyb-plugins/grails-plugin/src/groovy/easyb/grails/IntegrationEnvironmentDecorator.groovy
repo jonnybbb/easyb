@@ -1,14 +1,14 @@
 package easyb.grails
 
 import grails.util.GrailsWebUtil
-import org.codehaus.groovy.grails.support.PersistenceContextInterceptor
+import org.codehaus.groovy.grails.commons.GrailsClassUtils
 import org.codehaus.groovy.grails.web.servlet.GrailsApplicationAttributes
+import org.codehaus.groovy.grails.web.servlet.mvc.GrailsWebRequest
 import org.disco.easyb.BehaviorStep
 import org.disco.easyb.domain.Behavior
 import org.disco.easyb.listener.ExecutionListenerAdaptor
-import org.codehaus.groovy.grails.web.servlet.mvc.GrailsWebRequest
-import org.codehaus.groovy.grails.commons.GrailsClassUtils
 import org.springframework.web.context.request.RequestContextHolder
+
 
 class IntegrationEnvironmentDecorator extends ExecutionListenerAdaptor {
 
@@ -26,20 +26,11 @@ class IntegrationEnvironmentDecorator extends ExecutionListenerAdaptor {
     }
 
 	public void startBehavior(Behavior behavior) {
-        def beanNames = appCtx.getBeanNamesForType(PersistenceContextInterceptor.class)
-        if (beanNames.size() > 0) interceptor = appCtx.getBean(beanNames[0])
-
-        try {
-            interceptor?.init()
-        } catch (Exception ignore) {}
-
 		setupMockWebRequest(behavior)
 	}
 
     public void stopBehavior(BehaviorStep behaviorStep, Behavior behavior) {
-        try {
-            interceptor?.destroy()
-        } catch (Exception ignore) {}
+        RequestContextHolder.setRequestAttributes(null)
 	}
 
     static String calcSubjectClassname(String behaviorFilename) {
@@ -60,8 +51,4 @@ class IntegrationEnvironmentDecorator extends ExecutionListenerAdaptor {
 
         return result
     }
-
-	public void stopStep() {
-		RequestContextHolder.setRequestAttributes(null)
-	}
 }
