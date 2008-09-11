@@ -8,6 +8,7 @@ import org.disco.easyb.report.TxtSpecificationReportWriter
 import org.disco.easyb.report.TxtStoryReportWriter
 import org.disco.easyb.report.XmlReportWriter
 import org.disco.easyb.listener.ExecutionListener
+import org.disco.easyb.report.HtmlReportWriter
 
 /**
  * Gant script that runs the Grails easyb tests
@@ -60,6 +61,7 @@ target(testApp: "The test app implementation target") {
 
     reports = [
             new XmlReportWriter(location: "${testDir}/xml/easyb.xml"),
+			new HtmlReportWriter(location: "${testDir}/html/easyb.html"),
             new TxtStoryReportWriter(location: "${testDir}/plain/stories.txt"),
             new TxtSpecificationReportWriter(location: "${testDir}/plain/specifications.txt")]
 
