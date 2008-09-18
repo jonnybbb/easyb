@@ -1,11 +1,12 @@
 class MainController extends ControllerBase {
 
-   def beforeInterceptor = [ action: this.&intercept, except: [ 'login', 'do_login', 'register', 'do_register', 'do_logout', 'index' ] ]
+   def beforeInterceptor = [ action: this.&intercept, except: [ 'login', 'do_login', 'register', 'do_register', 'do_logout', 'index', 'about' ] ]
 
 
    
    def index = {}
    def login = {}
+   def about = {}
 
 
    def register = {

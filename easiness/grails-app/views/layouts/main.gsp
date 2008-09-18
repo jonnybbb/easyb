@@ -54,6 +54,13 @@
                      </ul>
                  </li>
                  </ezi:hasRole>
+
+                 <li>
+                    <h2>More</h2>
+                    <ul>
+                       <li><g:link action="about" controller="main">About Easiness</g:link></li>
+                    </ul>
+                 </li>
               </ul>
            </div>
 
