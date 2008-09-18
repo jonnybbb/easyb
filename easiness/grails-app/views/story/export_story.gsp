@@ -15,7 +15,9 @@
 
 <pre>
 
-package ${story.packageText}
+<g:if test="${story.packageText != null}">
+   package ${story.packageText}
+</g:if>
 
 <p/>
 

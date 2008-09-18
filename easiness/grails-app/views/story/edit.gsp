@@ -68,7 +68,7 @@
 
               <p class="tab-label">Package</p>
               <ezi:hasRights type="code">
-                 <g:textField name="packageText" size="60" maxlength="256" value="${story.packageText}" /> \
+                 <g:textField name="packageText" size="60" maxlength="256" value="${story.packageText}" />
                  <p class="note">Enter your story's package here.  Do <strong>not</strong> include the word 'package'.</p>
               </ezi:hasRights>
               <ezi:hasRights type="code" not="true">

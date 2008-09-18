@@ -357,6 +357,40 @@ class StoryController extends ControllerBase {
 
 
 
+
+   def do_run = {
+
+
+      println "############ do_run 1"
+
+      def story = Story.get(params.id)
+
+
+      def exporter = new Exporter()
+
+      println "############ do_run 2"
+
+      def story_filename = exporter.export_story(story, "story/")
+
+      println "############ do_run 3"
+
+      def story_exec = new StoryExecutor()
+
+      println "############ do_run 4"
+
+      story_exec.exec(story, "story", story_filename, "test/reports")
+
+      println "############ do_run 5"
+
+
+      render(view: 'story_run_report', model: [ story: story ])
+
+
+   }
+
+
+
+
    //----------------- [ private ] -------------------------------
 
    boolean intercept() {

@@ -11,7 +11,7 @@ class Exporter {
    public String export_family( Family family, String topdir ) {
 
 
-      createDirIfNeeded(topdir)
+      FileUtil.createDirIfNeeded(topdir)
 
       family.stories.each { st ->
 
@@ -31,15 +31,19 @@ class Exporter {
    public String export_story( Story story, String dir) {
 
 
-      createDirIfNeeded(dir)
+      FileUtil.createDirIfNeeded(dir)
 
-      def fileName = getMixedCaseName(story.title)
+      def fileName = FileUtil.getMixedCaseName(story.title)
 
 
       def fw = new FileWriter("${dir}/${fileName}.story", false) // false <-- overwrite
 
 
-      fw << "package ${story.packageText}\n\n"
+      if (story.packageText != null) {
+         fw << "package ${story.packageText}\n\n"         
+      }
+
+
       fw << story.imports+"\n\n"
 
       if (story.description) {
@@ -95,36 +99,7 @@ class Exporter {
    }
 
 
-   public String getMixedCaseName( String title ) {
-
-      if (title.indexOf(' ') != -1) {
-
-         def mixedCase = title.toLowerCase().split(' ').collect {
-            it.substring(0,1).toUpperCase() + it.substring(1) }.join('')
 
 
-         // if we did this, it would lowercase the first letter, making it camelCase
-         //camelCase.substring(0,1).toLowerCase() + camelCase.substring(1)
-
-         return mixedCase
-      }
-
-      return title
-   }
-
-
-   private boolean createDirIfNeeded( String dir ) {
-
-      def dd = new File(dir)
-
-      if (dd.exists()) {
-         return true
-      }
-
-      dd.mkdir()
-
-      return false
-
-   }
 
 }

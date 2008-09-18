@@ -27,7 +27,7 @@
                  <td width="70%"><g:link action="expand" controller="story" id="${story.id}">
                      ${story.title}
                  </g:link></td>
-                 <td width="15%"> run </td>
+                 <td width="15%"> <g:link action="do_run" controller="story" id="${story.id}">run</g:link> </td>
                  <td width="15%"> <g:link action="edit" controller="story" id="${story.id}">edit</g:link> </td>
               </tr>
            </g:each>
