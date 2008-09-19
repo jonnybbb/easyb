@@ -10,8 +10,21 @@
 
 Ant.property(environment:"env")
 grailsHome = Ant.antProject.properties."env.GRAILS_HOME"
-testDir = new File("${basedir}/test/behavior")
+testDir = "${basedir}/test"
 
-if(!testDir.exists()) {
-	Ant.mkdir(dir:testDir)
+includeTargets << new File("${grailsHome}/scripts/Compile.groovy")
+includeTargets << new File("${grailsHome}/scripts/Init.groovy")
+includeTargets << new File("${grailsHome}/scripts/Bootstrap.groovy")
+
+['behavior', 'reports/html', 'reports/plain', 'reports/xml'].each {
+	File requiredDir = new File("${testDir}/${it}")
+	if(!requiredDir.exists()) {
+		Ant.mkdir(dir:requiredDir)
+	}
 }
+
+checkVersion()
+configureProxy()
+createStructure()
+packagePlugins()
+compile()
