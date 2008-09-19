@@ -20,6 +20,7 @@ grailsApp = null
 appCtx = null
 
 includeTargets << new File("${grailsHome}/scripts/Package.groovy")
+includeTargets << new File("${grailsHome}/scripts/Compile.groovy")
 includeTargets << new File("${grailsHome}/scripts/Bootstrap.groovy")
 
 generateLog4jFile = true
@@ -39,7 +40,9 @@ target('default': "Run a Grails applications easyb tests") {
 }
 
 target(testApp: "The test app implementation target") {
-
+//    try {
+//        Class.forName('easyb.grails.IntegrationEnvironmentDecorator')
+//    }
     testSources = Ant.path {
         fileset(dir: "${basedir}/test/behavior") {
             include(name: "**/*Story.groovy")
@@ -57,7 +60,10 @@ target(testApp: "The test app implementation target") {
 
     Ant.mkdir(dir: testDir)
     Ant.mkdir(dir: "${testDir}/xml")
+    Ant.mkdir(dir: "${testDir}/html")
     Ant.mkdir(dir: "${testDir}/plain")
+
+    
 
     reports = [
             new XmlReportWriter(location: "${testDir}/xml/easyb.xml"),
