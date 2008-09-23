@@ -198,7 +198,7 @@ class StoryController extends ControllerBase {
    }
 
 
-   def family_export = {
+   def export_family = {
       def families = flash.user.families
 
       flash.context_help = family_export_help()
@@ -206,6 +206,22 @@ class StoryController extends ControllerBase {
 
       return [families: families]
    }
+
+
+
+   def run_family = {
+
+      def families = flash.user.families
+
+      flash.context_help = [ title: 'Family Execution',
+            content: '''
+      <p>You can run the stories in one or more of your story families from this page. </p>
+      ''']
+
+      return [ families: families]
+
+   }
+
 
 
    //-------------------[ Actions ]---------------------------------
@@ -317,7 +333,18 @@ class StoryController extends ControllerBase {
 
 
 
+   def do_export_family = {
 
+      
+      def list = []
+
+      list << Family.get(params.id)
+
+      flash.message = export_family_list(list)
+
+      render(view: 'viewfamilies', model: [ families: flash.user.families ])
+
+   }
 
 
    def do_export_families = {
@@ -327,28 +354,8 @@ class StoryController extends ControllerBase {
       def list = gather_object_ids( "family", families, params )
 
 
+      flash.message = export_family_list(list)
 
-
-      def exporter = new Exporter()
-
-
-      def namelist = []
-
-      list.each { fm ->
-
-         namelist << exporter.export_family(fm, "story")
-      }
-
-
-      def msg =  "Export successful for the following families:  <ul>"
-
-      namelist.each { name ->
-         msg += " <li>${name}</li>"
-      }
-
-      msg += "</ul>"
-
-      flash.message = msg
 
       flash.context_help = family_export_help()
 
@@ -361,29 +368,95 @@ class StoryController extends ControllerBase {
    def do_run = {
 
 
-      println "############ do_run 1"
+
 
       def story = Story.get(params.id)
 
 
       def exporter = new Exporter()
 
-      println "############ do_run 2"
+
+      def story_analysis_list = []
+
+      def analyzer = new EasybXmlAnalyzer( story_analysis_list )
+
 
       def story_filename = exporter.export_story(story, "story/")
 
-      println "############ do_run 3"
-
-      def story_exec = new StoryExecutor()
-
-      println "############ do_run 4"
-
-      story_exec.exec(story, "story", story_filename, "test/reports")
-
-      println "############ do_run 5"
 
 
-      render(view: 'story_run_report', model: [ story: story ])
+      def story_exec = new EasybExecutor()
+
+
+
+      def msg = story_exec.exec_story(story: story, src: "story", out: "test/reports", analyzer: analyzer)
+
+      if (msg != null) {
+         flash.error = msg
+      } else {
+         flash.message = "Execution of story: ${story.title}: Success"
+      }
+
+
+      create_analysis_report( story_analysis_list )
+
+
+
+      redirect(action: 'mystories', controller: 'story')
+
+
+   }
+
+
+
+   def do_run_family = {
+
+      def families = flash.user.families
+
+      def list = [ Family.get(params.id) ]
+
+      def msg_list = exec_family_list( list )
+
+      def results = "<ul>\n"
+
+      msg_list.each { msg ->
+         results += "  <li>${msg}</li>\n"
+      }
+
+      results += "</ul>\n"
+
+      flash.message = results
+
+
+      redirect(action: 'viewfamilies', controller: 'story' )
+
+
+
+   }
+
+
+
+   def do_run_families = {
+
+      def families = flash.user.families
+
+      def list = gather_object_ids( "family", families, params )
+
+      def msg_list = exec_family_list( list )
+
+      def results = "<ul>\n"
+      msg_list.each { msg ->
+         results << "  <li>${msg}</li>\n"
+      }
+
+      results << "</ul>\n"
+
+      flash.message = results
+
+
+      redirect(action: 'viewfamilies', controller: 'story' )
+      
+
 
 
    }
@@ -450,5 +523,79 @@ class StoryController extends ControllerBase {
       return list
    }
 
+
+
+   def export_family_list( list ) {
+      def exporter = new Exporter()
+
+
+      def namelist = []
+
+      list.each { fm ->
+
+         namelist << exporter.export_family(fm, "story")
+      }
+
+
+      def msg =  "Export successful for the following families:  <ul>"
+
+      namelist.each { name ->
+         msg += " <li>${name}</li>"
+      }
+
+      msg += "</ul>"
+
+
+      return msg
+   }
+
+
+
+   def exec_family_list( list ) {
+
+
+      def exporter = new Exporter()
+
+      def namelist = []
+
+      list.each { fm ->
+
+         namelist << exporter.export_family(fm, "story")
+      }
+
+
+
+      def exec = new EasybExecutor()
+
+
+      def story_report_list = []
+
+      def analyzer = new EasybXmlAnalyzer( story_report_list )
+
+
+      def messages = exec.exec_family(families: list, src: "story", out: "test/reports", analyzer: analyzer )
+
+
+      create_analysis_report( story_analysis_list )
+
+
+      return messages
+
+   }
+
+
+   def create_analysis_report( list ) {
+
+      list.each { data ->
+
+         def rep = new RunReport(data)
+
+         data.story.reports << rep
+
+         data.story.save()
+      }
+
+
+   }
 
 }

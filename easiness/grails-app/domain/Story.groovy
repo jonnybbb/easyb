@@ -19,7 +19,7 @@ class Story {
 
    static belongsTo = [User,Family]
 
-   static hasMany = [ scenarios: Scenario, scripts: Script]
+   static hasMany = [ scenarios: Scenario, scripts: Script, reports: RunReport ]
 
    static constraints = {
       title(maxsize:256, blank:false)

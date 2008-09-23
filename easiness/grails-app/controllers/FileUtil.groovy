@@ -32,6 +32,31 @@ class FileUtil {
             it.substring(0,1).toUpperCase() + it.substring(1) }.join('')
 
 
+         mixedCase = mixedCase.replace('(', '_')
+         mixedCase = mixedCase.replace(')', '_')
+         mixedCase = mixedCase.replace('{', '_')
+         mixedCase = mixedCase.replace('}', '_')
+         mixedCase = mixedCase.replace('$', '_')
+         mixedCase = mixedCase.replace('!', '_')
+         mixedCase = mixedCase.replace('?', '_')
+         mixedCase = mixedCase.replace('#', '_')
+         mixedCase = mixedCase.replace('@', '_')
+         mixedCase = mixedCase.replace('&', '_')
+         mixedCase = mixedCase.replace('%', '_')
+         mixedCase = mixedCase.replace('^', '_')
+         mixedCase = mixedCase.replace('*', '_')
+         mixedCase = mixedCase.replace('/', '_')
+         mixedCase = mixedCase.replace('\\', '_')
+         mixedCase = mixedCase.replace('\'', '_')
+         mixedCase = mixedCase.replace('"', '_')
+         mixedCase = mixedCase.replace('<', '_')
+         mixedCase = mixedCase.replace('>', '_')
+         mixedCase = mixedCase.replace('?', '_')
+         mixedCase = mixedCase.replace(':', '_')
+         mixedCase = mixedCase.replace(';', '_')
+         mixedCase = mixedCase.replace('`', '_')
+         mixedCase = mixedCase.replace('~', '_')
+         
          // if we did this, it would lowercase the first letter, making it camelCase
          //camelCase.substring(0,1).toLowerCase() + camelCase.substring(1)
 

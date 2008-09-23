@@ -21,10 +21,12 @@
   <p />
 
   <div id="story-list">
-     <table border="0">
+     <table class="story-table" border="0">
         <g:each var="fam" in="${families}">
               <tr>
-                 <td><g:link action="family" controller="story" id="${fam.id}">${fam.name}</g:link></td>
+                 <td width="70%"><g:link action="family" controller="story" id="${fam.id}">${fam.name}</g:link></td>
+                 <td><g:link action="do_run_family" controller="story" id="${fam.id}">run</g:link></td>
+                 <td><g:link action="do_export_family" controller="story" id="${fam.id}">export</g:link></td>
               </tr>
 
         </g:each>
