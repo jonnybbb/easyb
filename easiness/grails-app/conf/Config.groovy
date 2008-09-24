@@ -47,21 +47,21 @@ log4j {
     appender.'stacktraceLog.layout'="org.apache.log4j.PatternLayout"
     appender.'stacktraceLog.layout.ConversionPattern'='[%r] %c{2} %m%n'
     appender.'stacktraceLog.File'="stacktrace.log"
-    rootLogger="debug,stdout"
+    rootLogger="warning,stdout"
     logger {
-        grails="debug"
+        grails="warning"
         StackTrace="info,stacktraceLog"
         org {
-            codehaus.groovy.grails.web.servlet="info"  //  controllers
-            codehaus.groovy.grails.web.pages="info" //  GSP
-            codehaus.groovy.grails.web.sitemesh="info" //  layouts
-            codehaus.groovy.grails."web.mapping.filter"="info" // URL mapping
-            codehaus.groovy.grails."web.mapping"="info" // URL mapping
-            codehaus.groovy.grails.commons="debug" // core / classloading
-            codehaus.groovy.grails.plugins="info" // plugins
-            codehaus.groovy.grails.orm.hibernate="debug" // hibernate integration
+            codehaus.groovy.grails.web.servlet="warning"  //  controllers
+            codehaus.groovy.grails.web.pages="warning" //  GSP
+            codehaus.groovy.grails.web.sitemesh="warning" //  layouts
+            codehaus.groovy.grails."web.mapping.filter"="warning" // URL mapping
+            codehaus.groovy.grails."web.mapping"="warning" // URL mapping
+            codehaus.groovy.grails.commons="warning" // core / classloading
+            codehaus.groovy.grails.plugins="warning" // plugins
+            codehaus.groovy.grails.orm.hibernate="warning" // hibernate integration
             springframework="off"
-            hibernate="debug"
+            hibernate="warning"
         }
     }
     additivity.StackTrace=false

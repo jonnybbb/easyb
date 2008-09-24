@@ -97,6 +97,8 @@ class StoryController extends ControllerBase {
 
       def stories = Story.findAllByUser(flash.user)
 
+
+
       flash.context_help = [ title: 'Story Statistics',
             content: '''
       <p>This page shows you the latest statistics on your stories - the most recent pass/fail/incomplete numbers and
@@ -127,6 +129,7 @@ class StoryController extends ControllerBase {
       flash.context_help = [ title: 'Story Execution',
             content: '''
       <p>You can run one or all of your stories from this page. </p>
+<p>To include your code libraries into Easiness, place the jar files in the easiness/lib directory, and restart easiness.</p> 
       ''']
 
       return [ stories: stories]
@@ -220,6 +223,20 @@ class StoryController extends ControllerBase {
 
       return [ families: families]
 
+   }
+
+
+
+   def family_statistics = {
+      flash.context_help = [ title: 'Family Statistics',
+            content: '''
+      <p>This page shows you the latest statistics on the stories in each of your families - the most recent pass/fail/incomplete numbers and
+      the time and date of the last run.</p>
+      ''']
+
+      return [ families: flash.user.families]
+
+      
    }
 
 
@@ -446,10 +463,10 @@ class StoryController extends ControllerBase {
 
       def results = "<ul>\n"
       msg_list.each { msg ->
-         results << "  <li>${msg}</li>\n"
+         results += "  <li>${msg}</li>\n"
       }
 
-      results << "</ul>\n"
+      results += "</ul>\n"
 
       flash.message = results
 
@@ -576,7 +593,7 @@ class StoryController extends ControllerBase {
       def messages = exec.exec_family(families: list, src: "story", out: "test/reports", analyzer: analyzer )
 
 
-      create_analysis_report( story_analysis_list )
+      create_analysis_report( story_report_list )
 
 
       return messages

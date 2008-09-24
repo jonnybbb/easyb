@@ -30,4 +30,20 @@ class Story {
       imports(nullable:true)
    }
 
+
+   def lastReport() {
+
+      def tmp = RunReport.findAll("from RunReport as r where r.story = ? order by r.create_dt DESC", [this], [max:1])
+
+      if (tmp.size > 0) {
+         return tmp[0]
+      }
+
+
+      return null
+
+
+
+   }
+
 }

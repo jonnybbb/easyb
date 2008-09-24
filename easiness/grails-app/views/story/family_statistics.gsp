@@ -19,6 +19,36 @@
 
 <p></p>
 
-The Pass/Fail/Incomplete results for your story families will be placed here.
+<g:each var="fam" in="${families}">
+
+   <h2>${fam.name}</h2>
+   <div class="story-list">
+      <table class="story-table" border="0">
+         <tr style="font-weight: bold;">
+            <td>Story</td>
+            <td>Failed</td>
+            <td>Pending</td>
+            <td>Success</td>
+         </tr>
+         <g:each var="st" in="${fam.stories}">
+         <tr>
+            <g:if test="${st.lastReport() != null}">
+               <td>${st.title}</td>
+               <td style="text-align: center;">${st.lastReport().failure}</td>
+               <td style="text-align: center;">${st.lastReport().pending}</td>
+               <td style="text-align: center;">${st.lastReport().success}</td>
+            </g:if>
+            <g:if test="${st.lastReport() == null}">
+               <td class="story_error">${st.title}</td>
+               <td colspan="3" style="text-align: center;" class="info"> not running properly </td>
+            </g:if>
+
+         </tr>
+         </g:each>
+      </table>
+   </div>
+
+</g:each>
+
 </body>
 </html>

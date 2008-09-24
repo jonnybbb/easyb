@@ -79,7 +79,7 @@
             <input type="hidden" name="${iname}" value="${given.id}"/>
 
             <ezi:hasRights type="context">
-                <input type="text" size="44" maxlength="128" name="${tname}" value="${given.text}"/>
+                <input type="text" size="54" maxlength="128" name="${tname}" value="${given.text}"/>
 
 
                 <g:link action="do_add_clause" controller="scenario" params="[scenario_id: scenario.id, type: 'given']">
@@ -95,7 +95,6 @@
             <ezi:hasRights type="context" not="true"><span class="info">${given.text}</span>
             </ezi:hasRights>
 
-            </p>
            <div id="${cname}_show" style="display: none;">
 
                     <p>&nbsp;&nbsp;&nbsp;
@@ -110,7 +109,6 @@
                 <!--<p class="note">hide the source</p>-->
                 <img src="${createLinkTo(dir: 'images', file: 'hide_icon.gif')}" alt="hide code" title="hide source code"/>
             </a>
-            </p>
             </div>
             <div id="${cname}_noshow" style="display: inline;">
                 <p><em>
@@ -139,12 +137,14 @@
     </g:if>
     <g:if test="${ordered_givens== null || ordered_givens?.size() == 0}">
 
-        <input type="text" size="44" maxlength="128" name="g_text0"/>
+        <input type="text" size="64" maxlength="128" name="g_text0"/>
+
+       <!--
         <g:link action="do_add_clause" controller="scenario" params="[scenario_id: scenario.id, type: 'given']">
             <img src="${createLinkTo(dir: 'images', file: 'add_icon.gif')}" alt="add" title="add another given"/>
         </g:link>
+        -->
 
-        </p>
         <div id="g_code0_show" style="display: none;">
             <p>&nbsp;&nbsp;&nbsp;
                 <ezi:hasRights type="code">
@@ -152,14 +152,16 @@
                 </ezi:hasRights>
                 <a href="#" onclick="changeLayout(1, 'g_code0_show', 'g_code0_noshow');
                 return false;">
-                    <p class="note">Click here to hide the source</p></a>
+                   <img src="${createLinkTo(dir: 'images', file: 'hide_icon.gif')}" alt="hide code" title="hide source code"/>
+                </a>
             </p>
         </div>
         <div id="g_code0_noshow" style="display: inline;">
             <p><em>
                 <a href="#" onclick="changeLayout(0, 'g_code0_show', 'g_code0_noshow');
                 return false;">
-                    <p class="note">Click here to view the source</p></a>
+                   <img src="${createLinkTo(dir: 'images', file: 'code_icon.gif')}" alt="view code" title="view source code"/>
+                </a>
             </em></p>
         </div>
 
@@ -192,14 +194,22 @@
 
 
             <ezi:hasRights type="context">
-                <input type="text" size="64" maxlength="128" name="${tname}" value="${cond.text}"/>
+                <input type="text" size="54" maxlength="128" name="${tname}" value="${cond.text}"/>
+                <g:link action="do_add_clause" controller="scenario"
+                       params="[scenario_id: scenario.id, type: 'condition']">
+                  <img src="${createLinkTo(dir: 'images', file: 'add_icon.gif')}" alt="add" title="add another when"/>
+                </g:link>
+                <g:link action="do_delete_clause" controller="scenario" id="${cond.id}"
+                       params="[type:'condition',scenario_id: scenario.id]">
+                  <img src="${createLinkTo(dir: 'images', file: 'delete_icon.gif')}" alt="view" title="delete this when"/>
+               </g:link>
+
             </ezi:hasRights>
             <ezi:hasRights type="context" not="true"><span class="info">${cond.text}</span>
             </ezi:hasRights>
 
 
 
-            </p>
            <div id="${cname}_show" style="display: none;">
                     <p>&nbsp;&nbsp;&nbsp;
             <ezi:hasRights type="code">
@@ -211,21 +221,19 @@
 
             <a href="#" onclick='changeLayout(1, "${cname}_show", "${cname}_noshow");
             return false;'>
-                <p class="note">Click here to hide the source</p></a>
-            </p>
+               <img src="${createLinkTo(dir: 'images', file: 'hide_icon.gif')}" alt="hide code" title="hide source code"/>
+            </a>
             </div>
             <div id="${cname}_noshow" style="display: inline;">
                 <p><em>
                     <a href="#" onclick='changeLayout(0, "${cname}_show", "${cname}_noshow");
                     return false;'>
-                        <p class="note">Click here to view the source</p></a>
+                       <img src="${createLinkTo(dir: 'images', file: 'code_icon.gif')}" alt="view code" title="view source code"/>
+                    </a>
                 </em></p>
             </div>
             <ezi:hasRights type="context">
                 <div style="float:right; padding-right: 20px;">
-                    <g:link action="do_delete_clause" controller="scenario" id="${cond.id}"
-                            params="[type:'condition',scenario_id: scenario.id]">
-                        <span class="delete_clause">Delete</span></g:link>
                 </div>
             </ezi:hasRights>
             <p></p>
@@ -241,7 +249,6 @@
     </g:if>
     <g:if test="${ordered_conditions == null || ordered_conditions?.size() == 0}">
         <input type="text" size="64" maxlength="128" name="w_text0"/>
-        </p>
         <div id="w_code0_show" style="display: none;">
             <p>&nbsp;&nbsp;&nbsp;
                 <ezi:hasRights type="code">
@@ -249,22 +256,22 @@
                 </ezi:hasRights>
                 <a href="#" onclick="changeLayout(1, 'w_code0_show', 'w_code0_noshow');
                 return false;">
-                    <p class="note">Click here to hide the source</p></a>
+                   <img src="${createLinkTo(dir: 'images', file: 'hide_icon.gif')}" alt="hide code" title="hide source code"/>
+                </a>
             </p>
         </div>
         <div id="w_code0_noshow" style="display: inline;">
             <p><em>
                 <a href="#" onclick="changeLayout(0, 'w_code0_show', 'w_code0_noshow');
                 return false;">
-                    <p class="note">Click here to view the source</p></a>
+                   <img src="${createLinkTo(dir: 'images', file: 'code_icon.gif')}" alt="view code" title="view source code"/>
+                </a>
             </em></p>
         </div>
         <p></p>
     </g:if>
     <ezi:hasRights type="context">
-        <g:link action="do_add_clause" controller="scenario"
-                params="[scenario_id: scenario.id, type: 'condition']">
-            <span class="add_clause">add another When</span></g:link>
+
     </ezi:hasRights>
 
 
@@ -289,7 +296,19 @@
             <input type="hidden" name="${iname}" value="${concl.id}"/>
 
             <ezi:hasRights type="context">
-                <input type="text" size="64" maxlength="128" name="${tname}" value="${concl.text}"/>
+                <input type="text" size="54" maxlength="128" name="${tname}" value="${concl.text}"/>
+
+               <g:link action="do_add_clause" controller="scenario"
+                       params="[scenario_id: scenario.id, type: 'conclusion']">
+                  <img src="${createLinkTo(dir: 'images', file: 'add_icon.gif')}" alt="add" title="add another Then"/>
+               </g:link>
+               
+
+               <g:link action="do_delete_clause" controller="scenario" id="${concl.id}"
+                       params="[type:'conclusion',scenario_id: scenario.id]">
+                  <img src="${createLinkTo(dir: 'images', file: 'delete_icon.gif')}" alt="view" title="delete this Then"/>
+              </g:link>
+
             </ezi:hasRights>
             <ezi:hasRights type="context" not="true"><span class="info">${concl.text}</span>
             </ezi:hasRights>
@@ -307,21 +326,20 @@
 
                 <a href="#" onclick='changeLayout(1, "${cname}_show", "${cname}_noshow");
                 return false;'>
-                    <p class="note"><p class="note">Click here to hide the source</p></p></a>
-                      </p>
+                   <img src="${createLinkTo(dir: 'images', file: 'hide_icon.gif')}" alt="hide code" title="hide source code"/>
+                    </a>
+
                  </div>
             <div id="${cname}_noshow" style="display: inline;">
                 <p><em>
                     <a href="#" onclick='changeLayout(0, "${cname}_show", "${cname}_noshow");
                     return false;'>
-                        <p class="note">Click here to view the source</p></a>
+                       <img src="${createLinkTo(dir: 'images', file: 'code_icon.gif')}" alt="view code" title="view source code"/>
+                    </a>
                 </em></p>
             </div>
             <ezi:hasRights type="context">
                 <div style="float:right; padding-right: 20px;">
-                    <g:link action="do_delete_clause" controller="scenario" id="${concl.id}"
-                            params="[type:'conclusion',scenario_id: scenario.id]">
-                        <span class="delete_clause">Delete</span></g:link>
                 </div>
             </ezi:hasRights>
             <p></p>
@@ -345,22 +363,21 @@
             <textarea rows="5" cols="62" name="t_code0"></textarea><br/>
         </ezi:hasRights>
         <a href="#" onclick="changeLayout(1, 't_code0_show', 't_code0_noshow'); return false;">
-              <p class="note"><p class="note">Click here to hide the source</p></p></a>
+           <img src="${createLinkTo(dir: 'images', file: 'hide_icon.gif')}" alt="hide code" title="hide source code"/>
+        </a>
            </p>
         </div>
         <div id="t_code0_noshow" style="display: inline;">
            <p><em>
               <a href="#" onclick="changeLayout(0, 't_code0_show', 't_code0_noshow'); return false;">
-              <p class="note"><p class="note">Click here to view the source</p></p></a>
+                 <img src="${createLinkTo(dir: 'images', file: 'code_icon.gif')}" alt="view code" title="view source code"/>
+              </a>
            </em></p>
         </div>
         <p></p>
     </g:if>
 
     <ezi:hasRights type="context">
-        <g:link action="do_add_clause" controller="scenario"
-                params="[scenario_id: scenario.id, type: 'conclusion']">
-            <span class="add_clause">add another Then</span></g:link></p>
     </ezi:hasRights>
 
 
