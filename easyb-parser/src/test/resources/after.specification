@@ -1,8 +1,0 @@
-it "should foo", {
-
-}
-
-after "cleanup", {
-
-}
-

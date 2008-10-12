@@ -21,17 +21,19 @@ public class EasybParser {
         this.specificationText = specificationText;
     }
 
-    public List<String> splitBehaviors() throws TokenStreamException, RecognitionException {
+    public List<EasybSnippet> splitBehaviors() throws TokenStreamException, RecognitionException {
         Reader reader = new InputStreamReader(getClass().getResourceAsStream(specificationText));
         GroovyLexer lexer = new GroovyLexer(new UnicodeEscapingReader(reader, new SourceBuffer()));
         GroovyRecognizer parser = GroovyRecognizer.make(lexer);
-        
+
         parser.compilationUnit();
 
-        List<String> behaviors = new ArrayList<String>();
+        List<EasybSnippet> behaviors = new ArrayList<EasybSnippet>();
         AST ast = parser.getAST();
         do {
-            behaviors.add(ast.getLine() + ":" + ast.getColumn());
+            if (ast.getType() == GroovyLexer.EXPR) {
+                behaviors.add(new EasybSnippet(ast.getLine(), ast.getColumn()));
+            }
             ast = ast.getNextSibling();
         } while (ast != null);
 

@@ -7,11 +7,15 @@ import static org.junit.Assert.assertThat;
 import org.junit.Test;
 
 import static java.util.Arrays.asList;
+import java.util.List;
 
 public class WhenParsingGroovyInput {
     @Test
     public void shouldRecognizeBehaviors() throws TokenStreamException, RecognitionException {
-        EasybParser parser = new EasybParser("/after.specification");
-        assertThat(parser.splitBehaviors(), is(asList("1:1", "5:1")));
+        EasybParser parser = new EasybParser("/after.story");
+
+        List<EasybSnippet> expected = asList(new EasybSnippet(3, 1), new EasybSnippet(7, 1), new EasybSnippet(13, 1),
+                new EasybSnippet(25, 1));
+        assertThat(parser.splitBehaviors(), is(expected));
     }
 }
