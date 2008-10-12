@@ -2,10 +2,7 @@ it "should foo", {
 
 }
 
-it "should bar", {
+after "cleanup", {
 
 }
 
-after "after spec", {
-
-}

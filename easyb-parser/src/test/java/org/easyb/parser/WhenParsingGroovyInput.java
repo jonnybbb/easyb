@@ -1,24 +1,17 @@
 package org.easyb.parser;
 
-import org.junit.Test;
+import groovyjarjarantlr.RecognitionException;
+import groovyjarjarantlr.TokenStreamException;
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import org.codehaus.groovy.antlr.parser.GroovyRecognizer;
-import org.codehaus.groovy.antlr.parser.GroovyLexer;
-import org.codehaus.groovy.antlr.UnicodeEscapingReader;
-import org.codehaus.groovy.antlr.SourceBuffer;
-import static org.hamcrest.core.Is.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
+import org.junit.Test;
 
-import java.io.Reader;
-import java.io.InputStreamReader;
+import static java.util.Arrays.asList;
 
 public class WhenParsingGroovyInput {
     @Test
-    public void shouldProduceAbstractSyntaxTree() {
-        Reader reader = new InputStreamReader(getClass().getResourceAsStream("/after.specification"));
-        GroovyLexer lexer = new GroovyLexer(new UnicodeEscapingReader(reader, new SourceBuffer()));
-        GroovyRecognizer parser = GroovyRecognizer.make(lexer);
-
-        assertThat(parser, is(notNullValue()));
+    public void shouldRecognizeBehaviors() throws TokenStreamException, RecognitionException {
+        EasybParser parser = new EasybParser("/after.specification");
+        assertThat(parser.splitBehaviors(), is(asList("1:1", "5:1")));
     }
 }

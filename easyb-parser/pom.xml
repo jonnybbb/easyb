@@ -26,16 +26,40 @@
                     </includes>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>cobertura-maven-plugin</artifactId>
+                <configuration>
+                    <check>
+                        <haltOnFailure>true</haltOnFailure>
+                        <branchRate>100</branchRate>
+                        <lineRate>100</lineRate>
+                        <totalBranchRate>100</totalBranchRate>
+                        <totalLineRate>100</totalLineRate>
+                        <packageLineRate>100</packageLineRate>
+                        <packageBranchRate>100</packageBranchRate>
+                    </check>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>clean</goal>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 
     <dependencies>
         <dependency>
-            <groupId>groovy</groupId>
-            <artifactId>groovy</artifactId>
-            <version>1.0</version>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-all</artifactId>
+            <version>1.5.4</version>
             <scope>provided</scope>
         </dependency>
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
