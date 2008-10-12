@@ -28,7 +28,8 @@ public class EasybSnippetMatcher extends TypeSafeMatcher<EasybSnippet> {
     }
 
     public boolean matchesSafely(EasybSnippet other) {
-        return snippet.line == other.line && snippet.column == other.column;
+        return snippet.start.line == other.start.line && snippet.start.column == other.start.column &&
+                snippet.end.line == other.end.line && snippet.end.column == other.end.column;
     }
 
     public void describeTo(Description description) {
