@@ -11,7 +11,9 @@ import org.codehaus.groovy.grails.commons.ApplicationHolder
 import org.disco.easyb.report.XmlReportWriter
 import org.disco.easyb.ConsoleReporter
 import org.disco.easyb.BehaviorRunner
-import org.disco.easyb.domain.BehaviorFactory;
+import org.disco.easyb.domain.BehaviorFactory
+import org.disco.easyb.domain.Behavior
+import org.disco.easyb.exception.VerificationException;
 
 
 class EasybExecutor {
@@ -25,7 +27,7 @@ class EasybExecutor {
       def analyzer = args.analyzer
 
 
-      def results = []
+      int fail_count = 0
 
       // execute each story inside each family.
       //
@@ -43,17 +45,16 @@ class EasybExecutor {
 
             def res = exec_story( story: st, src: familyStoryDir, out: familyOutDir, analyzer: analyzer)
 
-            if (res == null) {
-               res = "${st.title} : Success"
-            }
 
-            results << res
+            if (res == null) {
+               fail_count++
+            }
 
          }
          
       }
 
-      return results
+      return fail_count
 
    }
 
@@ -101,6 +102,8 @@ class EasybExecutor {
       behaviors << BehaviorFactory.createBehavior(new File(story_fullName))
 
 
+      
+
       try {
 
          runner.runBehavior( behaviors )
@@ -108,20 +111,26 @@ class EasybExecutor {
 
          analyzer.build_and_store_report( s, outputFilename )
 
-
-      } catch (Exception e) {
+      } catch (VerificationException ve) {
 
          def fw = new FileWriter(outputFilename)
 
          fw << "<easyb sucess='false'>\n"
          fw << "   <error><![CDATA["
-         fw << "      ${e}"
+         fw << "      ${e.message}"
          fw << "   ]]></error>"
          fw << "</easyb>\n"
 
          fw.close()
 
-         return "Story: ${s.title} Failed: ${e.message}"
+         return "Story: ${s.title} Failed To Compile: ${ve.message} - expected: ${ve.expected}, actual: ${ve.actual}"
+
+
+      } catch (Exception e) {
+
+        // runner.
+
+         return "Story: ${s.title} Failed: ${e.message} "
       }
 
 

@@ -411,7 +411,53 @@ class StoryController extends ControllerBase {
       if (msg != null) {
          flash.error = msg
       } else {
-         flash.message = "Execution of story: ${story.title}: Success"
+
+         flash.message = "Execution of story: ${story.title}: "
+
+         def errored_scenarios = []
+
+         int total_pending = 0
+         int total_failures = 0
+         int total_success = 0
+         int total = 0
+
+         story_analysis_list.each { data ->
+            def rep = new RunReport(data)
+
+            total_failures += rep.failures
+            total_pending += rep.pending
+            total_success += rep.success
+            total += rep.total
+
+            if (rep.failures > 0) {
+                errored_scenarios << rep.failed_scenarios
+
+            }
+
+         }
+
+         if (total_failures == 0) {
+            if (total_pending == 0) {
+               flash.message += "Success - ${total_success} scenarios passed."
+            } else {
+               flash.message += "Incomplete - ${total_success} scenarios passed, ${total_pending} scenarios incomplete."
+            }
+
+         } else {
+            if (total_failures == total) {
+               flash.message += "Failed: All ${total_failures} scenarios"
+            } else {
+
+               if (total_pending == 0) {
+                  flash.message += "Partial Success: ${total_success} scenarios passed, ${total_failures} scenarios failed."
+               } else {
+                  flash.message += "Failure: ${total_success} scenarios passed, ${total_pending} scenarios incomplete, ${total_failures} scenarios failed."
+               }
+
+            }
+         }
+
+         // flash.message = "Execution of story: ${story.title}: Success"
       }
 
 
@@ -432,17 +478,13 @@ class StoryController extends ControllerBase {
 
       def list = [ Family.get(params.id) ]
 
-      def msg_list = exec_family_list( list )
+      int fail_count = exec_family_list( list )
 
-      def results = "<ul>\n"
-
-      msg_list.each { msg ->
-         results += "  <li>${msg}</li>\n"
+      if (fail_count > 0) {
+         flash.error = "Family ${list[0].name} Exec Failure: ${fail_count} stories have failures."
+      } else {
+         flash.message = "No failures in any of the stories in family ${list[0].name}"
       }
-
-      results += "</ul>\n"
-
-      flash.message = results
 
 
       redirect(action: 'viewfamilies', controller: 'story' )
@@ -590,14 +632,13 @@ class StoryController extends ControllerBase {
       def analyzer = new EasybXmlAnalyzer( story_report_list )
 
 
-      def messages = exec.exec_family(families: list, src: "story", out: "test/reports", analyzer: analyzer )
+      int fail_count = exec.exec_family(families: list, src: "story", out: "test/reports", analyzer: analyzer )
 
 
       create_analysis_report( story_report_list )
 
 
-      return messages
-
+      return fail_count
    }
 
 

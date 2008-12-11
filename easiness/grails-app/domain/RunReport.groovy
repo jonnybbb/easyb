@@ -1,10 +1,14 @@
 class RunReport {
 
    int success
-   int failure
+   int failures
    int pending
    int total
 
+   String[] failed_scenarios
+   HashMap  failure_reasons
+
+   
    Date create_dt = new Date()
 
 

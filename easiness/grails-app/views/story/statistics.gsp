@@ -36,7 +36,7 @@
         <tr>
            <g:if test="${st.lastReport() != null}">
               <td>${st.title}</td>
-              <td style="text-align: center;">${st.lastReport().failure}</td>
+              <td style="text-align: center;">${st.lastReport().failures}</td>
               <td style="text-align: center;">${st.lastReport().pending}</td>
               <td style="text-align: center;">${st.lastReport().success}</td>
            </g:if>

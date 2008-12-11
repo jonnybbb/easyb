@@ -29,6 +29,27 @@ class EasybXmlAnalyzer {
 
       results.success = results.total - (results.failures + results.pending)
 
+
+      results.failed_scenarios = []
+      results.failure_reasons = [:]
+
+      data.stories.story.each { st ->
+         st.scenario.each { sc ->
+            if (sc.@result.text() == "failure") {
+               results.failed_scenarios << sc.@name.text()
+
+               sc.then.each { th ->
+
+                  if (th.@result.text() == "failure") {
+
+                     results.failure_reasons[sc.@name.text()] += "" + th.failure.@message.text()
+                  }
+               }
+            }
+         }
+      }
+
+
       results.story = story
 
 
