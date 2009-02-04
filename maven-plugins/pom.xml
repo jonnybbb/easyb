@@ -45,11 +45,16 @@
 
   <distributionManagement>
     <repository>
-      <!-- Since we're not taking advantage of automatic deployment yet, just deploy to the target directory -->
-      <id>target</id>
-      <name>target repository</name>
-      <url>file:./target/deploy</url>
+      <id>easyb.org</id>
+      <name>easyb repository</name>
+      <url>scp://easyb.org/var/maven/repo/release</url>
     </repository>
+    <snapshotRepository>
+      <id>easyb.org</id>
+      <name>easyb repository</name>
+      <url>scp://easyb.org/var/maven/repo/snapshot</url>
+    </snapshotRepository>
+    <!-- Since we're not taking advantage of automatic deployment for sites yet, just deploy to the target directory -->
     <site>
       <id>target</id>
       <name>target repository</name>
