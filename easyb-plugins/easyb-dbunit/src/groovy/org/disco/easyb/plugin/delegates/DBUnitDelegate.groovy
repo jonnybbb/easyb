@@ -14,14 +14,14 @@ import org.dbunit.dataset.IDataSet
 import org.dbunit.dataset.xml.FlatXmlDataSet
 import org.dbunit.operation.DatabaseOperation
 
-import org.disco.easyb.delegates.Plugable
 import java.sql.Connection
+import org.disco.easyb.plugin.EasybPlugin
 
 /**
  * @author aglover
  * 
  */
-public class DBUnitDelegate implements Plugable{
+public class DBUnitDelegate implements EasybPlugin {
 	/**
 	 *
 	 * @param driver
@@ -74,4 +74,15 @@ public class DBUnitDelegate implements Plugable{
 		return new DatabaseConnection(DriverManager.getConnection(url, user, pssword))
 	}
 
+  public String getName() {
+    return "dbunit";
+  }
+
+  public void beforeScenario(Binding binding) {
+
+  }
+
+  public void afterScenario(Binding binding) {
+
+  }
 }

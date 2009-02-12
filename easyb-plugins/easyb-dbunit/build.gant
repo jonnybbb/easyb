@@ -22,8 +22,8 @@ tarfilename = "${defaultdir}/dist/${artifactid}-${version}.tar"
  * default value of version from above.
  */
 def detectOrDefaultVersion(version) {
-    if (Ant.project.properties."version" != null) {
-        return Ant.project.properties."version"
+    if (ant.project.properties."version" != null) {
+        return ant.project.properties."version"
     } else {
         return version
     }
@@ -40,7 +40,7 @@ target("groovyc": "compile Groovy classes") {
 
 target(jar: "archive project") {
     depends(groovyc)
-    Ant.jar(destfile: "${defaultdir}/${artifactid}-${version}.jar", basedir: classdir) {
+    ant.jar(destfile: "${defaultdir}/${artifactid}-${version}.jar", basedir: classdir) {
         metainf(dir: "./cfg/web/META-INF", includes: "**")
     }
 }
@@ -53,9 +53,9 @@ target(jar: "archive project") {
 target(release: "compile and archive") {
     depends(jar)
     depends("validate-plugin")
-    Ant.mkdir(dir: "${defaultdir}/release")
-    Ant.move(file: "${defaultdir}/${artifactid}-${version}.jar", todir: "${defaultdir}/release")
-    Ant.move(todir: "${defaultdir}/release") {
+    ant.mkdir(dir: "${defaultdir}/release")
+    ant.move(file: "${defaultdir}/${artifactid}-${version}.jar", todir: "${defaultdir}/release")
+    ant.move(todir: "${defaultdir}/release") {
         fileset(dir: "./target/lib/") {
             exclude(name: "**/ant-*.jar")
             exclude(name: "**/hsqldb-*.jar")
@@ -69,13 +69,13 @@ target(release: "compile and archive") {
 target("validate-plugin": "runs the easyb ant task") {
     depends(jar)
 
-    Ant.taskdef(name: "easyb", classname: "org.disco.easyb.ant.BehaviorRunnerTask") {
+    ant.taskdef(name: "easyb", classname: "org.disco.easyb.ant.BehaviorRunnerTask") {
         classpath() {
             pathelement(location: "${defaultdir}/lib/easyb-${version}.jar")
         }
     }
 
-    Ant.easyb(failureProperty: "easyb.failed") {
+    ant.easyb(failureProperty: "easyb.failed") {
 
         classpath() {
             fileset(dir: libdir, includes: jarincludes)
@@ -91,5 +91,5 @@ target("validate-plugin": "runs the easyb ant task") {
         }
     }
 
-    Ant.fail(if: "easyb.failed", message: "Execution halted as behaviors failed")
+    ant.fail(if: "easyb.failed", message: "Execution halted as behaviors failed")
 }
