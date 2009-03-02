@@ -3,8 +3,8 @@
 <ivy-module version="1.0">
 	<info organisation="org" module="dbunit-plug-in" />
 	<dependencies>
-		<dependency org="org/easyb" name="easyb" rev="0.9.4" />
-		<dependency org="org/codehaus" name="groovy" branch="groovy-all" rev="1.5.4" />
+		<dependency org="org/easyb" name="easyb" rev="0.9.5" />
+		<dependency org="org/codehaus" name="groovy" branch="groovy-all" rev="1.6.0" />
 		<dependency name="dbunit" rev="2.1" />
 		<dependency name="crimson" rev="1.1.3" />
 		<dependency name="hsqldb" rev="1.8.0.5" />

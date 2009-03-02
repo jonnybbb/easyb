@@ -15,7 +15,8 @@ import org.dbunit.dataset.xml.FlatXmlDataSet
 import org.dbunit.operation.DatabaseOperation
 
 import java.sql.Connection
-import org.disco.easyb.plugin.EasybPlugin
+import org.easyb.plugin.EasybPlugin
+import org.easyb.plugin.EasybPlugin
 
 /**
  * @author aglover
