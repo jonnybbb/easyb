@@ -1,4 +1,4 @@
-package org.disco.easyb.plugin.delegates
+package org.easyb.plugin.delegates
 
 import groovy.lang.Closure
 
