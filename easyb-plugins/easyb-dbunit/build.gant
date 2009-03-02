@@ -93,3 +93,12 @@ target("validate-plugin": "runs the easyb ant task") {
 
     ant.fail(if: "easyb.failed", message: "Execution halted as behaviors failed")
 }
+
+
+target(dist: "create a distribution from the release") {
+    depends(release)
+    ant.mkdir(dir: "${defaultdir}/dist")
+    ant.tar(tarfile: tarfilename, basedir: "${defaultdir}/release")
+    ant.gzip(zipfile: "${tarfilename}.gz", src: tarfilename)
+    ant.delete(file: tarfilename)
+}
