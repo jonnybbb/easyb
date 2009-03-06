@@ -37,6 +37,7 @@ public class EasybSnippet {
     static class Coordinate {
         public final int line;
         public final int column;
+        public static final Coordinate EOF = new Coordinate(-1, -1);
 
         public Coordinate(int line, int column) {
             this.line = line;

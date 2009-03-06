@@ -5,6 +5,7 @@ import org.codehaus.groovy.antlr.parser.GroovyRecognizer;
 import org.codehaus.groovy.antlr.UnicodeEscapingReader;
 import org.codehaus.groovy.antlr.SourceBuffer;
 import static org.easyb.parser.EasybSnippet.Coordinate.createCoordinate;
+import static org.easyb.parser.EasybSnippet.Coordinate.EOF;
 
 import java.io.Reader;
 import java.io.InputStreamReader;
@@ -44,6 +45,7 @@ public class EasybParser {
             }
             ast = ast.getNextSibling();
         } while (ast != null);
+        behaviors.add(new EasybSnippet(specificationPath, lastCoordinate, EOF));
 
         return behaviors;
     }
