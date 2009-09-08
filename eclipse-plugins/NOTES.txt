@@ -1,0 +1,30 @@
+Import project into Eclipse
+----------------------------
+Currently only developed against Gailileo
+
+1)Create a workspace
+2)Select from menu File->Import
+3)Click General 
+4)Click Existing Projects into Workspace
+5)Browse for easyb plugin project root dir
+6)Click Finish
+
+NOTE To be able to access eclipse plugins source download the "Eclipse Classic" version of Eclipse as all plugins come 
+with attached source.See http://www.vogella.de/articles/EclipseCodeAccess/article.html for details on how to view a plugins source
+
+To launch the plugin from the project double click plugin.xml and select "Launch an Eclipse Applciation"  
+
+Project Structure
+-----------------
+Standard plugin project structure except their are 2 lib directories
+easyblib - Contains easyb runtime specific libraries needed to launch org.easyb.BehaviorRunner
+pluginlib - Contains other libraries used by the plugin but not used by easyb
+
+This seperation is necessary as the EasybRuntimeClasspathBuilder reads all the files in easyblib and 
+appends to the classpath when launching a story. To reduce the risk of conflicts on the classpath
+this should only have the minimum necessary to run easyb.
+
+Story Launch
+----------
+1)Based on JUnit plugin at least in terms of the Launch UI.
+2)Launch each story in a seperate JVM incase user wants to use a different JVM to the one running eclipse.

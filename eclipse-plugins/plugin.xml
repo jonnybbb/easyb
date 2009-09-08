@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <!--Launch Config -->
+   <extension point="org.eclipse.debug.core.launchConfigurationTypes">
+	    <launchConfigurationType
+	        name="Easyb Story"
+	        delegate="org.easyb.easybplugin.launch.EasybLaunchConfigurationDelegate"
+	        modes="run, debug"               
+	        id="org.easyb.easybplugin.launch.EasybLaunchConfigurationDelegate">        
+	    </launchConfigurationType>
+	</extension>
+   
+	<extension point="org.eclipse.debug.ui.launchConfigurationTypeImages">
+	    <launchConfigurationTypeImage
+	        icon="icons/easyb.png"
+	        configTypeID="org.easyb.easybplugin.launch.EasybLaunchConfigurationDelegate"
+	        id="org.easyb.easybplugin.launch.easyblaunch.img">
+	    </launchConfigurationTypeImage>
+	</extension>
+	
+	<extension point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+	    <launchConfigurationTabGroup
+	        type="org.easyb.easybplugin.launch.EasybLaunchConfigurationDelegate"
+	        class="org.easyb.easybplugin.launch.EasybLaunchConfigurationTabGroup"
+	        id="org.easyb.easybplugin.launch.EasybLaunchConfigurationTabGroup">
+	    </launchConfigurationTabGroup>
+	</extension>
+	
+	<!--Launch short cut-->
+	<extension point="org.eclipse.debug.ui.launchShortcuts">
+	   <Shortcut
+	      id="org.easyb.easybplugin.launch.EasybLaunchShortcut"
+	      class="org.easyb.easybplugin.launch.EasybLaunchShortcut"
+	 		label="Easyb Story"
+	 		icon="icons/easyb.png"
+	 		modes="run, debug">
+ 
+            <contextualLaunch>
+           		<enablement>
+	           		<with variable="selection">
+		               <count value="1"/>
+		               <iterate>
+		                 <or>
+		                   <test property="org.eclipse.debug.ui.matchesPattern" value="*.story"/>
+		                 </or>
+		               </iterate>
+		             </with>
+           			
+           		</enablement>
+           		<contextLabel label="Run Easyb Story" mode="run"/>
+           		<contextLabel label="Debug Easyb Story" mode="debug"/>
+           		
+        	</contextualLaunch>
+            <configurationType id="org.easyb.easybplugin.launch.EasybLaunchConfigurationDelegate"/>
+	
+	   </Shortcut>
+	 </extension>
+	
+</plugin>
