@@ -9,13 +9,55 @@ Currently only developed against Gailileo
 5)Browse for easyb plugin project root dir
 6)Click Finish
 
+Do the same for the feature project.
+
 NOTE To be able to access eclipse plugins source download the "Eclipse Classic" version of Eclipse as all plugins come 
 with attached source.See http://www.vogella.de/articles/EclipseCodeAccess/article.html for details on how to view a plugins source
 
-To launch the plugin from the project double click plugin.xml and select "Launch an Eclipse Applciation"  
+Debug/run project from Eclipse
+-------------------------------
+To launch the plugin from the project:
+
+1)Double click plugin.xml 
+2)select "Launch an Eclipse Application" or "Debug an Eclipse Application".
+
+This will launch another eclipse version which you can debug
+
+Local deploy feature/plugin
+---------------------------
+1)Set up a folder somewhere locally with this structure any_name_you_like/eclipse/
+Its important to have the eclipse folder there for dropin deployment (I think)
+
+2)In you Eclipse installation go to eclipse_home/dropin and create a file with any name but with .link extension
+
+3)Put the path to the folder you created earlier, but not to the eclipse folder you created,
+like this:
+path=path=c:/any_name_you_like
+ 
+4)Go to feature project,not the plugin project
+
+5)Click feature.xml
+
+6)On overview tab click "Export Wizard" link
+
+7)In the radio buttons select "Directory" then enter the directory to the eclipse folder 
+you created earlier,including the eclipse  directory:
+C:/any_name_you_like/eclipse
+
+8)Click finish and the plugin should be exported.
+
+9)When you restart eclipse it should read the link file and pick up the exported plugins/features 
+from :/any_name_you_like/eclipse
 
 Project Structure
 -----------------
+Feature Project
+---------------
+Most importantly it has unpack archive after installation set for the plugin.
+This is needed to be able to get a path to the jars needed to run easyb 
+
+Plugin Project
+--------------
 Standard plugin project structure except their are 2 lib directories
 easyblib - Contains easyb runtime specific libraries needed to launch org.easyb.BehaviorRunner
 pluginlib - Contains other libraries used by the plugin but not used by easyb

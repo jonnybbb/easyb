@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Compile org.easyb.launch" default="main">
+	<target name="main">
+	</target>
+</project>

@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: EasybPlugin
-Bundle-SymbolicName: EasybPlugin; singleton:=true
+Bundle-Name: Easyb Launch Plugin
+Bundle-SymbolicName: org.easyb.launch.ui;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: org.easyb.easybplugin.EasybActivator
 Require-Bundle: org.eclipse.ui,
@@ -19,4 +19,6 @@ Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ClassPath: .,
  easyblib/easyb-0.9.5.jar,
- pluginlib/commons-lang-2.4.jar
+ pluginlib/commons-lang-2.4.jar,
+ easyblib/commons-cli-1.1.jar,
+ easyblib/groovy-1.6.0.jar
