@@ -1,4 +1,4 @@
-package org.disco.easyb.plugin
+package org.easyb.plugin
 
 import groovy.sql.Sql
 import groovy.xml.MarkupBuilder

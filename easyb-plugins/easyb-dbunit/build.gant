@@ -7,7 +7,7 @@ includeTargets << new File("../../easyb/default_tasks.gant")
  * Properties needed by default tasks
  */
 artifactid = "easyb-dbunit-plugin"
-version = detectOrDefaultVersion("0.9.5")
+version = detectOrDefaultVersion("0.9.6")
 sourcedirs = [gsourcedir]
 
 /**
