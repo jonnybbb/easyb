@@ -44,6 +44,8 @@ path=path=c:/any_name_you_like
 you created earlier,including the eclipse  directory:
 C:/any_name_you_like/eclipse
 
+Note:The Directory Browse button was crashing my version of Eclipse might be Eclipse bug.
+
 8)Click finish and the plugin should be exported.
 
 9)When you restart eclipse it should read the link file and pick up the exported plugins/features 
