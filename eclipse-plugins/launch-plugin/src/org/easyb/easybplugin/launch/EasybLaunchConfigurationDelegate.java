@@ -1,15 +1,11 @@
 package org.easyb.easybplugin.launch;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.easyb.easybplugin.EasybActivator;
 import org.easyb.easybplugin.IEasybLaunchConfigConstants;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.jdt.launching.JavaLaunchDelegate;
 
@@ -48,9 +44,19 @@ public class EasybLaunchConfigurationDelegate extends JavaLaunchDelegate{
 		List<String> storyPaths = 
 			config.getAttribute(IEasybLaunchConfigConstants.LAUNCH_ATTR_STORIES_FULL_PATH,new ArrayList(0));
 		
+		String os = Platform.getOS();
 		for(String storyPath : storyPaths){
-			args.append(" ").append(storyPath);
+			args.append(" ");
+			
+			//Wrap in " encase of spaces on windows
+			if(os.equals(Platform.OS_WIN32)){
+				args.append(" \"").append(storyPath).append("\"");
+			}else{
+				args.append(storyPath);
+			}
 		}
+		
+		System.out.println(args);
 		
 		return args.toString();
 	}

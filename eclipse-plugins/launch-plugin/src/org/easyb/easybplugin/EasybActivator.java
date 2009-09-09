@@ -1,5 +1,7 @@
 package org.easyb.easybplugin;
 
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
@@ -57,5 +59,17 @@ public class EasybActivator extends AbstractUIPlugin {
 	 */
 	public static ImageDescriptor getImageDescriptor(String path) {
 		return imageDescriptorFromPlugin(PLUGIN_ID, path);
+	}
+	
+	public static void Log(String message,Exception ex){
+		getDefault().getLog().log(new Status(IStatus.ERROR, PLUGIN_ID, 0,message,ex));
+	}
+	
+	public static void Log(String message){
+		getDefault().getLog().log(new Status(IStatus.ERROR, PLUGIN_ID,message));
+	}
+	
+	public static void Log(IStatus status){
+		getDefault().getLog().log(status);
 	}
 }

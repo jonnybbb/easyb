@@ -1,12 +1,9 @@
 package org.easyb.easybplugin.search;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 
 /**
@@ -15,6 +12,9 @@ import org.eclipse.core.runtime.CoreException;
  * @author whiteda
  *
  */
+//TODO Large projects may need to index stories
+//and store index file with plugin obviously when a new story is 
+//added index would have to be rebuilt.May not be necessary though.
 public class StorySearch {
 	
 	//TODO possibly run as an eclipse job
@@ -25,9 +25,9 @@ public class StorySearch {
 	}
 	
 	//TODO possibly run as an eclipse job
-	public static List<IFile> findStoryFiles(IResource resource)throws CoreException{ 
+	public static IFile[] findStoryFiles(IResource resource)throws CoreException{ 
 		StoryFileVisitor vistor = new StoryFileVisitor();
 		resource.accept(vistor, IResource.NONE);
-		return vistor.getFiles();
+		return vistor.getFiles().toArray(new IFile[vistor.getFiles().size()]);
 	}
 }

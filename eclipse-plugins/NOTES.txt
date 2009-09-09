@@ -28,7 +28,7 @@ Local deploy feature/plugin
 1)Set up a folder somewhere locally with this structure any_name_you_like/eclipse/
 Its important to have the eclipse folder there for dropin deployment (I think)
 
-2)In you Eclipse installation go to eclipse_home/dropin and create a file with any name but with .link extension
+2)In your Eclipse installation go to eclipse_home/dropin and create a file with any name but with .link extension
 
 3)Put the path to the folder you created earlier, but not to the eclipse folder you created,
 like this:
@@ -50,6 +50,7 @@ Note:The Directory Browse button was crashing my version of Eclipse might be Ecl
 
 9)When you restart eclipse it should read the link file and pick up the exported plugins/features 
 from :/any_name_you_like/eclipse
+
 
 Project Structure
 -----------------

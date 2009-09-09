@@ -7,8 +7,6 @@ import org.easyb.easybplugin.EasybActivator;
 import org.easyb.easybplugin.IEasybLaunchConfigConstants;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.jface.viewers.ISelection;
@@ -60,9 +58,7 @@ public class EasybLaunchShortcut extends AbstractLaunchShortcut{
 			}
 
 		} catch (CoreException ce) {
-			EasybActivator.getDefault().getLog().log(
-					new Status(IStatus.ERROR, EasybActivator.PLUGIN_ID, 0,
-							"Unable to get stories for launch", ce));
+			EasybActivator.Log("Unable to get stories for launch", ce);
 		}
 		return false;
 	}

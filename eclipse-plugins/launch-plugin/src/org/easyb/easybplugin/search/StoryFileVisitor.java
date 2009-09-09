@@ -23,7 +23,10 @@ public class StoryFileVisitor implements IResourceProxyVisitor{
 	//could be included twice if part of a package
 	@Override
 	public boolean visit(IResourceProxy proxy) throws CoreException {
-		if(IResource.FILE == proxy.getType() && !proxy.isHidden()){
+		
+		//Don`t want hidden,none accessibkle or derived (those in output folder)
+		if(IResource.FILE == proxy.getType() && !proxy.isHidden() && proxy.isAccessible() &&!proxy.isDerived()){
+
 			IFile file = (IFile)proxy.requestResource();
 			if(file.getFileExtension().equals(IEasybLaunchConfigConstants.STORY_FILE_EXTENSION)){
 				storyFiles.add(file);

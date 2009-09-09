@@ -9,31 +9,21 @@ import org.easyb.easybplugin.IEasybLaunchConfigConstants;
 import org.easyb.easybplugin.search.StorySearch;
 import org.easyb.easybplugin.utils.WidgetUtil;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.debug.ui.AbstractLaunchConfigurationTab;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaModel;
 import org.eclipse.jdt.core.IJavaProject;
-import org.eclipse.jdt.core.IPackageFragment;
-import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
-import org.eclipse.jdt.internal.ui.wizards.TypedElementSelectionValidator;
-import org.eclipse.jdt.internal.ui.wizards.TypedViewerFilter;
 import org.eclipse.jdt.launching.IJavaLaunchConfigurationConstants;
-import org.eclipse.jdt.ui.JavaElementComparator;
 import org.eclipse.jdt.ui.JavaElementLabelProvider;
 import org.eclipse.jdt.ui.StandardJavaElementContentProvider;
 import org.eclipse.jface.viewers.ILabelProvider;
-import org.eclipse.jface.viewers.Viewer;
-import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
@@ -57,6 +47,7 @@ import org.eclipse.ui.dialogs.ElementTreeSelectionDialog;
  * @author whiteda
  *
  */
+//TODO Class is getting too big refactor
 public class EasybMainTab extends AbstractLaunchConfigurationTab
 {
 	private final static String MAIN_TAB_NAME = "easyb_main_tab";
@@ -83,6 +74,7 @@ public class EasybMainTab extends AbstractLaunchConfigurationTab
 	private class EasybMainTabListener extends SelectionAdapter implements ModifyListener {
 		@Override
 		public void modifyText(ModifyEvent event) {
+			setEnableSingleStory(true);
 			updateLaunchConfigurationDialog();
 		}
 	}
@@ -97,12 +89,16 @@ public class EasybMainTab extends AbstractLaunchConfigurationTab
 	
 	private SelectionAdapter resourceSelectionAdapter = new SelectionAdapter(){ 
 		public void widgetSelected(SelectionEvent e){
-			IJavaElement newElement = chooseContainer(element);
-			
-			if(newElement!=null){
-				updateElement(newElement);
-			}
+			updateElement(chooseContainer(element));
+			updateLaunchConfigurationDialog();
 		} 
+	};
+	
+	private SelectionAdapter storySelectionAdapter = new SelectionAdapter(){
+		public void widgetSelected(SelectionEvent e){
+			updateStory(chooseStory());
+			updateLaunchConfigurationDialog();
+		}
 	};
 	
 	private EasybMainTabListener tabListener = new EasybMainTabListener();
@@ -116,8 +112,7 @@ public class EasybMainTab extends AbstractLaunchConfigurationTab
 		comp.setLayout(mainLayout);
 		
 		createSingleStoryControls(comp);
-		createMultiStoryControls(comp);
-		
+		createMultiStoryControls(comp);	
 	}
 	
 	@Override
@@ -132,10 +127,7 @@ public class EasybMainTab extends AbstractLaunchConfigurationTab
 			txtProject.setText(config.getAttribute(
 					IJavaLaunchConfigurationConstants.ATTR_PROJECT_NAME, ""));
 		} catch (CoreException ce) {
-			EasybActivator.getDefault().getLog().log(
-					new Status(IStatus.ERROR, EasybActivator.PLUGIN_ID, 0,
-							"Unable to set project name for launch", ce));
-
+			EasybActivator.Log("Unable to set project name for launch", ce);
 			setErrorMessage("Unable to set project from configuration");
 		}
 
@@ -148,24 +140,20 @@ public class EasybMainTab extends AbstractLaunchConfigurationTab
 	}
 	
 	@Override
-	public void performApply(ILaunchConfigurationWorkingCopy config) {
+	public void performApply(ILaunchConfigurationWorkingCopy config) {		
+		config.setAttribute(
+				IJavaLaunchConfigurationConstants.ATTR_PROJECT_NAME,StringUtils.trimToEmpty(txtProject.getText()));
 		
+		try{
+			List<String> stories = getStoriesFullPaths();
+			config.setAttribute( IEasybLaunchConfigConstants.LAUNCH_ATTR_STORIES_FULL_PATH,stories);
+		}catch(CoreException cex){
+			EasybActivator.Log("Unable apply configuration due to exception while retrieving story locations", cex);
+			setErrorMessage("Unable apply configuration due to exception while retrieving story locations");
+		}
 		
-			config.setAttribute(
-					IJavaLaunchConfigurationConstants.ATTR_PROJECT_NAME,StringUtils.trimToEmpty(txtProject.getText()));
-			
-			try{
-				List<String> stories = getStoriesFullPaths();
-				config.setAttribute( IEasybLaunchConfigConstants.LAUNCH_ATTR_STORIES_FULL_PATH,stories);
-			}catch(CoreException cex){
-				EasybActivator.getDefault().getLog().log(
-						new Status(IStatus.ERROR, EasybActivator.PLUGIN_ID, 0,
-								"Unable apply configuration due to exception while retrieving story locations", cex));
-				setErrorMessage("Unable apply configuration due to exception while retrieving story locations");
-			}
-			
-			config.setAttribute(
-					IEasybLaunchConfigConstants.LAUNCH_ATTR_PACKAGE_FOLDER,StringUtils.trimToEmpty(txtMultiStories.getText()));
+		config.setAttribute(
+				IEasybLaunchConfigConstants.LAUNCH_ATTR_PACKAGE_FOLDER,StringUtils.trimToEmpty(txtMultiStories.getText()));
 		
 	}
 	
@@ -209,10 +197,7 @@ public class EasybMainTab extends AbstractLaunchConfigurationTab
 			}
 
 		} catch (CoreException ce) {
-			EasybActivator.getDefault().getLog().log(
-					new Status(IStatus.ERROR, EasybActivator.PLUGIN_ID, 0,
-							"Unable to get stories for launch", ce));
-
+			EasybActivator.Log("Unable to get stories for launch", ce);
 			setErrorMessage("Unable to get stories for launch");
 		}
 
@@ -221,17 +206,7 @@ public class EasybMainTab extends AbstractLaunchConfigurationTab
 			packageFolder = config.getAttribute(
 					IEasybLaunchConfigConstants.LAUNCH_ATTR_PACKAGE_FOLDER, "");
 		} catch (CoreException ce) {
-			EasybActivator
-					.getDefault()
-					.getLog()
-					.log(
-							new Status(
-									IStatus.ERROR,
-									EasybActivator.PLUGIN_ID,
-									0,
-									"Unable to set project,resource or package name for launch",
-									ce));
-
+			EasybActivator.Log("Unable to set project,resource or package name for launch",ce);
 			setErrorMessage("Unable to set project,folder or package for stories from configuration");
 		}
 
@@ -244,10 +219,9 @@ public class EasybMainTab extends AbstractLaunchConfigurationTab
 	}
 	
 	protected List<String> getStoriesFullPaths()throws CoreException{
-		List<String> stories = null;;
-	
+		List<String> stories = null;
 		if(btnRadioSingleStory.getSelection()){
-			String singleStory = StringUtils.trimToEmpty(txtStory.getText());
+			String singleStory = (storyFile==null?"":storyFile.getRawLocation().toOSString());
 			stories = new ArrayList<String>(1);
 			stories.add(singleStory);
 			
@@ -302,6 +276,7 @@ public class EasybMainTab extends AbstractLaunchConfigurationTab
 		btnStory = new Button(comp,SWT.PUSH);
 		btnStory.setText("Browse");
 		setButtonGridData(btnStory);
+		btnStory.addSelectionListener(storySelectionAdapter);
 	}
 	
 	private void createMultiStoryControls(Composite comp){
@@ -339,17 +314,26 @@ public class EasybMainTab extends AbstractLaunchConfigurationTab
 	
 	private void changeStoryMode(){
 		boolean singleStory  = btnRadioSingleStory.getSelection();
+		setEnableProject(singleStory);
 		setEnableSingleStory(singleStory);
 		setEnableMultiStory(!singleStory);
 	}
 	
-	private void setEnableSingleStory(boolean enabled){
-		txtProject.setEnabled(enabled);
-		txtStory.setEnabled(enabled);
-		btnProject.setEnabled(enabled);
-		btnStory.setEnabled(enabled);
+	private void setEnableProject(boolean enabled){
 		lblProj.setEnabled(enabled);
+		txtProject.setEnabled(enabled);
+		btnProject.setEnabled(enabled);	
+	}
+	
+	private void setEnableSingleStory(boolean enabled){
+		
+		if(StringUtils.isBlank(txtProject.getText())){
+			enabled = false;
+		}
+		
 		lblStory.setEnabled(enabled);
+		txtStory.setEnabled(enabled);
+		btnStory.setEnabled(enabled);	
 	}
 	
 	private void setEnableMultiStory(boolean enabled){
@@ -361,11 +345,17 @@ public class EasybMainTab extends AbstractLaunchConfigurationTab
 		if(newElement==null){
 			return;
 		}
-		
 		element = newElement;
-		
 		txtMultiStories.setText(elementLabelProvider.getText(element));
 		updateLaunchConfigurationDialog();
+	}
+	
+	private void updateStory(IFile file){
+		if(file==null){
+			return;
+		}
+		storyFile = file;
+		txtStory.setText(storyFile.getName());
 	}
 	
 	private IWorkspaceRoot getWorkspaceRoot(){
@@ -409,39 +399,14 @@ public class EasybMainTab extends AbstractLaunchConfigurationTab
 		return model.getJavaProject(projTxt);
 	}
 	
-	//TODO Refactor to not use restricted API 
 	private IJavaElement chooseContainer(IJavaElement initElement) {
-		Class[] acceptedClasses= new Class[] { IPackageFragmentRoot.class, IJavaProject.class, IPackageFragment.class };
-		TypedElementSelectionValidator validator= new TypedElementSelectionValidator(acceptedClasses, false) {
-			public boolean isSelectedValid(Object element) {
-				return true;
-			}
-		};
-
-		acceptedClasses= new Class[] { IJavaModel.class, IPackageFragmentRoot.class, IJavaProject.class, IPackageFragment.class };
-		ViewerFilter filter= new TypedViewerFilter(acceptedClasses) {
-			public boolean select(Viewer viewer, Object parent, Object element) {
-			    if (element instanceof IPackageFragmentRoot && ((IPackageFragmentRoot)element).isArchive())
-			        return false;
-			    try {
-					if (element instanceof IPackageFragment && !((IPackageFragment) element).hasChildren()) {
-						return false;
-					}
-				} catch (JavaModelException e) {
-					return false;
-				}
-				return super.select(viewer, parent, element);
-			}
-		};
 
 		StandardJavaElementContentProvider provider= new StandardJavaElementContentProvider();
 		ILabelProvider labelProvider= new JavaElementLabelProvider(JavaElementLabelProvider.SHOW_DEFAULT);
 		ElementTreeSelectionDialog dialog= new ElementTreeSelectionDialog(getShell(), labelProvider, provider);
-		dialog.setValidator(validator);
-		dialog.setComparator(new JavaElementComparator());
 		dialog.setTitle("Elements");
-		dialog.setMessage("Choos package or folder");
-		dialog.addFilter(filter);
+		dialog.setMessage("Choose a project,package or folder");
+		dialog.addFilter(new ContainerViewerFilter());
 		dialog.setInput(JavaCore.create(getWorkspaceRoot()));
 		dialog.setInitialSelection(initElement);
 		dialog.setAllowMultiple(false);
@@ -454,9 +419,27 @@ public class EasybMainTab extends AbstractLaunchConfigurationTab
 	}
 	
 	
-	private IFile chooseStory()throws CoreException{
-		IJavaProject javaProject = getJavaProject();
-		StorySearch.findStoryFiles(javaProject.getResource());
+	private IFile chooseStory(){
+		try
+		{
+			IJavaProject javaProject = getJavaProject();
+			IFile[] files = StorySearch.findStoryFiles(javaProject.getResource());
+			
+			StoryElementSelectorDialog dialog= 
+				new StoryElementSelectorDialog(getShell(),files);
+
+			dialog.setTitle("Stories");
+			dialog.setMessage("Choose a story");
+		
+			if (dialog.open() == Window.OK) {
+				Object element= dialog.getFirstResult();
+				return (IFile)element;
+			}	
+		}catch(CoreException cex){
+			EasybActivator.Log("Unable to locate storys for story browse", cex);
+			setErrorMessage("Unable to locate storys for story browse");
+		}
+		
 		return null;
 	}
 	
