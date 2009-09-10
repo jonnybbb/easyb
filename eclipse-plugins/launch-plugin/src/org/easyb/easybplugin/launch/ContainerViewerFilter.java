@@ -21,11 +21,13 @@ public class ContainerViewerFilter extends ViewerFilter{
 	@Override
 	public boolean select(Viewer viewer, Object parentElement, Object element) {
 		
-		if(element instanceof IProject || element instanceof IJavaProject){
+		if(element instanceof IJavaProject){
 			return true;
 		}
 		
-		if(element instanceof IFolder)
+		//TODO possible support for none source 
+		//folders if needed 
+		/*if(element instanceof IFolder)
 		{
 			IFolder folder = (IFolder)element;
 			
@@ -34,7 +36,7 @@ public class ContainerViewerFilter extends ViewerFilter{
 			}
 			
 			return true;
-		}
+		}*/
 		
 		try{
 			

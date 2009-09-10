@@ -1,0 +1,14 @@
+1)Launch a story or multiple stories from shortcut or launch configuration
+2)Have a better view on results rather then just logging to console
+3)Have a seperate preference page where the user can specify the Groovy/easyb jars
+4)Have a Create Story added to the File menu and package menus 
+This would allow the user to add the Given,When,Then text in a wizard and the rest of the story code will be generated.
+5)Provide editor support e.g error highlighting,maybe provided by other plugins like SpringSources Groovy plugin
+6)Could integrate with issue reporting apps like JIRA,Collabnet,Bugzilla so when a user creates a story using the wizard 
+they have an option to push the story to one of the issuer trackers.
+7)Could also have that the othjer way so issuer trackers push stories to a project generating a story script 
+though this could be harder to do
+8)6,7 could possibly be integrated with Mylyn
+9)Could Hook 6,7 into continuas integration so story in issuer tracker will have status changed to broken if a story fails. 
+10)Easyb eclipse plugin tests    
+11)I18N messages

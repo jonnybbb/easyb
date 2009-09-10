@@ -9,9 +9,13 @@ import org.easyb.easybplugin.IEasybLaunchConfigConstants;
 import org.easyb.easybplugin.search.StorySearch;
 import org.easyb.easybplugin.utils.WidgetUtil;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.debug.ui.AbstractLaunchConfigurationTab;
@@ -66,7 +70,7 @@ public class EasybMainTab extends AbstractLaunchConfigurationTab
 	private Text txtMultiStories;
 	private Button btnMultiStory;
 	
-	private IJavaElement element;
+	private IJavaElement container;
 	private IFile storyFile; 
 	
 	private final ILabelProvider elementLabelProvider= new JavaElementLabelProvider();
@@ -89,7 +93,7 @@ public class EasybMainTab extends AbstractLaunchConfigurationTab
 	
 	private SelectionAdapter resourceSelectionAdapter = new SelectionAdapter(){ 
 		public void widgetSelected(SelectionEvent e){
-			updateElement(chooseContainer(element));
+			updateElement(chooseContainer(container));
 			updateLaunchConfigurationDialog();
 		} 
 	};
@@ -144,6 +148,7 @@ public class EasybMainTab extends AbstractLaunchConfigurationTab
 		config.setAttribute(
 				IJavaLaunchConfigurationConstants.ATTR_PROJECT_NAME,StringUtils.trimToEmpty(txtProject.getText()));
 		
+		//TODO Maybe better to have this in the ConfigurationDelegate 
 		try{
 			List<String> stories = getStoriesFullPaths();
 			config.setAttribute( IEasybLaunchConfigConstants.LAUNCH_ATTR_STORIES_FULL_PATH,stories);
@@ -152,9 +157,15 @@ public class EasybMainTab extends AbstractLaunchConfigurationTab
 			setErrorMessage("Unable apply configuration due to exception while retrieving story locations");
 		}
 		
-		config.setAttribute(
-				IEasybLaunchConfigConstants.LAUNCH_ATTR_PACKAGE_FOLDER,StringUtils.trimToEmpty(txtMultiStories.getText()));
+		if(container !=null){
+			config.setAttribute(
+					IEasybLaunchConfigConstants.LAUNCH_ATTR_CONTAINER_HANDLE,container.getHandleIdentifier());
+		}
 		
+		if(storyFile!=null){
+			config.setAttribute(
+					IEasybLaunchConfigConstants.LAUNCH_ATTR_STORY_PATH,storyFile.getProjectRelativePath().toPortableString());
+		}
 	}
 	
 	@Override
@@ -171,62 +182,86 @@ public class EasybMainTab extends AbstractLaunchConfigurationTab
 			return false;
 		}
 		
-		if(StringUtils.isBlank(txtProject.getText())){
-			setErrorMessage("A project has not been set");
-			return false;
-		}
-		
-		if(StringUtils.isBlank(txtStory.getText()) && 
-				StringUtils.isBlank(txtMultiStories.getText())){
-			setErrorMessage("A story has not been set");
-			return false;
+		if(btnRadioSingleStory.getSelection()){
+			if(StringUtils.isBlank(txtProject.getText())){
+				setErrorMessage("A project has not been set");
+				return false;
+			}
+			
+			if(StringUtils.isBlank(txtStory.getText())){
+				setErrorMessage("A story has not been set");
+				return false;
+			}
+		}else if(btnRadioMultiStory.getSelection()){
+			if(StringUtils.isBlank(txtMultiStories.getText())){
+				setErrorMessage("A Project,Package or Folder has not been selected");
+				return false;
+			}
 		}
 		
 		return true;
 	}
 	
 	protected void initialiseStoriesfromConfiguration(ILaunchConfiguration config){
-		List<String> stories = null;
-		try {
-			stories = config.getAttribute(
-					IEasybLaunchConfigConstants.LAUNCH_ATTR_STORIES_FULL_PATH,
-					new ArrayList<String>(0));
 
-			if (stories.size() == 0) {
-				return;
+		try {
+			String containerHandle = config.getAttribute(
+					IEasybLaunchConfigConstants.LAUNCH_ATTR_CONTAINER_HANDLE, "");
+			
+			if(!StringUtils.isBlank(containerHandle)){
+				container = JavaCore.create(containerHandle);
+				txtMultiStories.setText(container.getElementName());
 			}
-
-		} catch (CoreException ce) {
-			EasybActivator.Log("Unable to get stories for launch", ce);
-			setErrorMessage("Unable to get stories for launch");
-		}
-
-		String packageFolder = "";
-		try {
-			packageFolder = config.getAttribute(
-					IEasybLaunchConfigConstants.LAUNCH_ATTR_PACKAGE_FOLDER, "");
+					
 		} catch (CoreException ce) {
 			EasybActivator.Log("Unable to set project,resource or package name for launch",ce);
 			setErrorMessage("Unable to set project,folder or package for stories from configuration");
 		}
 
-		if (!StringUtils.isBlank(packageFolder)) {
-
-			txtMultiStories.setText(packageFolder);
-		} else if (stories != null && stories.size() > 0) {
-			txtStory.setText(stories.get(0));
+		try{
+			String storyProjectPath = config.getAttribute(
+					IEasybLaunchConfigConstants.LAUNCH_ATTR_STORY_PATH, "");
+			
+			IPath path = null;
+			if(!StringUtils.isBlank(storyProjectPath))
+			{
+				path = Path.fromPortableString(storyProjectPath);
+			}
+			
+			IJavaProject javaProject = getJavaProject();
+		
+			if(javaProject !=null){
+				IProject project = javaProject.getProject();
+				if(project.findMember(path) instanceof IFile){
+					storyFile  = (IFile)project.findMember(path);
+				}else{
+					setErrorMessage("Unable to locate "+storyProjectPath+" in project");
+				}
+			}else{
+				setErrorMessage("No project has been set for story");
+			}
+			
+			if(storyFile!=null){
+				txtStory.setText(storyFile.getName());
+			}else if(!StringUtils.isBlank(storyProjectPath)){
+				txtStory.setText(storyProjectPath);
+			}
+		
+		} catch (CoreException ce) {
+			EasybActivator.Log("Unable to set story for launch",ce);
+			setErrorMessage("Unable to set story for launch");
 		}
 	}
 	
 	protected List<String> getStoriesFullPaths()throws CoreException{
 		List<String> stories = null;
-		if(btnRadioSingleStory.getSelection()){
+		if(btnRadioSingleStory.getSelection() && storyFile !=null){
 			String singleStory = (storyFile==null?"":storyFile.getRawLocation().toOSString());
 			stories = new ArrayList<String>(1);
 			stories.add(singleStory);
 			
-		}else{
-			stories = StorySearch.findStoryPaths(element.getResource());
+		}else if(container!=null){
+			stories = StorySearch.findStoryPaths(container.getResource());
 		}
 		
 		return stories;
@@ -317,6 +352,7 @@ public class EasybMainTab extends AbstractLaunchConfigurationTab
 		setEnableProject(singleStory);
 		setEnableSingleStory(singleStory);
 		setEnableMultiStory(!singleStory);
+		updateLaunchConfigurationDialog();
 	}
 	
 	private void setEnableProject(boolean enabled){
@@ -345,8 +381,8 @@ public class EasybMainTab extends AbstractLaunchConfigurationTab
 		if(newElement==null){
 			return;
 		}
-		element = newElement;
-		txtMultiStories.setText(elementLabelProvider.getText(element));
+		container = newElement;
+		txtMultiStories.setText(elementLabelProvider.getText(container));
 		updateLaunchConfigurationDialog();
 	}
 	
@@ -413,6 +449,7 @@ public class EasybMainTab extends AbstractLaunchConfigurationTab
 
 		if (dialog.open() == Window.OK) {
 			Object element= dialog.getFirstResult();
+			
 			return (IJavaElement)element;
 		}
 		return null;

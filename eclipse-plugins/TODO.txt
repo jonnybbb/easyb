@@ -1,12 +1,18 @@
 1)Create tests ideally using easyb.Need to find a way of launchign eclipse in test mode.
-Look into headless eclipse
+Look into headless eclipse.
 
-2)Story search needs to be implemented. Try to find a generic mechanism in Eclipse otherwise 
+2)Look into JUnit Pluigin Tests
+
+3)Story search needs to be implemented. Try to find a generic mechanism in Eclipse otherwise 
 role our own.
 
-3)Improve results view rather then just write to console. Could possibly use the XML output 
+4)Improve results view rather then just write to console. Could possibly use the XML output 
 from easyb but it would be better if we could get some streaming output. JUnit writes  to a socket (I think).
 XML could be done first at least then Views would be in place then ,if needed,streaming could be looked into.
 
-4)Make plugin more configurable.At the moment easyb version and groovy are bundled with the plugin. This could be 
+5)Make plugin more configurable.At the moment easyb version and groovy are bundled with the plugin. This could be 
 made configurable via preferences. 
+
+6)Check compatable with Eclipse 3.4
+
+7)Check it can be used with other JVM based projects eg Groovy project,Scala project 
