@@ -24,10 +24,13 @@ import org.eclipse.jdt.core.IJavaModel;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.jdt.internal.ui.packageview.PackageFragmentRootContainer;
 import org.eclipse.jdt.launching.IJavaLaunchConfigurationConstants;
 import org.eclipse.jdt.ui.JavaElementLabelProvider;
 import org.eclipse.jdt.ui.StandardJavaElementContentProvider;
 import org.eclipse.jface.viewers.ILabelProvider;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
@@ -40,6 +43,7 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.ui.ISelectionService;
 import org.eclipse.ui.dialogs.ElementListSelectionDialog;
 import org.eclipse.ui.dialogs.ElementTreeSelectionDialog;
 
@@ -148,7 +152,6 @@ public class EasybMainTab extends AbstractLaunchConfigurationTab
 		config.setAttribute(
 				IJavaLaunchConfigurationConstants.ATTR_PROJECT_NAME,StringUtils.trimToEmpty(txtProject.getText()));
 		
-		//TODO Maybe better to have this in the ConfigurationDelegate 
 		try{
 			List<String> stories = getStoriesFullPaths();
 			config.setAttribute( IEasybLaunchConfigConstants.LAUNCH_ATTR_STORIES_FULL_PATH,stories);
@@ -169,9 +172,15 @@ public class EasybMainTab extends AbstractLaunchConfigurationTab
 	}
 	
 	@Override
-	public void setDefaults(ILaunchConfigurationWorkingCopy arg0) {
-		// TODO Auto-generated method stub
+	public void setDefaults(ILaunchConfigurationWorkingCopy config) {
 		
+		IProject proj = 
+			EasybActivator.getDefault().getSelectedProject();
+		
+		if(proj!=null){
+			config.setAttribute(
+					IJavaLaunchConfigurationConstants.ATTR_PROJECT_NAME,proj.getName());
+		}
 	}
 	
 	@Override

@@ -1,8 +1,6 @@
 package org.easyb.easybplugin.launch;
 
 import org.easyb.easybplugin.EasybActivator;
-import org.eclipse.core.resources.IFolder;
-import org.eclipse.core.resources.IProject;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragment;
 import org.eclipse.jdt.core.IPackageFragmentRoot;

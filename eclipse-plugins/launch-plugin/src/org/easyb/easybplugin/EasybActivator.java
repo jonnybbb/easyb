@@ -1,8 +1,18 @@
 package org.easyb.easybplugin;
 
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.jdt.core.IJavaElement;
+import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.internal.ui.actions.SelectionConverter;
+import org.eclipse.jdt.internal.ui.javaeditor.JavaEditor;
+import org.eclipse.jdt.internal.ui.packageview.PackageFragmentRootContainer;
 import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.ui.ISelectionService;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
@@ -71,5 +81,36 @@ public class EasybActivator extends AbstractUIPlugin {
 	
 	public static void Log(IStatus status){
 		getDefault().getLog().log(status);
+	}
+	
+	public IProject getSelectedProject(){
+		ISelectionService selectionService = 
+			getWorkbench().getActiveWorkbenchWindow().getSelectionService();
+		
+		ISelection selection = selectionService.getSelection();
+
+		if(selection instanceof IStructuredSelection) {
+			    Object element = ((IStructuredSelection)selection).getFirstElement();
+	
+			    IProject project = null;
+			    if (element instanceof IResource) {
+			        project= ((IResource)element).getProject();
+			    } else if (element instanceof PackageFragmentRootContainer) {
+			        IJavaProject jProject = 
+			            ((PackageFragmentRootContainer)element).getJavaProject();
+			        project = jProject.getProject();
+			    } else if (element instanceof IJavaElement) {
+			        IJavaProject jProject= ((IJavaElement)element).getJavaProject();
+			        project = jProject.getProject();
+			    }
+			    
+			    return project;
+		    } /*else if (selection instanceof ITextSelection) {
+		    if(sourcePart instanceof JavaEditor) {
+		        IJavaElement element = SelectionConverter.resolveEnclosingElement(sourcePart, selection);
+		        project = element.getJavaProject().getProject();
+		    }
+		}*/
+		return null;
 	}
 }

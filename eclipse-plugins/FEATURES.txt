@@ -6,7 +6,7 @@ This would allow the user to add the Given,When,Then text in a wizard and the re
 5)Provide editor support e.g error highlighting,maybe provided by other plugins like SpringSources Groovy plugin
 6)Could integrate with issue reporting apps like JIRA,Collabnet,Bugzilla so when a user creates a story using the wizard 
 they have an option to push the story to one of the issuer trackers.
-7)Could also have that the othjer way so issuer trackers push stories to a project generating a story script 
+7)Could also have that the other way so issuer trackers push stories to a project generating a story script 
 though this could be harder to do
 8)6,7 could possibly be integrated with Mylyn
 9)Could Hook 6,7 into continuas integration so story in issuer tracker will have status changed to broken if a story fails. 
