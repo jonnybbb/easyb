@@ -79,3 +79,19 @@ Testing
 Install the TPTP frameowrk http://www.eclipse.org/tptp/home/downloads/#tptp-plugins
 This has an option to create a plugin JUnit test
 
+For testing to work its best to have tests in a seperate plugin or fragment.
+A fargment has some benefits so I think this is the approach to take.(see test resources 1)
+However at the moment the wizard to create plugin tests won`t let you add one to a fragement!
+So using a plugin
+
+Test resources
+1)http://rcpquickstart.com/2007/06/20/unit-testing-plug-ins-with-fragments/
+2)http://rcpquickstart.com/2008/06/12/running-unit-tests-for-rcp-and-osgi-applications/
+3)http://rcpquickstart.com/2008/08/01/creating-a-test-environment-for-the-eclipse-testing-framework/
+4)http://rcpquickstart.com/2007/08/06/running-automated-tests-with-pde-build/
+5)http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.test/testframework.html?view=co
+
+
+
+
+

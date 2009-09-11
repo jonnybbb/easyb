@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.easyb.easybplugin.IEasybLaunchConfigConstants;
+import org.easyb.easybplugin.utils.StoryFileMatcher;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceProxy;
@@ -23,11 +24,9 @@ public class StoryPathVisitor implements IResourceProxyVisitor{
 	@Override
 	public boolean visit(IResourceProxy proxy) throws CoreException {
 		
-		if(IResource.FILE == proxy.getType() && !proxy.isHidden()){
+		if(StoryFileMatcher.isStoryFile(proxy)){
 			IFile file = (IFile)proxy.requestResource();
-			if(file.getFileExtension().equals(IEasybLaunchConfigConstants.STORY_FILE_EXTENSION)){
-				storyPaths.add(file.getRawLocation().toOSString());
-			}
+			storyPaths.add(file.getRawLocation().toOSString());
 		}
 		
 		return true;

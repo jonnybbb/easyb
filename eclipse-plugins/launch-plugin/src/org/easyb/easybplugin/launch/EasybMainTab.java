@@ -353,7 +353,9 @@ public class EasybMainTab extends AbstractLaunchConfigurationTab
 	private void setButtonGridData(Button button){
 		GridData gridData= new GridData();
 		button.setLayoutData(gridData);
-		WidgetUtil.setButtonDimensionHint(button);
+		//TODO reinstate WidgetUtil once dependency 
+		//on Pixel COnverter has been removed
+		//WidgetUtil.setButtonDimensionHint(button);
 	}
 	
 	private void changeStoryMode(){

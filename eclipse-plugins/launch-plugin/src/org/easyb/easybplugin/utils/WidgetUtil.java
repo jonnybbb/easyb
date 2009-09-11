@@ -21,6 +21,8 @@ public class WidgetUtil {
 	 * @param button	the button for which to set the dimension hint
 	 * @return the width hint
 	 */
+	//TODO Not compatable with 3.4 as PixelConverter is not [part
+	//of JFace in 3.4
 	public static int getButtonWidthHint(Button button) {
 		button.setFont(JFaceResources.getDialogFont());
 		PixelConverter converter= new PixelConverter(button);

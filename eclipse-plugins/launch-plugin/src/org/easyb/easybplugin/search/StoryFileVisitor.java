@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.easyb.easybplugin.IEasybLaunchConfigConstants;
+import org.easyb.easybplugin.utils.StoryFileMatcher;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceProxy;
@@ -25,14 +26,8 @@ public class StoryFileVisitor implements IResourceProxyVisitor{
 	public boolean visit(IResourceProxy proxy) throws CoreException {
 		
 		//Don`t want hidden,none accessibkle or derived (those in output folder)
-		if(proxy !=null && IResource.FILE == proxy.getType() && 
-				!proxy.isHidden() && proxy.isAccessible() &&!proxy.isDerived()){
-
-			IFile file = (IFile)proxy.requestResource();
-			if(file.getFileExtension()!=null && 
-					file.getFileExtension().equals(IEasybLaunchConfigConstants.STORY_FILE_EXTENSION)){
-				storyFiles.add(file);
-			}
+		if(StoryFileMatcher.isStoryFile(proxy)){			
+			storyFiles.add((IFile)proxy.requestResource());
 		}
 		
 		return true;
