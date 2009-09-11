@@ -2,7 +2,8 @@
 <feature
       id="org.easyb.eclipse.feature"
       label="Easyb Eclipse Feature"
-      version="1.0.0.qualifier">
+      version="0.0.1"
+      provider-name="easyb.org">
 
    <description url="http://www.easyb.org">
       [Enter Feature Description here.]
@@ -15,6 +16,10 @@
    <license url="http://www.example.com/license">
       [Enter License Description here.]
    </license>
+
+   <url>
+      <update label="easby Eclipse Update Site" url="http://easyb.googlecode.com/svn/trunk/org.easyb.eclipse.updatesite"/>
+   </url>
 
    <plugin
          id="org.easyb.launch.ui"
