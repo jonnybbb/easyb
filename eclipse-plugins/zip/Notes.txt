@@ -1,0 +1,10 @@
+Unzip in eclipse3.4 or 3.5 dropins folder.See eclipse_home/dropins
+
+Or unzip somewhere else and reference in a link file in the dropins folder like
+easyb.link 
+
+With the following in it:
+
+path=c:/Eclipse/eclipseplugins
+
+Where eclipseplugins has the unzipped zip file
