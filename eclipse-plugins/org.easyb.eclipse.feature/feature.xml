@@ -18,7 +18,7 @@
    </license>
 
    <url>
-      <update label="easby Eclipse Update Site" url="http://easyb.googlecode.com/svn/trunk/org.easyb.eclipse.updatesite"/>
+      <update label="easby Eclipse Update Site" url="http://easyb.googlecode.com/svn/trunk/eclipse-plugins/org.easyb.eclipse.updatesite"/>
    </url>
 
    <plugin
