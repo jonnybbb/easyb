@@ -1,6 +1,7 @@
 package org.easyb.easybplugin.launch;
 
 import java.io.File;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -35,8 +36,14 @@ public class EasybClasspathBuilder {
 						new Status(IStatus.ERROR, EasybActivator.PLUGIN_ID,"Easyb runtime lib "+IEasybLaunchConfigConstants.EASYB_RUNNER_LIB_NAME+" not found in plugin root dir"));
 			}
 				
-			for(String fileName : libDir.list()){
-				classpathEntries.add(libDir.getAbsolutePath()+File.separatorChar+fileName);
+			for(String fileName : libDir.list(new FilenameFilter() {
+				
+				@Override
+				public boolean accept(File dir, String name) {
+					return name.endsWith(".jar");
+				}
+			})){
+				classpathEntries.add(libDir.getAbsolutePath()+File.separator+fileName);
 			}
 		
 			return classpathEntries.toArray(new String[classpathEntries.size()]);

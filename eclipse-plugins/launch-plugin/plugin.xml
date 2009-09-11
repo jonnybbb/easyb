@@ -13,7 +13,7 @@
    
 	<extension point="org.eclipse.debug.ui.launchConfigurationTypeImages">
 	    <launchConfigurationTypeImage
-	        icon="icons/easyb.png"
+	        icon="resources/images/icons/easyb.png"
 	        configTypeID="org.easyb.easybplugin.launch.EasybLaunchConfigurationDelegate"
 	        id="org.easyb.easybplugin.launch.easyblaunch.img">
 	    </launchConfigurationTypeImage>
@@ -33,7 +33,7 @@
 	      id="org.easyb.easybplugin.launch.EasybLaunchShortcut"
 	      class="org.easyb.easybplugin.launch.EasybLaunchShortcut"
 	 		label="Easyb Story"
-	 		icon="icons/easyb.png"
+	 		icon="resources/images/icons/easyb.png"
 	 		modes="run, debug">
  
             <contextualLaunch>
@@ -42,7 +42,9 @@
 		               <count value="1"/>
 		               <iterate>
 		                 <or>
-		                   <test property="org.eclipse.debug.ui.matchesPattern" value="*.story"/>
+		                   <!--test property="org.eclipse.debug.ui.matchesPattern" value="*.story"/-->
+			        	  <test property="org.eclipse.debug.ui.matchesContentType" value="org.easyb.eclipse.contenttype.groovystory"/>
+			        	  <test property="org.eclipse.debug.ui.matchesContentType" value="org.easyb.eclipse.contenttype.story"/>
 		                 </or>
 		               </iterate>
 		             </with>
@@ -56,5 +58,49 @@
 	
 	   </Shortcut>
 	 </extension>
-	
+	<extension point="org.eclipse.ui.editors"> 
+	<editor
+      class="org.eclipse.ui.editors.text.TextEditor"
+      default="false"
+      extensions="story"
+      icon="resources/images/icons/easyb.png"
+      id="org.easy.eclipse.ui.dummyEditor"
+      name="easyb story editor">
+
+
+	</editor> 
+	</extension>
+   <extension
+         point="org.eclipse.core.contenttype.contentTypes">
+      <content-type
+            file-extensions="story"
+            id="org.easyb.eclipse.contenttype.story"
+            name="easyb story"
+            priority="normal">
+      </content-type>
+      <content-type
+            file-extensions="groovy"
+            id="org.easyb.eclipse.contenttype.groovystory"
+            name="easyb groovy story"
+            priority="low">
+      </content-type>
+   </extension>
+
+   <extension
+         point="org.eclipse.ui.commands">
+      <command 
+            categoryId="org.eclipse.debug.ui.category.run"
+            id="org.easyb.easybplugin.launch.EasybLaunchShortcut.run"
+            name="run easby story">
+      </command>
+
+   </extension>	
+   <extension
+         point="org.eclipse.ui.bindings">
+      <key
+            commandId="org.easyb.easybplugin.launch.EasybLaunchShortcut.run"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M2+M3+X S">
+      </key>
+   </extension>	
 </plugin>
