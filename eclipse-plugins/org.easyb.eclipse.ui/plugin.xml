@@ -32,7 +32,7 @@
 	   <Shortcut
 	      id="org.easyb.easybplugin.launch.EasybLaunchShortcut"
 	      class="org.easyb.easybplugin.launch.EasybLaunchShortcut"
-	 		label="Easyb Story"
+	 		label="easyb story"
 	 		icon="resources/images/icons/easyb.png"
 	 		modes="run, debug">
  
@@ -50,8 +50,8 @@
 		             </with>
            			
            		</enablement>
-           		<contextLabel label="Run Easyb Story" mode="run"/>
-           		<contextLabel label="Debug Easyb Story" mode="debug"/>
+           		<contextLabel label="Run easyb story" mode="run"/>
+           		<contextLabel label="Debug easyb story" mode="debug"/>
            		
         	</contextualLaunch>
             <configurationType id="org.easyb.easybplugin.launch.EasybLaunchConfigurationDelegate"/>
@@ -73,7 +73,7 @@
    <extension
          point="org.eclipse.core.contenttype.contentTypes">
       <content-type
-            file-extensions="story"
+            file-extensions="story,specification"
             id="org.easyb.eclipse.contenttype.story"
             name="easyb story"
             priority="normal">
