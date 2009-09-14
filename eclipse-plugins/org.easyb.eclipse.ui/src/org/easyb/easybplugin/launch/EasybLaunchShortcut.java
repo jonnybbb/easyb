@@ -3,12 +3,15 @@ package org.easyb.easybplugin.launch;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.easyb.easybplugin.EasybActivator;
 import org.easyb.easybplugin.IEasybLaunchConfigConstants;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
+import org.eclipse.jdt.launching.IJavaLaunchConfigurationConstants;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.pde.ui.launcher.AbstractLaunchShortcut;
@@ -33,11 +36,13 @@ public class EasybLaunchShortcut extends AbstractLaunchShortcut{
 
 	@Override
 	protected void initializeConfiguration(ILaunchConfigurationWorkingCopy wc) {
-		String filePath = file.getRawLocation().toOSString();
-		List<String> stories = new ArrayList<String>();
-		stories.add(filePath);
-		
-		wc.setAttribute(IEasybLaunchConfigConstants.LAUNCH_ATTR_STORIES_FULL_PATH,stories);
+		if(file==null){
+			//TODO log maybe
+			return;
+		}
+		setConfigFileFullPath(wc);
+		setConfigProject(wc);
+		setConfigFileProjectPath(wc);
 	}
 
 	@Override
@@ -71,7 +76,8 @@ public class EasybLaunchShortcut extends AbstractLaunchShortcut{
 			IFileEditorInput fileInput = (IFileEditorInput)input;
 			file =fileInput.getFile();
 			launch(mode);
-		}
+		
+		}	
 	}
 
 	@Override
@@ -86,6 +92,28 @@ public class EasybLaunchShortcut extends AbstractLaunchShortcut{
 
 			launch(mode);
         } 
+	}
+	
+	private void setConfigFileFullPath(ILaunchConfigurationWorkingCopy wc){
+		String filePath = file.getRawLocation().toOSString();
+		List<String> stories = new ArrayList<String>();
+		stories.add(filePath);
+		
+		wc.setAttribute(IEasybLaunchConfigConstants.LAUNCH_ATTR_STORIES_FULL_PATH,stories);
+	}
+	
+	private void setConfigProject(ILaunchConfigurationWorkingCopy wc){
+		IProject proj = file.getProject();
+		
+		if(proj!=null){
+			wc.setAttribute(
+					IJavaLaunchConfigurationConstants.ATTR_PROJECT_NAME,proj.getName());
+		}
+	}
+	
+	private void setConfigFileProjectPath(ILaunchConfigurationWorkingCopy wc){
+		wc.setAttribute(
+				IEasybLaunchConfigConstants.LAUNCH_ATTR_STORY_PATH,file.getProjectRelativePath().toPortableString());
 	}
 
 }
