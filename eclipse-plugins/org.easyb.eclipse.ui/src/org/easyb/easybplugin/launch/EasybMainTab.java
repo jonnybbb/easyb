@@ -82,12 +82,18 @@ public class EasybMainTab extends AbstractLaunchConfigurationTab
 	private class EasybMainTabListener extends SelectionAdapter implements ModifyListener {
 		@Override
 		public void modifyText(ModifyEvent event) {
-			setEnableSingleStory(true);
+			//If this is the single story mode then the project might of been triggered
+			//so enable the single story box
+			if(btnRadioSingleStory.getSelection()){
+				setEnableSingleStory(true);
+			}
+			
 			updateLaunchConfigurationDialog();
 		}
 	}
+
 	
-	private SelectionAdapter projectSelectionListener = new SelectionAdapter() {
+	private SelectionAdapter projectSelectionListener = new SelectionAdapter(){
 		public void widgetSelected(SelectionEvent e){
 			IJavaProject proj = chooseJavaProject();
 			txtProject.setText(proj.getElementName());
@@ -169,6 +175,9 @@ public class EasybMainTab extends AbstractLaunchConfigurationTab
 			config.setAttribute(
 					IEasybLaunchConfigConstants.LAUNCH_ATTR_STORY_PATH,storyFile.getProjectRelativePath().toPortableString());
 		}
+		
+		config.setAttribute(
+				IEasybLaunchConfigConstants.LAUNCH_ATTR_IS_SINGLE_STORY,btnRadioSingleStory.getSelection());
 	}
 	
 	@Override
@@ -181,6 +190,7 @@ public class EasybMainTab extends AbstractLaunchConfigurationTab
 			config.setAttribute(
 					IJavaLaunchConfigurationConstants.ATTR_PROJECT_NAME,proj.getName());
 		}
+		
 	}
 	
 	@Override
@@ -212,7 +222,7 @@ public class EasybMainTab extends AbstractLaunchConfigurationTab
 	}
 	
 	protected void initialiseStoriesfromConfiguration(ILaunchConfiguration config){
-
+		
 		try {
 			String containerHandle = config.getAttribute(
 					IEasybLaunchConfigConstants.LAUNCH_ATTR_CONTAINER_HANDLE, "");
@@ -255,11 +265,27 @@ public class EasybMainTab extends AbstractLaunchConfigurationTab
 			}else if(!StringUtils.isBlank(storyProjectPath)){
 				txtStory.setText(storyProjectPath);
 			}
-		
+			
 		} catch (CoreException ce) {
 			EasybActivator.Log("Unable to set story for launch",ce);
 			setErrorMessage("Unable to set story for launch");
 		}
+		
+		try{
+			boolean isSingleStory = config.getAttribute(
+										IEasybLaunchConfigConstants.LAUNCH_ATTR_IS_SINGLE_STORY,true);
+			setEnableSingleStory(isSingleStory);
+			setEnableProject(isSingleStory);
+			setEnableMultiStory(!isSingleStory);
+			
+			btnRadioSingleStory.setSelection(isSingleStory);
+			btnRadioMultiStory.setSelection(!isSingleStory);
+			
+		}catch(CoreException ce){
+			EasybActivator.Log("Unable to set single or multi story radio buttons",ce);
+			setErrorMessage("Unable to set single or multi story radio buttons");
+		}
+		
 	}
 	
 	protected List<String> getStoriesFullPaths()throws CoreException{
@@ -353,9 +379,7 @@ public class EasybMainTab extends AbstractLaunchConfigurationTab
 	private void setButtonGridData(Button button){
 		GridData gridData= new GridData();
 		button.setLayoutData(gridData);
-		//TODO reinstate WidgetUtil once dependency 
-		//on Pixel COnverter has been removed
-		//WidgetUtil.setButtonDimensionHint(button);
+		WidgetUtil.setButtonDimensionHint(button);
 	}
 	
 	private void changeStoryMode(){
@@ -380,7 +404,7 @@ public class EasybMainTab extends AbstractLaunchConfigurationTab
 		
 		lblStory.setEnabled(enabled);
 		txtStory.setEnabled(enabled);
-		btnStory.setEnabled(enabled);	
+		btnStory.setEnabled(enabled);
 	}
 	
 	private void setEnableMultiStory(boolean enabled){
