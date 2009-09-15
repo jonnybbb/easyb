@@ -58,18 +58,18 @@
 	
 	   </Shortcut>
 	 </extension>
+	 
 	<extension point="org.eclipse.ui.editors"> 
-	<editor
-      class="org.eclipse.ui.editors.text.TextEditor"
-      default="false"
-      extensions="story"
-      icon="resources/images/icons/easyb.png"
-      id="org.easy.eclipse.ui.dummyEditor"
-      name="easyb story editor">
-
-
-	</editor> 
+		<editor
+	      class="org.eclipse.ui.editors.text.TextEditor"
+	      default="false"
+	      extensions="story"
+	      icon="resources/images/icons/easyb.png"
+	      id="org.easy.eclipse.ui.dummyEditor"
+	      name="easyb story editor">
+		</editor> 
 	</extension>
+	
    <extension
          point="org.eclipse.core.contenttype.contentTypes">
       <content-type
@@ -93,8 +93,8 @@
             id="org.easyb.easybplugin.launch.EasybLaunchShortcut.run"
             name="run easby story">
       </command>
-
    </extension>	
+   
    <extension
          point="org.eclipse.ui.bindings">
       <key
@@ -103,4 +103,39 @@
             sequence="M2+M3+X S">
       </key>
    </extension>	
+
+	
+	<!--<extension point="org.eclipse.ui.activities">
+        <category description="easyb Category" name="easyb"
+            id="org.easyb.category"/>
+    </extension>-->
+	
+
+   <extension
+      point = "org.eclipse.ui.newWizards">
+		<category
+		   id = "org.eclipse.ui.easyb"
+		   name="easyb">
+		</category>
+	 	<wizard
+		   id = "org.easyb.easybplugin.newbehaviour.NewStoryWizard"
+	      	   name = "Story"
+		   class="org.easyb.easybplugin.newbehaviour.NewStoryWizard"
+		   category="org.eclipse.ui.easyb"
+		   icon="resources/images/logo.png">
+	    	   <description>"Creates a new easyb story"</description>
+		   <selection class="org.eclipse.core.resources.IResource"/>
+		</wizard>
+		<wizard
+		   id = "org.easyb.easybplugin.newbehaviour.NewSpecificationWizard"
+	      	   name = "Specification"
+		   class="org.easyb.easybplugin.newbehaviour.NewSpecificationWizard"
+		   category="org.eclipse.ui.easyb"
+		   icon="resources/images/logo.png">
+	    	   <description>"Creates a new easyb specification"</description>
+		   <selection class="org.eclipse.core.resources.IResource"/>
+		</wizard>
+	</extension>
+
+   	
 </plugin>

@@ -1,0 +1,12 @@
+
+scenario "scenario txt",{
+	
+	given "your text",{
+	}
+	
+	when "your text",{
+	}
+	
+	then "your text",{
+	}
+}

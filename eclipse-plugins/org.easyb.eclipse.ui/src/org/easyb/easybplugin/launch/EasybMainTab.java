@@ -8,6 +8,7 @@ import org.easyb.easybplugin.EasybActivator;
 import org.easyb.easybplugin.IEasybLaunchConfigConstants;
 import org.easyb.easybplugin.search.StorySearch;
 import org.easyb.easybplugin.utils.WidgetUtil;
+import org.easyb.easybplugin.viewerfilters.ContainerViewerFilter;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
