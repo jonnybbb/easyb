@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Templates
+Bundle-SymbolicName: org.easyb.eclipse.templates;singleton:=true
+Bundle-Version: 0.0.1
+Bundle-Activator: org.easyb.eclipse.templates.TemplateActivator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.jface.text;bundle-version="3.5.0",
+ org.eclipse.ui.editors;bundle-version="3.5.0",
+ org.eclipse.ui.workbench.texteditor;bundle-version="3.5.0"
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

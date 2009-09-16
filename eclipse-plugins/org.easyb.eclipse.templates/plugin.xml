@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+	
+	<extension
+     point="org.eclipse.ui.keywords">
+	    <keyword
+	            label="Behaviour template preferences"
+	            id="org.easyb.eclipse.templates.keyword"/>
+   </extension> 
+   
+	<extension point="org.eclipse.ui.preferencePages">
+		 <page id="org.easyb.eclipse.templates.preferences.BehaviourTemplatePreferencePage" 
+         	name="easyb" 
+         	class="org.easyb.eclipse.templates.preferences.BehaviourTemplatePreferencePage"> 
+         	<keywordReference id="org.easyb.eclipse.templates.keyword"/>
+      </page> 
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.templates">
+		<contextType class="org.easyb.eclipse.templates.context.BehaviourContextType" 
+					id="org.easyb.eclipse.templates.context.BehaviourContextType" name="Behaviour">
+		</contextType>
+		<include file="resources/templates/story_template.xml"/>
+	</extension>
+
+</plugin>

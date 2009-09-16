@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+	<template
+		name="scenario"
+		description="Creates a story scenario"
+		id="org.easyb.eclipse.templates.storytemplate.scenario"
+		context="org.easyb.eclipse.templates.context.BehaviourContextType" enabled="true" autoinsert="false" icon="resources/images/logo.png">
+	scenario "${scenario}", {
+	  given "${given}",{
+	  }
+	
+	  when "${when}", {
+	  }
+	
+	  then "${then}", {
+	  }
+	}
+	</template>
+</templates>
