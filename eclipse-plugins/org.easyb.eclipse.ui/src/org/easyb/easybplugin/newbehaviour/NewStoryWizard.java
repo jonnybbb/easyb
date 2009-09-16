@@ -6,6 +6,8 @@ import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
 
+//TODO If this becomes more complex then possibly move to a seperate 
+//plugin
 public class NewStoryWizard extends Wizard implements INewWizard{
 	private IStructuredSelection selection;
     private NewStoryWizardPage newFileWizardPage;
