@@ -5,6 +5,8 @@ import java.io.IOException;
 import org.easyb.eclipse.templates.context.BehaviourContextType;
 import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.jface.text.templates.ContextTypeRegistry;
+import org.eclipse.jface.text.templates.Template;
+import org.eclipse.jface.text.templates.TemplateContextType;
 import org.eclipse.jface.text.templates.persistence.TemplateStore;
 import org.eclipse.ui.editors.text.templates.ContributionContextTypeRegistry;
 import org.eclipse.ui.editors.text.templates.ContributionTemplateStore;
@@ -51,6 +53,14 @@ public class TemplateManager {
 	
 	public void savePreferences()throws BackingStoreException{
 		(new InstanceScope()).getNode(TemplateActivator.PLUGIN_ID).flush();
+	}
+	
+	public Template[] getTemplates(){
+		return getTemplateStore().getTemplates();
+	}
+	
+	public TemplateContextType getBehaviourContextType(){
+		return getContextTypeRegistry().getContextType(BehaviourContextType.CONTEXT_TYPE);
 	}
 	
 }

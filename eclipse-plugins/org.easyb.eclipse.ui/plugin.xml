@@ -59,7 +59,7 @@
 	   </Shortcut>
 	 </extension>
 	 
-	<extension point="org.eclipse.ui.editors"> 
+	<!--<extension point="org.eclipse.ui.editors"> 
 		<editor
 	      class="org.eclipse.ui.editors.text.TextEditor"
 	      default="false"
@@ -68,7 +68,7 @@
 	      id="org.easy.eclipse.ui.dummyEditor"
 	      name="easyb story editor">
 		</editor> 
-	</extension>
+	</extension>-->
 	
    <extension
          point="org.eclipse.core.contenttype.contentTypes">
@@ -103,14 +103,8 @@
             sequence="M2+M3+X S">
       </key>
    </extension>	
-
 	
-	<!--<extension point="org.eclipse.ui.activities">
-        <category description="easyb Category" name="easyb"
-            id="org.easyb.category"/>
-    </extension>-->
-	
-
+<!--New Behaviour Wizard TODO COuld move to seperate plugin-->
    <extension
       point = "org.eclipse.ui.newWizards">
 		<category
@@ -136,6 +130,19 @@
 		   <selection class="org.eclipse.core.resources.IResource"/>
 		</wizard>
 	</extension>
+	
+	<!--Behaviour editor TODO could move to seperate plugin-->
+	<extension
+         point="org.eclipse.ui.editors">
+      <editor
+            name="Behaviour editor"
+            icon="resources/images/logo.png"
+            extensions="story"
+            contributorClass="org.easyb.easybplugin.editor.BehaviourActionContributor"
+            class="org.easyb.easybplugin.editor.BehaviourEditor"
+            id="org.easyb.easybplugin.editor.BehaviourEditor">
+      </editor>
+   </extension>
 
    	
 </plugin>
