@@ -21,7 +21,7 @@
 		<contextType class="org.easyb.eclipse.templates.context.BehaviourContextType" 
 					id="org.easyb.eclipse.templates.context.BehaviourContextType" name="Behaviour">
 		</contextType>
-		<include file="resources/templates/story_template.xml"/>
+		<include file="resources/templates/behaviour_template.xml"/>
 	</extension>
 
 </plugin>

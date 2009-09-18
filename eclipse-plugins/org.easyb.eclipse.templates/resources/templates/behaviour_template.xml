@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+	<template
+		name="scenario"
+		description="Inserts a story scenario"
+		id="org.easyb.eclipse.templates.storytemplate.scenario"
+		context="org.easyb.eclipse.templates.context.BehaviourContextType" enabled="true" autoinsert="false" icon="resources/images/logo.png"
+>scenario "${scenario}",{
+	given "${given}",{
+	}
+	
+	when "${when}", {
+	}
+	
+	then "${then}", {
+	}
+}</template>
+	
+	<template
+		name="given"
+		description="Inserts a scenario 'given'"
+		id="org.easyb.eclipse.templates.storytemplate.given"
+		context="org.easyb.eclipse.templates.context.BehaviourContextType" enabled="true" autoinsert="true" icon="resources/images/logo.png"
+>given "${given}",{
+	}</template>
+	
+	<template
+		name="when"
+		description="Inserts a scenario 'when'"
+		id="org.easyb.eclipse.templates.storytemplate.when"
+		context="org.easyb.eclipse.templates.context.BehaviourContextType" enabled="true" autoinsert="true" icon="resources/images/logo.png"
+>when "${when}",{
+	}</template>
+	  
+	  <template
+		name="then"
+		description="Inserts a scenario 'then'"
+		id="org.easyb.eclipse.templates.storytemplate.then"
+		context="org.easyb.eclipse.templates.context.BehaviourContextType" enabled="true" autoinsert="true" icon="resources/images/logo.png"
+>then "${then}",{
+	}</template>
+	  
+	  <template
+		name="ensureThrows"
+		description="Inserts a scenario 'ensureThrows'"
+		id="org.easyb.eclipse.templates.storytemplate.ensurethrows"
+		context="org.easyb.eclipse.templates.context.BehaviourContextType" enabled="true" autoinsert="true" icon="resources/images/logo.png"
+>ensureThrows(${exception}){
+	}</template>
+	
+	<template
+		name="and"
+		description="Inserts a scenario 'and'"
+		id="org.easyb.eclipse.templates.storytemplate.and"
+		context="org.easyb.eclipse.templates.context.BehaviourContextType" enabled="true" autoinsert="true" icon="resources/images/logo.png"
+>and "${and}",{
+	}</template>
+    <template
+		name="narrative"
+		description="Inserts a narrative"
+		id="org.easyb.eclipse.templates.storytemplate.narrative"
+		context="org.easyb.eclipse.templates.context.BehaviourContextType" enabled="true" autoinsert="true" icon="resources/images/logo.png"
+>narrative "${narrative}",{
+	}</template>
+	<template
+		name="before"
+		description="Inserts a before"
+		id="org.easyb.eclipse.templates.storytemplate.before"
+		context="org.easyb.eclipse.templates.context.BehaviourContextType" enabled="true" autoinsert="true" icon="resources/images/logo.png"
+>before "${before}",{
+	}</template>
+		<template
+		name="before_each"
+		description="Inserts a before_each"
+		id="org.easyb.eclipse.templates.storytemplate.before"
+		context="org.easyb.eclipse.templates.context.BehaviourContextType" enabled="true" autoinsert="true" icon="resources/images/logo.png"
+>before_each "${before_each}",{
+	}</template>
+	<template
+		name="after"
+		description="Inserts a after"
+		id="org.easyb.eclipse.templates.storytemplate.after"
+		context="org.easyb.eclipse.templates.context.BehaviourContextType" enabled="true" autoinsert="true" icon="resources/images/logo.png"
+>after "${after}",{
+	}</template>
+	<template
+		name="after_each"
+		description="Inserts a after_each"
+		id="org.easyb.eclipse.templates.storytemplate.after_each"
+		context="org.easyb.eclipse.templates.context.BehaviourContextType" enabled="true" autoinsert="true" icon="resources/images/logo.png"
+>after_each "${after_each}",{
+	}</template>
+	<template
+		name="shared_behavior"
+		description="Inserts a shared_behavior"
+		id="org.easyb.eclipse.templates.storytemplate.shared_behavior"
+		context="org.easyb.eclipse.templates.context.BehaviourContextType" enabled="true" autoinsert="true" icon="resources/images/logo.png"
+>shared_behavior "${shared_behavior}",{
+	}</template>
+	<template
+		name="it_behaves_as"
+		description="Inserts a it_behaves_as"
+		id="org.easyb.eclipse.templates.storytemplate.it_behaves_as"
+		context="org.easyb.eclipse.templates.context.BehaviourContextType" enabled="true" autoinsert="true" icon="resources/images/logo.png"
+>it_behaves_as "${it_behaves_as}",{
+	}</template>
+	<template
+		name="it"
+		description="Inserts a it"
+		id="org.easyb.eclipse.templates.storytemplate.it"
+		context="org.easyb.eclipse.templates.context.BehaviourContextType" enabled="true" autoinsert="true" icon="resources/images/logo.png"
+>it "${it}",{
+	}</template>
+	
+	<template
+		name="description"
+		description="Inserts a description"
+		id="org.easyb.eclipse.templates.storytemplate.description"
+		context="org.easyb.eclipse.templates.context.BehaviourContextType" enabled="true" autoinsert="true" icon="resources/images/logo.png"
+>description "${description}"</template>
+</templates>

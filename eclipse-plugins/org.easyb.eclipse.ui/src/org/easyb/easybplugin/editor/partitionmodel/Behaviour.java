@@ -23,17 +23,8 @@ import org.eclipse.jface.text.TypedPosition;
  */
 public class Behaviour implements IModelElement{
 	public static final String BEHAVIOUR_TEXT = "Behaviour";
-	public static final String[] EASYB_STATEMENT_PARTITION_TYPES = new String[]{
-		PartitionScannerBuilder.EASYB_STORY_GIVEN_START,
-		PartitionScannerBuilder.EASYB_STORY_THEN_START,
-		PartitionScannerBuilder.EASYB_STORY_WHEN_START
-	};
 	
-	static{
-		Arrays.sort(EASYB_STATEMENT_PARTITION_TYPES);
-	}
-	
-	private List<IModelElement> specs 
+	private List<IModelElement> roots 
 	= new ArrayList<IModelElement>();
 	
 	/**
@@ -43,9 +34,13 @@ public class Behaviour implements IModelElement{
 	 */
 	public void createModel(IDocument document) throws PartitionModelException {
 		try {
+			if(document==null){
+				return;
+			}
+			
 			String[] categories = DocumentUtil.getManagingPositionCategories(
 					PartitionScannerBuilder.PARTITIONER_ID, document);
-
+			
 			Position[] positions = document.getPositions(categories[0]);
 			
 			Statement lastSpec =null;
@@ -59,7 +54,7 @@ public class Behaviour implements IModelElement{
 				if(isSpecification(typePos)){
 					lastSpec = new Statement();
 					lastSpec.update(typePos, document,this);
-					specs.add(lastSpec);
+					roots.add(lastSpec);
 				}
 				
 				//IF spec isn`t set then continue as 
@@ -80,30 +75,26 @@ public class Behaviour implements IModelElement{
 	}
 	
 	public void clear(){
-		specs.clear();
+		roots.clear();
 	}
 	
 	private boolean isStatement(TypedPosition typePos){
-		return Arrays.binarySearch(EASYB_STATEMENT_PARTITION_TYPES,typePos.getType())>=0;
+		return Arrays.binarySearch(PartitionScannerBuilder.EASYB_STATEMENT_PARTITION_TYPES,typePos.getType())>=0;
 	}
 	
 	private boolean isSpecification(TypedPosition typePos){
-		if(PartitionScannerBuilder.EASYB_STORY_SCENARIO_START.equals(typePos.getType())){
-			return true;
-		}
-		
-		return false;
+		return Arrays.binarySearch(PartitionScannerBuilder.EASYB_ROOT_PARTITION_TYPES,typePos.getType())>=0;
 	}
 
 	@Override
 	public boolean hasChildren(){
-		return !specs.isEmpty();
+		return !roots.isEmpty();
 	}
 	
 	
 	@Override
 	public IModelElement[] getElements() {
-		return  specs.toArray(new IModelElement[specs.size()]);
+		return  roots.toArray(new IModelElement[roots.size()]);
 	}
 
 	@Override

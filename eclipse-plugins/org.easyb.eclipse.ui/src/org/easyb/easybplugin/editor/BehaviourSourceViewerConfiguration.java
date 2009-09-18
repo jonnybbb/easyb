@@ -39,7 +39,7 @@ public class BehaviourSourceViewerConfiguration extends TextSourceViewerConfigur
 	@Override
 	public String[] getConfiguredContentTypes(ISourceViewer sourceViewer)
 	{
-		return PartitionScannerBuilder.EASYB_BEHAVIOUR_PARTITION_TYPES;
+		return PartitionScannerBuilder.EASYB_ALL_PARTITION_TYPES;
 	}
 	
 	@Override

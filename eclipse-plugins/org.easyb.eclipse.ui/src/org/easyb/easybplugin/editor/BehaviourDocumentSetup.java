@@ -16,7 +16,7 @@ public class BehaviourDocumentSetup implements IDocumentSetupParticipant {
 	public static void setupPartitioner(IDocument document) {
 		IDocumentPartitioner partitioner = 
 			new FastPartitioner(PartitionScannerBuilder.createBehaviourPartitionScanner(),
-					PartitionScannerBuilder.EASYB_BEHAVIOUR_PARTITION_TYPES);
+					PartitionScannerBuilder.EASYB_ALL_PARTITION_TYPES);
 		
 		DocumentUtil.setDocumentPartitioner(
 				document,PartitionScannerBuilder.PARTITIONER_ID, partitioner);
