@@ -146,7 +146,10 @@ public class EasybMainTab extends AbstractLaunchConfigurationTab
 	
 	public void dispose() {
 		super.dispose();
-		elementLabelProvider.dispose();
+		
+		if(elementLabelProvider!=null){
+			elementLabelProvider.dispose();
+		}
 	}
 	
 	@Override

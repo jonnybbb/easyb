@@ -1,7 +1,9 @@
 package org.easyb.easybplugin.editor.partitionmodel;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.jface.text.BadLocationException;
@@ -22,8 +24,8 @@ public class Statement implements IModelElement{
 	private String text;
 	private IModelElement parent;
 	
-	private Map<Integer,IModelElement> statements = 
-		new HashMap<Integer,IModelElement>();
+	private List<IModelElement> statements = 
+		new ArrayList<IModelElement>();
 	
 	public Statement(){
 	}
@@ -59,7 +61,7 @@ public class Statement implements IModelElement{
 	public void addStatement(TypedPosition typePos,IDocument document)throws PartitionModelException{
 		Statement state = new Statement();
 		state.update(typePos, document,this);
-		statements.put(state.getOffSet(),state);
+		statements.add(state);
 	}
 	
 	@Override
@@ -69,8 +71,7 @@ public class Statement implements IModelElement{
 
 	@Override
 	public IModelElement[] getElements() {
-		Collection<IModelElement> elements = statements.values();
-		return  elements.toArray(new IModelElement[ elements.size()]);
+		return  statements.toArray(new IModelElement[statements.size()]);
 	}
 
 	@Override

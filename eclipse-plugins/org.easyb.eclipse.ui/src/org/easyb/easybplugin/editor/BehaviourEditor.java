@@ -12,8 +12,12 @@ public class BehaviourEditor extends TextEditor
 	
 	protected  void initializeEditor() {
 		super.initializeEditor();
-		setSourceViewerConfiguration(new BehaviourSourceViewerConfiguration());
+		setSourceViewerConfiguration(new BehaviourSourceViewerConfiguration(this));
 		//setDocumentProvider(input);
+	}
+	
+	public void updateOutline(){
+		outlinePage.update();
 	}
 	
 	public Object getAdapter(Class required) {

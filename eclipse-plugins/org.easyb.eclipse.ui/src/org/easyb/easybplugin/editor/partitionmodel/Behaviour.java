@@ -1,8 +1,10 @@
 package org.easyb.easybplugin.editor.partitionmodel;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.easyb.easybplugin.editor.PartitionScannerBuilder;
@@ -31,8 +33,8 @@ public class Behaviour implements IModelElement{
 		Arrays.sort(EASYB_STATEMENT_PARTITION_TYPES);
 	}
 	
-	private Map<Integer,IModelElement> specs 
-	= new HashMap<Integer,IModelElement>();
+	private List<IModelElement> specs 
+	= new ArrayList<IModelElement>();
 	
 	/**
 	 * Creates a partition model for the partitions in the document
@@ -57,7 +59,7 @@ public class Behaviour implements IModelElement{
 				if(isSpecification(typePos)){
 					lastSpec = new Statement();
 					lastSpec.update(typePos, document,this);
-					specs.put(lastSpec.getOffSet(),lastSpec);
+					specs.add(lastSpec);
 				}
 				
 				//IF spec isn`t set then continue as 
@@ -101,8 +103,7 @@ public class Behaviour implements IModelElement{
 	
 	@Override
 	public IModelElement[] getElements() {
-		Collection<IModelElement> elements = specs.values();
-		return  elements.toArray(new IModelElement[ elements.size()]);
+		return  specs.toArray(new IModelElement[specs.size()]);
 	}
 
 	@Override
