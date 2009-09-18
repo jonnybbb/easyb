@@ -3,10 +3,8 @@ package org.easyb.easybplugin.search;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.easyb.easybplugin.IEasybLaunchConfigConstants;
 import org.easyb.easybplugin.utils.StoryFileMatcher;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceProxy;
 import org.eclipse.core.resources.IResourceProxyVisitor;
 import org.eclipse.core.runtime.CoreException;

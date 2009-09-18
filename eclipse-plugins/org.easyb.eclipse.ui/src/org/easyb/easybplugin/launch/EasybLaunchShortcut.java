@@ -3,7 +3,6 @@ package org.easyb.easybplugin.launch;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
 import org.easyb.easybplugin.EasybActivator;
 import org.easyb.easybplugin.IEasybLaunchConfigConstants;
 import org.eclipse.core.resources.IFile;

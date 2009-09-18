@@ -137,12 +137,23 @@
       <editor
             name="Behaviour editor"
             icon="resources/images/logo.png"
-            extensions="story"
+            extensions="story,groovy"
             contributorClass="org.easyb.easybplugin.editor.BehaviourActionContributor"
             class="org.easyb.easybplugin.editor.BehaviourEditor"
             id="org.easyb.easybplugin.editor.BehaviourEditor">
       </editor>
    </extension>
+   
+   <!--Used by the TextFileDocumentProvider to partition the document-->
+   <extension point="org.eclipse.core.filebuffers.documentSetup">
+   	<participant
+   		class="org.easyb.easybplugin.editor.BehaviourDocumentSetup"
+   		contentTypeId="org.easyb.eclipse.contenttype.story" >
+	</participant>
+	<participant
+   		class="org.easyb.easybplugin.editor.BehaviourDocumentSetup"
+   		contentTypeId="org.easyb.eclipse.contenttype.groovystory" >
+	</participant>   	
+   </extension>
 
-   	
 </plugin>

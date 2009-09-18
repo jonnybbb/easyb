@@ -3,8 +3,6 @@ package org.easyb.easybplugin.utils;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.easyb.easybplugin.IEasybLaunchConfigConstants;
-import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceProxy;
 

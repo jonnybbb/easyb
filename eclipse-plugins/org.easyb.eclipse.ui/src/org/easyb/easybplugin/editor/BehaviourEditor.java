@@ -1,12 +1,39 @@
 package org.easyb.easybplugin.editor;
 
-import org.eclipse.ui.editors.text.TextFileDocumentProvider;
-import org.eclipse.ui.texteditor.AbstractTextEditor;
+import org.eclipse.ui.editors.text.TextEditor;
+import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 
-public class BehaviourEditor extends AbstractTextEditor{
+public class BehaviourEditor extends TextEditor
+{
+	private BehaviourOutlinePage outlinePage = null;
 	
 	public BehaviourEditor(){
+	}
+	
+	protected  void initializeEditor() {
+		super.initializeEditor();
 		setSourceViewerConfiguration(new BehaviourSourceViewerConfiguration());
-		setDocumentProvider(new TextFileDocumentProvider());
+		//setDocumentProvider(input);
+	}
+	
+	public Object getAdapter(Class required) {
+		if (IContentOutlinePage.class.equals(required)) {
+			if (outlinePage == null) {
+				outlinePage= new BehaviourOutlinePage(getDocumentProvider());
+				if (getEditorInput() != null){
+					outlinePage.setInput(getEditorInput());
+				}
+			}
+			return outlinePage;
+		}
+		return super.getAdapter(required);
+	}
+	
+	@Override
+	public void dispose(){
+		super.dispose();
+		if (outlinePage != null){
+			outlinePage.setInput(null);
+		}
 	}
 }

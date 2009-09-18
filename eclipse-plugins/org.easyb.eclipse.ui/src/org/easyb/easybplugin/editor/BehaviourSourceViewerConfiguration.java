@@ -16,11 +16,19 @@ public class BehaviourSourceViewerConfiguration extends TextSourceViewerConfigur
 
 		IContentAssistProcessor processor= new BehaviourCompletionProcessor();
 		assistant.setContentAssistProcessor(processor, IDocument.DEFAULT_CONTENT_TYPE);
-		//assistant.setContentAssistProcessor(processor, XMLPartitionScanner.XML_TAG);
 
 		assistant.setContextInformationPopupOrientation(IContentAssistant.CONTEXT_INFO_ABOVE);
 		assistant.setInformationControlCreator(getInformationControlCreator(sourceViewer));
 
 		return assistant;
+	}
+	
+	public String[] getConfiguredContentTypes(ISourceViewer sourceViewer)
+	{
+		return PartitionScannerBuilder.EASYB_BEHAVIOUR_PARTITION_TYPES;
+	}
+	
+	public String getConfiguredDocumentPartitioning(ISourceViewer sourceViewer) {
+		return PartitionScannerBuilder.PARTITIONER_ID;
 	}
 }

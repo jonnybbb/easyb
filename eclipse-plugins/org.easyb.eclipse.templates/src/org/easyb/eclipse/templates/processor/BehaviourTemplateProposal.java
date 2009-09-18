@@ -6,6 +6,7 @@ import org.eclipse.jface.text.templates.TemplateContext;
 import org.eclipse.jface.text.templates.TemplateProposal;
 import org.eclipse.swt.graphics.Image;
 
+//TODO THis class may not be needed
 public class BehaviourTemplateProposal extends TemplateProposal{
 	private final Template behaviourTemplate;
 	
