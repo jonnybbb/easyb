@@ -59,6 +59,10 @@ public class BehaviourCompletionProcessor extends TemplateCompletionProcessor {
 		
 		Template[] templates = getTemplates(context.getContextType().getId());
 		
+		if(templates==null){
+			return super.computeCompletionProposals(viewer,offset);
+		}
+		
 		//Try and match the templates by the name
 		List<ICompletionProposal> matches= new ArrayList<ICompletionProposal>();
 		for(Template template : templates){
