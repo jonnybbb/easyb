@@ -6,6 +6,7 @@ scenario "This is a test",{
 		test = new Integer(1)
 	}
 	
+	
 	when "2 is added",{
 		test += 2
 	}
