@@ -32,7 +32,7 @@
          point="org.eclipse.ui.editors">
       <editor
             name="Behaviour editor"
-            icon="resources/images/logo.png"
+            icon="resources/images/icons/easyb.png"
             extensions="story,groovy"
             contributorClass="org.easyb.ui.editor.BehaviourActionContributor"
             class="org.easyb.ui.editor.BehaviourEditor"

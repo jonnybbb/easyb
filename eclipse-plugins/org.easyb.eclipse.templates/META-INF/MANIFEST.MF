@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Templates
-Bundle-SymbolicName: org.easyb.eclipse.templates;singleton:=true
-Bundle-Version: 0.0.1
+Bundle-SymbolicName: org.easyb.templates;singleton:=true
+Bundle-Version: 0.0.4
 Bundle-Activator: org.easyb.eclipse.templates.TemplateActivator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
