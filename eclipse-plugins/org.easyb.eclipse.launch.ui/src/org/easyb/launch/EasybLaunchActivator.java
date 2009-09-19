@@ -20,7 +20,7 @@ import org.osgi.framework.BundleContext;
 public class EasybLaunchActivator extends AbstractUIPlugin {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "org.easyb.eclipse.ui";
+	public static final String PLUGIN_ID = "org.easyb.launch.ui";
 
 	// The shared instance
 	private static EasybLaunchActivator plugin;

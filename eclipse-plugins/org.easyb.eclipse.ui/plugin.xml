@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+      point = "org.eclipse.ui.newWizards">
+		<category
+		   id = "org.eclipse.ui.easyb"
+		   name="easyb">
+		</category>
+	 	<wizard
+		   id = "org.easyb.ui.newbehaviour.NewStoryWizard"
+	      	   name = "Story"
+		   class="org.easyb.ui.newbehaviour.NewStoryWizard"
+		   category="org.eclipse.ui.easyb"
+		   icon="resources/images/logo.png">
+	    	   <description>"Creates a new easyb story"</description>
+		   <selection class="org.eclipse.core.resources.IResource"/>
+		</wizard>
+		<wizard
+		   id = "org.easyb.ui.newbehaviour.NewSpecificationWizard"
+	      	   name = "Specification"
+		   class="org.easyb.ui.newbehaviour.NewSpecificationWizard"
+		   category="org.eclipse.ui.easyb"
+		   icon="resources/images/logo.png">
+	    	   <description>"Creates a new easyb specification"</description>
+		   <selection class="org.eclipse.core.resources.IResource"/>
+		</wizard>
+	</extension>
+	
+	<extension
+         point="org.eclipse.ui.editors">
+      <editor
+            name="Behaviour editor"
+            icon="resources/images/logo.png"
+            extensions="story,groovy"
+            contributorClass="org.easyb.ui.editor.BehaviourActionContributor"
+            class="org.easyb.ui.editor.BehaviourEditor"
+            id="org.easyb.ui.editor.BehaviourEditor">
+      </editor>
+   </extension>
+   
+   <extension point="org.eclipse.core.filebuffers.documentSetup">
+   	<participant
+   		class="org.easyb.ui.editor.BehaviourDocumentSetup"
+   		contentTypeId="org.easyb.eclipse.contenttype.story" >
+	</participant>
+	<participant
+   		class="org.easyb.ui.editor.BehaviourDocumentSetup"
+   		contentTypeId="org.easyb.eclipse.contenttype.groovystory" >
+	</participant>   	
+   </extension>
+</plugin>
