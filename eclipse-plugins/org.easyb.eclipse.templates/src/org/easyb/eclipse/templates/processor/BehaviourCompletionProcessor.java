@@ -27,4 +27,10 @@ public class BehaviourCompletionProcessor extends TemplateCompletionProcessor {
 		return TemplateManager.getInstance().getTemplates();
 	}
 
+	@Override
+	protected String extractPrefix(ITextViewer viewer, int offset) {
+		
+		return "";
+	}
+	
 }
