@@ -1,4 +1,4 @@
-package org.easyb.launch.launch;
+package org.easyb.launch.launcher;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.jdt.ui.JavaElementLabelProvider;

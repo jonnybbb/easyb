@@ -1,4 +1,4 @@
-package org.easyb.launch.launch;
+package org.easyb.launch.launcher;
 
 import java.io.File;
 import java.io.FilenameFilter;

@@ -1,4 +1,4 @@
-package org.easyb.launch.launch;
+package org.easyb.launch.launcher;
 
 import org.eclipse.debug.ui.AbstractLaunchConfigurationTabGroup;
 import org.eclipse.debug.ui.CommonTab;

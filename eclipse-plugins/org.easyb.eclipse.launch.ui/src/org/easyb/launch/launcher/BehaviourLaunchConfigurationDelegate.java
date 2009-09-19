@@ -1,4 +1,4 @@
-package org.easyb.launch.launch;
+package org.easyb.launch.launcher;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +15,7 @@ import org.eclipse.jdt.launching.JavaLaunchDelegate;
  *
  */
 public class BehaviourLaunchConfigurationDelegate extends JavaLaunchDelegate{
-	public static final String ID = "org.easyb.easybplugin.launch.EasybLaunchConfigurationDelegate"; 
+	public static final String ID = "org.easyb.launch.launcher.BehaviourLaunchConfigurationDelegate"; 
 	
 	@Override
 	public String getMainTypeName(ILaunchConfiguration configuration) throws CoreException {
@@ -55,8 +55,6 @@ public class BehaviourLaunchConfigurationDelegate extends JavaLaunchDelegate{
 				args.append(storyPath);
 			}
 		}
-		
-		System.out.println(args);
 		
 		return args.toString();
 	}

@@ -1,4 +1,4 @@
-package org.easyb.launch.launch;
+package org.easyb.launch.launcher;
 
 import java.util.ArrayList;
 import java.util.List;

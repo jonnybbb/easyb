@@ -5,33 +5,33 @@
    <extension point="org.eclipse.debug.core.launchConfigurationTypes">
 	    <launchConfigurationType
 	        name="Easyb Story"
-	        delegate="org.easyb.launch.launch.BehaviourLaunchConfigurationDelegate"
+	        delegate="org.easyb.launch.launcher.BehaviourLaunchConfigurationDelegate"
 	        modes="run, debug"               
-	        id="org.easyb.easybplugin.launch.EasybLaunchConfigurationDelegate">        
+	        id="org.easyb.launch.launcher.BehaviourLaunchConfigurationDelegate">        
 	    </launchConfigurationType>
 	</extension>
    
 	<extension point="org.eclipse.debug.ui.launchConfigurationTypeImages">
 	    <launchConfigurationTypeImage
 	        icon="resources/images/icons/easyb.png"
-	        configTypeID="org.easyb.easybplugin.launch.EasybLaunchConfigurationDelegate"
-	        id="org.easyb.easybplugin.launch.easyblaunch.img">
+	        configTypeID="org.easyb.launch.launcher.BehaviourLaunchConfigurationDelegate"
+	        id="org.easyb.launch.easyblaunch.img">
 	    </launchConfigurationTypeImage>
 	</extension>
 	
 	<extension point="org.eclipse.debug.ui.launchConfigurationTabGroups">
 	    <launchConfigurationTabGroup
-	        type="org.easyb.easybplugin.launch.EasybLaunchConfigurationDelegate"
-	        class="org.easyb.launch.launch.BehaviourLaunchConfigurationTabGroup"
-	        id="org.easyb.easybplugin.launch.EasybLaunchConfigurationTabGroup">
+	        type="org.easyb.launch.launcher.BehaviourLaunchConfigurationDelegate"
+	        class="org.easyb.launch.launcher.BehaviourLaunchConfigurationTabGroup"
+	        id="org.easyb.launch.launcher.BehaviourLaunchConfigurationTabGroup">
 	    </launchConfigurationTabGroup>
 	</extension>
 	
 	<!--Launch short cut-->
 	<extension point="org.eclipse.debug.ui.launchShortcuts">
 	   <Shortcut
-	      id="org.easyb.easybplugin.launch.EasybLaunchShortcut"
-	      class="org.easyb.easybplugin.launch.EasybLaunchShortcut"
+	      id="org.easyb.launch.launcher.BehaviourLaunchShortcut"
+	      class="org.easyb.launch.launcher.BehaviourLaunchShortcut"
 	 		label="easyb story"
 	 		icon="resources/images/icons/easyb.png"
 	 		modes="run, debug">
@@ -54,7 +54,7 @@
            		<contextLabel label="Debug easyb story" mode="debug"/>
            		
         	</contextualLaunch>
-            <configurationType id="org.easyb.easybplugin.launch.EasybLaunchConfigurationDelegate"/>
+            <configurationType id="org.easyb.launch.launcher.BehaviourLaunchConfigurationDelegate"/>
 	
 	   </Shortcut>
 	 </extension>
@@ -90,7 +90,7 @@
          point="org.eclipse.ui.commands">
       <command 
             categoryId="org.eclipse.debug.ui.category.run"
-            id="org.easyb.easybplugin.launch.EasybLaunchShortcut.run"
+            id="org.easyb.launch.launcher.BehaviourLaunchShortcut.run"
             name="run easby story">
       </command>
    </extension>	
@@ -98,13 +98,13 @@
    <extension
          point="org.eclipse.ui.bindings">
       <key
-            commandId="org.easyb.easybplugin.launch.EasybLaunchShortcut.run"
+            commandId="org.easyb.launch.launcher.BehaviourLaunchShortcut.run"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
             sequence="M2+M3+X S">
       </key>
    </extension>	
 	
-<!--New Behaviour Wizard TODO COuld move to seperate plugin-->
+<!--
    <extension
       point = "org.eclipse.ui.newWizards">
 		<category
@@ -131,7 +131,6 @@
 		</wizard>
 	</extension>
 	
-	<!--Behaviour editor TODO could move to seperate plugin-->
 	<extension
          point="org.eclipse.ui.editors">
       <editor
@@ -144,7 +143,6 @@
       </editor>
    </extension>
    
-   <!--Used by the TextFileDocumentProvider to partition the document-->
    <extension point="org.eclipse.core.filebuffers.documentSetup">
    	<participant
    		class="org.easyb.launch.editor.BehaviourDocumentSetup"
@@ -154,6 +152,6 @@
    		class="org.easyb.launch.editor.BehaviourDocumentSetup"
    		contentTypeId="org.easyb.eclipse.contenttype.groovystory" >
 	</participant>   	
-   </extension>
+   </extension>-->
 
 </plugin>
