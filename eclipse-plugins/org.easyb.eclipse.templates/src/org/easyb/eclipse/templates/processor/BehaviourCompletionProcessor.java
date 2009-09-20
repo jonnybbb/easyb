@@ -63,6 +63,8 @@ public class BehaviourCompletionProcessor extends TemplateCompletionProcessor {
 			return super.computeCompletionProposals(viewer,offset);
 		}
 		
+		//TODO filter on whether its a story or specification as 
+		//certain templates are only for story or a specification
 		//Try and match the templates by the name
 		List<ICompletionProposal> matches= new ArrayList<ICompletionProposal>();
 		for(Template template : templates){
