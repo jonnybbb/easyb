@@ -29,7 +29,7 @@ public class TemplateActivator extends AbstractUIPlugin {
 	private static TemplateActivator plugin;
 	
 	public static final String SCENARIO_TEMPLATE_NAME = "scenario";
-	
+	public static final String IT_TEMPLATE_NAME ="it";
 	
 	/**
 	 * The constructor
@@ -79,6 +79,13 @@ public class TemplateActivator extends AbstractUIPlugin {
 	public static String getEmptyScenarioTemplateText()throws CoreException{
 		Template template = 
 			TemplateManager.getInstance().getTemplate(SCENARIO_TEMPLATE_NAME);
+			
+		return getEmptyTemplateText(template);
+	}
+	
+	public static String getEmptySpecificationTemplateText()throws CoreException{
+		Template template = 
+			TemplateManager.getInstance().getTemplate(IT_TEMPLATE_NAME);
 			
 		return getEmptyTemplateText(template);
 	}

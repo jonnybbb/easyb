@@ -42,9 +42,8 @@
 		               <count value="1"/>
 		               <iterate>
 		                 <or>
-		                   <!--test property="org.eclipse.debug.ui.matchesPattern" value="*.story"/-->
-			        	  <test property="org.eclipse.debug.ui.matchesContentType" value="org.easyb.eclipse.contenttype.groovystory"/>
 			        	  <test property="org.eclipse.debug.ui.matchesContentType" value="org.easyb.eclipse.contenttype.story"/>
+			        	  <test property="org.eclipse.debug.ui.matchesContentType" value="org.easyb.eclipse.contenttype.specification"/>
 		                 </or>
 		               </iterate>
 		             </with>
@@ -70,19 +69,20 @@
 		</editor> 
 	</extension>-->
 	
+	<!--TODO Move to UI plugin-->
    <extension
          point="org.eclipse.core.contenttype.contentTypes">
       <content-type
-            file-extensions="story,specification"
+            file-extensions="story"
             id="org.easyb.eclipse.contenttype.story"
             name="easyb story"
             priority="normal">
       </content-type>
       <content-type
-            file-extensions="groovy"
-            id="org.easyb.eclipse.contenttype.groovystory"
-            name="easyb groovy story"
-            priority="low">
+            file-extensions="specification"
+            id="org.easyb.eclipse.contenttype.specification"
+            name="easyb specification"
+            priority="normal">
       </content-type>
    </extension>
 

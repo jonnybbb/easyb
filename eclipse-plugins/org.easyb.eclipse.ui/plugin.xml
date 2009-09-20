@@ -14,7 +14,7 @@
 		   class="org.easyb.ui.newbehaviour.NewStoryWizard"
 		   category="org.eclipse.ui.easyb"
 		   icon="resources/images/icons/easyb.png">
-	    	   <description>"Creates a new easyb story"</description>
+	    	   <description>"Create a story"</description>
 		   <selection class="org.eclipse.core.resources.IResource"/>
 		</wizard>
 		<wizard
@@ -23,7 +23,7 @@
 		   class="org.easyb.ui.newbehaviour.NewSpecificationWizard"
 		   category="org.eclipse.ui.easyb"
 		   icon="resources/images/icons/easyb.png">
-	    	   <description>"Creates a new easyb specification"</description>
+	    	   <description>"Create a specification"</description>
 		   <selection class="org.eclipse.core.resources.IResource"/>
 		</wizard>
 	</extension>
@@ -33,7 +33,7 @@
       <editor
             name="Behaviour editor"
             icon="resources/images/icons/easyb.png"
-            extensions="story,groovy"
+            extensions="story,specification"
             contributorClass="org.easyb.ui.editor.BehaviourActionContributor"
             class="org.easyb.ui.editor.BehaviourEditor"
             id="org.easyb.ui.editor.BehaviourEditor">
@@ -47,7 +47,7 @@
 	</participant>
 	<participant
    		class="org.easyb.ui.editor.BehaviourDocumentSetup"
-   		contentTypeId="org.easyb.eclipse.contenttype.groovystory" >
-	</participant>   	
+   		contentTypeId="org.easyb.eclipse.contenttype.specification" >
+	</participant> 	
    </extension>
 </plugin>

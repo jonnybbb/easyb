@@ -1,9 +1,6 @@
 package org.easyb.ui.newbehaviour;
 
-import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.io.StringReader;
 
 import org.easyb.eclipse.templates.TemplateActivator;
 import org.easyb.ui.EasybUIActivator;
@@ -80,6 +77,15 @@ public abstract class AbstractNewBehaviourWizardPage extends WizardPage{
 		} 
 	};
 	
+	//USed by derived classes
+	protected class FileNameModifyListener extends SelectionAdapter implements ModifyListener {
+
+		@Override
+		public void modifyText(ModifyEvent e) {
+			updatePageComplete();
+		}
+	};
+	
 	public AbstractNewBehaviourWizardPage(String pageName,String pageTitle,ImageDescriptor img,
 											IStructuredSelection selection){
 		super(pageName,pageTitle,img);
@@ -148,18 +154,18 @@ public abstract class AbstractNewBehaviourWizardPage extends WizardPage{
 		}
 		
 		String pattern = getTemplatePattern();
-		
+		String fileName =getFileName()+"."+getFileExtension();
 		IFile file = null;
 		if(isPackageSet()){
 			IFolder packageFolder = (IFolder)getPackage().getResource();
-			file = packageFolder.getFile(getFileName()+"."+getFileExtension());
+			file = packageFolder.getFile(fileName);
 		}else if(isSourceFolderSet()){
 			IFolder srcfolder = (IFolder)sourceFolder.getResource();
-			file = srcfolder.getFile(getFileName());
+			file = srcfolder.getFile(fileName);
 		}
 		
 		if(file.exists()){
-			setErrorMessage("File "+getFileName()+"already exists");
+			setErrorMessage("File "+fileName+"already exists");
 			return null;
 		}
 		

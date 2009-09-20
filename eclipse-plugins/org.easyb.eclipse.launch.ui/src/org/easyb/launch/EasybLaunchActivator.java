@@ -103,7 +103,9 @@ public class EasybLaunchActivator extends AbstractUIPlugin {
 			    }
 			    
 			    return project;
-		    } /*else if (selection instanceof ITextSelection) {
+		    } 
+		//TODO implement below 
+		/*else if (selection instanceof ITextSelection) {
 		    if(sourcePart instanceof JavaEditor) {
 		        IJavaElement element = SelectionConverter.resolveEnclosingElement(sourcePart, selection);
 		        project = element.getJavaProject().getProject();

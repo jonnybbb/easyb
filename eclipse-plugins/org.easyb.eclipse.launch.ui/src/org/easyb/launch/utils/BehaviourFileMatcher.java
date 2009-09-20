@@ -17,7 +17,8 @@ import org.eclipse.core.resources.IResourceProxy;
  * @author whiteda
  */
 public class BehaviourFileMatcher {
-	public static final String FILE_MATCH_REGEX = "^[_a-z0-9\\-]*\\.story$|^specification.groovy$|^story.groovy$"; 
+	//public static final String FILE_MATCH_REGEX = "^[_a-z0-9\\-]*\\.story$|^[_a-z0-9\\-]*\\.specification$|^specification.groovy$|^story.groovy$";
+	public static final String FILE_MATCH_REGEX = "^[_a-z0-9\\-]*\\.story$|^[_a-z0-9\\-]*\\.specification$";
 	static Pattern regexPattern = Pattern.compile(FILE_MATCH_REGEX,Pattern.CASE_INSENSITIVE);
 
 	/**

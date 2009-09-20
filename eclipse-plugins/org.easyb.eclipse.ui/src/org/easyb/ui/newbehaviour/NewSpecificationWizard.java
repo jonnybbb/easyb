@@ -1,26 +1,15 @@
 package org.easyb.ui.newbehaviour;
 
 import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.jface.wizard.Wizard;
-import org.eclipse.ui.INewWizard;
-import org.eclipse.ui.IWorkbench;
 
-public class NewSpecificationWizard extends Wizard implements INewWizard{
+public class NewSpecificationWizard  extends AbstractBehaviourWizard{
 	
 	public NewSpecificationWizard(){
-		 setWindowTitle("New Specification");
-	}
-	
-	@Override
-	public boolean performFinish() {
-		// TODO Auto-generated method stub
-		return false;
+		super("New Specification");
 	}
 
 	@Override
-	public void init(IWorkbench workbench, IStructuredSelection selection) {
-		// TODO Auto-generated method stub
-		
+	protected AbstractNewBehaviourWizardPage getNewBehaviourWizardPage(IStructuredSelection selection){
+		return new NewSpecificationWizardPage(selection);
 	}
-
 }

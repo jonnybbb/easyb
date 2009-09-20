@@ -2,13 +2,9 @@ package org.easyb.ui.newbehaviour;
 
 import org.easyb.eclipse.templates.TemplateActivator;
 import org.easyb.ui.utils.IUIConstants;
-import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.ModifyEvent;
-import org.eclipse.swt.events.ModifyListener;
-import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
@@ -18,14 +14,6 @@ public class NewStoryWizardPage extends AbstractNewBehaviourWizardPage{
 	
 	private Label lblName;
 	private Text txtName;
-	
-	private class FileNameModifyListener extends SelectionAdapter implements ModifyListener {
-
-		@Override
-		public void modifyText(ModifyEvent e) {
-			updatePageComplete();
-		}
-	};
 
 	public NewStoryWizardPage(IStructuredSelection selection){
 		super("Create Story","New Story",null,selection);
@@ -46,7 +34,7 @@ public class NewStoryWizardPage extends AbstractNewBehaviourWizardPage{
 		try{
 		return TemplateActivator.getEmptyScenarioTemplateText();
 		}catch(CoreException cex){
-			setErrorMessage("Unable to get empty template,check error log");
+			setErrorMessage("Unable to get empty template for story,check error log");
 		}
 		return "";
 	}
