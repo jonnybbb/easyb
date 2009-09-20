@@ -13,7 +13,7 @@
 	      	   name = "Story"
 		   class="org.easyb.ui.newbehaviour.NewStoryWizard"
 		   category="org.eclipse.ui.easyb"
-		   icon="resources/images/logo.png">
+		   icon="resources/images/icons/easyb.png">
 	    	   <description>"Creates a new easyb story"</description>
 		   <selection class="org.eclipse.core.resources.IResource"/>
 		</wizard>
@@ -22,7 +22,7 @@
 	      	   name = "Specification"
 		   class="org.easyb.ui.newbehaviour.NewSpecificationWizard"
 		   category="org.eclipse.ui.easyb"
-		   icon="resources/images/logo.png">
+		   icon="resources/images/icons/easyb.png">
 	    	   <description>"Creates a new easyb specification"</description>
 		   <selection class="org.eclipse.core.resources.IResource"/>
 		</wizard>

@@ -1,7 +1,7 @@
 package org.easyb.eclipse.templates.preferences;
 
-import org.easyb.eclipse.templates.TemplateManager;
 import org.easyb.eclipse.templates.TemplateActivator;
+import org.easyb.eclipse.templates.manager.TemplateManager;
 import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.ui.texteditor.templates.TemplatePreferencePage;
 import org.osgi.service.prefs.BackingStoreException;

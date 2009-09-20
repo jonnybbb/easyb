@@ -6,7 +6,7 @@ import java.util.List;
 import javax.xml.transform.Templates;
 
 import org.easyb.eclipse.templates.TemplateActivator;
-import org.easyb.eclipse.templates.TemplateManager;
+import org.easyb.eclipse.templates.manager.TemplateManager;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;

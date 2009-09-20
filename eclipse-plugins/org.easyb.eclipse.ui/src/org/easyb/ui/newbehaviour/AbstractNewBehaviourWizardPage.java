@@ -1,11 +1,19 @@
 package org.easyb.ui.newbehaviour;
 
+import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.io.StringReader;
+
+import org.easyb.eclipse.templates.TemplateActivator;
 import org.easyb.ui.EasybUIActivator;
 import org.easyb.ui.viewerfilters.PackageViewerFilter;
 import org.easyb.ui.viewerfilters.SourceViewerFilter;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
@@ -78,7 +86,32 @@ public abstract class AbstractNewBehaviourWizardPage extends WizardPage{
 		this.selection =  selection;
 	}
 	
-	public abstract void createPageControl(Composite parent);
+	/**
+	 * Must be Implemented by derived class to add additoinal page controls 
+	 * @param parent
+	 */
+	protected abstract void createPageControl(Composite parent);
+	
+	/**
+	 * Must be implemented by derived classes to 
+	 * get the template pattern that will be written 
+	 * to the new behaviour
+	 * @return
+	 */
+	protected abstract String getTemplatePattern();
+	
+	/**
+	 * Must be implemented by derived classes to return 
+	 * the file name for this new behaviour
+	 */
+	protected abstract String getFileName();
+	
+	/**
+	 * Must be imeplmented by derived classes to return the 
+	 * file extension associated with the behaviour
+	 * @return
+	 */
+	protected abstract String getFileExtension();
 	
 	@Override
 	public void createControl(Composite parent) {
@@ -99,11 +132,49 @@ public abstract class AbstractNewBehaviourWizardPage extends WizardPage{
 		
 	}
 	
-
-	public IFile createNewBehaviour(){
-		return null;
+	public void updatePageComplete(){
+		if(isSourceFolderSet()&&isFileNameSet()){
+			setPageComplete(true);
+			
+		}else{
+			setPageComplete(false);
+		}
 	}
 	
+	public IFile createNewBehaviour(){
+		
+		if(!isPageComplete()){
+			return null;
+		}
+		
+		String pattern = getTemplatePattern();
+		
+		IFile file = null;
+		if(isPackageSet()){
+			IFolder packageFolder = (IFolder)getPackage().getResource();
+			file = packageFolder.getFile(getFileName()+"."+getFileExtension());
+		}else if(isSourceFolderSet()){
+			IFolder srcfolder = (IFolder)sourceFolder.getResource();
+			file = srcfolder.getFile(getFileName());
+		}
+		
+		if(file.exists()){
+			setErrorMessage("File "+getFileName()+"already exists");
+			return null;
+		}
+		
+		//TODO pass a progress montior
+		try{
+			file.create(new ByteArrayInputStream(pattern.getBytes()), false,null);
+			return file;
+		}catch(CoreException cex){
+			setErrorMessage("Unable to create behaviour, check error log for details");
+			TemplateActivator.Log("Unable to create new behaviour", cex);
+		}
+	
+		return null;
+	}
+	 
 	protected IJavaElement getSourceFolder(){
 		return sourceFolder;
 	}
@@ -122,6 +193,23 @@ public abstract class AbstractNewBehaviourWizardPage extends WizardPage{
 	
 	protected boolean isSourceFolderEmpty(){
 		return sourceFolder ==null?true:false;
+	}
+	
+	protected boolean isSourceFolderSet(){
+		return getSourceFolder()==null?false:true;
+	}
+	
+	protected boolean isPackageSet(){
+		return getPackage() == null?false:true;
+	}
+	
+	protected boolean isFileNameSet(){
+		String fileName = getFileName();
+		if(fileName==null){
+			return false;
+		}
+		
+		return fileName.trim().isEmpty()?false:true;
 	}
 	
 	private void createSourceLocationControl(Composite comp){

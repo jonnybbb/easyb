@@ -1,12 +1,19 @@
-package org.easyb.eclipse.templates;
+package org.easyb.eclipse.templates.manager;
 
 import java.io.IOException;
 
+import org.easyb.eclipse.templates.TemplateActivator;
 import org.easyb.eclipse.templates.context.BehaviourContextType;
 import org.eclipse.core.runtime.preferences.InstanceScope;
+import org.eclipse.jface.text.BadLocationException;
+import org.eclipse.jface.text.Document;
+import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.templates.ContextTypeRegistry;
+import org.eclipse.jface.text.templates.DocumentTemplateContext;
 import org.eclipse.jface.text.templates.Template;
+import org.eclipse.jface.text.templates.TemplateBuffer;
 import org.eclipse.jface.text.templates.TemplateContextType;
+import org.eclipse.jface.text.templates.TemplateException;
 import org.eclipse.jface.text.templates.persistence.TemplateStore;
 import org.eclipse.ui.editors.text.templates.ContributionContextTypeRegistry;
 import org.eclipse.ui.editors.text.templates.ContributionTemplateStore;
@@ -63,4 +70,30 @@ public class TemplateManager {
 		return getContextTypeRegistry().getContextType(BehaviourContextType.CONTEXT_TYPE);
 	}
 	
+	public Template getTemplate(String templateName){
+		Template[] templates = getTemplates();
+		
+		for(Template template : templates){
+			if(template.getName().equals(templateName)){
+				return template;
+			}
+		}
+		
+		return null;
+	}
+	
+	public String getEmptyDocumentResolvedPattern(Template template)throws TemplateException,BadLocationException{
+		IDocument document = new Document("");
+		return getResolvedPattern(template,document,0,document.getLength());
+	}
+
+	public String getResolvedPattern(Template template,IDocument document,int offset,int length)throws TemplateException,BadLocationException{
+
+		DocumentTemplateContext ctx = 
+			new DocumentTemplateContext(getBehaviourContextType(),document,offset,length);
+		
+		TemplateBuffer buffer = ctx.evaluate(template);
+		
+		return buffer.getString();
+	}
 }
