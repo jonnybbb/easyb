@@ -18,7 +18,7 @@ Require-Bundle: org.eclipse.ui,
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ClassPath: .,
- resources/easyblib/easyb-0.9.5.jar,
  resources/pluginlib/commons-lang-2.4.jar,
- resources/easyblib/commons-cli-1.1.jar,
- resources/easyblib/groovy-1.6.0.jar
+ resources/easyblib/commons-cli-1.2.jar,
+ resources/easyblib/easyb-0.9.6.jar,
+ resources/easyblib/groovy-1.6.4.jar
