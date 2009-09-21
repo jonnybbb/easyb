@@ -4,10 +4,11 @@
       easby Eclipse Update Site
    </description>
    <feature url="features/org.easyb.eclipse.feature_0.0.3.jar" id="org.easyb.eclipse.feature" version="0.0.3">
-      <category name="easyb"/>
+      <category name="easybOLD"/>
    </feature>
    <feature url="features/org.easyb.eclipse.feature_0.0.4.jar" id="org.easyb.eclipse.feature" version="0.0.4">
       <category name="easyb"/>
    </feature>
-   <category-def name="easyb" label="easyb Plugin"/>
+   <category-def name="easybOLD" label="easyb Plugin"/>
+   <category-def name="easyb" label="easyb"/>
 </site>
