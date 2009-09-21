@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.easyb.launch.EasybLaunchActivator;
-import org.easyb.launch.ILaunchConfigConstants;
+import org.easyb.launch.ILaunchConstants;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
@@ -49,7 +49,7 @@ public class BehaviourLaunchShortcut extends AbstractLaunchShortcut{
 		
 		try {
 			List<String> stories = config.getAttribute(
-					ILaunchConfigConstants.LAUNCH_ATTR_STORIES_FULL_PATH,
+					ILaunchConstants.LAUNCH_ATTR_STORIES_FULL_PATH,
 					new ArrayList<String>(0));
 
 			if (stories.size() == 0 || stories.size()>1)  {
@@ -98,7 +98,7 @@ public class BehaviourLaunchShortcut extends AbstractLaunchShortcut{
 		List<String> stories = new ArrayList<String>();
 		stories.add(filePath);
 		
-		wc.setAttribute(ILaunchConfigConstants.LAUNCH_ATTR_STORIES_FULL_PATH,stories);
+		wc.setAttribute(ILaunchConstants.LAUNCH_ATTR_STORIES_FULL_PATH,stories);
 	}
 	
 	private void setConfigProject(ILaunchConfigurationWorkingCopy wc){
@@ -112,7 +112,7 @@ public class BehaviourLaunchShortcut extends AbstractLaunchShortcut{
 	
 	private void setConfigFileProjectPath(ILaunchConfigurationWorkingCopy wc){
 		wc.setAttribute(
-				ILaunchConfigConstants.LAUNCH_ATTR_STORY_PATH,file.getProjectRelativePath().toPortableString());
+				ILaunchConstants.LAUNCH_ATTR_STORY_PATH,file.getProjectRelativePath().toPortableString());
 	}
 
 }

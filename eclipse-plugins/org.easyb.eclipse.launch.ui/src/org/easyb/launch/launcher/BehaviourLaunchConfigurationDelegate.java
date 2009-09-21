@@ -3,7 +3,7 @@ package org.easyb.launch.launcher;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.easyb.launch.ILaunchConfigConstants;
+import org.easyb.launch.ILaunchConstants;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.debug.core.ILaunchConfiguration;
@@ -19,7 +19,7 @@ public class BehaviourLaunchConfigurationDelegate extends JavaLaunchDelegate{
 	
 	@Override
 	public String getMainTypeName(ILaunchConfiguration configuration) throws CoreException {
-		return ILaunchConfigConstants.BEHAVIOR_RUNNER_CLASS;
+		return ILaunchConstants.BEHAVIOR_RUNNER_CLASS;
 	}
 	
 	/**
@@ -42,7 +42,7 @@ public class BehaviourLaunchConfigurationDelegate extends JavaLaunchDelegate{
 		StringBuilder args = new StringBuilder(super.getProgramArguments(config));
 		
 		List<String> storyPaths = 
-			config.getAttribute(ILaunchConfigConstants.LAUNCH_ATTR_STORIES_FULL_PATH,new ArrayList(0));
+			config.getAttribute(ILaunchConstants.LAUNCH_ATTR_STORIES_FULL_PATH,new ArrayList(0));
 		
 		String os = Platform.getOS();
 		for(String storyPath : storyPaths){

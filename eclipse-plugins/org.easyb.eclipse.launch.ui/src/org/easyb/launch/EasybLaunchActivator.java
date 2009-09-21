@@ -25,6 +25,8 @@ public class EasybLaunchActivator extends AbstractUIPlugin {
 	// The shared instance
 	private static EasybLaunchActivator plugin;
 	
+	//Plugin Preference store
+	
 	/**
 	 * The constructor
 	 */

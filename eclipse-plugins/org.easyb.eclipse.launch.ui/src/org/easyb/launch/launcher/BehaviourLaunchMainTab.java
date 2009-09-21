@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 import org.easyb.launch.EasybLaunchActivator;
-import org.easyb.launch.ILaunchConfigConstants;
+import org.easyb.launch.ILaunchConstants;
 import org.easyb.launch.search.BehaviourSearch;
 import org.easyb.launch.utils.WidgetUtil;
 import org.easyb.launch.viewerfilters.ContainerViewerFilter;
@@ -159,7 +159,7 @@ public class BehaviourLaunchMainTab extends AbstractLaunchConfigurationTab
 		
 		try{
 			List<String> stories = getStoriesFullPaths();
-			config.setAttribute( ILaunchConfigConstants.LAUNCH_ATTR_STORIES_FULL_PATH,stories);
+			config.setAttribute( ILaunchConstants.LAUNCH_ATTR_STORIES_FULL_PATH,stories);
 		}catch(CoreException cex){
 			EasybLaunchActivator.Log("Unable apply configuration due to exception while retrieving story locations", cex);
 			setErrorMessage("Unable apply configuration due to exception while retrieving story locations");
@@ -167,16 +167,16 @@ public class BehaviourLaunchMainTab extends AbstractLaunchConfigurationTab
 		
 		if(container !=null){
 			config.setAttribute(
-					ILaunchConfigConstants.LAUNCH_ATTR_CONTAINER_HANDLE,container.getHandleIdentifier());
+					ILaunchConstants.LAUNCH_ATTR_CONTAINER_HANDLE,container.getHandleIdentifier());
 		}
 		
 		if(storyFile!=null){
 			config.setAttribute(
-					ILaunchConfigConstants.LAUNCH_ATTR_STORY_PATH,storyFile.getProjectRelativePath().toPortableString());
+					ILaunchConstants.LAUNCH_ATTR_STORY_PATH,storyFile.getProjectRelativePath().toPortableString());
 		}
 		
 		config.setAttribute(
-				ILaunchConfigConstants.LAUNCH_ATTR_IS_SINGLE_STORY,btnRadioSingleStory.getSelection());
+				ILaunchConstants.LAUNCH_ATTR_IS_SINGLE_STORY,btnRadioSingleStory.getSelection());
 	}
 	
 	@Override
@@ -224,7 +224,7 @@ public class BehaviourLaunchMainTab extends AbstractLaunchConfigurationTab
 		
 		try {
 			String containerHandle = config.getAttribute(
-					ILaunchConfigConstants.LAUNCH_ATTR_CONTAINER_HANDLE, "");
+					ILaunchConstants.LAUNCH_ATTR_CONTAINER_HANDLE, "");
 			
 			if(!StringUtils.isBlank(containerHandle)){
 				container = JavaCore.create(containerHandle);
@@ -238,7 +238,7 @@ public class BehaviourLaunchMainTab extends AbstractLaunchConfigurationTab
 
 		try{
 			String storyProjectPath = config.getAttribute(
-					ILaunchConfigConstants.LAUNCH_ATTR_STORY_PATH, "");
+					ILaunchConstants.LAUNCH_ATTR_STORY_PATH, "");
 			
 			IPath path = null;
 			if(!StringUtils.isBlank(storyProjectPath))
@@ -272,7 +272,7 @@ public class BehaviourLaunchMainTab extends AbstractLaunchConfigurationTab
 		
 		try{
 			boolean isSingleStory = config.getAttribute(
-										ILaunchConfigConstants.LAUNCH_ATTR_IS_SINGLE_STORY,true);
+										ILaunchConstants.LAUNCH_ATTR_IS_SINGLE_STORY,true);
 			setEnableSingleStory(isSingleStory);
 			setEnableProject(isSingleStory);
 			setEnableMultiStory(!isSingleStory);

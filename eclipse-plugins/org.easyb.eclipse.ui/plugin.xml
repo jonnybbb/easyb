@@ -6,7 +6,7 @@
       point = "org.eclipse.ui.newWizards">
 		<category
 		   id = "org.eclipse.ui.easyb"
-		   name="easyb">
+		   name="Easyb">
 		</category>
 	 	<wizard
 		   id = "org.easyb.ui.newbehaviour.NewStoryWizard"

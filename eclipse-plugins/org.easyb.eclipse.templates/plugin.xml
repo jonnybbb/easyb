@@ -8,11 +8,12 @@
 	            label="Behaviour template preferences"
 	            id="org.easyb.eclipse.templates.keyword"/>
    </extension> 
-   
+		
 	<extension point="org.eclipse.ui.preferencePages">
 		 <page id="org.easyb.eclipse.templates.preferences.BehaviourTemplatePreferencePage" 
-         	name="easyb" 
-         	class="org.easyb.eclipse.templates.preferences.BehaviourTemplatePreferencePage"> 
+         	name="Behaviour templates" 
+         	class="org.easyb.eclipse.templates.preferences.BehaviourTemplatePreferencePage">
+	
          	<keywordReference id="org.easyb.eclipse.templates.keyword"/>
       </page> 
 	</extension>
