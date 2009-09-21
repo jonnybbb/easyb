@@ -49,8 +49,8 @@
 		             </with>
            			
            		</enablement>
-           		<contextLabel label="Run easyb story" mode="run"/>
-           		<contextLabel label="Debug easyb story" mode="debug"/>
+           		<contextLabel label="Behaviour" mode="run"/>
+           		<contextLabel label="Behaviour" mode="debug"/>
            		
         	</contextualLaunch>
             <configurationType id="org.easyb.launch.launcher.BehaviourLaunchConfigurationDelegate"/>

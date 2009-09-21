@@ -6,5 +6,8 @@
    <feature url="features/org.easyb.eclipse.feature_0.0.3.jar" id="org.easyb.eclipse.feature" version="0.0.3">
       <category name="easyb"/>
    </feature>
+   <feature url="features/org.easyb.eclipse.feature_0.0.4.jar" id="org.easyb.eclipse.feature" version="0.0.4">
+      <category name="easyb"/>
+   </feature>
    <category-def name="easyb" label="easyb Plugin"/>
 </site>
