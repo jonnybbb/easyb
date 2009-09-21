@@ -23,7 +23,7 @@ public class BehaviourEditor extends TextEditor
 	public Object getAdapter(Class required) {
 		if (IContentOutlinePage.class.equals(required)) {
 			if (outlinePage == null) {
-				outlinePage= new BehaviourOutlinePage(getDocumentProvider());
+				outlinePage= new BehaviourOutlinePage(this);
 				if (getEditorInput() != null){
 					outlinePage.setInput(getEditorInput());
 				}

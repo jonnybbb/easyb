@@ -103,4 +103,7 @@ public class Behaviour implements IModelElement{
 		return BEHAVIOUR_TEXT;
 	}
 	
+	public KeywordPosition getFirstKeywordPosition(){
+		return new KeywordPosition(0,0);
+	}
 }

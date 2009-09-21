@@ -21,8 +21,6 @@ public class BehaviourDocumentSetup implements IDocumentSetupParticipant {
 		DocumentUtil.setDocumentPartitioner(
 				document,PartitionScannerBuilder.PARTITIONER_ID, partitioner);
 		
-		int length = document.getLength();
-		
 		partitioner.connect(document);
 	}
 

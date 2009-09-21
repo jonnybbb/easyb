@@ -9,4 +9,5 @@ public interface IModelElement {
 	
 	public String getText();
 	
+	public KeywordPosition getFirstKeywordPosition();
 }

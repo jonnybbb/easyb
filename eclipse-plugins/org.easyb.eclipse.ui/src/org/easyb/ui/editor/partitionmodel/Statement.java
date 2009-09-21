@@ -16,10 +16,12 @@ import org.eclipse.jface.text.TypedPosition;
 public class Statement implements IModelElement{
 	//Removes everything after the last , i.e ,{
 	private static final String CLEAN_TEXT_REGEX = "[,$]|[\\{$]";
-	private int offSet;
+	private int offset;
 	private String type;
 	private String text;
 	private IModelElement parent;
+	private int keywordOffset;
+	private int keywordLength;
 	
 	private List<IModelElement> statements = 
 		new ArrayList<IModelElement>();
@@ -29,9 +31,9 @@ public class Statement implements IModelElement{
 	
 	public void update(TypedPosition typePos,IDocument document,IModelElement parent)throws PartitionModelException{
 		try {
-			offSet = typePos.offset;
+			offset = typePos.offset;
 			type = typePos.getType();
-			setText(document.get(offSet,typePos.length));
+			setText(document.get(offset,typePos.length));
 			this.parent = parent;
 		} catch (BadLocationException e) {
 			throw new PartitionModelException("Unable to update partiton model for "+type,e);
@@ -44,7 +46,7 @@ public class Statement implements IModelElement{
 	}
 	
 	public int getOffSet(){
-		return offSet;
+		return offset;
 	}
 	
 	public String getType(){
@@ -52,9 +54,16 @@ public class Statement implements IModelElement{
 	}
 	
 	public String getText(){
-		return text;
+		return text == null?"":text;
 	}
 	
+	public int getHighlightOffset(){
+		return offset;
+	}
+	
+	public int getHighlightLength(){
+		return getText().length();
+	}
 	public void addStatement(TypedPosition typePos,IDocument document)throws PartitionModelException{
 		Statement state = new Statement();
 		state.update(typePos, document,this);
@@ -76,10 +85,35 @@ public class Statement implements IModelElement{
 		return parent;
 	}
 	
+	@Override
+	public KeywordPosition getFirstKeywordPosition(){
+		keywordLength = 0;
+		keywordOffset = offset;
+		boolean bFoundChar = false;
+		for(char ch : getText().toCharArray()){
+		
+			if(Character.isWhitespace(ch)){
+				if(bFoundChar)
+				{
+					break;
+				}else{
+					++keywordOffset;
+					continue;
+				}
+			}else{
+				bFoundChar=true;
+				++keywordLength;
+			}
+		}
+		
+		return new KeywordPosition(keywordOffset,keywordLength);
+	}
+	
+	@Override
 	public String toString(){
 		StringBuilder builder = new StringBuilder();
 		builder.append("type=").append(type)
-		.append("offset=").append(offSet)
+		.append("offset=").append(offset)
 		.append("text=").append(text);
 		
 		return builder.toString();
