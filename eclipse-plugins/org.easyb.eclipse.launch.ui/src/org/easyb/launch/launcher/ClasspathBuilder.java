@@ -11,11 +11,11 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils;
 import org.easyb.launch.EasybLaunchActivator;
 import org.easyb.launch.ILaunchConstants;
+import org.easyb.launch.preference.LaunchPreferenceManager;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.jface.preference.IPreferenceStore;
 
 public class ClasspathBuilder {
 	
@@ -82,17 +82,12 @@ public class ClasspathBuilder {
 	}
 	
 	public static String[] getJarEntriesFromPreferences(){
-		IPreferenceStore store = 
-			EasybLaunchActivator.getDefault().getPreferenceStore();
 		
-		String easybJarPath = 
-			store.getString(ILaunchConstants.PREF_EASYB_JAR_PATH);
+		String easybJarPath = LaunchPreferenceManager.getEasybJarLocation();
 		
-		String cliJarPath = 
-			store.getString(ILaunchConstants.PREF_CLI_JAR_PATH);
+		String cliJarPath = LaunchPreferenceManager.getCommoncCLIJar();
 		
-		String groovyJarPath = 
-			store.getString(ILaunchConstants.PREF_GROOVY_JAR_PATH);
+		String groovyJarPath = LaunchPreferenceManager.getGroovyJarLocation();
 		
 		//All paths must be set for them to be used
 		if(StringUtils.isBlank(easybJarPath)||

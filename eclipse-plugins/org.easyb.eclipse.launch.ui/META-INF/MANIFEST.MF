@@ -22,3 +22,4 @@ Bundle-ClassPath: .,
  resources/easyblib/commons-cli-1.2.jar,
  resources/easyblib/easyb-0.9.6.jar,
  resources/easyblib/groovy-1.6.4.jar
+Export-Package: org.easyb.launch.preference

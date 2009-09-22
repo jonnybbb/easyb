@@ -50,4 +50,43 @@
    		contentTypeId="org.easyb.eclipse.contenttype.specification" >
 	</participant> 	
    </extension>
+   
+   <!--Keywords are used to allwo the user to filter 
+   with in the preference dialog-->
+   <extension
+     point="org.eclipse.ui.keywords">
+	    <keyword
+	            label="template templates easyb behaviour story specification"
+	            id="org.easyb.templates.keyword"/>
+	    <keyword
+	            label="launch jar easyb behaviour story specification"
+	            id="org.easyb.launch.keyword"/>
+	            
+   </extension> 
+   
+   	<extension point="org.eclipse.ui.preferencePages">
+		<page 
+         id="org.easyb.ui.preferences.LaunchPreferencePage" 
+         name="Easyb" 
+         class="org.easyb.ui.preferences.LaunchPreferencePage">
+         
+         <keywordReference id="org.easyb.launch.keyword"/>
+      </page>
+      
+		 <page id="org.easyb.ui.preferences.BehaviourTemplatePreferencePage" 
+         	name="Behaviour templates" 
+         	class="org.easyb.ui.preferences.BehaviourTemplatePreferencePage"
+         	category="org.easyb.ui.preferences.LaunchPreferencePage">
+			
+         	<keywordReference id="org.easyb.templates.keyword"/>
+      </page>
+       
+	</extension>
+	
+	   <extension 
+       point="org.eclipse.ui.preferencePages"> 
+    
+   </extension>
+   
+	
 </plugin>

@@ -103,16 +103,5 @@
             sequence="M2+M3+X S">
       </key>
    </extension>	
-   
-   <extension 
-       point="org.eclipse.ui.preferencePages"> 
-      <page 
-         id="org.easyb.launch.preferences.LaunchPreferencePage" 
-         name="Behaviour launch" 
-         class="org.easyb.launch.preferences.LaunchPreferencePage">
-         
-         <!--<keywordReference id="xyz.Keyword"/>-->
-      </page> 
-   </extension>
 
 </plugin>

@@ -7,6 +7,7 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.internal.ui.packageview.PackageFragmentRootContainer;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -81,6 +82,10 @@ public class EasybLaunchActivator extends AbstractUIPlugin {
 	
 	public static void Log(IStatus status){
 		getDefault().getLog().log(status);
+	}
+	
+	public static IPreferenceStore getLaunchPreferenceStore(){
+		return getDefault().getPreferenceStore();
 	}
 	
 	public IProject getSelectedProject(){

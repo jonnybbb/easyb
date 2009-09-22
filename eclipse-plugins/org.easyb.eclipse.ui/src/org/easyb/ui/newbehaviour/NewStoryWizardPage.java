@@ -1,6 +1,6 @@
 package org.easyb.ui.newbehaviour;
 
-import org.easyb.eclipse.templates.TemplateActivator;
+import org.easyb.eclipse.templates.processor.TemplateTextFormatter;
 import org.easyb.ui.utils.IUIConstants;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -32,7 +32,7 @@ public class NewStoryWizardPage extends AbstractNewBehaviourWizardPage{
 	
 	protected String getTemplatePattern(){
 		try{
-		return TemplateActivator.getEmptyScenarioTemplateText();
+		return TemplateTextFormatter.getEmptyScenarioTemplateText();
 		}catch(CoreException cex){
 			setErrorMessage("Unable to get empty template for story,check error log");
 		}

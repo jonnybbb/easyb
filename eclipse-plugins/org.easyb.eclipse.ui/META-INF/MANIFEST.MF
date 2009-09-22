@@ -13,6 +13,11 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.core.resources;bundle-version="3.4.0",
  org.eclipse.jdt.core;bundle-version="3.4.0",
  org.eclipse.jdt.ui;bundle-version="3.4.0",
- org.eclipse.ui.ide;bundle-version="3.4.0"
+ org.eclipse.ui.ide;bundle-version="3.4.0",
+ org.easyb.launch.ui;bundle-version="0.0.4",
+ org.eclipse.ui.workbench.texteditor;bundle-version="3.4.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: org.easyb.ui.preferences
+Bundle-ClassPath: .,
+ resources/lib/commons-lang-2.4.jar

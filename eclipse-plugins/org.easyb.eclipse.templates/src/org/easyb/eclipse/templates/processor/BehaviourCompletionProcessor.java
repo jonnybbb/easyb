@@ -3,12 +3,7 @@ package org.easyb.eclipse.templates.processor;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.transform.Templates;
-
-import org.easyb.eclipse.templates.TemplateActivator;
 import org.easyb.eclipse.templates.manager.TemplateManager;
-import org.eclipse.jface.text.BadLocationException;
-import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.text.ITextViewer;

@@ -18,9 +18,5 @@ public interface ILaunchConstants {
 
 	//Plugin internal lib with jar files
 	public static final String EASYB_RUNNER_LIB_NAME = "resources/easyblib";
-	
-	//Preference store value names
-	public static final String PREF_EASYB_JAR_PATH = "easyb_jar_path";
-	public static final String PREF_CLI_JAR_PATH = "cli_jar_path";
-	public static final String PREF_GROOVY_JAR_PATH = "groovy_jar_path";
+
 }

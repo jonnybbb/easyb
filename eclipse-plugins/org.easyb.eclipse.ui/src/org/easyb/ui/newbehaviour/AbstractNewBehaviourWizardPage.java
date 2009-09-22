@@ -2,7 +2,6 @@ package org.easyb.ui.newbehaviour;
 
 import java.io.ByteArrayInputStream;
 
-import org.easyb.eclipse.templates.TemplateActivator;
 import org.easyb.ui.EasybUIActivator;
 import org.easyb.ui.viewerfilters.PackageViewerFilter;
 import org.easyb.ui.viewerfilters.SourceViewerFilter;
@@ -175,7 +174,7 @@ public abstract class AbstractNewBehaviourWizardPage extends WizardPage{
 			return file;
 		}catch(CoreException cex){
 			setErrorMessage("Unable to create behaviour, check error log for details");
-			TemplateActivator.Log("Unable to create new behaviour", cex);
+			EasybUIActivator.Log("Unable to create new behaviour", cex);
 		}
 	
 		return null;
