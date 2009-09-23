@@ -46,6 +46,28 @@ public class ClasspathBuilderTest extends TestCase{
 		assertEquals(5,foundPath);
 	}
 	
+	public void testGetRuntimeClassPathWithNullUserClassPath()throws Exception{
+
+		String[] newClzPath = 
+			ClasspathBuilder.getRuntimeClasspath(null);
+		
+		//Absolute classpath so shouldn`t start at 0
+		//for bundle plugins
+		int foundPath = 0;
+		for(String path : newClzPath){
+			if(path.lastIndexOf(BUNDLE_PATH+EASYB_JAR_NAME)>0){
+				foundPath++;
+			}else if(path.lastIndexOf(BUNDLE_PATH+GROOVY_JAR_NAME)>0){
+				foundPath++;
+			}else if(path.lastIndexOf(BUNDLE_PATH+CLI_JAR_NAME)>0){
+				foundPath++;
+			}
+		}
+		
+		assertEquals(3,foundPath);
+	}
+	
+	
 	public void testGetLibraryFolder()throws Exception{
 		File folder = ClasspathBuilder.getLibraryFolder();
 		
