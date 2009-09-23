@@ -49,7 +49,7 @@ public class ClasspathBuilder {
 		try{
 			return  new File(FileLocator.toFileURL(
 					EasybLaunchActivator.getDefault().getBundle().getEntry(
-							"/"+ILaunchConstants.EASYB_RUNNER_LIB_NAME)).toURI());
+							File.separator+ILaunchConstants.EASYB_RUNNER_LIB_NAME)).toURI());
 		}
 		catch(URISyntaxException uriex){
 			Status status = new Status(IStatus.ERROR, EasybLaunchActivator.PLUGIN_ID, 0,

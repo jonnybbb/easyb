@@ -35,10 +35,6 @@ public class BehaviourLaunchShortcut extends AbstractLaunchShortcut{
 
 	@Override
 	protected void initializeConfiguration(ILaunchConfigurationWorkingCopy wc) {
-		if(file==null){
-			//TODO log maybe
-			return;
-		}
 		setConfigFileFullPath(wc);
 		setConfigProject(wc);
 		setConfigFileProjectPath(wc);

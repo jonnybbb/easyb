@@ -17,6 +17,13 @@ import org.eclipse.jdt.launching.JavaLaunchDelegate;
 public class BehaviourLaunchConfigurationDelegate extends JavaLaunchDelegate{
 	public static final String ID = "org.easyb.launch.launcher.BehaviourLaunchConfigurationDelegate"; 
 	
+	private String os = Platform.getOS();
+	
+	//Method used for testing only
+	public void setPlatformOS(String os){
+		this.os = os;
+	}
+	
 	@Override
 	public String getMainTypeName(ILaunchConfiguration configuration) throws CoreException {
 		return ILaunchConstants.BEHAVIOR_RUNNER_CLASS;
@@ -44,13 +51,12 @@ public class BehaviourLaunchConfigurationDelegate extends JavaLaunchDelegate{
 		List<String> storyPaths = 
 			config.getAttribute(ILaunchConstants.LAUNCH_ATTR_STORIES_FULL_PATH,new ArrayList(0));
 		
-		String os = Platform.getOS();
 		for(String storyPath : storyPaths){
 			args.append(" ");
 			
 			//Wrap in " encase of spaces on windows
 			if(os.equals(Platform.OS_WIN32)){
-				args.append(" \"").append(storyPath).append("\"");
+				args.append("\"").append(storyPath).append("\"");
 			}else{
 				args.append(storyPath);
 			}
