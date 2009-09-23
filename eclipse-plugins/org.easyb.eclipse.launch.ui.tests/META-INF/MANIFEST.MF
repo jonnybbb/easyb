@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Tests
+Bundle-SymbolicName: org.easyb.eclipse.launch.ui.tests;singleton:=true
+Bundle-Version: 0.0.4
+Fragment-Host: org.easyb.launch.ui;bundle-version="0.0.4"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.junit;bundle-version="3.8.2"
