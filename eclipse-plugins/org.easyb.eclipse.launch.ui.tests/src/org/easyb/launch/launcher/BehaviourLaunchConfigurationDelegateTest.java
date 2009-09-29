@@ -3,14 +3,14 @@ package org.easyb.launch.launcher;
 import java.util.ArrayList;
 import java.util.List;
 
+import junit.framework.TestCase;
+
 import org.easyb.launch.ILaunchConstants;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.jdt.launching.IJavaLaunchConfigurationConstants;
 import org.jmock.Expectations;
 import org.jmock.Mockery;
-
-import junit.framework.TestCase;
 
 public class BehaviourLaunchConfigurationDelegateTest extends TestCase{
 	 private Mockery context = new Mockery();

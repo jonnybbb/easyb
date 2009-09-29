@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Tools
+Bundle-SymbolicName: org.easyb.eclipse.test.tools
+Bundle-Version: 0.0.1
+Bundle-Activator: org.easyb.eclipse.test.tools.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.debug.core;bundle-version="3.5.0",
+ org.easyb.launch.ui;bundle-version="0.0.4"
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: org.easyb.eclipse.test.tools
