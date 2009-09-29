@@ -25,6 +25,7 @@ import org.eclipse.debug.core.ILaunchConfigurationType;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.debug.core.ILaunchManager;
 import org.eclipse.debug.core.Launch;
+import org.eclipse.debug.core.model.IProcess;
 import org.eclipse.debug.ui.IDebugUIConstants;
 import org.eclipse.debug.ui.ILaunchShortcut;
 import org.eclipse.debug.ui.actions.ILaunchable;
@@ -44,12 +45,10 @@ public class BehaviourLaunchShortcutTest extends TestCase{
 
 	private static final String LAUNCH_CONFIG_TYPE = "org.easyb.launch.launcher.BehaviourLaunchConfigurationDelegate";
 	 private Mockery context = new Mockery();
-	 private ILaunchConfiguration config;
 	 private IEditorPart editor;
 	 private IFileEditorInput fileInput;
 	@Override
 	public void setUp(){
-		config = context.mock(ILaunchConfiguration.class);
 		editor = context.mock(IEditorPart.class);
 		fileInput = context.mock(IFileEditorInput.class);
 	}
@@ -81,17 +80,6 @@ public class BehaviourLaunchShortcutTest extends TestCase{
 		return file;
 	}
 	
-	private void setUpConfigForSingleStory(IFile file)throws Exception{
-		final List<String> stories = new ArrayList<String>();
-		stories.add(file.getFullPath().toOSString());
-		
-		context.checking(new Expectations() {{
-			atLeast(1).of (config).getAttribute(with(equal(ILaunchConstants.LAUNCH_ATTR_STORIES_FULL_PATH)),with(any(ArrayList.class)));
-            will(returnValue(stories));
-		}});
-		
-	}
-	
 	private void setUpEditor(){
 		context.checking(new Expectations() {{
 			atLeast(1).of (editor).getEditorInput();
@@ -111,19 +99,22 @@ public class BehaviourLaunchShortcutTest extends TestCase{
 		ILaunchConfigurationType lcType= launchManager.getLaunchConfigurationType(LAUNCH_CONFIG_TYPE);
 	
 		ILaunchConfigurationWorkingCopy wc= lcType.newInstance(null,launchConfigName);
-		wc.setAttribute(ILaunchConstants.LAUNCH_ATTR_STORIES_FULL_PATH,storyPath);
-			
-		ILaunch newLaunch= new Launch(wc,ILaunchManager.RUN_MODE, null);
-
+		
+		List<String> paths = new ArrayList<String>();
+		paths.add(storyPath);
+		
+		wc.setAttribute(ILaunchConstants.LAUNCH_ATTR_STORIES_FULL_PATH,paths);
+		ILaunchConfiguration config = wc.doSave();
+		ILaunch newLaunch= new Launch(config,ILaunchManager.RUN_MODE, null);
 		DebugPlugin.getDefault().getLaunchManager().addLaunch(newLaunch);
+		
 	}
 	public void testRunLaunch()throws Exception{
 		IFile file = getBehaviourFile("test.story");
 		
 		setUpEditor();
-		setUpConfigForSingleStory(file);
 		setUpEditorInput(file);
-		setUpLaunchConfigurations("testConfig","test2.story");
+		setUpLaunchConfigurations("testConfig",file.getRawLocation().toOSString());
 		
 		BehaviourLaunchShortcut shortcut = new BehaviourLaunchShortcut();
 		shortcut.launch(editor,ILaunchManager.RUN_MODE);
