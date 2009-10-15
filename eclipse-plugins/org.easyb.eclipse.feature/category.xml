@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature url="features/org.easyb.eclipse.feature_0.0.8.jar" id="org.easyb.eclipse.feature" version="0.0.8">
+   <feature url="features/org.easyb.eclipse.feature_0.0.10.jar" id="org.easyb.eclipse.feature" version="0.0.10">
       <category name="easyb"/>
    </feature>
    <category-def name="easyb" label="easyb"/>
