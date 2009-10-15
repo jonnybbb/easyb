@@ -7,3 +7,7 @@ Fragment-Host: org.easyb.ui
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.junit;bundle-version="3.8.2",
  org.easyb.eclipse.test.tools;bundle-version="0.0.1"
+Bundle-ClassPath: resources/lib/hamcrest-core-1.1.jar,
+ resources/lib/hamcrest-library-1.1.jar,
+ resources/lib/jmock-2.5.1.jar,
+ .
