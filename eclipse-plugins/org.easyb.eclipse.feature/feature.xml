@@ -2,7 +2,7 @@
 <feature
       id="org.easyb.eclipse.feature"
       label="Easyb Eclipse Feature"
-      version="0.0.10"
+      version="0.0.14"
       provider-name="easyb.org">
 
    <description url="http://www.easyb.org">
@@ -46,7 +46,7 @@ THE SOFTWARE.
    </license>
 
    <url>
-      <update label="easby Eclipse Update Site" url="http://easyb.googlecode.com/svn/branches/004_eclipse_groovy_plugin_integration/org.easyb.eclipse.updatesite/"/>
+      <update label="easby Eclipse Update Site" url="http://easyb.googlecode.com/svn/trunk/eclipse-plugins/org.easyb.eclipse.updatesite/"/>
    </url>
 
    <requires>
@@ -66,7 +66,6 @@ THE SOFTWARE.
       <import plugin="org.eclipse.ui.editors" version="3.4.0" match="greaterOrEqual"/>
       <import plugin="org.codehaus.groovy.eclipse.codeassist.completion" version="2.0.0" match="greaterOrEqual"/>
       <import plugin="org.codehaus.groovy" version="1.7.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.core.resources" version="3.5.1" match="greaterOrEqual"/>
       <import plugin="org.eclipse.ui.views" version="3.3.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.jface.text" version="3.4.0" match="greaterOrEqual"/>
       <import plugin="org.easyb.launch.ui" version="0.0.4" match="greaterOrEqual"/>
