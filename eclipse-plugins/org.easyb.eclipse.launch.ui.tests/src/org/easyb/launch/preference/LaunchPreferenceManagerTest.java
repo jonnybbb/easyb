@@ -1,11 +1,9 @@
-package org.easyb.launch.launcher;
+package org.easyb.launch.preference;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import junit.framework.TestCase;
-
-import org.easyb.launch.preference.LaunchPreferenceManager;
 
 public class LaunchPreferenceManagerTest extends TestCase {
 	private static final String EASYB_JAR = "test_easyb.jar";

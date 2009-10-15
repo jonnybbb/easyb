@@ -5,3 +5,5 @@ Bundle-SymbolicName: org.easyb.eclipse.templates.tests
 Bundle-Version: 0.0.4
 Fragment-Host: org.easyb.templates;bundle-version="0.0.4"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.easyb.eclipse.test.tools;bundle-version="0.0.1",
+ org.junit;bundle-version="3.8.2"

@@ -43,7 +43,7 @@ public class BehaviourLaunchShortcutTest extends TestCase{
 	
 	public void testRunLaunch()throws Exception{
 		IFile file = 
-			ProjectTool.setupProjectAndBehaviourFile("test.story","test",getStoryText());
+			ProjectTool.setupJavaProjectAndBehaviourFile("test.story","test",getStoryText());
 		
 		setUpEditor();
 		setUpEditorInput(file);
