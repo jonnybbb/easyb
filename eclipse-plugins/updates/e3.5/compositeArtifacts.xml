@@ -6,7 +6,7 @@
     <property name='p2.timestamp' value='1243822502440'/>
   </properties>
   <children size='2'>
-     <child location='http://easyb.googlecode.com/svn/branches/004_eclipse_groovy_plugin_integration/org.easyb.eclipse.updatesite/'/>
+     <child location='http://easyb.googlecode.com/svn/trunk/org.easyb.eclipse.updatesite/'/>
     <child location='http://dist.codehaus.org/groovy/distributions/greclipse/snapshot/e3.5/'/>
   </children>
 </repository>
