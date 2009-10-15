@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <description name="easby Eclipse Update Site" url="http://easyb.googlecode.com/svn/branches/004_eclipse_groovy_plugin_integration/org.easyb.eclipse.updatesite/">
+   <description name="easby Eclipse Update Site" url="http://easyb.googlecode.com/svn/trunk/eclipse-plugins/org.easyb.eclipse.updatesite">
       easby Eclipse Update Site
    </description>
    <feature url="features/org.easyb.eclipse.feature_0.0.10.jar" id="org.easyb.eclipse.feature" version="0.0.10">
