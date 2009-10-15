@@ -28,6 +28,7 @@ public class DocumentUtil {
 		
 		((IDocumentExtension3)document).setDocumentPartitioner(
 				partionerId,partitioner);
+		
 	}
 	
 	public static String[] getManagingPositionCategories(String partionerId,IDocument document){

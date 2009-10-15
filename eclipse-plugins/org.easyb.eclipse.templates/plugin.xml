@@ -9,4 +9,26 @@
 		<include file="resources/templates/behaviour_template.xml"/>
 	</extension>
 
+	<extension
+         id="org.easyb.behaviour.codeassist.completion.category"
+         name="Easyb Content"
+         point="org.eclipse.jdt.ui.javaCompletionProposalComputer">
+      <proposalCategory
+            icon="resources/images/icons/easyb.png"></proposalCategory>
+   </extension>
+   
+  	<extension
+   			 name="BehaviourCodeCompletions"
+   			 id="org.codehaus.groovy.eclipse.codeassist.completion.groovy"
+         point="org.eclipse.jdt.ui.javaCompletionProposalComputer">
+      <javaCompletionProposalComputer
+            activate="true"
+           	categoryId="org.easyb.behaviour.codeassist.completion.category"
+            class="org.easyb.eclipse.templates.processor.BehaviourTemplateCompletionProposalComputer">
+         <partition
+               type="__dftl_partition_content_type">
+         </partition>
+      </javaCompletionProposalComputer>
+   </extension>
+   <!-- categoryId="org.codehaus.groovy.eclipse.codeassist.completion.category"-->
 </plugin>

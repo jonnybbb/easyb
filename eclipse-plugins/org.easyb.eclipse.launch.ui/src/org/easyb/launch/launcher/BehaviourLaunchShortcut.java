@@ -3,13 +3,16 @@ package org.easyb.launch.launcher;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.codehaus.jdt.groovy.model.GroovyCompilationUnit;
 import org.easyb.launch.EasybLaunchActivator;
 import org.easyb.launch.ILaunchConstants;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
+import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.launching.IJavaLaunchConfigurationConstants;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -81,8 +84,25 @@ public class BehaviourLaunchShortcut extends AbstractLaunchShortcut{
 		if (selection instanceof IStructuredSelection) {
 			selectArr = ((IStructuredSelection)selection).toArray();
 			
-			if(selectArr.length>0){
-				file = (IFile)selectArr[0];
+			try {
+				if(selectArr.length>0){
+					
+					if(selectArr[0] instanceof IFile){
+						file = (IFile)selectArr[0];
+					}else if(selectArr[0] instanceof GroovyCompilationUnit){
+						//TODO change to EasybCompilationUnit when its accessable
+						GroovyCompilationUnit compUnit = (GroovyCompilationUnit)selectArr[0];
+					
+						IResource resource = compUnit.getCorrespondingResource();
+						
+						if(resource.getType() == IResource.FILE){
+							file = (IFile)resource;
+						}
+					}
+					
+				}
+			} catch (JavaModelException e) {
+				EasybLaunchActivator.Log("Unable to get the behaviour file for launch",e);
 			}
 
 			launch(mode);

@@ -17,6 +17,9 @@ import org.eclipse.core.resources.IResourceProxy;
  * @author whiteda
  */
 public class BehaviourFileMatcher {
+	//public static final String STORY_CONTENT_TYPE = "org.easyb.eclipse.contenttype.story";
+	//public static final String SPEC_CONTENT_TYPE = "org.easyb.eclipse.contenttype.specification";
+	
 	//public static final String FILE_MATCH_REGEX = "^[_a-z0-9\\-]*\\.story$|^[_a-z0-9\\-]*\\.specification$|^specification.groovy$|^story.groovy$";
 	public static final String FILE_MATCH_REGEX = "^[_a-z0-9\\-]*\\.story$|^[_a-z0-9\\-]*\\.specification$";
 	static Pattern regexPattern = Pattern.compile(FILE_MATCH_REGEX,Pattern.CASE_INSENSITIVE);
@@ -50,8 +53,18 @@ public class BehaviourFileMatcher {
 	 */
 	public static boolean isExtensionOrNameMatch(IResourceProxy proxy){
 		String name = proxy.getName();
-		
 		Matcher match = regexPattern.matcher(name);
 		return match.find();
 	}
+	
+	/*TODO implement using contenttypes public static void buildContentTypeRegex(IResourceProxy proxy){
+		String name = proxy.getName();
+		
+		IContentType storyContentType = 
+			Platform.getContentTypeManager().getContentType(STORY_CONTENT_TYPE);
+		
+		String[] extensions = storyContentType.getFileSpecs(IContentType.FILE_EXTENSION_SPEC);
+	}*/
+	
+	
 }

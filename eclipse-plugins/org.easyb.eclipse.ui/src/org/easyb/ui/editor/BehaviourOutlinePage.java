@@ -65,8 +65,6 @@ public class BehaviourOutlinePage extends ContentOutlinePage {
 
 			try {
 				
-				model.clear();
-				
 				if (newInput != null) {
 					IDocument document= docProvider.getDocument(newInput);
 					if (document != null) {

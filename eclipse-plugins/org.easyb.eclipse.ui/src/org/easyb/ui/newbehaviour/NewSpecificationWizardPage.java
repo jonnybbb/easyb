@@ -1,7 +1,6 @@
 package org.easyb.ui.newbehaviour;
 
 import org.easyb.eclipse.templates.processor.TemplateTextFormatter;
-import org.easyb.ui.EasybUIActivator;
 import org.easyb.ui.utils.IUIConstants;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jface.viewers.IStructuredSelection;

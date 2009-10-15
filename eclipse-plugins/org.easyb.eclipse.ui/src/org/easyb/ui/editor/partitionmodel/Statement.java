@@ -33,7 +33,8 @@ public class Statement implements IModelElement{
 		try {
 			offset = typePos.offset;
 			type = typePos.getType();
-			setText(document.get(offset,typePos.length));
+			this.text = document.get(offset,typePos.length);
+			//setText(document.get(offset,typePos.length));
 			this.parent = parent;
 		} catch (BadLocationException e) {
 			throw new PartitionModelException("Unable to update partiton model for "+type,e);
@@ -41,9 +42,9 @@ public class Statement implements IModelElement{
 	}
 	
 	//Removes ,{ from the line of text
-	private void setText(String dirtyText){
-		text = dirtyText.replaceAll(CLEAN_TEXT_REGEX, "");
-	}
+//	private void setText(String dirtyText){
+	//	text = dirtyText.replaceAll(CLEAN_TEXT_REGEX, "");
+	//}
 	
 	public int getOffSet(){
 		return offset;

@@ -1,7 +1,14 @@
 package org.easyb.ui;
 
+import java.io.IOException;
+import java.net.URL;
+
+import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.jface.resource.ImageRegistry;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
@@ -9,13 +16,15 @@ import org.osgi.framework.BundleContext;
  * The activator class controls the plug-in life cycle
  */
 public class EasybUIActivator extends AbstractUIPlugin {
-
+	
+	public static final String EASYB_ICON_IMAGE = "EASYB_ICON";
 	// The plug-in ID
 	public static final String PLUGIN_ID = "org.easyb.ui";
 
 	// The shared instance
 	private static EasybUIActivator plugin;
-	
+
+	//
 	/**
 	 * The constructor
 	 */
@@ -39,7 +48,22 @@ public class EasybUIActivator extends AbstractUIPlugin {
 		plugin = null;
 		super.stop(context);
 	}
-
+	
+	@Override
+	public void initializeImageRegistry(ImageRegistry reg){
+		try{
+			URL url = FileLocator.toFileURL(
+					EasybUIActivator.getDefault().getBundle().getEntry(
+							"/resources/images/icons/easyb.png"));
+			Image easyb = ImageDescriptor.createFromURL(url).createImage();
+			
+			reg.put(EASYB_ICON_IMAGE,easyb);
+			
+		}catch(IOException ex){
+			Log("Unable to intialize image registry", ex);
+		}
+	}
+	
 	/**
 	 * Returns the shared instance
 	 *

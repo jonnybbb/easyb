@@ -36,6 +36,7 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.ElementTreeSelectionDialog;
 
 public abstract class AbstractNewBehaviourWizardPage extends WizardPage{
+	private static final String SOURCE_PACKAGE_TEXT = "package"; 
 	private Label lblSource;
 	private Text txtSource;
 	private Button btnSource;
@@ -152,7 +153,10 @@ public abstract class AbstractNewBehaviourWizardPage extends WizardPage{
 			return null;
 		}
 		
-		String pattern = getTemplatePattern();
+		String text = getSourcePackageText() +
+						System.getProperty("line.separator")+
+						getTemplatePattern();
+		
 		String fileName =getFileName()+"."+getFileExtension();
 		IFile file = null;
 		if(isPackageSet()){
@@ -163,6 +167,11 @@ public abstract class AbstractNewBehaviourWizardPage extends WizardPage{
 			file = srcfolder.getFile(fileName);
 		}
 		
+		if(file == null){
+			setErrorMessage("File "+fileName+"could not be created");
+			return null;
+		}
+		
 		if(file.exists()){
 			setErrorMessage("File "+fileName+"already exists");
 			return null;
@@ -170,7 +179,7 @@ public abstract class AbstractNewBehaviourWizardPage extends WizardPage{
 		
 		//TODO pass a progress montior
 		try{
-			file.create(new ByteArrayInputStream(pattern.getBytes()), false,null);
+			file.create(new ByteArrayInputStream(text.getBytes()), false,null);
 			return file;
 		}catch(CoreException cex){
 			setErrorMessage("Unable to create behaviour, check error log for details");
@@ -179,7 +188,16 @@ public abstract class AbstractNewBehaviourWizardPage extends WizardPage{
 	
 		return null;
 	}
-	 
+	
+	protected String getSourcePackageText(){
+		IJavaElement pckg = getPackage();
+		if(pckg==null){
+			return "";
+		}
+		
+		return SOURCE_PACKAGE_TEXT+" "+pckg.getElementName();
+	}
+	
 	protected IJavaElement getSourceFolder(){
 		return sourceFolder;
 	}
@@ -368,6 +386,10 @@ public abstract class AbstractNewBehaviourWizardPage extends WizardPage{
 					updateSourceFolder(jElement.getAncestor(IJavaElement.PACKAGE_FRAGMENT_ROOT));
 					updatePackage(jElement);
 					break;
+				}
+				case IJavaElement.COMPILATION_UNIT:{
+					updateSourceFolder(jElement.getAncestor(IJavaElement.PACKAGE_FRAGMENT_ROOT));
+					updatePackage(jElement.getAncestor(IJavaElement.PACKAGE_FRAGMENT));
 				}
 			}	
 			

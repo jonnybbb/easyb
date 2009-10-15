@@ -2,33 +2,80 @@
 <feature
       id="org.easyb.eclipse.feature"
       label="Easyb Eclipse Feature"
-      version="0.0.4"
+      version="0.0.9"
       provider-name="easyb.org">
 
    <description url="http://www.easyb.org">
-      [Enter Feature Description here.]
+      Enables editing,launching,debugging,etc of easyb behaviours.
+Built on the groovy eclipse plugin http://groovy.codehaus.org/Eclipse+Plugin
    </description>
 
-   <copyright url="http://www.example.com/copyright">
-      [Enter Copyright Description here.]
+   <copyright url="http://www.easyb.org">
+      Copyright (c) 2009 www.easyb.org
    </copyright>
 
-   <license url="http://www.example.com/license">
-      [Enter License Description here.]
+   <license url="http://www.opensource.org/licenses/mit-license.php">
+      The MIT License
+Copyright (c) 2009 www.easyb.org
+Permission is hereby granted, free of charge, to any person obtaining
+a copy
+of this software and associated documentation files (the &quot;Software&quot;),
+to deal
+in the Software without restriction, including without limitation
+the rights
+to use, copy, modify, merge, publish, distribute, sublicense,
+and/or sell
+copies of the Software, and to permit persons to whom the Software
+is
+furnished to do so, subject to the following conditions:
+The above copyright notice and this permission notice shall be
+included in
+all copies or substantial portions of the Software.
+THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT
+SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES
+OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+DEALINGS IN
+THE SOFTWARE.
    </license>
 
    <url>
-      <update label="easby Eclipse Update Site" url="http://easyb.googlecode.com/svn/trunk/eclipse-plugins/org.easyb.eclipse.updatesite"/>
+      <update label="easby Eclipse Update Site" url="http://easyb.googlecode.com/svn/branches/004_eclipse_groovy_plugin_integration/org.easyb.eclipse.updatesite/"/>
    </url>
+
+   <requires>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.ui.views" version="3.3.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.jface.text" version="3.4.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ui.editors" version="3.4.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.core.resources" version="3.4.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.jdt.core" version="3.4.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.jdt.ui" version="3.4.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ui.ide" version="3.4.0" match="greaterOrEqual"/>
+      <import plugin="org.easyb.launch.ui" version="0.0.4" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ui.workbench.texteditor" version="3.4.0" match="greaterOrEqual"/>
+      <import plugin="org.codehaus.groovy.eclipse.ui" version="2.0.0" match="greaterOrEqual"/>
+      <import plugin="org.codehaus.groovy.eclipse.codeassist.completion" version="2.0.0" match="greaterOrEqual"/>
+      <import plugin="org.easyb.templates" version="0.0.4" match="greaterOrEqual"/>
+      <import plugin="org.codehaus.groovy" version="1.7.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.debug.ui" version="3.4.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.jdt.groovy.core" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.debug.core" version="3.4.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.jdt.debug.ui" version="3.3.1" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.jdt.launching" version="3.4.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.pde.ui" version="3.4.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.jface.text" version="3.4.1" match="greaterOrEqual"/>
+   </requires>
 
    <plugin
          id="org.easyb.launch.ui"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"/>
-
-   <plugin
-         id="org.easyb.ui"
          download-size="0"
          install-size="0"
          version="0.0.0"/>
@@ -38,5 +85,12 @@
          download-size="0"
          install-size="0"
          version="0.0.0"/>
+
+   <plugin
+         id="org.easyb.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
 
 </feature>

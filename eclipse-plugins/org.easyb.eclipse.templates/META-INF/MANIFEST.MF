@@ -2,13 +2,18 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Templates
 Bundle-SymbolicName: org.easyb.templates;singleton:=true
-Bundle-Version: 0.0.4
+Bundle-Version: 0.0.9
 Bundle-Activator: org.easyb.eclipse.templates.TemplateActivator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.jface.text;bundle-version="3.4.1",
- org.eclipse.ui.editors;bundle-version="3.4.0",
- org.eclipse.ui.workbench.texteditor;bundle-version="3.5.0"
+ org.eclipse.ui.editors,
+ org.eclipse.jdt.ui,
+ org.eclipse.jdt.core;bundle-version="3.4.0",
+ org.codehaus.groovy.eclipse.codeassist.completion;bundle-version="2.0.0",
+ org.eclipse.jdt.groovy.core;bundle-version="1.0.0",
+ org.codehaus.groovy;bundle-version="1.7.0",
+ org.eclipse.core.resources;bundle-version="3.5.1"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.easyb.eclipse.templates.preference,

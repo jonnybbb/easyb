@@ -32,15 +32,41 @@
          point="org.eclipse.ui.editors">
       <editor
             name="Behaviour editor"
-            icon="resources/images/icons/easyb.png"
             extensions="story,specification"
             contributorClass="org.easyb.ui.editor.BehaviourActionContributor"
             class="org.easyb.ui.editor.BehaviourEditor"
-            id="org.easyb.ui.editor.BehaviourEditor">
+            id="org.easyb.ui.editor.BehaviourEditor"
+            default="true">
       </editor>
    </extension>
    
-   <extension point="org.eclipse.core.filebuffers.documentSetup">
+   <!--Note the behaviour content types extend the groovy ones so as 
+	to be included as part of the Groovy Compilaton Model in the Groovy V2 plugin
+	  			base-type="org.eclipse.jdt.groovy.core.groovySource" -->
+   <extension
+         point="org.eclipse.core.contenttype.contentTypes"
+         id="org.easyb.contenttypes">
+      <content-type
+            file-extensions="story"
+            id="org.easyb.eclipse.contenttype.story"
+            name="easyb story"
+			base-type="org.eclipse.jdt.groovy.core.groovySource"
+            priority="high"
+            describer="">
+      </content-type>
+      <content-type
+            file-extensions="specification"
+            id="org.easyb.eclipse.contenttype.specification"
+            name="easyb specification"
+			base-type="org.eclipse.jdt.groovy.core.groovySource"
+            priority="high"
+            describer="">
+      </content-type>
+   </extension>
+   
+   <extension point="org.eclipse.core.filebuffers.documentSetup"
+   		name="BehaviourDocumentSetupParticipant"
+   		id="org.easyb.ui.editor.BehaviourDocumentSetup">
    	<participant
    		class="org.easyb.ui.editor.BehaviourDocumentSetup"
    		contentTypeId="org.easyb.eclipse.contenttype.story" >
@@ -51,7 +77,7 @@
 	</participant> 	
    </extension>
    
-   <!--Keywords are used to allwo the user to filter 
+   <!--Keywords are used to allow the user to filter 
    with in the preference dialog-->
    <extension
      point="org.eclipse.ui.keywords">
@@ -72,21 +98,63 @@
          
          <keywordReference id="org.easyb.launch.keyword"/>
       </page>
-      
-		 <page id="org.easyb.ui.preferences.BehaviourTemplatePreferencePage" 
+       <page id="org.easyb.ui.preferences.BehaviourTemplatePreferencePage" 
          	name="Behaviour templates" 
          	class="org.easyb.ui.preferences.BehaviourTemplatePreferencePage"
          	category="org.easyb.ui.preferences.LaunchPreferencePage">
 			
          	<keywordReference id="org.easyb.templates.keyword"/>
       </page>
-       
 	</extension>
-	
-	   <extension 
-       point="org.eclipse.ui.preferencePages"> 
-    
-   </extension>
    
+   	<!--<extension point="org.eclipse.core.runtime.adapters">
+         <factory 
+            class="org.codehaus.groovy.eclipse.debug.ui.GroovyRetargettableActionAdapterFactory" 
+            adaptableType="org.easyb.ui.editor.BehaviourEditor">
+            <adapter type="org.eclipse.debug.ui.actions.IToggleBreakpointsTarget"/>
+         </factory>-->
+  	<!--	<factory adaptableType="org.eclipse.ui.IFileEditorInput"
+        	class="org.codehaus.groovy.eclipse.adapters.GroovyIFileEditorInputAdapterFactory">
+     		<adapter type="org.codehaus.groovy.ast.ClassNode"/>
+	  	</factory>-->
+   <!-- <factory
+          adaptableType="org.easyb.ui.editor.BehaviourEditor"
+          class="org.codehaus.groovy.eclipse.adapters.GroovyEditorAdapterFactory">
+       <adapter
+             type="org.codehaus.groovy.ast.ModuleNode">
+       </adapter>
+    </factory>-->
+ <!--   </extension>-->
+    
+    <extension
+       point="org.eclipse.ui.editorActions">
+      <editorContribution
+            targetID="org.easyb.ui.editor.BehaviourEditor"
+            id="org.codehaus.groovy.BreakpointRulerActions">
+         <action
+               label="Toggle Breakpoint"
+               class="org.codehaus.groovy.eclipse.debug.ui.GroovyBreakpointRulerActionDelegate"
+               actionID="RulerDoubleClick"
+               id="org.groovy.codehaus.eclipse.ui.actions.ManageBreakpointRulerAction">
+         </action>
+     </editorContribution>
+     </extension>
+     
+  <!--  <extension
+          point="org.eclipse.jdt.groovy.core.compilationUnitTargets"
+          id="org.easyb.compilationunit.easybCompilationUnitTargets"
+   		  name="Easyb Compilation Units">
+       <compilationUnitTarget
+             class="org.easyb.ui.compilationunit.EasybCompilationUnitTarget"
+             contentTypeId="org.easyb.eclipse.contenttype.story"
+             id="org.easyb.ui.compilationunit.target.story">
+       </compilationUnitTarget>
+       <compilationUnitTarget
+             class="org.easyb.ui.compilationunit.EasybCompilationUnitTarget"
+             contentTypeId="org.easyb.eclipse.contenttype.specification"
+             id="org.easyb.ui.compilationunit.target.specification">
+       </compilationUnitTarget>
+    </extension>-->
+     
 	
 </plugin>

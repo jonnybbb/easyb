@@ -2,7 +2,7 @@
 <project name="Compile org.easyb.eclipse.feature" default="main">
 	<target name="main">
 		<ant antfile="build.xml" dir="../org.easyb.eclipse.templates" target="build.jars"/>
-		<ant antfile="build.xml" dir="../org.easyb.eclipse.ui" target="build.jars"/>
 		<ant antfile="build.xml" dir="../org.easyb.eclipse.launch.ui" target="build.jars"/>
+		<ant antfile="build.xml" dir="../org.easyb.eclipse.ui" target="build.jars"/>
 	</target>
 </project>

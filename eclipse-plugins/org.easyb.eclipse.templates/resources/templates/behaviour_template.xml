@@ -47,7 +47,20 @@
 		context="org.easyb.eclipse.templates.context.BehaviourContextType" enabled="true" autoinsert="true" icon="resources/images/logo.png"
 >ensureThrows(${}){
 	}</template>
-	
+<template
+		name="ensure"
+		description="Inserts a scenario 'ensureThrows'"
+		id="org.easyb.eclipse.templates.storytemplate.ensurethrows"
+		context="org.easyb.eclipse.templates.context.BehaviourContextType" enabled="true" autoinsert="true" icon="resources/images/logo.png"
+>ensure(${}){
+	}</template>
+	<template
+		name="ensureFails"
+		description="Inserts a scenario 'ensureThrows'"
+		id="org.easyb.eclipse.templates.storytemplate.ensurethrows"
+		context="org.easyb.eclipse.templates.context.BehaviourContextType" enabled="true" autoinsert="true" icon="resources/images/logo.png"
+>ensureFails(${}){
+	}</template>
 	<template
 		name="and"
 		description="Inserts a scenario 'and'"
@@ -111,7 +124,6 @@
 		context="org.easyb.eclipse.templates.context.BehaviourContextType" enabled="true" autoinsert="true" icon="resources/images/logo.png"
 >it "${}",{
 	}</template>
-	
 	<template
 		name="description"
 		description="Inserts a description"
