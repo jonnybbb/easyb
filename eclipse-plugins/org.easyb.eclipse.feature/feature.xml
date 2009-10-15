@@ -2,7 +2,7 @@
 <feature
       id="org.easyb.eclipse.feature"
       label="Easyb Eclipse Feature"
-      version="0.0.14"
+      version="0.0.15"
       provider-name="easyb.org">
 
    <description url="http://www.easyb.org">
