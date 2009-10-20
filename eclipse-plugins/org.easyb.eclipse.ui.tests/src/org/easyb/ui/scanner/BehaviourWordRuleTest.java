@@ -1,11 +1,18 @@
 package org.easyb.ui.scanner;
 
+import static org.easyb.ui.editor.KeywordEnum.SCENARIO;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import junit.framework.TestCase;
 
+import org.easyb.ui.editor.BehaviourWordRule;
+import org.easyb.ui.editor.PartitionScannerBuilder;
 import org.eclipse.jface.text.rules.ICharacterScanner;
+import org.eclipse.jface.text.rules.IToken;
+import org.eclipse.jface.text.rules.RuleBasedScanner;
+import org.eclipse.jface.text.rules.Token;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.jmock.Expectations;
@@ -13,54 +20,114 @@ import org.jmock.Mockery;
 import org.jmock.lib.action.VoidAction; 
 
 public class BehaviourWordRuleTest extends TestCase{
-	private Mockery context = new Mockery();
-	
-	private ICharacterScanner scanner;
-	private byte[] bytes; 
-	private int offset;             
-	@Override
-	public void setUp(){
-		context.mock(ICharacterScanner.class);
-	}
-	
-	private void configureScanner(String text){
-		 bytes = new byte[text.length()+1];
-		 bytes[text.length()] = ICharacterScanner.EOF;
-		
-		 byte[] oldBytes = text.getBytes();
-		 for(int i = 0;i<oldBytes.length;++i){
-			 bytes[i] = oldBytes[i];
-		 }
-		
-		 context.checking(new Expectations() {{
-				atLeast(1).of (scanner).read();
-	            will(returnValue(read()));
-			}});
-		 
-		 context.checking(new Expectations() {{
-				atLeast(1).of (scanner).unread();
-				will(returnValue(unread()));//Might break here as can`t return a value
-			}});
-	}
-	
-	private byte read(){
-		if(offset<0){
-			throw new RuntimeException("offset < 0 for read, "+offset);
-		}
-		
-		if(offset<bytes.length){
-			return bytes[offset++];
-		}
 
-		return ICharacterScanner.EOF;
+	
+	public void testMatch(){
+		ScannerStub scanner = 
+			new ScannerStub("scenario \"Test scenario\",{ ");
+		
+		BehaviourWordRule rule = 
+			new BehaviourWordRule(new Token(PartitionScannerBuilder.EASYB_BEHAVIOUR_SCENARIO_START),SCENARIO.toString());
+		IToken token = null;
+		do{
+			token = rule.evaluate(scanner);
+		}while(scanner.isEnd());
+		
+		assertFalse(token.isUndefined());
+		assertEquals(24,scanner.getOffSet());
 	}
 	
-	private int unread(){
-		if(offset-1<0){
-			throw new RuntimeException("unread will mean offset is < 0, "+offset);
-		}
+	//Shouldn`t iterate passed the first character
+	public void testNoneMatchFirstCharacter(){
+		ScannerStub scanner = 
+			new ScannerStub("test \"Test scenario\",{ ");
 		
-		--offset;
-		return offset;
+		BehaviourWordRule rule = 
+			new BehaviourWordRule(new Token(PartitionScannerBuilder.EASYB_BEHAVIOUR_SCENARIO_START),SCENARIO.toString());
+		IToken token = null;
+		do{
+			token = rule.evaluate(scanner);
+		}while(scanner.isEnd());
+		
+		assertTrue(token.isUndefined());
+		assertEquals(0,scanner.getOffSet());
 	}
+	
+	public void testNoneMatch(){
+		ScannerStub scanner = 
+			new ScannerStub("scen \"Test scenario\",{ ");
+		
+		BehaviourWordRule rule = 
+			new BehaviourWordRule(new Token(PartitionScannerBuilder.EASYB_BEHAVIOUR_SCENARIO_START),SCENARIO.toString());
+		IToken token = null;
+		do{
+			token = rule.evaluate(scanner);
+		}while(scanner.isEnd());
+		
+		assertTrue(token.isUndefined());
+		assertEquals(0,scanner.getOffSet());
+	}
+	
+	
+	public void testTripleQuotes(){
+		ScannerStub scanner = 
+			new ScannerStub("scenario \"\"\"Test scenario\"\"\",{ ");
+		
+		BehaviourWordRule rule = 
+			new BehaviourWordRule(new Token(PartitionScannerBuilder.EASYB_BEHAVIOUR_SCENARIO_START),SCENARIO.toString());
+		IToken token = null;
+		do{
+			token = rule.evaluate(scanner);
+		}while(scanner.isEnd());
+		
+		assertFalse(token.isUndefined());
+		assertEquals(28,scanner.getOffSet());
+	}
+	
+	//TODO fix
+	public void testTripleQuotesMissingQuote(){
+		ScannerStub scanner = 
+			new ScannerStub("scenario \"\"Test scenario\"\"\",{ ");
+		
+		BehaviourWordRule rule = 
+			new BehaviourWordRule(new Token(PartitionScannerBuilder.EASYB_BEHAVIOUR_SCENARIO_START),SCENARIO.toString());
+		IToken token = null;
+		do{
+			token = rule.evaluate(scanner);
+		}while(scanner.isEnd());
+		
+		assertTrue(token.isUndefined());
+		assertEquals(0,scanner.getOffSet());
+	}
+	
+	public void testSingleQuotesMatch(){
+		ScannerStub scanner = 
+			new ScannerStub("scenario 'Test scenario',{ ");
+		
+		BehaviourWordRule rule = 
+			new BehaviourWordRule(new Token(PartitionScannerBuilder.EASYB_BEHAVIOUR_SCENARIO_START),SCENARIO.toString());
+		IToken token = null;
+		do{
+			token = rule.evaluate(scanner);
+		}while(scanner.isEnd());
+		
+		assertFalse(token.isUndefined());
+		assertEquals(24,scanner.getOffSet());
+	}
+	
+	public void testSlashMatch(){
+		ScannerStub scanner = 
+			new ScannerStub("scenario /Test scenario/,{ ");
+		
+		BehaviourWordRule rule = 
+			new BehaviourWordRule(new Token(PartitionScannerBuilder.EASYB_BEHAVIOUR_SCENARIO_START),SCENARIO.toString());
+		IToken token = null;
+		do{
+			token = rule.evaluate(scanner);
+		}while(scanner.isEnd());
+		
+		assertFalse(token.isUndefined());
+		assertEquals(24,scanner.getOffSet());
+	}
+	
 }
