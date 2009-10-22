@@ -6,13 +6,13 @@
 		id="org.easyb.eclipse.templates.storytemplate.scenario"
 		context="org.easyb.eclipse.templates.context.BehaviourContextType" enabled="true" autoinsert="false" icon="resources/images/logo.png"
 >scenario "${}",{
-	given "${}",{
+	given "",{
 	}
 	
-	when "${}", {
+	when "", {
 	}
 	
-	then "${}", {
+	then "", {
 	}
 }</template>
 	
