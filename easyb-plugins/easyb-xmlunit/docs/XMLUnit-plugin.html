@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>easyb makes it easy, man</title>
+<meta name="keywords" content="BDD, behavior driven development, java, java bdd, groovy, groovy bdd, 
+groovy behavior driven development, java behavior driven development, ruby, rspec, easyb, easy bdd" />
+<meta name="description" content="easyb is story verification framework built in the spirit of behavior driven development." />
+<link href="default.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<!-- start header -->
+<div id="header">
+	<h1><a href="http://www.easyb.org"><span>easyb</span></a></h1>
+	<h2>&nbsp;&nbsp; -- BDD in java can't get any easier</h2>
+</div>
+<!-- end header -->
+
+<!-- start page -->
+<div id="page">
+<!-- start content -->
+<div id="content">
+  <div class="post">
+    <h2 class="title">Using the XMLUnit easyb plug-in</h2>
+
+    <div class="entry">
+
+        <p>There’s myriad ways to validate XML; in fact, with Groovy, the mechanics of
+        parsing XML with <code>XMLSlurper</code> couldn’t be easier! Nevertheless, from time to time,
+        you might have needed an easy way to validate XML
+        documents without having to actually parse them. Thus, XMLUnit has been a handy
+        framework today as it has been for years.</p>
+
+        <p>While XMLUnit is a JUnit-style framework, you can certainly leverage it outside of JUnit.
+        What’s more, via easyb’s plug-in framework, using XMLUnit just got a lot easier!
+        For instance, leveraging XMLUnit with this plug-in makes validation as easy as:</p>
+
+  			
+    <pre><code>
+using "xmlunit"
+
+scenario "XML documents are compared easier via xml unit plug-in", {
+
+ given "some xml document", {
+  control = """&lt;account&gt;&lt;id&gt;3A-00&lt;/id&gt;&lt;name&gt;acme&lt;/name&gt;&lt;/account&gt;"""
+ }
+
+ then "the plugin should enable easy comparisons", {
+  testXML = """&lt;account&gt;&lt;id&gt;3A-00&lt;/id&gt;&lt;name&gt;acme&lt;/name&gt;&lt;/account&gt;"""
+  testXML.shouldBeIdenticalTo control
+  testXML.shouldBeIdenticalWith control  //same behavior different call
+  testXML.shouldBeIdentical control      //ditto
+  testXML.identical control              //ditto
+ }
+
+ and "the instance of XMLUnit should be available for use", {
+  XMLUnit.version.shouldBe "1.3alpha"
+  XMLUnit.getIgnoreWhitespace().shouldBe true
+ }
+}
+</code></pre>
+
+        <p>Note how the <code>using</code> keyword is required -- this loads the XMLUnit
+         easyb plug-in (providing you've placed the plug-in in your classspath. The key aspects of the
+        plug-in are the special validation methods, such as <code>shouldBeIdenticalTo</code> and its
+        logical cousin <code>shouldBeSimilarTo</code>. Note too, these methods have synonyms (see the code
+        above). What's more, you can grab an instance of the core XMLUnit framework as it's automatically
+        present in the binding available to your behaviors (as <code>XMLUnit</code>). Lastly, all <code>should</code>
+            methods in easyb support an optional message parameter that will be captured if there is an error --
+            <code>testXML.shouldBeIdenticalTo control, "documents were not identical"</code> -- as you can
+            see this is quite similar to JUnit-style assertions.
+        </p>
+
+        <p>If you should have any questions, please feel free to post your question
+            on <a href="http://groups.google.com/group/easyb-users">the users list</a> or
+        you can <a href="http://twitter.com/easybdd">twitter easyb</a>.</p>
+    
+    </div>
+  </div>
+
+</div>
+<!-- end content -->
+
+
+<!-- start sidebar -->
+<div id="sidebar">
+  <ul>
+    <li>
+      <h2>Overview</h2>
+      <ul>
+        <li><a href="http://www.easyb.org/index.html">Home</a></li>
+        <li><a href="http://www.easyb.org/howtos.html">Stories</a></li>
+        <li><a href="http://www.easyb.org/howtobb.html">Specifications</a></li>
+        <li><a href="http://www.easyb.org/download.html">Download</a></li>
+      </ul>
+    </li>
+	<li>
+		<h2>Examples</h2>
+		<ul>
+			<li><a href="http://www.easyb.org/storyexmpls.html">Story examples</a></li>
+			<li><a href="http://www.easyb.org/specexmpls.html">Specification examples</a></li>
+		</ul>
+	</li>
+    <li>
+      <h2>Details</h2>
+      <ul>
+        <li><a href="http://www.easyb.org/running.html">Running easyb</a></li>
+        <li><a href="http://www.easyb.org/tutorialstack.html">An in-depth tutorial</a></li>
+        <li><a href="http://www.easyb.org/dsls.html">easyb syntax specification</a></li>
+        <li><a href="http://www.easyb.org/lic.html">License</a></li>
+        <li><a href="http://www.easyb.org/source.html">Source code</a></li>
+		<li><a href="http://www.easyb.org/contact.html">Contact</a></li>
+      </ul>
+    </li>
+
+    <li>
+      <h2>Plug-ins</h2>
+      <ul>
+        <li><a href="http://www.easyb.org/dbunit.html">DbUnit plug-in</a></li>
+      </ul>
+    </li>
+
+    <li>
+      <h2>Resources</h2>
+      <ul>
+	<li><a href="http://www.ibm.com/developerworks/edu/j-dw-java-easyb-i.html">Drive development with easyb</a></li>
+        <li><a href="http://dannorth.net/introducing-bdd/">Introducing BDD</a> (DanNorth.net)</li>
+        <li><a href="http://rspec.rubyforge.org/">RSpec</a></li>
+        <li><a href="http://groovy.codehaus.org/">Groovy</a></li>
+		<li><a href="http://code.google.com/p/easyb/w/list">easyb wiki</a></li>
+        <li><a href="http://www.easyb.org/articles.html">Additional resources</a></li>
+      </ul>
+    </li>
+
+  </ul>
+  <div style="clear: both;">&nbsp;</div>
+</div>
+<!-- end sidebar -->
+</div>
+<!-- end page -->
+<div id="footer">
+	
+</div>
+</body>
+</html>
