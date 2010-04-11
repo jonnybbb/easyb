@@ -45,14 +45,14 @@
 
   <distributionManagement>
     <repository>
-      <id>easyb.org</id>
-      <name>easyb repository</name>
-      <url>scp://easyb.org/var/maven/repo/release</url>
+      <id>sonatype</id>
+      <name>Sonatype OSS repository</name>
+      <url>http://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
     </repository>
     <snapshotRepository>
-      <id>easyb.org</id>
-      <name>easyb repository</name>
-      <url>scp://easyb.org/var/maven/repo/snapshot</url>
+      <id>sonatype</id>
+      <name>Sonatype OSS repository</name>
+      <url>http://oss.sonatype.org/content/repositories/snapshots</url>
     </snapshotRepository>
     <!-- Since we're not taking advantage of automatic deployment for sites yet, just deploy to the target directory -->
     <site>
@@ -104,4 +104,35 @@
     </plugins>
   </build>
 
+  <profiles>
+    <profile>
+      <id>release-sign-artifacts</id>
+      <activation>
+        <property>
+          <name>performRelease</name>
+          <value>true</value>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <version>1.0-alpha-4</version>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
 </project>
+
