@@ -39,8 +39,8 @@
   </licenses>
 
   <scm>
-    <connection>scm:svn:http://easyb.googlecode.com/svn/tags/maven-parent-0.8</connection>
-    <developerConnection>scm:svn:https://easyb.googlecode.com/svn/tags/maven-parent-0.8</developerConnection>
+    <connection>scm:svn:http://easyb.googlecode.com/svn/trunk/maven-plugins</connection>
+    <developerConnection>scm:svn:https://easyb.googlecode.com/svn/trunk/maven-plugins</developerConnection>
   </scm>
 
   <distributionManagement>
@@ -106,6 +106,7 @@
         <artifactId>maven-release-plugin</artifactId>
         <version>2.0</version>
         <configuration>
+          <tagBase>https://easyb.googlecode.com/svn/tags/maven-parent</tagBase>
           <preparationGoals>clean install</preparationGoals>
         </configuration>
       </plugin>
