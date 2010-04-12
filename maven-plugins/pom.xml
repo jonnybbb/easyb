@@ -5,7 +5,7 @@
   <groupId>org.easyb</groupId>
   <artifactId>maven-parent</artifactId>
   <packaging>pom</packaging>
-  <version>0.9.7-SNAPSHOT</version>
+  <version>0.9.7</version>
   <name>easyb Maven Parent</name>
   <description>Common definitions for all maven easyb projects</description>
   <url>http://www.easyb.org</url>
@@ -39,8 +39,8 @@
   </licenses>
 
   <scm>
-    <connection>scm:svn:http://easyb.googlecode.com/svn/trunk/maven-plugins</connection>
-    <developerConnection>scm:svn:https://easyb.googlecode.com/svn/trunk/maven-plugins</developerConnection>
+    <connection>scm:svn:http://easyb.googlecode.com/svn/tags/maven-parent-0.9.7</connection>
+    <developerConnection>scm:svn:https://easyb.googlecode.com/svn/tags/maven-parent-0.9.7</developerConnection>
   </scm>
 
   <distributionManagement>
