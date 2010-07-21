@@ -2,6 +2,12 @@
 
   <modelVersion>4.0.0</modelVersion>
 
+  <parent>
+    <groupId>org.sonatype.oss</groupId>
+    <artifactId>oss-parent</artifactId>
+    <version>3</version>
+  </parent>
+
   <groupId>org.easyb</groupId>
   <artifactId>maven-parent</artifactId>
   <packaging>pom</packaging>
@@ -45,6 +51,8 @@
   </scm>
 
   <distributionManagement>
+      <!-- now inherited from Sonatype OSS POM -->
+      <!--
     <repository>
       <id>sonatype</id>
       <name>Sonatype OSS repository</name>
@@ -55,6 +63,7 @@
       <name>Sonatype OSS repository</name>
       <url>http://oss.sonatype.org/content/repositories/snapshots</url>
     </snapshotRepository>
+    -->
     <!-- Since we're not taking advantage of automatic deployment for sites yet, just deploy to the target directory -->
     <site>
       <id>target</id>
@@ -114,6 +123,8 @@
     </plugins>
   </build>
 
+  <!-- release profile now inherited from Sonatype OSS POM -->
+  <!--
   <profiles>
     <profile>
       <id>release-sign-artifacts</id>
@@ -143,6 +154,7 @@
       </build>
     </profile>
   </profiles>
+  -->
 
 </project>
 
