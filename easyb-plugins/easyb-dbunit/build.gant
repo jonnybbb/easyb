@@ -7,7 +7,7 @@ includeTargets << new File("../../easyb/default_tasks.gant")
  * Properties needed by default tasks
  */
 artifactid = "easyb-dbunit-plugin"
-version = detectOrDefaultVersion("0.9.6")
+version = detectOrDefaultVersion("0.9.8.3")
 sourcedirs = [gsourcedir]
 
 /**
@@ -69,9 +69,11 @@ target(release: "compile and archive") {
 target("validate-plugin": "runs the easyb ant task") {
     depends(jar)
 
+    println "${defaultdir}/lib/easyb-${version}-jar.jar"
+
     ant.taskdef(name: "easyb", classname: "org.easyb.ant.BehaviorRunnerTask") {
         classpath() {
-            pathelement(location: "${defaultdir}/lib/easyb-${version}.jar")
+            pathelement(location: "${defaultdir}/lib/easyb-${version}-jar.jar")
         }
     }
 
