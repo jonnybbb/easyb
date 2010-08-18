@@ -69,8 +69,6 @@ target(release: "compile and archive") {
 target("validate-plugin": "runs the easyb ant task") {
     depends(jar)
 
-    println "${defaultdir}/lib/easyb-${version}-jar.jar"
-
     ant.taskdef(name: "easyb", classname: "org.easyb.ant.BehaviorRunnerTask") {
         classpath() {
             pathelement(location: "${defaultdir}/lib/easyb-${version}-jar.jar")
