@@ -1,12 +1,17 @@
 /**
  * DbUnit easyb plug-in build file
  */
+ 
+ant.property(file: '../../easyb-version.properties') 
+
+ivySettingsFile = "../../ivysettings.xml"
+
 includeTargets << new File("../../easyb/default_tasks.gant")
 
 /**
  * Properties needed by default tasks
  */
-artifactid = "easyb-dbunit-plugin"
+artifactid = "dbunit"
 version = detectOrDefaultVersion("0.9.8.3")
 sourcedirs = [gsourcedir]
 
@@ -53,32 +58,38 @@ target(jar: "archive project") {
 target(release: "compile and archive") {
     depends(jar)
     depends("validate-plugin")
-    ant.mkdir(dir: "${defaultdir}/release")
-    ant.move(file: "${defaultdir}/${artifactid}-${version}.jar", todir: "${defaultdir}/release")
-    ant.move(todir: "${defaultdir}/release") {
-        fileset(dir: "./target/lib/") {
-            exclude(name: "**/ant-*.jar")
-            exclude(name: "**/hsqldb-*.jar")
-            exclude(name: "**/easyb-*.jar")
-            exclude(name: "**/groovy-all-*.jar")
-            exclude(name: "**/commons-cli-*.jar")
-        }
-    }
+    depends("jar-javadocs")
+    depends("jar-sources")
+    depends("ivy-publish")
+    
+//    ant.mkdir(dir: "${defaultdir}/release")
+//    ant.move(file: "${defaultdir}/${artifactid}-${version}.jar", todir: "${defaultdir}/release")
+//    ant.move(todir: "${defaultdir}/release") {
+//        fileset(dir: "./target/lib/") {
+//            exclude(name: "**/ant-*.jar")
+//            exclude(name: "**/hsqldb-*.jar")
+//            exclude(name: "**/easyb-*.jar")
+//            exclude(name: "**/groovy-all-*.jar")
+//            exclude(name: "**/commons-cli-*.jar")
+//        }
+//    }
 }
 
 target("validate-plugin": "runs the easyb ant task") {
     depends(jar)
 
+    ivy.cachepath(pathid:'ivy.test.classpath', conf:"test")
+
     ant.taskdef(name: "easyb", classname: "org.easyb.ant.BehaviorRunnerTask") {
         classpath() {
-            pathelement(location: "${defaultdir}/lib/easyb-${version}-jar.jar")
+          path(refid:"ivy.test.classpath")
         }
     }
 
     ant.easyb(failureProperty: "easyb.failed") {
 
         classpath() {
-            fileset(dir: libdir, includes: jarincludes)
+            path(refid:"ivy.test.classpath")
             pathelement(location: "${defaultdir}/${artifactid}-${version}.jar")
             pathelement(location: gbehaviordir)
         }
@@ -87,13 +98,11 @@ target("validate-plugin": "runs the easyb ant task") {
 
         behaviors(dir: gbehaviordir) {
             include(name: "**/*.story")
-
         }
     }
 
     ant.fail(if: "easyb.failed", message: "Execution halted as behaviors failed")
 }
-
 
 target(dist: "create a distribution from the release") {
     depends(release)
