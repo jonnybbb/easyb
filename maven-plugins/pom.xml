@@ -11,7 +11,7 @@
   <groupId>org.easyb</groupId>
   <artifactId>maven-parent</artifactId>
   <packaging>pom</packaging>
-  <version>0.9.7-2-SNAPSHOT</version>
+  <version>0.9.8-SNAPSHOT</version>
   <name>easyb Maven Parent</name>
   <description>Common definitions for all maven easyb projects</description>
   <url>http://www.easyb.org</url>
