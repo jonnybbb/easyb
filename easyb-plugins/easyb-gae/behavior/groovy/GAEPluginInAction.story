@@ -1,10 +1,7 @@
 import com.google.appengine.api.datastore.Entity
 import com.google.appengine.api.datastore.Query
-import com.google.appengine.api.labs.taskqueue.QueueFactory
 import com.google.appengine.api.labs.taskqueue.TaskOptions
 import com.google.appengine.api.labs.taskqueue.dev.QueueStateInfo
-import com.google.appengine.tools.development.testing.LocalServiceTestHelper
-import com.google.appengine.tools.development.testing.LocalTaskQueueTestConfig
 
 using "GAE"
 
@@ -23,10 +20,10 @@ scenario "Creating a simple entity easily", {
 
 
 scenario "Using memcache should work", {
-  given "a ms instance", {
+  given "a memcache instance", {
     ms = memcache
   }
-  then "it should be found and contain all relevant puts", {
+  then "it should support storing information", {
     ms.contains("yar").shouldBe false
     ms.put("yar", "foo")
     ms.contains("yar").shouldBe true
@@ -52,15 +49,11 @@ scenario "Using task service should work", {
   given "a task", {
     queue.add(TaskOptions.Builder.taskName("task29"))
   }
-
-  then "it should be done", {
-    // give the task time to execute if tasks are actually enabled (which they
-    // aren't, but that's part of the test)
+  then "it should be in the queue", {
     Thread.sleep(1000)
     QueueStateInfo qsi = localTaskQueue.getQueueStateInfo().get(queue.getQueueName())
     qsi.getTaskInfo().size().shouldBe 1
     qsi.getTaskInfo().get(0).getTaskName().shouldBe "task29"
-
   }
 }
 
