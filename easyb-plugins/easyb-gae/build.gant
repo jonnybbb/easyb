@@ -9,7 +9,7 @@ ivySettingsFile = "../../ivysettings.xml"
  * Properties needed by default tasks
  */
 artifactid = "easyb-gae-plugin"
-version = detectOrDefaultVersion("0.9.7")
+version = detectOrDefaultVersion("0.9.8")
 sourcedirs = [gsourcedir]
 
 /**

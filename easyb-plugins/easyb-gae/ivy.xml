@@ -8,8 +8,8 @@
         <conf name="compile" description="the only configuration needed by this build"/>       
       </configurations>      
       <dependencies>
-        <dependency org="org.easyb" name="easyb" rev="[0.9.6, 1.0)"  conf="compile->default"/>
-        <dependency org="org.codehaus.groovy" name="groovy-all" rev="[1.7.0, 1.7.99)" conf="compile->default"/>
+        <dependency org="org.easyb" name="easyb" rev="[0.9.8, 1.0)"  conf="compile->default"/>
+        <dependency org="org.codehaus.groovy" name="groovy-all" rev="[1.7.3, 1.7.99)" conf="compile->default"/>
         <dependency org="commons-cli" name="commons-cli" rev="1.2" conf="compile->default"/>
         <dependency org="commons-lang" name="commons-lang" rev="2.5" conf="compile->default"/>        
         <dependency org="ant" name="ant" rev="[1.6.5,1.8.99)" conf="compile->default"/>        
