@@ -57,7 +57,7 @@ target(release: "compile and archive") {
   depends("validate-plugin")
   ant.mkdir(dir: "${defaultdir}/release")
   ant.move(file: "${defaultdir}/${artifactid}-${version}.jar", todir: "${defaultdir}/release")
-  ant.copy(todir: "${defaultdir}/release") {
+  ant.copy(todir: "${defaultdir}/release/lib") {
     fileset(dir: "./target/lib/") {
       exclude(name: "**/ant-*.jar")
       exclude(name: "**/easyb-*.jar")
@@ -65,6 +65,14 @@ target(release: "compile and archive") {
       exclude(name: "**/commons-cli-*.jar")
     }
   }
+
+  new File("${defaultdir}/release/lib/").eachFile{ fl ->
+    fl.renameTo(new File("${defaultdir}/release/lib/${fl.name[0..-9]}.jar"))
+  }
+
+  //ant.copy(file: "${defaultdir}/${artifactid}-${version}-sources.jar", todir: "${defaultdir}/release")
+  //ant.copy(file: "${defaultdir}/${artifactid}-${version}-javadocs.jar", todir: "${defaultdir}/release")
+
   ant.copy(todir: "${defaultdir}/release/docs") {
       fileset(dir:"docs")
   }
