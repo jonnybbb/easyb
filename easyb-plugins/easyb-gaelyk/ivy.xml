@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+    <ivy-module version="2.0" xmlns:e="http://ant.apache.org/ivy/extra">
+      <info organisation="org" module="easyb">
+        <license name="MIT License" url="http://www.opensource.org/licenses/mit-license.php"/>
+        <description homepage="http://www.easyb.org">A behavior driven development framework for the Java platform</description>       
+      </info>
+      <configurations>
+        <conf name="compile" description="the only configuration needed by this build"/>       
+      </configurations>      
+      <dependencies>
+        <dependency org="org.easyb" name="easyb" rev="[0.9.8, 1.0)"  conf="compile->default"/>
+        <dependency org="org.codehaus.groovy" name="groovy-all" rev="[1.7.3, 1.7.99)" conf="compile->default"/>
+        <dependency org="commons-cli" name="commons-cli" rev="1.2" conf="compile->default"/>       
+        <dependency org="ant" name="ant" rev="[1.6.5,1.8.99)" conf="compile->default"/>        
+         <dependency org="groovyx.gaelyk" name="gaelyk" rev="0.5.6" conf="compile->default"/>
+      </dependencies>
+    </ivy-module>
+

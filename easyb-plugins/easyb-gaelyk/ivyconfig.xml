@@ -1,0 +1,25 @@
+<ivysettings>
+	<conf defaultResolver="chained" />
+	<resolvers>
+		<chain name="chained" returnFirst="true">
+            <filesystem name="maven2">
+                <artifact pattern="${user.home}/.m2/repository/[organisation]/[module]/[revision]/[module]-[revision].[ext]"/>
+            </filesystem>
+			<url name="easybrepo">
+				<artifact
+					pattern="http://www.easyb.org/maven2/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]" />
+					
+				<artifact
+					pattern="http://www.easyb.org/maven2/[organisation]/[module]/[module]/[revision]/[artifact]-[revision].[ext]" />
+			</url>
+			<ibiblio name="ibiblio" />
+			<url name="ibiblio-mirror">
+				<artifact
+          pattern="http://mirrors.ibiblio.org/pub/mirrors/maven2/[organisation]/[module]/[branch]/[revision]/[branch]-[revision].[ext]" />
+
+                <artifact
+          pattern="http://code.google.com/p/maven-gaelyk/source/browse/repository/[organisation]/[module]/[branch]/[revision]/[branch]-[revision].[ext]" />
+			</url>
+		</chain>
+	</resolvers>
+</ivysettings>
