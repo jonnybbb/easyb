@@ -2,59 +2,121 @@ package org.easyb.report
 
 import groovy.text.SimpleTemplateEngine
 import org.easyb.listener.ResultsAmalgamator
+import org.easyb.listener.ResultsReporter
 
 class HtmlReportWriter implements ReportWriter {
-  private String location
-  private String templateFolder
+  /* the template folder inside the easyb.jar */
+  private static final String DEFAULT_TEMPLATE_FOLDER = "reports/"
+  private static final String DEFAULT_TEMPLATE_NAME = "easyb_report_main.tmpl"
+  private static final String DEFAULT_OUT_NAME = "easyb-report.html";
 
-  private static final String DEFAULT_LOC_NAME = "easyb-report.html";
+  private String templateLocation // null -> take templates from easyb.jar
+  private String outputLocation
+
+  private ResultsReporter results
+  private Writer outWriter
 
   public HtmlReportWriter() {
-    this(DEFAULT_LOC_NAME, null)
+    this(null, null)
   }
 
-  HtmlReportWriter(String location, String templateFolder) {
-    this.location = (location != null ? location : DEFAULT_LOC_NAME);
-    this.templateFolder = templateFolder;
+  HtmlReportWriter(String templateLocation, String outputLocation) {
+    this.templateLocation = templateLocation;
+    this.outputLocation = (outputLocation != null ? outputLocation : DEFAULT_OUT_NAME);
   }
 
-  public void writeReport(ResultsAmalgamator amal) {
-    def results = amal.getResultsReporter()
+  public void writeReport(ResultsAmalgamator resultsAmalgamator) {
+    results = resultsAmalgamator.getResultsReporter()
+    outWriter = new File(outputLocation).newWriter();
 
-    writeResourceToDisk("prototype.js")
-
-    ['img01.gif', 'img02.jpg', 'img03.jpg', 'img04.jpg', 'img05.jpg', 'img06.jpg', 'spacer.gif', 'report.css'].each {
-      writeResourceToDisk("easyb_${it}")
-    }
-
-    InputStream mainTemplateInputStream = HtmlReportHelper.getResourceInputStream(templateFolder, "easyb_report_main.tmpl");
-    def outputReportBufferedWriter = new File(location).newWriter();
-    def templateBinding = ["results": results, "reportWriter": outputReportBufferedWriter, "templateFolder": templateFolder]
-    def templateEngine = new SimpleTemplateEngine()
-    def reportTemplate = templateEngine.createTemplate(mainTemplateInputStream.newReader()).make(templateBinding)
-    reportTemplate.writeTo(outputReportBufferedWriter)
-
+    copyResourcesToOutFolder()
+    writeReportToOutFolder()
   }
 
-  private writeResourceToDisk(String resourceName) {
-    InputStream inputStream = HtmlReportHelper.getResourceInputStream(templateFolder, resourceName);
-    if (inputStream != null) {
-      FileOutputStream resourceWriter = new FileOutputStream("${locationDir}${File.separator}${resourceName}")
-      inputStream.eachByte {singleByte ->
-        resourceWriter.write(singleByte)
+  private copyResourcesToOutFolder() {
+    if(getTemplateFolder() != null) {
+      new File(getTemplateFolder()).eachFile { file ->
+        if(file.file && !file.name.endsWith(".tmpl")) {
+          copyFile(file, new File(getOutputFolder()+file.name))
+        }
       }
-      resourceWriter.close()
+    } else {
+      writeResource("prototype.js")
+      ['img01.gif', 'img02.jpg', 'img03.jpg', 'img04.jpg', 'img05.jpg', 'img06.jpg', 'spacer.gif', 'report.css'].each {
+        writeResource("easyb_${it}")
+      }
     }
   }
 
-  private getLocationDir() {
-    String normalizedPath = new File(location).canonicalPath
-    if (normalizedPath.contains("\\")) {
-      return normalizedPath.substring(0, normalizedPath.lastIndexOf("\\"))
-    } else if (location.contains("/")) {
-      return normalizedPath.substring(0, normalizedPath.lastIndexOf("/"))
+  private writeReportToOutFolder() {
+    InputStream templateInputStream = getTemplateResourceInputStream(getTemplateName());
+    def reportTemplate = new SimpleTemplateEngine().createTemplate(templateInputStream.newReader()).make(["report": this])
+    reportTemplate.writeTo(outWriter)
+  }
+
+  private copyFile(File sourceFile, File destFile) {
+    InputStream is = sourceFile.newInputStream()
+    destFile.withOutputStream { os ->
+      os << is
+    }
+    is.close()
+  }
+
+  private writeResource(String resourceName) {
+    InputStream is = getTemplateResourceInputStream(resourceName);
+    new File(getOutputFolder()+resourceName).withOutputStream { os ->
+      os << is
+    }
+    is.close()
+  }
+
+  /**
+   * Returns a input stream from the given resource in the template folder. If
+   * no template folder was provided by the user, the resource is taken from the
+   * easyb.jar.
+   *
+   * @param resourceName the file name of the resource
+   * @return the input stream to the given resource
+   */
+  private InputStream getTemplateResourceInputStream(String resourceName) {
+    if (getTemplateFolder() != null) {
+      return new FileInputStream(getTemplateFolder() + resourceName)
+    } else {
+      return HtmlReportHelper.getClassLoader().getResourceAsStream(DEFAULT_TEMPLATE_FOLDER + resourceName)
+    }
+  }
+
+  private getTemplateName() {
+    String templateName = null;
+    if (templateLocation != null) {
+      if (templateLocation.contains(File.separator)) {
+        templateName = templateLocation.substring(templateLocation.lastIndexOf(File.separator)+1, templateLocation.length())
+      } else {
+        templateName = templateLocation
+      }
+    }
+    return templateName != null && templateName.length() > 0 ? templateName : DEFAULT_TEMPLATE_NAME
+  }
+
+  private getTemplateFolder() {
+    if (templateLocation != null && templateLocation.contains(File.separator)) {
+        return templateLocation.substring(0, templateLocation.lastIndexOf(File.separator)+1)
+    }
+    return null
+  }
+
+  private getOutputFolder() {
+    String outPath = new File(outputLocation).canonicalPath
+    if (outPath.contains(File.separator)) {
+      return outPath.substring(0, outPath.lastIndexOf(File.separator)+1)
     } else {
       return "."
     }
+  }
+
+  void includeTemplate(String templateFilename) {
+    InputStream genericListTemplateInputStream = getTemplateResourceInputStream(templateFilename);
+    def reportTemplate = new SimpleTemplateEngine().createTemplate(genericListTemplateInputStream.newReader()).make(["report": this])
+    reportTemplate.writeTo(outWriter)
   }
 }

@@ -16,13 +16,13 @@
     function showOnlyContent(contentDiv, linkId) {
       \$('Summaries').hide();
       \$('summary-menu-link').removeClassName('selected-menu-link');
-    <% if(results.genesisStep.getChildrenOfType(BehaviorStepType.SPECIFICATION).size() > 0) { %>
+    <% if(report.results.genesisStep.getChildrenOfType(BehaviorStepType.SPECIFICATION).size() > 0) { %>
       \$('SpecificationsList').hide();
       \$('SpecificationsListPlain').hide();
       \$('specifications-list-menu-link').removeClassName('selected-menu-link');
       \$('specifications-list-plain-menu-link').removeClassName('selected-menu-link');
     <% } %>
-    <% if(results.genesisStep.getChildrenOfType(BehaviorStepType.STORY).size() > 0) { %>
+    <% if(report.results.genesisStep.getChildrenOfType(BehaviorStepType.STORY).size() > 0) { %>
       \$('StoriesList').hide();
       \$('StoriesListPlain').hide();
       \$('stories-list-menu-link').removeClassName('selected-menu-link');
@@ -73,10 +73,10 @@
             </thead>
             <tbody>
               <tr class='primaryRow'>
-                <td>${results.behaviorCount}</td>
-                <td class='${HtmlReportHelper.getBehaviorResultFailureSummaryClass(results.failedBehaviorCount)}'>${results.failedBehaviorCount}</td>
-                <td class='${HtmlReportHelper.getBehaviorResultPendingSummaryClass(results.pendingBehaviorCount)}'>${results.pendingBehaviorCount}</td>
-                <td>${HtmlReportHelper.formatBehaviorExecutionTime(results)}</td>
+                <td>${report.results.behaviorCount}</td>
+                <td class='${HtmlReportHelper.getBehaviorResultFailureSummaryClass(report.results.failedBehaviorCount)}'>${report.results.failedBehaviorCount}</td>
+                <td class='${HtmlReportHelper.getBehaviorResultPendingSummaryClass(report.results.pendingBehaviorCount)}'>${report.results.pendingBehaviorCount}</td>
+                <td>${HtmlReportHelper.formatBehaviorExecutionTime(report.results)}</td>
               </tr>
             </tbody>
           </table>
@@ -93,11 +93,11 @@
             </thead>
             <tbody>
               <tr class='primaryRow'>
-                <td>${results.storyBehaviorCount}</td>
-                <td>${results.scenarioCount}</td>
-                <td class='${HtmlReportHelper.getBehaviorResultFailureSummaryClass(results.failedScenarioCount)}'>${results.failedScenarioCount}</td>
-                <td class='${HtmlReportHelper.getBehaviorResultPendingSummaryClass(results.pendingScenarioCount)}'>${results.pendingScenarioCount}</td>
-                <td>${HtmlReportHelper.formatStoryExecutionTime(results)}</td>
+                <td>${report.results.storyBehaviorCount}</td>
+                <td>${report.results.scenarioCount}</td>
+                <td class='${HtmlReportHelper.getBehaviorResultFailureSummaryClass(report.results.failedScenarioCount)}'>${report.results.failedScenarioCount}</td>
+                <td class='${HtmlReportHelper.getBehaviorResultPendingSummaryClass(report.results.pendingScenarioCount)}'>${report.results.pendingScenarioCount}</td>
+                <td>${HtmlReportHelper.formatStoryExecutionTime(report.results)}</td>
               </tr>
             </tbody>
           </table>
@@ -113,21 +113,21 @@
             </thead>
             <tbody>
               <tr class='primaryRow'>
-                <td>${results.specificationBehaviorCount}</td>
-                <td class='${HtmlReportHelper.getBehaviorResultFailureSummaryClass(results.failedSpecificationCount)}'>${results.failedSpecificationCount}</td>
-                <td class='${HtmlReportHelper.getBehaviorResultPendingSummaryClass(results.pendingSpecificationCount)}'>${results.pendingSpecificationCount}</td>
-                <td>${HtmlReportHelper.formatSpecificationExecutionTime(results)}</td>
+                <td>${report.results.specificationBehaviorCount}</td>
+                <td class='${HtmlReportHelper.getBehaviorResultFailureSummaryClass(report.results.failedSpecificationCount)}'>${report.results.failedSpecificationCount}</td>
+                <td class='${HtmlReportHelper.getBehaviorResultPendingSummaryClass(report.results.pendingSpecificationCount)}'>${report.results.pendingSpecificationCount}</td>
+                <td>${HtmlReportHelper.formatSpecificationExecutionTime(report.results)}</td>
               </tr>
             </tbody>
           </table>
         </div>
-        <% if(results.specificationBehaviorCount > 0) {
-          HtmlReportHelper.writeSpecificationsList(results, reportWriter, templateFolder)
-          HtmlReportHelper.writeSpecificationsListPlain(results, reportWriter, templateFolder)
+        <% if(report.results.specificationBehaviorCount > 0) {
+          report.includeTemplate("easyb_report_specifications_list.tmpl")
+          report.includeTemplate("easyb_report_specifications_list_plain.tmpl")
         } %>
-        <% if(results.storyBehaviorCount > 0) {
-          HtmlReportHelper.writeStoriesList(results, reportWriter, templateFolder)
-          HtmlReportHelper.writeStoriesListPlain(results, reportWriter, templateFolder)
+        <% if(report.results.storyBehaviorCount > 0) {
+          report.includeTemplate("easyb_report_stories_list.tmpl")
+          report.includeTemplate("easyb_report_stories_list_plain.tmpl")
         } %>
       </div>
     </div>
@@ -145,7 +145,7 @@
           <li>
             <a id='summary-menu-link' class='selected-menu-link' href='#' onclick='showOnlyContent("Summaries", "summary-menu-link")'>Summary</a>
           </li>
-          <% if(results.storyBehaviorCount > 0) { %>
+          <% if(report.results.storyBehaviorCount > 0) { %>
           <li>
             <a id='stories-list-menu-link' href='#' onclick='showOnlyContent("StoriesList", "stories-list-menu-link")'>Stories</a>
           </li>
@@ -153,7 +153,7 @@
             <a id='stories-list-plain-menu-link' href='#' onclick='showOnlyContent("StoriesListPlain", "stories-list-plain-menu-link")'>Stories Text</a>
           </li>
           <% } %>
-          <% if(results.specificationBehaviorCount > 0) { %>
+          <% if(report.results.specificationBehaviorCount > 0) { %>
           <li>
             <a id='specifications-list-menu-link' href='#' onclick='showOnlyContent("SpecificationsList", "specifications-list-menu-link")'>Specifications</a>
           </li>
@@ -161,6 +161,12 @@
             <a id='specifications-list-plain-menu-link' href='#' onclick='showOnlyContent("SpecificationsListPlain", "specifications-list-plain-menu-link")'>Specifications Text</a>
           </li>
           <% } %>
+          <li>
+            <div>&nbsp;</div>
+          </li>
+          <li>
+            <div id='menu-info'>Created: ${new Date().dateTimeString}</div>
+          </li>
         </ul>
       </li>
     </ul>

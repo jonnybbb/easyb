@@ -1,14 +1,10 @@
 package org.easyb.report
 
-import groovy.text.SimpleTemplateEngine
 import org.easyb.listener.ResultsReporter
 import org.easyb.result.Result
 import org.easyb.util.BehaviorStepType
 
 class HtmlReportHelper {
-    /* the resource folder inside the easyb.jar */
-    private static final String RESOURCE_REPORTS_FOLDER = "reports/"
-    
     private HtmlReportHelper() {
     }
 
@@ -84,30 +80,6 @@ class HtmlReportHelper {
         return formattedElement
     }
 
-    static writeListDetails(ResultsReporter results, BufferedWriter reportWriter, String templateFolder, String templateFilename) {
-        InputStream genericListTemplateInputStream = getResourceInputStream(templateFolder, templateFilename);
-        def templateBinding = ["results": results]
-        def templateEngine = new SimpleTemplateEngine()
-        def reportTemplate = templateEngine.createTemplate(genericListTemplateInputStream.newReader()).make(templateBinding)
-        reportTemplate.writeTo(reportWriter)
-    }
-
-    static writeStoriesList(ResultsReporter results, BufferedWriter reportWriter, String templateFolder) {
-        writeListDetails(results, reportWriter, templateFolder, "easyb_report_stories_list.tmpl")
-    }
-
-    static writeSpecificationsList(ResultsReporter results, BufferedWriter reportWriter, String templateFolder) {
-        writeListDetails(results, reportWriter, templateFolder, "easyb_report_specifications_list.tmpl")
-    }
-
-    static writeSpecificationsListPlain(ResultsReporter results, BufferedWriter reportWriter, String templateFolder) {
-        writeListDetails(results, reportWriter, templateFolder, "easyb_report_specifications_list_plain.tmpl")
-    }
-
-    static writeStoriesListPlain(ResultsReporter results, BufferedWriter reportWriter, String templateFolder) {
-        writeListDetails(results, reportWriter, templateFolder, "easyb_report_stories_list_plain.tmpl")
-    }
-
     static String formatHtmlReportElement(results, behaviourStepType) {
         def html = ''
         results.genesisStep.getChildrenOfType(behaviourStepType).each {child ->
@@ -138,29 +110,5 @@ class HtmlReportHelper {
             plainElement += handleHtmlSpecificationElement(it)
         }
         return plainElement
-    }
-
-  /**
-   * Returns a input stream from the given resource. If no folder is provided, the resource is taken from the
-   * easyb.jar.
-   *
-   * @param resourceFolder the path to the resource - if null, the resource is taken from the easyb.jar
-   * @param resourceName the file name of the resource
-   * @return the input stream to the given resource
-   */
-    static InputStream getResourceInputStream(String resourceFolder, String resourceName) {
-        if(resourceFolder != null) {
-            return new FileInputStream(getCorrectPathName(resourceFolder)+resourceName)
-        } else {
-            return HtmlReportHelper.getClassLoader().getResourceAsStream(RESOURCE_REPORTS_FOLDER+resourceName)
-        }
-    }
-
-    private static String getCorrectPathName(String path) {
-        if (path.endsWith(File.separator)) {
-            return path
-        } else {
-            return path+File.separator
-        }
     }
 }

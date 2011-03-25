@@ -6,6 +6,6 @@
 <div id='StoriesListPlain' style='display:none;'>
   <h2>Stories Text</h2>
   
-  <div><%= results.getScenarioResultsAsText() %></div>
-  <div><%= HtmlReportHelper.formatHtmlReportElement(results, BehaviorStepType.STORY)%></div>
+  <div><%= report.results.getScenarioResultsAsText() %></div>
+  <div><%= HtmlReportHelper.formatHtmlReportElement(report.results, BehaviorStepType.STORY)%></div>
 </div>

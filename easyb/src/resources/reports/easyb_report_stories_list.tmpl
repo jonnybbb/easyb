@@ -16,7 +16,7 @@
     </thead>
     <tbody>
       <%
-        results.stories.eachWithIndex { storyStep, rowNum ->
+        report.results.stories.eachWithIndex { storyStep, rowNum ->
           int scenarioChildrenCount = storyStep.scenarioCount
       %>
       <tr class='${HtmlReportHelper.getRowClass(rowNum)}'>
