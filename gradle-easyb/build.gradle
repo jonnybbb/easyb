@@ -1,0 +1,17 @@
+apply plugin: 'groovy'
+apply plugin: 'idea'
+
+version = '0.1'
+group = 'org.gradle.plugins'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    groovy 'org.codehaus.groovy:groovy:1.7.10'
+    compile 'org.easyb:easyb:0.9.8'
+    compile gradleApi()
+}
+
+metaInf << project.files('src/resources/groovy/META-INF')
