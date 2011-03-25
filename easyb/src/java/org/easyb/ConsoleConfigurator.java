@@ -1,16 +1,27 @@
 package org.easyb;
 
-import org.apache.commons.cli.*;
-
-import static org.apache.commons.cli.OptionBuilder.withArgName;
-import static org.apache.commons.cli.OptionBuilder.withDescription;
-
-import org.easyb.report.*;
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.GnuParser;
+import org.apache.commons.cli.HelpFormatter;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
+import org.easyb.report.HtmlReportWriter;
+import org.easyb.report.JUnitReportWriter;
+import org.easyb.report.PrettyPrintReportWriter;
+import org.easyb.report.ReportWriter;
+import org.easyb.report.TxtSpecificationReportWriter;
+import org.easyb.report.TxtStoryReportWriter;
+import org.easyb.report.XmlReportWriter;
 import org.easyb.util.BehaviorFileToPathsBuilder;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import static org.apache.commons.cli.OptionBuilder.withArgName;
+import static org.apache.commons.cli.OptionBuilder.withDescription;
 
 public class ConsoleConfigurator {
     private static final String TXT_SPECIFICATION = "txtspecification";
@@ -21,6 +32,7 @@ public class ConsoleConfigurator {
     private static final String JUNIT_ROOT_PACKAGE = "root";
     private static final String EXCEPTION_STACK = "e";
     private static final String FILTER_EXCEPTION_STACK = "ef";
+    private static final String REPORT_TEMPLATE_FOLDER = "templates";
 
 	private static final String DEFAULT_JUNIT_ROOT_PACKAGE = "behavior";
 
@@ -44,6 +56,7 @@ public class ConsoleConfigurator {
     private static final String FAILURE_BEHAVIOR_FILE = "outfail";
     private static final String FAILURE_BEHAVIOR_FILE_DESCRIPTION = "caputure failed behaviors in a file " +
             "(for processing at a later point -- see the -f option)";
+    private static final String REPORT_TEMPLATE_FOLDER_DESCRIPTION = "path to the templates to use for the report";
 
     private static final String TAG = "tags";
     private static final String TAG_DESCRIPTION = "run behaviors with tag marker";
@@ -140,6 +153,13 @@ public class ConsoleConfigurator {
                         " a file containing behaviors.");
             }
         }
+        if(commandLine.hasOption(REPORT_TEMPLATE_FOLDER)) {
+            File reportTemplateFolder = new File(commandLine.getOptionValue(REPORT_TEMPLATE_FOLDER));
+            if(!reportTemplateFolder.exists() || !reportTemplateFolder.isDirectory()) {
+                throw new IllegalArgumentException("The specified report template directory [" +
+                        commandLine.getOptionValue(REPORT_TEMPLATE_FOLDER) + "] does not exist.");
+            }
+        }
     }
 
     /**
@@ -161,7 +181,7 @@ public class ConsoleConfigurator {
         }
 
         if (line.hasOption(HTML_EASYB)) {
-            configuredReports.add(new HtmlReportWriter(line.getOptionValue(HTML_EASYB)));
+            configuredReports.add(new HtmlReportWriter(line.getOptionValue(HTML_EASYB), line.getOptionValue(REPORT_TEMPLATE_FOLDER)));
         }
         if (line.hasOption(PRETTY_PRINT)) {
             configuredReports.add(new PrettyPrintReportWriter());
@@ -200,6 +220,7 @@ public class ConsoleConfigurator {
         options.addOption(withDescription(FAILURE_BEHAVIOR_FILE_DESCRIPTION).hasOptionalArg().create(FAILURE_BEHAVIOR_FILE));
         options.addOption(withDescription(TAG_DESCRIPTION).hasOptionalArg().create(TAG));
         options.addOption(withDescription(JUNIT_ROOT_DESCRIPTION).hasOptionalArg().create(JUNIT_ROOT_PACKAGE));
+        options.addOption(withDescription(REPORT_TEMPLATE_FOLDER_DESCRIPTION).hasOptionalArg().create(REPORT_TEMPLATE_FOLDER));
 
         return options;
     }

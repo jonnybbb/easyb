@@ -1,4 +1,3 @@
-
 <?xml version="1.0" encoding="UTF-8"?>
 <%
   import org.easyb.util.BehaviorStepType
@@ -123,12 +122,12 @@
           </table>
         </div>
         <% if(results.specificationBehaviorCount > 0) {
-          HtmlReportHelper.writeSpecificationsList(results, reportWriter)
-          HtmlReportHelper.writeSpecificationsListPlain(results, reportWriter)
+          HtmlReportHelper.writeSpecificationsList(results, reportWriter, templateFolder)
+          HtmlReportHelper.writeSpecificationsListPlain(results, reportWriter, templateFolder)
         } %>
         <% if(results.storyBehaviorCount > 0) {
-          HtmlReportHelper.writeStoriesList(results, reportWriter)
-          HtmlReportHelper.writeStoriesListPlain(results, reportWriter)
+          HtmlReportHelper.writeStoriesList(results, reportWriter, templateFolder)
+          HtmlReportHelper.writeStoriesListPlain(results, reportWriter, templateFolder)
         } %>
       </div>
     </div>
