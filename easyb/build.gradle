@@ -1,0 +1,39 @@
+apply plugin: 'groovy'
+apply plugin: 'idea'
+
+sourceSets {
+    main {
+        groovy {
+            srcDirs 'src/groovy', 'src/java', 'src/ant'
+            
+        }
+//        groovy {
+//            srcDir 'src/java'
+//        }
+        resources {
+            srcDir 'src/resources'
+        }
+
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+
+dependencies {
+     groovy group: 'org.codehaus.groovy', name: 'groovy', version: '1.7.8'
+
+        compile group: 'commons-cli' , name: 'commons-cli', version: '1.2'
+        compile group: 'commons-lang' , name: 'commons-lang', version: '2.5'
+        compile group: 'log4j' , name: 'log4j', version: '1.2.14'
+        compile 'org.apache.ant:ant:1.8.1@jar'
+//        compile group: 'net.sourceforge.cobertura' , name: 'cobertura', version: '[1.9.1,1.9.2)" conf="coverage->default"/>
+//        compile group: 'org.apache.xmlgraphics' , name: 'fop', version: '[0.95,1.0)" conf="docbook->default"/>
+//        compile group: 'org.apache.avalon.framework' , name: 'avalon-framework-impl', version: '4.3.1" conf="docbook->default"/>
+//        compile group: 'net.sf.xslthl' , name: 'xslthl', version: '2.0.1"  conf="docbook->default"/>
+//        compile group: 'net.sf.docbook' , name: 'docbook-xsl', version: '1.75.2" e:classifier="ns-resources" conf="docbook->default">
+//           <artifact name="docbook-xsl" type="zip"/>
+//        compile group: 'net.sf.docbook' , name: 'docbook-xsl-saxon', version: '1.0.0" conf="docbook->default"/>
+}
