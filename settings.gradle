@@ -1,3 +1,4 @@
 include 'easyb'
 include 'easyb-junit'
+include 'gradle-easyb'
 //include 'easyb-parser'

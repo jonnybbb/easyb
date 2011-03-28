@@ -6,12 +6,22 @@ group = 'org.gradle.plugins'
 
 repositories {
     mavenCentral()
+    flatDir(name: 'fileRepo', dirs: "/tmp/repo")
+}
+uploadArchives {
+    uploadDescriptor = false
+    repositories {
+        add project.repositories.fileRepo
+
+    }
 }
 
 dependencies {
     groovy 'org.codehaus.groovy:groovy:1.7.10'
-    compile 'org.easyb:easyb:0.9.8'
+    compile project(':easyb')
     compile gradleApi()
+    testCompile libraries.junit
+
 }
 
 metaInf << project.files('src/resources/groovy/META-INF')

@@ -7,7 +7,8 @@ libraries = [
         commons_cli: 'commons-cli:commons-cli:1.2@jar',
         groovy: 'org.codehaus.groovy:groovy-all:1.7.10@jar',
         logback_classic: 'ch.qos.logback:logback-classic:0.9.28@jar',
-        logback_core: 'ch.qos.logback:logback-core:0.9.28@jar'
+        logback_core: 'ch.qos.logback:logback-core:0.9.28@jar',
+        junit: 'junit:junit:4.8.2',
 ]
 
 libraries.groovy_depends = [libraries.groovy, libraries.commons_cli]
@@ -25,6 +26,19 @@ allprojects {
         into "$ideDir/lib"
         from { config.copyRecursive {dep -> !(dep instanceof ProjectDependency)}.files }
     }
+
+    repositories {
+        mavenCentral()
+        flatDir(name: 'fileRepo', dirs: "/tmp/repo")
+    }
+    uploadArchives {
+        uploadDescriptor = false
+        repositories {
+            add project.repositories.fileRepo
+
+        }
+    }
+
 }
 
 

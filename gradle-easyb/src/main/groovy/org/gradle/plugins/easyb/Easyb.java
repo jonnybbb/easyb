@@ -1,14 +1,19 @@
 package org.gradle.plugins.easyb;
 
-import groovy.lang.GroovyClassLoader;
 import org.easyb.BehaviorRunner;
 import org.easyb.Configuration;
+import org.easyb.domain.GroovyShellConfiguration;
 import org.easyb.report.*;
 import org.gradle.api.GradleException;
+import org.gradle.api.file.FileCollection;
+import org.gradle.api.file.FileTree;
 import org.gradle.api.internal.ConventionTask;
 import org.gradle.api.tasks.*;
 
 import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.*;
 
 public class Easyb extends ConventionTask implements VerificationTask {
@@ -18,39 +23,52 @@ public class Easyb extends ConventionTask implements VerificationTask {
     private List<String> suffixes;
     private List<String> reportFormats;
 
-    // private AntEasyb antEasyb = new AntEasyb();
 
     private static final Map<String, ReportConfig> REPORT_CONFIGURATION = new LinkedHashMap<String, ReportConfig>();
 
+    //@InputFiles
+    FileCollection classpath;
+
     static {
-        REPORT_CONFIGURATION.put("story", new ReportConfig("plain", "easyb-stories.txt", "TxtStoryReportWriter"));
-        REPORT_CONFIGURATION.put("spec", new ReportConfig("plain", "easyb-specifications.txt", "TxtSpecificationReportWriter"));
-        REPORT_CONFIGURATION.put("html", new ReportConfig("html", "easyb-reports.html", "HtmlReportWriter"));
-        REPORT_CONFIGURATION.put("xml", new ReportConfig("xml", "easyb-reports.xml", "XmlReportWriter"));
-        REPORT_CONFIGURATION.put("junit", new ReportConfig("junit", "", "JUnitReportWriter"));
+        REPORT_CONFIGURATION.put("story", new ReportConfig("plain", "easyb-stories.txt", TxtStoryReportWriter.class));
+        REPORT_CONFIGURATION.put("spec", new ReportConfig("plain", "easyb-specifications.txt", TxtSpecificationReportWriter.class));
+        REPORT_CONFIGURATION.put("html", new ReportConfig("html", "easyb-reports.html", HtmlReportWriter.class));
+        REPORT_CONFIGURATION.put("xml", new ReportConfig("xml", "easyb-reports.xml", XmlReportWriter.class));
+        REPORT_CONFIGURATION.put("junit", new ReportConfig("junit", "", JUnitReportWriter.class));
     }
 
     @TaskAction
     public void easyb() {
         String[] filePaths = filePaths();
+         org.gradle.api.artifacts.Configuration byName = getProject().getConfigurations().getByName("runtime");
+        FileTree byNameAsFileTree = byName.getAsFileTree();
+        List<URL> urls = new ArrayList<URL>();
+        for (File file : byNameAsFileTree) {
+            try {
+                URL url = file.toURI().toURL();
+                urls.add(url);
+            } catch (MalformedURLException e) {
+                getLogger().error("could not get URL for file "+ file.getAbsolutePath(), e);
+
+            }
+        }
         Configuration config = new Configuration(filePaths, reportWriters());
         BehaviorRunner runner = new BehaviorRunner(config);
         try {
-            runner.runBehaviors(BehaviorRunner.getBehaviors(filePaths, config));
+            ClassLoader easybAndRuntime = new URLClassLoader(urls.toArray(new URL[urls.size()]),EasybPlugin.class.getClassLoader());
+            GroovyShellConfiguration gsh = new GroovyShellConfiguration(easybAndRuntime, Collections.<String, Object>emptyMap());
+            runner.runBehaviors(BehaviorRunner.getBehaviors(gsh, filePaths, config));
         } catch (Exception e) {
             e.printStackTrace();
             throw new GradleException("I'm sorry Dave, I can't let you do that.", e);
         }
-
-        // getLogging().captureStandardOutput(LogLevel.INFO);
-        // antEasyb.execute(getProject(), getAnt(), getBehaviorsDir(), getReportsDir(), getReportFormats(), getSuffixes(), isIgnoreFailures());
     }
 
     private List<ReportWriter> reportWriters() {
         List<ReportWriter> reportWriters = new ArrayList<ReportWriter>();
-        for (String reportFormat : reportFormats) {
+        for (String reportFormat : getReportFormats()) {
             ReportConfig reportConfig = REPORT_CONFIGURATION.get(reportFormat);
-            reportWriters.add(reportConfig.newInstance(getClass().getClassLoader(), reportsDir));
+            reportWriters.add(reportConfig.newReportWriterInstance(reportConfig.getWriterClass(), getReportsDir()));
         }
 
         return reportWriters;
@@ -58,7 +76,8 @@ public class Easyb extends ConventionTask implements VerificationTask {
 
     private String[] filePaths() {
         List<String> paths = new ArrayList<String>();
-        listFiles(behaviorsDir, paths);
+        System.out.println("behaviour dir is " + String.valueOf(getBehaviorsDir()));
+        listFiles(getBehaviorsDir(), paths);
         return paths.toArray(new String[paths.size()]);
     }
 
@@ -80,7 +99,7 @@ public class Easyb extends ConventionTask implements VerificationTask {
     }
 
     private boolean isBehavior(File file) {
-        for (String pattern : suffixes) {
+        for (String pattern : getSuffixes()) {
             if (file.getName().endsWith(pattern)) return true;
         }
         return false;
@@ -130,27 +149,49 @@ public class Easyb extends ConventionTask implements VerificationTask {
         return ignoreFailures;
     }
 
+      /**
+     * Returns the classpath containing the compiled classes for the source files to be inspected.
+     *
+     * @return The classpath.
+     */
+    
+    public FileCollection getClasspath() {
+        return classpath;
+    }
+
+    /**
+     * Specified the classpath containing the compiled classes for the source file to be inspected.
+     *
+     * @param classpath The classpath. Must not be null.
+     */
+    public void setClasspath(FileCollection classpath) {
+        getLogger().info("setting classpath for easyb", classpath);
+        this.classpath = classpath;
+    }
+
     private static class ReportConfig {
         private final String dirName;
         private final String fileName;
-        private final String reportClassName;
+        private final Class<? extends ReportWriter> reportClassName;
 
-        private ReportConfig(String dirName, String fileName, String reportClassName) {
+        private ReportConfig(String dirName, String fileName, Class<? extends ReportWriter> reportClassName) {
             this.dirName = dirName;
             this.fileName = fileName;
             this.reportClassName = reportClassName;
         }
 
-        public ReportWriter newInstance(ClassLoader classLoader, File reportsDir) {
+        public ReportWriter newReportWriterInstance(Class<? extends ReportWriter> reportClass, File reportsDir) {
             File reportDir = new File(reportsDir.getAbsolutePath(), dirName);
             reportDir.mkdirs();
             try {
-                GroovyClassLoader gcl = new GroovyClassLoader(classLoader);
-                Class<? extends ReportWriter> reportClass = (Class<? extends ReportWriter>) gcl.loadClass("org.easyb.report." + reportClassName);
                 return reportClass.getDeclaredConstructor(String.class).newInstance(reportDir.getAbsolutePath() + File.separator + fileName);
             } catch (Exception e) {
                 throw new IllegalArgumentException(e);
             }
+        }
+
+        public Class<? extends ReportWriter> getWriterClass() {
+            return reportClassName;
         }
     }
 }
