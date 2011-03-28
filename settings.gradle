@@ -1,0 +1,3 @@
+include 'easyb'
+include 'easyb-junit'
+//include 'easyb-parser'

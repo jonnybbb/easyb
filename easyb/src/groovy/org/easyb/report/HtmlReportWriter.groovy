@@ -20,6 +20,10 @@ class HtmlReportWriter implements ReportWriter {
     this(null, null)
   }
 
+  HtmlReportWriter(String outputLocation) {
+    this(null, outputLocation);
+  }
+
   HtmlReportWriter(String templateLocation, String outputLocation) {
     this.templateLocation = templateLocation;
     this.outputLocation = (outputLocation != null ? outputLocation : DEFAULT_OUT_NAME);

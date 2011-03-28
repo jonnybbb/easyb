@@ -15,15 +15,23 @@ sourceSets {
         }
 
     }
+    test {
+        groovy {
+            srcDir 'behavior/groovy'
+            srcDir 'behavior/java'
+        }
+        resources {
+            srcDir 'behavior/resources'
+        }
+    }
 }
 
 repositories {
     mavenCentral()
 }
 
-
 dependencies {
-     groovy group: 'org.codehaus.groovy', name: 'groovy', version: '1.7.8'
+     groovy group: 'org.codehaus.groovy', name: 'groovy', version: '1.7.10'
 
         compile group: 'commons-cli' , name: 'commons-cli', version: '1.2'
         compile group: 'commons-lang' , name: 'commons-lang', version: '2.5'
@@ -37,3 +45,13 @@ dependencies {
 //           <artifact name="docbook-xsl" type="zip"/>
 //        compile group: 'net.sf.docbook' , name: 'docbook-xsl-saxon', version: '1.0.0" conf="docbook->default"/>
 }
+
+task spec << {
+    ant.java(classname:'org.easyb.BehaviorRunner', fork:false,
+      classpath: "${sourceSets.test.runtimeClasspath.asPath}") {
+        sourceSets.test.allSource.matching { include "**/*.story" }.each { specFile ->
+            arg(value: specFile)
+        }
+    }
+}
+

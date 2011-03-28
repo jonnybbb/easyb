@@ -1,0 +1,36 @@
+defaultTasks "idea", "test", "jar"
+
+apply plugin: 'groovy'
+apply plugin: 'idea'
+
+version = '0.6.0'
+
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+    groovy group: 'org.codehaus.groovy', name: 'groovy', version: '1.7.10'
+    compile project(':easyb')
+    compile "junit:junit:4.4"
+    testCompile 'org.mockito:mockito-all:1.8.5'
+}
+
+def ivyDependencies(conf) {
+  def dep = []
+  def ivyModule = new XmlParser().parse(file("ivy.xml"))
+
+  ivyModule.dependencies.dependency.each {
+    if (it.@conf == null || it.@conf == conf)
+      dep.add(it.@org + ':' + it.@name + ':' + it.@rev)
+  }
+
+  return dep
+}
+
+task sources(type: Jar) {
+  classifier = 'sources'
+  from sourceSets.all.allSource
+}
+
