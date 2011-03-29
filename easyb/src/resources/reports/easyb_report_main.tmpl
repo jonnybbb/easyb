@@ -20,13 +20,11 @@
       \$('SpecificationsList').hide();
       \$('SpecificationsListPlain').hide();
       \$('specifications-list-menu-link').removeClassName('selected-menu-link');
-      \$('specifications-list-plain-menu-link').removeClassName('selected-menu-link');
     <% } %>
     <% if(report.results.genesisStep.getChildrenOfType(BehaviorStepType.STORY).size() > 0) { %>
       \$('StoriesList').hide();
       \$('StoriesListPlain').hide();
       \$('stories-list-menu-link').removeClassName('selected-menu-link');
-      \$('stories-list-plain-menu-link').removeClassName('selected-menu-link');
     <% } %>
       \$(linkId).addClassName('selected-menu-link');
       \$(contentDiv).show();
@@ -93,7 +91,11 @@
             </thead>
             <tbody>
               <tr class='primaryRow'>
-                <td>${report.results.storyBehaviorCount}</td>
+                <% if(report.results.storyBehaviorCount > 0) { %>
+                  <td><a href='#' onclick='showOnlyContent("StoriesList", "stories-list-menu-link")'>${report.results.storyBehaviorCount}</a></td>
+                <% } else { %>
+                  <td>${report.results.storyBehaviorCount}</td>
+                <% } %>
                 <td>${report.results.scenarioCount}</td>
                 <td class='${HtmlReportHelper.getBehaviorResultFailureSummaryClass(report.results.failedScenarioCount)}'>${report.results.failedScenarioCount}</td>
                 <td class='${HtmlReportHelper.getBehaviorResultPendingSummaryClass(report.results.pendingScenarioCount)}'>${report.results.pendingScenarioCount}</td>
@@ -113,7 +115,11 @@
             </thead>
             <tbody>
               <tr class='primaryRow'>
-                <td>${report.results.specificationBehaviorCount}</td>
+                <% if(report.results.specificationBehaviorCount > 0) { %>
+                  <td><a href='#' onclick='showOnlyContent("SpecificationsList", "specifications-list-menu-link")'>${report.results.specificationBehaviorCount}</a></td>
+                <% } else { %>
+                  <td>${report.results.specificationBehaviorCount}</td>
+                <% } %>
                 <td class='${HtmlReportHelper.getBehaviorResultFailureSummaryClass(report.results.failedSpecificationCount)}'>${report.results.failedSpecificationCount}</td>
                 <td class='${HtmlReportHelper.getBehaviorResultPendingSummaryClass(report.results.pendingSpecificationCount)}'>${report.results.pendingSpecificationCount}</td>
                 <td>${HtmlReportHelper.formatSpecificationExecutionTime(report.results)}</td>
@@ -149,16 +155,10 @@
           <li>
             <a id='stories-list-menu-link' href='#' onclick='showOnlyContent("StoriesList", "stories-list-menu-link")'>Stories</a>
           </li>
-          <li>
-            <a id='stories-list-plain-menu-link' href='#' onclick='showOnlyContent("StoriesListPlain", "stories-list-plain-menu-link")'>Stories Text</a>
-          </li>
           <% } %>
           <% if(report.results.specificationBehaviorCount > 0) { %>
           <li>
             <a id='specifications-list-menu-link' href='#' onclick='showOnlyContent("SpecificationsList", "specifications-list-menu-link")'>Specifications</a>
-          </li>
-          <li>
-            <a id='specifications-list-plain-menu-link' href='#' onclick='showOnlyContent("SpecificationsListPlain", "specifications-list-plain-menu-link")'>Specifications Text</a>
           </li>
           <% } %>
           <li>

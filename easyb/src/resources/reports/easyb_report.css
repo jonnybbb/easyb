@@ -46,7 +46,6 @@ h2 {
 
 h3 {
 	font-size: 1em;
-	font-weight: bold;
 }
 
 p, ul, ol {
@@ -202,6 +201,13 @@ img.right {
 .entry h2 {
   color: #CC0000;
   font-size: 1.25em;
+}
+
+.entry h3 {
+  color: #CC0000;
+  font-size: 1.25em;
+  float: left;
+  margin-right: 16px;
 }
 
 .entry table.componentsForSpecificationTable {

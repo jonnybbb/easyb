@@ -4,8 +4,8 @@
 %>
 
 <div id='SpecificationsListPlain' style='display:none;'>
-  <h2>Specifications Text</h2>
-  
+  <h3>Specifications</h3> (<a href='#' onclick='showOnlyContent("SpecificationsList", "specifications-list-menu-link")'>show HTML table</a>)
+
   <div>${report.results.getSpecificationResultsAsText()}</div>
   <div><%= HtmlReportHelper.formatHtmlReportElement(report.results, BehaviorStepType.SPECIFICATION)%></div>
 </div>

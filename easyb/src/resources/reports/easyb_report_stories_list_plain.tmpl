@@ -4,7 +4,7 @@
 %>
 
 <div id='StoriesListPlain' style='display:none;'>
-  <h2>Stories Text</h2>
+  <h3>Stories</h3> (<a href='#' onclick='showOnlyContent("StoriesList", "stories-list-menu-link")'>show HTML table</a>)
   
   <div><%= report.results.getScenarioResultsAsText() %></div>
   <div><%= HtmlReportHelper.formatHtmlReportElement(report.results, BehaviorStepType.STORY)%></div>
