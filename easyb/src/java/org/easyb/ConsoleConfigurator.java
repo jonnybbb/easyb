@@ -56,7 +56,7 @@ public class ConsoleConfigurator {
     private static final String FAILURE_BEHAVIOR_FILE = "outfail";
     private static final String FAILURE_BEHAVIOR_FILE_DESCRIPTION = "caputure failed behaviors in a file " +
             "(for processing at a later point -- see the -f option)";
-    private static final String REPORT_TEMPLATE_DESCRIPTION = "the report template to use for the html output (full path)";
+    private static final String REPORT_TEMPLATE_DESCRIPTION = "the report template to use for the html output";
 
     private static final String TAG = "tags";
     private static final String TAG_DESCRIPTION = "run behaviors with tag marker";
@@ -216,7 +216,7 @@ public class ConsoleConfigurator {
         options.addOption(withDescription(FAILURE_BEHAVIOR_FILE_DESCRIPTION).hasOptionalArg().create(FAILURE_BEHAVIOR_FILE));
         options.addOption(withDescription(TAG_DESCRIPTION).hasOptionalArg().create(TAG));
         options.addOption(withDescription(JUNIT_ROOT_DESCRIPTION).hasOptionalArg().create(JUNIT_ROOT_PACKAGE));
-        options.addOption(withDescription(REPORT_TEMPLATE_DESCRIPTION).hasOptionalArg().create(REPORT_TEMPLATE));
+        options.addOption(withDescription(REPORT_TEMPLATE_DESCRIPTION).hasArg().create(REPORT_TEMPLATE));
 
         return options;
     }
