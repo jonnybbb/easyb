@@ -23,6 +23,7 @@
     <% } %>
     <% if(report.results.genesisStep.getChildrenOfType(BehaviorStepType.STORY).size() > 0) { %>
       \$('StoriesList').hide();
+      \$('StoriesFailedList').hide();
       \$('StoriesListPlain').hide();
       \$('stories-list-menu-link').removeClassName('selected-menu-link');
     <% } %>
@@ -97,7 +98,11 @@
                   <td>${report.results.storyBehaviorCount}</td>
                 <% } %>
                 <td>${report.results.scenarioCount}</td>
-                <td class='${HtmlReportHelper.getBehaviorResultFailureSummaryClass(report.results.failedScenarioCount)}'>${report.results.failedScenarioCount}</td>
+                <% if(report.results.failedScenarioCount > 0) { %>
+                  <td class='${HtmlReportHelper.getBehaviorResultFailureSummaryClass(report.results.failedScenarioCount)}'><a href='#' onclick='showOnlyContent("StoriesFailedList", "stories-list-menu-link")'>${report.results.failedScenarioCount}</a></td>
+                <% } else { %>
+                  <td class='${HtmlReportHelper.getBehaviorResultFailureSummaryClass(report.results.failedScenarioCount)}'>${report.results.failedScenarioCount}</td>
+                <% } %>
                 <td class='${HtmlReportHelper.getBehaviorResultPendingSummaryClass(report.results.pendingScenarioCount)}'>${report.results.pendingScenarioCount}</td>
                 <td>${HtmlReportHelper.formatStoryExecutionTime(report.results)}</td>
               </tr>
@@ -133,6 +138,7 @@
         } %>
         <% if(report.results.storyBehaviorCount > 0) {
           report.includeTemplate("easyb_report_stories_list.tmpl")
+          report.includeTemplate("easyb_report_stories_failed_list.tmpl")
           report.includeTemplate("easyb_report_stories_list_plain.tmpl")
         } %>
       </div>
