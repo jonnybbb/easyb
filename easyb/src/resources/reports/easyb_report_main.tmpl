@@ -18,6 +18,7 @@
       \$('summary-menu-link').removeClassName('selected-menu-link');
     <% if(report.results.genesisStep.getChildrenOfType(BehaviorStepType.SPECIFICATION).size() > 0) { %>
       \$('SpecificationsList').hide();
+      \$('SpecificationsFailedList').hide();
       \$('SpecificationsListPlain').hide();
       \$('specifications-list-menu-link').removeClassName('selected-menu-link');
     <% } %>
@@ -125,7 +126,11 @@
                 <% } else { %>
                   <td>${report.results.specificationBehaviorCount}</td>
                 <% } %>
-                <td class='${HtmlReportHelper.getBehaviorResultFailureSummaryClass(report.results.failedSpecificationCount)}'>${report.results.failedSpecificationCount}</td>
+                <% if(report.results.failedSpecificationCount > 0) { %>
+                  <td class='${HtmlReportHelper.getBehaviorResultFailureSummaryClass(report.results.failedSpecificationCount)}'><a href='#' onclick='showOnlyContent("SpecificationsFailedList", "specifications-list-menu-link")'>${report.results.failedSpecificationCount}</a></td>
+                <% } else { %>
+                  <td class='${HtmlReportHelper.getBehaviorResultFailureSummaryClass(report.results.failedSpecificationCount)}'>${report.results.failedSpecificationCount}</td>
+                <% } %>
                 <td class='${HtmlReportHelper.getBehaviorResultPendingSummaryClass(report.results.pendingSpecificationCount)}'>${report.results.pendingSpecificationCount}</td>
                 <td>${HtmlReportHelper.formatSpecificationExecutionTime(report.results)}</td>
               </tr>
@@ -134,6 +139,7 @@
         </div>
         <% if(report.results.specificationBehaviorCount > 0) {
           report.includeTemplate("easyb_report_specifications_list.tmpl")
+          report.includeTemplate("easyb_report_specifications_failed_list.tmpl")
           report.includeTemplate("easyb_report_specifications_list_plain.tmpl")
         } %>
         <% if(report.results.storyBehaviorCount > 0) {

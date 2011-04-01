@@ -77,6 +77,26 @@ public class ResultsReporter {
         return stories;
     }
 
+    public List<StepReporter> getFailedStories() {
+        List<StepReporter> failed = new ArrayList<StepReporter>();
+        for (StepReporter story : stories) {
+            if (story.getFailedScenarioCount() > 0) {
+                failed.add(story);
+            }
+        }
+        return failed;
+    }
+
+    public List<StepReporter> getFailedSpecifications() {
+        List<StepReporter> failed = new ArrayList<StepReporter>();
+        for (StepReporter spec : specifications) {
+            if (spec.getFailedSpecificationCount() > 0) {
+                failed.add(spec);
+            }
+        }
+        return failed;
+    }
+
     public long getFailedSpecificationCount() {
         return getSpecificationCount(Result.FAILED);
     }

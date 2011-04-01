@@ -22,15 +22,15 @@
       <tr class='${HtmlReportHelper.getRowClass(rowNum)}'>
         <td>
          <% if(scenarioChildrenCount > 0) { %>
-          <a href="#" onclick="\$('scenarios_for_failed_story_' + ${rowNum}).toggle(); return false;">${storyStep.story.name}</a>
+          <a href="#" onclick="\$('scenarios_for_failed_story_' + ${rowNum}).toggle(); return false;">${storyStep.step.name}</a>
          <% } else { %>
-          <a>${storyStep.story.name}</a>
+          <a>${storyStep.step.name}</a>
          <% } %>
         </td>
         <td>${storyStep.scenarioCount}</td>
         <td class='${HtmlReportHelper.getBehaviorResultFailureSummaryClass(storyStep.failedScenarioCount)}'>${storyStep.failedScenarioCount}</td>
         <td class='${HtmlReportHelper.getBehaviorResultPendingSummaryClass(storyStep.pendingScenarioCount)}'>${storyStep.pendingScenarioCount}</td>
-        <td>${storyStep.story.executionTotalTimeInMillis / 1000f}</td>
+        <td>${storyStep.step.executionTotalTimeInMillis / 1000f}</td>
       </tr>
 
       <% if(scenarioChildrenCount > 0) { %> 
