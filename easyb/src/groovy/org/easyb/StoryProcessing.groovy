@@ -248,7 +248,7 @@ public class StoryProcessing {
       currentStep = step // reset it
 
 
-      ResultsReporter.fixScenarioStatus(step)
+      ResultsReporter.StepReporter.fixScenarioStatus(step)
       
       listener.gotResult step.result
 
