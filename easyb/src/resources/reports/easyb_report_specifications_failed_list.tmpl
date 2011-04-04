@@ -2,8 +2,8 @@
   import org.easyb.util.BehaviorStepType
   import org.easyb.report.HtmlReportHelper
 %>
-<div id='SpecificationsList' style='display:none;'>
-  <h3>Specifications</h3> (<a href='#' onclick='showOnlyContent("SpecificationsListPlain", "specifications-list-menu-link")'>show plain text</a>)
+<div id='SpecificationsFailedList' style='display:none;'>
+  <h2>Failed Specifications</h2>
   <table>
     <thead>
       <tr>
@@ -16,12 +16,12 @@
     </thead>
     <tbody>
       <%
-        report.results.specifications.eachWithIndex { specificationStep, rowNum ->
+        report.results.failedSpecifications.eachWithIndex { specificationStep, rowNum ->
       %>
       <tr class='${HtmlReportHelper.getRowClass(rowNum)}'>
         <td>
           <% if(specificationStep.specificationCount > 0) { %>
-            <a href="#" onclick="\$('components_for_specification_' + ${rowNum}).toggle(); return false;">${specificationStep.step.name}</a>
+            <a href="#" onclick="\$('components_for_failed_specification_' + ${rowNum}).toggle(); return false;">${specificationStep.step.name}</a>
           <% } else { %>
             <a>${specificationStep.step.name}</a>
           <% } %>
@@ -33,7 +33,7 @@
       </tr>
 
       <% if(specificationStep.specificationCount > 0) { %>
-      <tr id='components_for_specification_${rowNum}' class='componentsForSpecification' style='display:none;'>
+      <tr id='components_for_failed_specification_${rowNum}' class='componentsForSpecification' style='display:none;'>
         <td colspan='5'>
           <table class='componentsForSpecificationTable'>
             <tbody>

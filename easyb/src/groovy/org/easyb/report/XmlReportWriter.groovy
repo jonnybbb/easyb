@@ -55,7 +55,7 @@ class XmlReportWriter implements ReportWriter {
       }
     } else {
       if (step.stepType == BehaviorStepType.STORY) { // assumed to be story now
-        ResultsReporter.StoryCollection story = results.findStory(step)
+        ResultsReporter.StepReporter story = results.findStory(step)
 
         xml."${step.stepType.type()}"(name: step.name, scenarios: story.scenarioCount, failedscenarios: story.failedScenarioCount, pendingscenarios: story.pendingScenarioCount, executionTime: step.executionTotalTimeInMillis) {
           if (step.description) {
@@ -129,7 +129,7 @@ class XmlReportWriter implements ReportWriter {
       }
     } else {
       if (step.getStepType() == BehaviorStepType.SPECIFICATION) {
-        ResultsReporter.SpecificationCollection spec = results.findSpecification(step)
+        ResultsReporter.StepReporter spec = results.findSpecification(step)
 
         xml."${step.stepType.type()}"(name: step.name, specifications: spec.specificationCount, failedspecifications: spec.failedSpecificationCount, pendingspecifications: spec.pendingSpecificationCount, executionTime: step.executionTotalTimeInMillis) {
           if (step.description) {
