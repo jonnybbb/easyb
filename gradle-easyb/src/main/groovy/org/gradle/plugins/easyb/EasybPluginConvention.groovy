@@ -15,8 +15,8 @@ class EasybPluginConvention {
         this.project = project
         reportsDirName = 'easyb'
         behaviorsDirName = 'src/test/easyb'
-        suffixes = ['Story.groovy', 'Specification.groovy']
-        reportFormats = ['story', 'spec', 'html', 'xml', 'junit']
+        suffixes = ['.specification','.story','Story.groovy', 'Specification.groovy']
+        reportFormats = ['story', 'spec', 'html' ,'xml', 'junit']
     }
 
     File getEasybBehaviorsDir() {

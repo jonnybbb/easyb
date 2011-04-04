@@ -35,7 +35,7 @@ class EasybPlugin implements Plugin<Project> {
         easyb.conventionMapping.reportsDir = {pluginConvention.easybReportsDir }
         easyb.conventionMapping.suffixes = {pluginConvention.suffixes}
         easyb.conventionMapping.reportFormats = {pluginConvention.reportFormats}
-        println "applied convention mapping"
+        easyb.conventionMapping.classpath = { project.sourceSets.test.runtimeClasspath }
         }
     }
 
