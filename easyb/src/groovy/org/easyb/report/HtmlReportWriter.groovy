@@ -16,6 +16,8 @@ class HtmlReportWriter implements ReportWriter {
   private ResultsReporter results
   private Writer outWriter
 
+  private ClassLoader parentClassloader = null
+
   public HtmlReportWriter() {
     this(null, null)
   }
@@ -28,6 +30,10 @@ class HtmlReportWriter implements ReportWriter {
     this.templateLocation = templateLocation;
     this.outputLocation = (outputLocation != null ? outputLocation : DEFAULT_OUT_NAME);
   }
+
+  void setParentClassloader(ClassLoader parentClassLoader ){
+      this.parentClassloader = parentClassLoader
+    }
 
   public void writeReport(ResultsAmalgamator resultsAmalgamator) {
     results = resultsAmalgamator.getResultsReporter()
@@ -54,7 +60,7 @@ class HtmlReportWriter implements ReportWriter {
 
   private writeReportToOutFolder() {
     InputStream templateInputStream = getTemplateResourceInputStream(getTemplateName());
-    def reportTemplate = new SimpleTemplateEngine().createTemplate(templateInputStream.newReader()).make(["report": this])
+    def reportTemplate = new SimpleTemplateEngine(parentClassloader).createTemplate(templateInputStream.newReader()).make(["report": this])
     reportTemplate.writeTo(outWriter)
   }
 
@@ -120,7 +126,7 @@ class HtmlReportWriter implements ReportWriter {
 
   void includeTemplate(String templateFilename) {
     InputStream genericListTemplateInputStream = getTemplateResourceInputStream(templateFilename);
-    def reportTemplate = new SimpleTemplateEngine().createTemplate(genericListTemplateInputStream.newReader()).make(["report": this])
+    def reportTemplate = new SimpleTemplateEngine(parentClassloader).createTemplate(genericListTemplateInputStream.newReader()).make(["report": this])
     reportTemplate.writeTo(outWriter)
   }
 }
